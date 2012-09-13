@@ -1,0 +1,131 @@
+name: MinecartRevolution
+version: 0 (1.3.1 B-R2)
+description: MinecartRevolution is a minecart-plugin which adds new awesome features to the minecarts.
+authors: [QuarterCode]
+load: startup
+website: http://www.MinecartRevolution.com
+main: com.quartercode.minecartrevolution.MinecartRevolution
+
+
+
+commands:
+  minecartrevolution:
+    description: The main command for controlling MinecartRevolution.
+    usage: /<command> <Command Label> [Parameters ...]
+    aliases: [mr, minecart, cart, carts, minecartr, mrevolution]
+
+
+
+permissions:
+  minecartrevolution.*:
+    description: Gives access to use all MinecartRevolution functions
+    default: op
+    children:
+      minecartrevolution.command.*: true
+      minecartrevolution.control.*: true
+
+
+
+  minecartrevolution.command.*:
+    description: Gives access to use all MinecartRevolution commands
+    children:
+      minecartrevolution.command.help: true
+      minecartrevolution.command.update.*: true
+      minecartrevolution.command.clear: true
+
+
+  minecartrevolution.command.help:
+    description: Gives access to use the MinecartRevolution help
+
+
+  minecartrevolution.command.update.*:
+    description: Gives access to use all MinecartRevolution update functions
+    children:
+      minecartrevolution.command.update.versioncheck: true
+      minecartrevolution.command.update.update: true
+  minecartrevolution.command.update.versioncheck:
+    description: Gives access to checks the MinecartRevolution version
+  minecartrevolution.command.update.update:
+    description: Gives access to update MinecartRevolution
+
+
+  minecartrevolution.command.clear:
+    description: Gives access to use the MinecartRevolution clear command
+
+
+
+  minecartrevolution.control.*:
+    description: Gives access to use all MinecartRevolution controls
+    children:
+      minecartrevolution.control.block.*: true
+      minecartrevolution.control.sign.*: true
+
+
+
+  minecartrevolution.control.block.*:
+    description: Gives access to use all MinecartRevolution control blocks
+    children:
+      minecartrevolution.control.block.controlsign.*: true
+      minecartrevolution.control.block.booster.*: true
+      minecartrevolution.control.block.brake.*: true
+
+
+  minecartrevolution.control.block.controlsign.*:
+    description: Gives access to use the MinecartRevolution Control Sign block
+    children:
+      minecartrevolution.control.block.controlsign.place: true
+      minecartrevolution.control.block.controlsign.destroy: true
+  minecartrevolution.control.block.controlsign.place:
+    description: Gives access to place the MinecartRevolution Control Sign block
+  minecartrevolution.control.block.controlsign.destroy:
+    description: Gives access to destroy the MinecartRevolution Control Sign block
+
+
+  minecartrevolution.control.block.booster.*:
+    description: Gives access to use the MinecartRevolution Booster block
+    children:
+      minecartrevolution.control.block.booster.place: true
+      minecartrevolution.control.block.booster.destroy: true
+  minecartrevolution.control.block.booster.place:
+    description: Gives access to place the MinecartRevolution Booster block
+  minecartrevolution.control.block.booster.destroy:
+    description: Gives access to destroy the MinecartRevolution Booster block
+
+
+  minecartrevolution.control.block.brake.*:
+    description: Gives access to use the MinecartRevolution Brake block
+    children:
+      minecartrevolution.control.block.brake.place: true
+      minecartrevolution.control.block.brake.destroy: true
+  minecartrevolution.control.block.brake.place:
+    description: Gives access to place the MinecartRevolution Brake block
+  minecartrevolution.control.block.brake.destroy:
+    description: Gives access to destroy the MinecartRevolution Brake block
+
+
+
+  minecartrevolution.control.sign.*:
+    description: Gives access to use all MinecartRevolution control signs
+    children:
+      minecartrevolution.control.sign.minecartcontrol.*: true
+
+
+  minecartrevolution.control.sign.expression.*:
+    description: Gives access to use the MinecartRevolution Expression sign
+    children:
+      minecartrevolution.control.sign.expression.place: true
+      minecartrevolution.control.sign.expression.destroy: true
+  minecartrevolution.control.sign.expression.place:
+    description: Gives access to place the MinecartRevolution Expression sign
+  minecartrevolution.control.sign.expression.destroy:
+    description: Gives access to destroy the MinecartRevolution Expression sign
+
+  minecartrevolution.control.sign.announce.*:
+    description: Gives access to use the MinecartRevolution Announce sign
+    children:
+      minecartrevolution.control.sign.announce.place: true
+      minecartrevolution.control.sign.announce.destroy: true
+  minecartrevolution.control.sign.announce.place:
+    description: Gives access to place the MinecartRevolution Announce sign
+  minecartrevolution.control.sign.announce.destroy:
+    description: Gives access to destroy the MinecartRevolution Announce sign
