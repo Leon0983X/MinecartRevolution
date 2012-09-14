@@ -30,11 +30,11 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         config.setDefaults();
         config.save();
 
-        getExpressionExecutor().getExpressionCommands().add(new AnnounceCommand());
-        getExpressionExecutor().getExpressionCommands().add(new FileCommand(getExpressionExecutor()));
-        getExpressionExecutor().getExpressionCommands().add(new SpeedCommand());
+        addExpressiomCommand(new AnnounceCommand());
+        addExpressiomCommand(new FileCommand(getExpressionExecutor()));
+        addExpressiomCommand(new SpeedCommand());
 
-        getExpressionExecutor().getExpressionConstants().add(new SpeedConstant());
+        addExpressiomConstant(new SpeedConstant());
     }
 
 }

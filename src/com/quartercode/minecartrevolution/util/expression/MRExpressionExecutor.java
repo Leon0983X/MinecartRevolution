@@ -124,10 +124,11 @@ public class MRExpressionExecutor {
 	        Object parameter = scriptExecutor.get("result");
 
 	        if (isNumber(String.valueOf(parameter))) {
-	            parameter = Double.parseDouble(parameterString);
+	            parameter = Double.parseDouble(String.valueOf(parameter));
 	        }
 
 	        expressionCommand.execute(minecart, parameter);
+	        return;
 	    }
 	}
                             }

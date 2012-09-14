@@ -10,30 +10,39 @@ public class MinecartUtil {
 
         Vector velocity = minecart.getVelocity();
 
-        if (velocity.getX() > 0 || velocity.getX() < 0) {
+        if (velocity.getX() > 0) {
             return velocity.getX();
-        } else if (velocity.getZ() > 0 || velocity.getZ() < 0) {
+        } else if (velocity.getX() < 0) {
+            return -velocity.getX();
+        } else if (velocity.getZ() > 0) {
             return velocity.getZ();
+        } else if (velocity.getZ() < 0) {
+            return -velocity.getZ();
         } else {
             return 0;
         }
     }
 
-    public static void addSpeed(Minecart minecart, double speed) {
+    public static void setSpeed(Minecart minecart, double speed) {
 
         Vector velocity = minecart.getVelocity();
 
         if (velocity.getX() > 0) {
-            velocity.setX(velocity.getX() + speed);
+            velocity.setX(speed);
         } else if (velocity.getX() < 0) {
-            velocity.setX(velocity.getX() - speed);
+            velocity.setX(-speed);
         } else if (velocity.getZ() > 0) {
-            velocity.setZ(velocity.getZ() + speed);
+            velocity.setZ(speed);
         } else if (velocity.getZ() < 0) {
-            velocity.setZ(velocity.getZ() - speed);
+            velocity.setZ(-speed);
         }
 
         minecart.setVelocity(velocity);
+    }
+
+    public static void addSpeed(Minecart minecart, double speed) {
+
+        setSpeed(minecart, getSpeed(minecart) + speed);
     }
 
     public static void subtractSpeed(Minecart minecart, double speed) {
@@ -57,19 +66,6 @@ public class MinecartUtil {
 
         velocity.setX(velocity.getX() / factor);
         velocity.setZ(velocity.getZ() / factor);
-
-        minecart.setVelocity(velocity);
-    }
-
-    public static void setSpeed(Minecart minecart, double speed) {
-
-        Vector velocity = minecart.getVelocity();
-
-        if (velocity.getX() > 0 || velocity.getX() < 0) {
-            velocity.setX(speed);
-        } else if (velocity.getZ() > 0 || velocity.getZ() < 0) {
-            velocity.setZ(speed);
-        }
 
         minecart.setVelocity(velocity);
     }

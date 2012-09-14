@@ -2,6 +2,7 @@
 package com.quartercode.basiccommands;
 
 import com.quartercode.basiccommands.command.ClearCommand;
+import com.quartercode.basiccommands.command.EjectCommand;
 import com.quartercode.basiccommands.command.HelpCommand;
 import com.quartercode.basiccommands.command.UpdateCommand;
 import com.quartercode.basiccommands.command.VersioncheckCommand;
@@ -39,6 +40,7 @@ public class BasicCommandsPlugin extends MinecartRevolutionPlugin {
         addCommand(new VersioncheckCommand());
         addCommand(new UpdateCommand(minecartRevolution));
         addCommand(new ClearCommand());
+        addCommand(new EjectCommand());
     }
 
 }

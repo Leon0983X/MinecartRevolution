@@ -32,6 +32,7 @@ permissions:
       minecartrevolution.command.help: true
       minecartrevolution.command.update.*: true
       minecartrevolution.command.clear: true
+      minecartrevolution.command.eject: true
 
 
   minecartrevolution.command.help:
@@ -52,7 +53,8 @@ permissions:
   minecartrevolution.command.clear:
     description: Gives access to use the MinecartRevolution clear command
 
-
+  minecartrevolution.command.eject:
+    description: Gives access to use the MinecartRevolution eject command
 
   minecartrevolution.control.*:
     description: Gives access to use all MinecartRevolution controls

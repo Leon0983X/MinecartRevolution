@@ -10,6 +10,8 @@ import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
+import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
 
@@ -76,6 +78,16 @@ public abstract class MinecartRevolutionPlugin {
     public void addControlSign(ControlSign controlSign) {
 
         getControlSignExecutor().getControlSigns().add(controlSign);
+    }
+
+    public void addExpressiomCommand(ExpressionCommand expressionCommand) {
+
+        getExpressionExecutor().getExpressionCommands().add(expressionCommand);
+    }
+
+    public void addExpressiomConstant(ExpressionConstant expressionConstant) {
+
+        getExpressionExecutor().getExpressionConstants().add(expressionConstant);
     }
 
     public abstract PluginInfo getInfo();

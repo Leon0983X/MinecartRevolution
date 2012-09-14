@@ -23,7 +23,7 @@ public class BrakeBlock extends ControlBlock {
     @Override
     public ControlBlockInfo getInfo() {
 
-        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.booster.name"), Lang.getValue("basiccontrols.blocks.booster.description"), "booster.place", "booster.destroy", Material.SOUL_SAND.getId());
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.brake.name"), Lang.getValue("basiccontrols.blocks.brake.description"), "brake.place", "brake.destroy", Material.SOUL_SAND.getId());
     }
 
     @Override

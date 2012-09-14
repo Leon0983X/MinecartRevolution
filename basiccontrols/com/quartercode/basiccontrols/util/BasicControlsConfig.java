@@ -24,8 +24,8 @@ public class BasicControlsConfig extends PluginConfig {
     @Override
     public void setDefaults() {
 
-        addDefault(boosterBlockExpression, "s = s*5;");
-        addDefault(brakeBlockExpression, "s = s/5;");
+        addDefault(boosterBlockExpression, "speed $speed * 5;");
+        addDefault(brakeBlockExpression, "speed $speed / 5;");
     }
 
 }
