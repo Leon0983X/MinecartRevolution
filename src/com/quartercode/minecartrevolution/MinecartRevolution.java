@@ -76,6 +76,7 @@ public class MinecartRevolution extends JavaPlugin {
         return configuration;
     }
 
+    @Override
     public File getFile() {
 
         return super.getFile();

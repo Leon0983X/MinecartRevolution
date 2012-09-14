@@ -140,6 +140,7 @@ public class MetricsUtil {
 
                 private boolean firstPost = true;
 
+                @Override
                 public void run() {
 
                     try {
@@ -210,7 +211,7 @@ public class MetricsUtil {
             }
 
             if (taskId > 0) {
-                this.plugin.getServer().getScheduler().cancelTask(taskId);
+                plugin.getServer().getScheduler().cancelTask(taskId);
                 taskId = -1;
             }
         }
