@@ -5,6 +5,7 @@ import com.quartercode.basicexpression.command.AnnounceCommand;
 import com.quartercode.basicexpression.command.ClearCommand;
 import com.quartercode.basicexpression.command.EjectCommand;
 import com.quartercode.basicexpression.command.FileCommand;
+import com.quartercode.basicexpression.command.HealthCommand;
 import com.quartercode.basicexpression.command.SpeedCommand;
 import com.quartercode.basicexpression.constant.SpeedConstant;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
@@ -32,13 +33,14 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         config.setDefaults();
         config.save();
 
-        addExpressiomCommand(new AnnounceCommand());
-        addExpressiomCommand(new FileCommand(getExpressionExecutor()));
-        addExpressiomCommand(new SpeedCommand());
-        addExpressiomCommand(new EjectCommand());
-        addExpressiomCommand(new ClearCommand(minecartRevolution));
+        addExpressionCommand(new AnnounceCommand());
+        addExpressionCommand(new FileCommand(getExpressionExecutor()));
+        addExpressionCommand(new SpeedCommand());
+        addExpressionCommand(new EjectCommand());
+        addExpressionCommand(new ClearCommand(minecartRevolution));
+        addExpressionCommand(new HealthCommand());
 
-        addExpressiomConstant(new SpeedConstant());
+        addExpressionConstant(new SpeedConstant());
     }
 
 }

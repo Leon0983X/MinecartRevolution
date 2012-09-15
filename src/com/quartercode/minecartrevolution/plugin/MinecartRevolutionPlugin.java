@@ -80,12 +80,12 @@ public abstract class MinecartRevolutionPlugin {
         getControlSignExecutor().getControlSigns().add(controlSign);
     }
 
-    public void addExpressiomCommand(ExpressionCommand expressionCommand) {
+    public void addExpressionCommand(ExpressionCommand expressionCommand) {
 
         getExpressionExecutor().getExpressionCommands().add(expressionCommand);
     }
 
-    public void addExpressiomConstant(ExpressionConstant expressionConstant) {
+    public void addExpressionConstant(ExpressionConstant expressionConstant) {
 
         getExpressionExecutor().getExpressionConstants().add(expressionConstant);
     }
