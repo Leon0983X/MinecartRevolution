@@ -57,12 +57,12 @@ public class InfoCommand extends Command {
                 sender.sendMessage("");
             }
 
-            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.GREEN + " was born at a Tuesday, on 21th February");
-            sender.sendMessage(ChatColor.GOLD + "2012, and filled with creativity.");
-            sender.sendMessage("The first was with only a few");
-            sender.sendMessage("lines of code, and it was the beginning of a big thing,");
-            sender.sendMessage("this big thing is called " + ChatColor.GOLD + Conf.NAME + ChatColor.RESET + ", and today it's one");
-            sender.sendMessage("of the largest & most versatile Minecart plugins ever made.");
+            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.GREEN + " was born at a Tuesday, on 21th February ");
+            sender.sendMessage(ChatColor.GREEN + "2012" + ChatColor.GOLD + ", and filled with creativity.");
+            sender.sendMessage("The first was with only a few lines of code, and it was the ");
+            sender.sendMessage("beginning of a big thing, this big thing is called ");
+            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.RESET + ". Today it's one of the largest & most ");
+            sender.sendMessage("versatile Minecart plugins ever made.");
             sender.sendMessage(ChatColor.AQUA + "There's no limit with " + ChatColor.GOLD + Conf.NAME);
         }
 
