@@ -23,7 +23,7 @@ public class RemovecartsCommand extends Command {
     }
 
     @Override
-    public CommandInfo getCommandInfo() {
+    public CommandInfo getInfo() {
 
         return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.removecarts.description"), "removecarts", "removecarts", "delcarts");
     }

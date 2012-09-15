@@ -23,7 +23,7 @@ public class InfoCommand extends Command {
     }
 
     @Override
-    public CommandInfo getCommandInfo() {
+    public CommandInfo getInfo() {
 
         return new CommandInfo(true, null, Lang.getValue("basiccommands.info.description"), "info", "info");
     }

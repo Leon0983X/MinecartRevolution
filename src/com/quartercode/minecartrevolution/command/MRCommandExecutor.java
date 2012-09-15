@@ -39,7 +39,7 @@ public class MRCommandExecutor implements CommandExecutor {
             }
         } else {
             for (Command listCommand : commands) {
-                CommandInfo commandInfo = listCommand.getCommandInfo();
+                CommandInfo commandInfo = listCommand.getInfo();
 
                 for (String label : commandInfo.getLabels()) {
                     if (label.equalsIgnoreCase("<empty>")) {
@@ -58,7 +58,7 @@ public class MRCommandExecutor implements CommandExecutor {
     private boolean executeCommand(CommandSender commandSender, String usedMrCommand, String commandLabel, Arguments arguments) {
 
         for (Command listCommand : commands) {
-            CommandInfo commandInfo = listCommand.getCommandInfo();
+            CommandInfo commandInfo = listCommand.getInfo();
 
             for (String label : commandInfo.getLabels()) {
                 boolean execute = false;
@@ -88,7 +88,7 @@ public class MRCommandExecutor implements CommandExecutor {
     private boolean canExecute(CommandSender commandSender, Command command) {
 
         if (commandSender instanceof Player) {
-            if (Perm.has((Player) commandSender, command.getCommandInfo().getPermission())) {
+            if (Perm.has((Player) commandSender, command.getInfo().getPermission())) {
                 return true;
             } else {
                 commandSender.sendMessage(Lang.getValue("command.noPermission"));

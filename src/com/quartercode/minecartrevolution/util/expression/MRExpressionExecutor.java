@@ -104,18 +104,22 @@ public class MRExpressionExecutor {
                     }
                 }
             } else {
+                String[] splittedExpressionPart = splitExpression(expressionPart);
+
                 for (ExpressionCommand expressionCommand : expressionCommands) {
-                    String[] splittedExpressionPart = splitExpression(expressionPart);
-                    if (splittedExpressionPart != null) {
-                        String command = splittedExpressionPart[0];
-                        String parameterString = splittedExpressionPart[1];
+                    String command = splittedExpressionPart[0];
 
-                        if (command != null && parameterString != null) {
-                            ExpressionCommandInfo info = expressionCommand.getInfo();
+                    if (command != null) {
+                        ExpressionCommandInfo info = expressionCommand.getInfo();
 
-                            for (String ecCommandLabel : info.getCommandLabels()) {
-	if (ecCommandLabel.equalsIgnoreCase(command)) {
-	    if (expressionCommand.canExecute(minecart)) {
+                        for (String ecCommandLabel : info.getCommandLabels()) {
+                            if (ecCommandLabel.equalsIgnoreCase(command)) {
+	if (expressionCommand.canExecute(minecart)) {
+	    if (splittedExpressionPart.length == 1) {
+	        expressionCommand.execute(minecart, null);
+	        return;
+	    } else if (splittedExpressionPart.length == 2) {
+	        String parameterString = splittedExpressionPart[1];
 	        parameterString = replaceConstants(parameterString, minecart);
 	        parameterString = generateJavaScript(parameterString);
 
@@ -147,7 +151,7 @@ public class MRExpressionExecutor {
             }
         }
 
-        return null;
+        return new String[] { expression };
     }
 
     private String replaceConstants(String parameter, Minecart minecart) {

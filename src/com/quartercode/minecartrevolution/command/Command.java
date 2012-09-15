@@ -6,7 +6,7 @@ import com.quartercode.qcutil.args.Arguments;
 
 public abstract class Command {
 
-    public abstract CommandInfo getCommandInfo();
+    public abstract CommandInfo getInfo();
 
     public abstract void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments);
 

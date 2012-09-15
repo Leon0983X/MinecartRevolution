@@ -20,7 +20,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandInfo getCommandInfo() {
+    public CommandInfo getInfo() {
 
         return new CommandInfo(true, null, Lang.getValue("basiccommands.help.description"), "help", "<empty>", "help");
     }
@@ -45,7 +45,7 @@ public class HelpCommand extends Command {
         List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
 
         for (Command command : commands) {
-            CommandInfo commandInfo = command.getCommandInfo();
+            CommandInfo commandInfo = command.getInfo();
 
             for (String label : commandInfo.getLabels()) {
                 String printLabel = "";

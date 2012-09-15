@@ -15,7 +15,7 @@ public class VersioncheckCommand extends Command {
     }
 
     @Override
-    public CommandInfo getCommandInfo() {
+    public CommandInfo getInfo() {
 
         return new CommandInfo(true, null, Lang.getValue("basiccommands.versioncheck.description"), "versioncheck", "versioncheck", "checkversion", "checkv");
     }
