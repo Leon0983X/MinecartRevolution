@@ -2,6 +2,14 @@
 package com.quartercode.minecartrevolution.util;
 
 /*
+ * ################
+ * ##### INFO #####
+ * #####################################
+ * ### This is a modified version of ###
+ * ### the official MetricsUtil.     ###
+ * ### For Copyright see below.      ###
+ * #####################################
+ * 
  * Copyright 2011 Tyler Blair. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -30,7 +38,6 @@ package com.quartercode.minecartrevolution.util;
  */
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -48,38 +55,33 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.qcutil.io.File;
 
-public class MetricsUtil {
+public class Metrics {
 
-    private final static int        REVISION              = 5;
-    private static final String     BASE_URL              = "http://mcstats.org";
-    private static final String     REPORT_URL            = "/report/%s";
-    private static final String     CONFIG_FILE           = "plugins/PluginMetrics/config.yml";
-    private static final String     CUSTOM_DATA_SEPARATOR = "~~";
-    private static final int        PING_INTERVAL         = 10;
+    private static final int    REVISION              = 5;
+    private static final String BASE_URL              = "http://mcstats.org";
+    private static final String REPORT_URL            = "/report/%s";
+    private static final String CUSTOM_DATA_SEPARATOR = "~~";
+    private static final int    PING_INTERVAL         = 10;
 
-    private final Plugin            plugin;
-    private final Set<Graph>        graphs                = Collections.synchronizedSet(new HashSet<Graph>());
-    private final Graph             defaultGraph          = new Graph("Default");
-    private final YamlConfiguration configuration;
-    private final File              configurationFile;
-    private final String            guid;
+    private MinecartRevolution  minecartRevolution;
+    private Set<Graph>          graphs                = Collections.synchronizedSet(new HashSet<Graph>());
+    private Graph               defaultGraph          = new Graph("Default");
+    private File                configurationFile;
+    private YamlConfiguration   configuration;
+    private String              guid;
 
-    private final Object            optOutLock            = new Object();
-    private volatile int            taskId                = -1;
+    private Object              optOutLock            = new Object();
+    private volatile int        taskId                = -1;
 
-    public MetricsUtil(Plugin plugin) throws IOException {
+    public Metrics(MinecartRevolution minecartRevoluion, File configurationFile) throws IOException {
 
-        if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        }
+        minecartRevolution = minecartRevoluion;
 
-        this.plugin = plugin;
-
-        configurationFile = new File(CONFIG_FILE);
+        this.configurationFile = configurationFile;
         configuration = YamlConfiguration.loadConfiguration(configurationFile);
 
         configuration.addDefault("opt-out", false);
@@ -95,34 +97,29 @@ public class MetricsUtil {
 
     public Graph createGraph(String name) {
 
-        if (name == null) {
-            throw new IllegalArgumentException("Graph name cannot be null");
+        if (name != null) {
+            Graph graph = new Graph(name);
+            graphs.add(graph);
+
+            return graph;
+        } else {
+            return null;
         }
-
-        Graph graph = new Graph(name);
-        graphs.add(graph);
-
-        return graph;
     }
 
     public void addGraph(Graph graph) {
 
-        if (graph == null) {
-
-            throw new IllegalArgumentException("Graph cannot be null");
+        if (graph != null) {
+            graphs.add(graph);
         }
-
-        graphs.add(graph);
     }
 
     public void addCustomData(Plotter plotter) {
 
-        if (plotter == null) {
-            throw new IllegalArgumentException("Plotter cannot be null");
+        if (plotter != null) {
+            defaultGraph.addPlotter(plotter);
+            graphs.add(defaultGraph);
         }
-
-        defaultGraph.addPlotter(plotter);
-        graphs.add(defaultGraph);
     }
 
     public boolean start() {
@@ -136,7 +133,7 @@ public class MetricsUtil {
                 return true;
             }
 
-            taskId = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
+            taskId = Bukkit.getScheduler().scheduleAsyncRepeatingTask(minecartRevolution, new Runnable() {
 
                 private boolean firstPost = true;
 
@@ -147,7 +144,7 @@ public class MetricsUtil {
                         synchronized (optOutLock) {
                             if (isOptOut() && taskId > 0) {
 
-	plugin.getServer().getScheduler().cancelTask(taskId);
+	Bukkit.getScheduler().cancelTask(taskId);
 	taskId = -1;
 
 	for (Graph graph : graphs) {
@@ -173,7 +170,7 @@ public class MetricsUtil {
 
         synchronized (optOutLock) {
             try {
-                configuration.load(CONFIG_FILE);
+                configuration.load(configurationFile);
             }
             catch (IOException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
@@ -211,17 +208,17 @@ public class MetricsUtil {
             }
 
             if (taskId > 0) {
-                plugin.getServer().getScheduler().cancelTask(taskId);
+                minecartRevolution.getServer().getScheduler().cancelTask(taskId);
                 taskId = -1;
             }
         }
     }
 
-    private void postPlugin(final boolean isPing) throws IOException {
+    private void postPlugin(boolean isPing) throws IOException {
 
-        final PluginDescriptionFile description = plugin.getDescription();
+        PluginDescriptionFile description = minecartRevolution.getDescription();
 
-        final StringBuilder data = new StringBuilder();
+        StringBuilder data = new StringBuilder();
         data.append(encode("guid")).append('=').append(encode(guid));
         encodeDataPair(data, "version", description.getVersion());
         encodeDataPair(data, "server", Bukkit.getVersion());
@@ -233,20 +230,20 @@ public class MetricsUtil {
         }
 
         synchronized (graphs) {
-            final Iterator<Graph> iter = graphs.iterator();
+            Iterator<Graph> iter = graphs.iterator();
 
             while (iter.hasNext()) {
-                final Graph graph = iter.next();
+                Graph graph = iter.next();
 
                 for (Plotter plotter : graph.getPlotters()) {
-                    final String key = String.format("C%s%s%s%s", CUSTOM_DATA_SEPARATOR, graph.getName(), CUSTOM_DATA_SEPARATOR, plotter.getColumnName());
-                    final String value = Integer.toString(plotter.getValue());
+                    String key = String.format("C%s%s%s%s", CUSTOM_DATA_SEPARATOR, graph.getName(), CUSTOM_DATA_SEPARATOR, plotter.getColumnName());
+                    String value = Integer.toString(plotter.getValue());
                     encodeDataPair(data, key, value);
                 }
             }
         }
 
-        URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(plugin.getDescription().getName())));
+        URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(minecartRevolution.getDescription().getName())));
         URLConnection connection;
 
         if (isMineshafterPresent()) {
@@ -257,12 +254,12 @@ public class MetricsUtil {
 
         connection.setDoOutput(true);
 
-        final OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         writer.write(data.toString());
         writer.flush();
 
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        final String response = reader.readLine();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String response = reader.readLine();
 
         writer.close();
         reader.close();
@@ -272,10 +269,10 @@ public class MetricsUtil {
         } else {
             if (response.contains("OK This is your first update this hour")) {
                 synchronized (graphs) {
-                    final Iterator<Graph> iterator = graphs.iterator();
+                    Iterator<Graph> iterator = graphs.iterator();
 
                     while (iterator.hasNext()) {
-                        final Graph graph = iterator.next();
+                        Graph graph = iterator.next();
                         for (Plotter plotter : graph.getPlotters()) {
                             plotter.reset();
                         }
@@ -296,22 +293,22 @@ public class MetricsUtil {
         }
     }
 
-    private static void encodeDataPair(final StringBuilder buffer, final String key, final String value) throws UnsupportedEncodingException {
+    private static void encodeDataPair(StringBuilder buffer, String key, String value) throws UnsupportedEncodingException {
 
         buffer.append('&').append(encode(key)).append('=').append(encode(value));
     }
 
-    private static String encode(final String text) throws UnsupportedEncodingException {
+    private static String encode(String text) throws UnsupportedEncodingException {
 
         return URLEncoder.encode(text, "UTF-8");
     }
 
     public static class Graph {
 
-        private final String       name;
-        private final Set<Plotter> plotters = new LinkedHashSet<Plotter>();
+        private String       name;
+        private Set<Plotter> plotters = new LinkedHashSet<Plotter>();
 
-        private Graph(final String name) {
+        private Graph(String name) {
 
             this.name = name;
         }
@@ -321,19 +318,19 @@ public class MetricsUtil {
             return name;
         }
 
-        public void addPlotter(final Plotter plotter) {
+        public Set<Plotter> getPlotters() {
+
+            return Collections.unmodifiableSet(plotters);
+        }
+
+        public void addPlotter(Plotter plotter) {
 
             plotters.add(plotter);
         }
 
-        public void removePlotter(final Plotter plotter) {
+        public void removePlotter(Plotter plotter) {
 
             plotters.remove(plotter);
-        }
-
-        public Set<Plotter> getPlotters() {
-
-            return Collections.unmodifiableSet(plotters);
         }
 
         @Override
@@ -343,32 +340,31 @@ public class MetricsUtil {
         }
 
         @Override
-        public boolean equals(final Object object) {
+        public boolean equals(Object object) {
 
             if (! (object instanceof Graph)) {
                 return false;
             }
 
-            final Graph graph = (Graph) object;
+            Graph graph = (Graph) object;
             return graph.name.equals(name);
         }
 
         protected void onOptOut() {
 
         }
-
     }
 
     public static abstract class Plotter {
 
-        private final String name;
+        private String name;
 
         public Plotter() {
 
             this("Default");
         }
 
-        public Plotter(final String name) {
+        public Plotter(String name) {
 
             this.name = name;
         }
@@ -391,16 +387,15 @@ public class MetricsUtil {
         }
 
         @Override
-        public boolean equals(final Object object) {
+        public boolean equals(Object object) {
 
             if (! (object instanceof Plotter)) {
                 return false;
             }
 
-            final Plotter plotter = (Plotter) object;
+            Plotter plotter = (Plotter) object;
             return plotter.name.equals(name) && plotter.getValue() == getValue();
         }
-
     }
 
 }

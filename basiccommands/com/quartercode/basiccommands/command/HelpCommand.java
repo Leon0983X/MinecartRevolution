@@ -1,7 +1,6 @@
 
 package com.quartercode.basiccommands.command;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -34,8 +33,16 @@ public class HelpCommand extends Command {
 
     private void showHelp(CommandSender commandSender, String usedMrCommand) {
 
+        commandSender.sendMessage(ChatColor.GREEN + "========== [" + Lang.getValue("basiccommands.help.start") + "] ==========");
+
+        String aliases = "";
+        for (String alias : minecartRevolution.getCommand("minecartrevolution").getAliases()) {
+            aliases += alias + ", ";
+        }
+        aliases = aliases.substring(0, aliases.length() - 2);
+        commandSender.sendMessage(Lang.getValue("basiccommands.help.aliases", "aliases", aliases));
+
         List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
-        List<String> helpStrings = new ArrayList<String>();
 
         for (Command command : commands) {
             CommandInfo commandInfo = command.getCommandInfo();
@@ -51,19 +58,15 @@ public class HelpCommand extends Command {
                     parameterUsage = " " + commandInfo.getParameterUsage();
                 }
 
-                helpStrings.add(colorHelpMessage("/" + usedMrCommand + printLabel + parameterUsage, commandInfo.getDescription()));
+                printHelpMessage(commandSender, "/" + usedMrCommand + printLabel + parameterUsage, commandInfo.getDescription());
             }
-        }
-
-        commandSender.sendMessage(ChatColor.GREEN + "========== [" + Lang.getValue("basiccommands.help.start") + "] ==========");
-        for (String helpString : helpStrings) {
-            commandSender.sendMessage(helpString);
         }
     }
 
-    private String colorHelpMessage(String command, String description) {
+    private void printHelpMessage(CommandSender sender, String command, String description) {
 
-        return ChatColor.DARK_GREEN + command + ChatColor.BLUE + " > " + ChatColor.DARK_AQUA + description;
+        sender.sendMessage(ChatColor.GOLD + command);
+        sender.sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + description);
     }
 
 }

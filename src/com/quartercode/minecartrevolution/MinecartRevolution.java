@@ -1,7 +1,6 @@
 
 package com.quartercode.minecartrevolution;
 
-import java.io.File;
 import java.io.IOException;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.quartercode.basiccommands.BasicCommandsPlugin;
@@ -16,9 +15,10 @@ import com.quartercode.minecartrevolution.plugin.PluginManager;
 import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
-import com.quartercode.minecartrevolution.util.MetricsUtil;
+import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.QcUtil;
+import com.quartercode.qcutil.io.File;
 
 public class MinecartRevolution extends JavaPlugin {
 
@@ -41,6 +41,7 @@ public class MinecartRevolution extends JavaPlugin {
     private MRControlSignExecutor  controlSignExecutor;
     private MRExpressionExecutor   expressionExecutor;
     private Config                 configuration;
+    private Metrics                metrics;
 
     private BasicCommandsPlugin    commandsPlugin;
     private BasicControlsPlugin    controlsPlugin;
@@ -79,7 +80,7 @@ public class MinecartRevolution extends JavaPlugin {
     @Override
     public File getFile() {
 
-        return super.getFile();
+        return (File) super.getFile();
     }
 
     @Override
@@ -135,11 +136,11 @@ public class MinecartRevolution extends JavaPlugin {
     private void enableMetrics() {
 
         try {
-            MetricsUtil metrics = new MetricsUtil(this);
+            metrics = new Metrics(this, new File("plugins" + java.io.File.separator + "PluginMetrics", "config.yml"));
             metrics.start();
         }
         catch (IOException e) {
-            handleThrowable(e);
+            handleSilenceThrowable(e);
         }
     }
 

@@ -1,9 +1,12 @@
 
 package com.quartercode.basiccommands;
 
-import com.quartercode.basiccommands.command.ClearCommand;
 import com.quartercode.basiccommands.command.EjectCommand;
+import com.quartercode.basiccommands.command.GetVersionCommand;
 import com.quartercode.basiccommands.command.HelpCommand;
+import com.quartercode.basiccommands.command.InfoCommand;
+import com.quartercode.basiccommands.command.RemovecartsCommand;
+import com.quartercode.basiccommands.command.StopcartsCommand;
 import com.quartercode.basiccommands.command.UpdateCommand;
 import com.quartercode.basiccommands.command.VersioncheckCommand;
 import com.quartercode.basiccommands.listener.PlayerListener;
@@ -37,9 +40,12 @@ public class BasicCommandsPlugin extends MinecartRevolutionPlugin {
         new ServerListener(minecartRevolution);
 
         addCommand(new HelpCommand(minecartRevolution));
+        addCommand(new InfoCommand());
+        addCommand(new GetVersionCommand());
         addCommand(new VersioncheckCommand());
         addCommand(new UpdateCommand(minecartRevolution));
-        addCommand(new ClearCommand());
+        addCommand(new RemovecartsCommand());
+        addCommand(new StopcartsCommand());
         addCommand(new EjectCommand());
     }
 

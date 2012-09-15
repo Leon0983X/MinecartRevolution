@@ -2,7 +2,7 @@ MinecartRevolution
 ==================
 
 MinecartRevolution is a modern Minecart-Plugin for Bukkit. It features simple functions for beginners and professional ones like an own english-like scripting language.
-You can use it simple with Control-Signs and -Blocks, define the expression scripts and create new Controls in configuration files. You can also write plugins for more complicated Controls.
+You can use it simple with Control-Signs and -Blocks and define the expression scripts. You can also write plugins for more complicated Controls.
 
 There is no limit with MinecartRevolution.
 

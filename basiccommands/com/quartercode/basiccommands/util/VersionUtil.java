@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -55,10 +56,10 @@ public class VersionUtil {
                 return new Version(title.split(" ")[1]);
             }
         }
-        catch (IOException e) {
-            MinecartRevolution.handleThrowable(e);
+        catch (UnknownHostException e) {
+            MinecartRevolution.handleSilenceThrowable(e);
         }
-        catch (XMLStreamException e) {
+        catch (Exception e) {
             MinecartRevolution.handleThrowable(e);
         }
 
@@ -107,6 +108,10 @@ public class VersionUtil {
             sendMessage(logger, commandSender, Lang.getValue("basiccommands.update.reloaded"), true);
 
             sendMessage(logger, commandSender, Lang.getValue("basiccommands.update.updated"), true);
+        }
+        catch (UnknownHostException e) {
+            sendMessage(null, commandSender, Lang.getValue("basiccommands.update.error"), false);
+            MinecartRevolution.handleSilenceThrowable(e);
         }
         catch (Exception e) {
             sendMessage(null, commandSender, Lang.getValue("basiccommands.update.error"), false);
