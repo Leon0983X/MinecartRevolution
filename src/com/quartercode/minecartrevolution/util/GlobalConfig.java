@@ -15,6 +15,9 @@ public class GlobalConfig extends Config {
     public static final String error               = "error";
     public static final String printSilenceErrors  = error + ".printSilenceErrors";
 
+    public static final String minecart            = "minecart";
+    public static final String playEffects         = minecart + ".playEffects";
+
     public GlobalConfig() {
 
         super(FileConf.MAIN_CONF);
@@ -24,10 +27,14 @@ public class GlobalConfig extends Config {
     public void setDefaults() {
 
         addDefault(language, "english");
+
         addDefault(autoUpdate, false);
         addDefault(checkVersionOnStart, true);
         addDefault(checkVersionOnJoin, true);
+
         addDefault(printSilenceErrors, false);
+
+        addDefault(playEffects, true);
     }
 
 }

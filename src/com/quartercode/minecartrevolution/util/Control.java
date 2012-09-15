@@ -1,5 +1,5 @@
 
-package com.quartercode.minecartrevolution.util.expression;
+package com.quartercode.minecartrevolution.util;
 
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;

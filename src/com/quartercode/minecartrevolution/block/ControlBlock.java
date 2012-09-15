@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.util.expression.Control;
+import com.quartercode.minecartrevolution.util.Control;
 
 public abstract class ControlBlock extends Control {
 
