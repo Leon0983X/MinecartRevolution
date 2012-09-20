@@ -1,20 +1,33 @@
 
 package com.quartercode.minecartrevolution.get;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.Conf;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.qcutil.io.File;
 import com.quartercode.qcutil.res.PropertyResourceHandler;
 import com.quartercode.qcutil.res.ResourceManager;
 
 public class Lang {
 
-    protected static ResourceManager         resourceManager = new ResourceManager(FileConf.LANGUAGES);
-    protected static PropertyResourceHandler resourceHandler = new PropertyResourceHandler(resourceManager);
+    public static final String               standardLanguage = "english";
+
+    protected static ResourceManager         resourceManager  = new ResourceManager(FileConf.LANGUAGES);
+    protected static PropertyResourceHandler resourceHandler  = new PropertyResourceHandler(resourceManager);
 
     static {
         resourceManager.getFilePatterns().add("english.lang");
@@ -61,31 +74,21 @@ public class Lang {
         addVariable(variableList, "under", ChatColor.UNDERLINE);
         addVariable(variableList, "underline", ChatColor.UNDERLINE);
 
-        // addVariable(variableList, "black", "§0");
-        // addVariable(variableList, "darkBlue", "§1");
-        // addVariable(variableList, "darkGreen", "§2");
-        // addVariable(variableList, "darkAqua", "§3");
-        // addVariable(variableList, "darkRed", "§4");
-        // addVariable(variableList, "purple", "§5");
-        // addVariable(variableList, "gold", "§6");
-        // addVariable(variableList, "grey", "§7");
-        // addVariable(variableList, "darkGrey", "§8");
-        // addVariable(variableList, "indigo", "§9");
-        // addVariable(variableList, "brightGreen", "§a");
-        // addVariable(variableList, "aqua", "§b");
-        // addVariable(variableList, "red", "§c");
-        // addVariable(variableList, "pink", "§d");
-        // addVariable(variableList, "yellow", "§e");
-        // addVariable(variableList, "white", "§f");
+        String result = resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
 
-        // addVariable(variableList, "random", "§k");
-        // addVariable(variableList, "bold", "§l");
-        // addVariable(variableList, "strike", "§m");
-        // addVariable(variableList, "underline", "§n");
-        // addVariable(variableList, "italic", "§o");
-        // addVariable(variableList, "reset", "§r");
+        if (result == null) {
+            String languageName = resourceHandler.getProperty("name");
+            String noLangValue = resourceHandler.getProperty("noLangValue", key, "key", key, "language", languageName, "languageFile", getLanguage() + ".lang");
 
-        return resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
+            if (noLangValue == null) {
+                noLangValue = ChatColor.RED + "There's no language value for " + key + " in the language " + languageName + " (" + getLanguage() + ".lang)!";
+            }
+
+            Bukkit.getConsoleSender().sendMessage(noLangValue);
+            return noLangValue;
+        } else {
+            return result;
+        }
     }
 
     private static void addVariable(List<String> variableList, String key, Object value) {
@@ -112,6 +115,71 @@ public class Lang {
     public static void setLanguage(String language) {
 
         setLocale(new Locale(language));
+    }
+
+    public static boolean isCurrentLanguageAvaiable() {
+
+        return resourceManager.getResource() != null;
+    }
+
+    public static void extractCurrentLanguage() {
+
+        extractFromJAR(Lang.class.getResource("/languages/" + getLanguage() + ".lang"), new File(FileConf.LANGUAGES + java.io.File.separator + getLanguage() + ".lang"));
+    }
+
+    private static void extractFromJAR(URL url, File destination) {
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+
+            destination.getParentFile().mkdirs();
+
+            outputStream = new FileOutputStream(destination);
+            outputStream.flush();
+
+            URLConnection castConnection = url.openConnection();
+
+            if (castConnection instanceof JarURLConnection) {
+                JarURLConnection connection = (JarURLConnection) url.openConnection();
+                connection.connect();
+
+                byte[] tempBuffer = new byte[4096];
+
+                inputStream = connection.getInputStream();
+                int counter;
+                while ( (counter = inputStream.read(tempBuffer)) > 0) {
+                    outputStream.write(tempBuffer, 0, counter);
+                    outputStream.flush();
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            MinecartRevolution.handleThrowable(e);
+        }
+        catch (IOException e) {
+            MinecartRevolution.handleThrowable(e);
+        }
+        finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                }
+                catch (IOException e) {
+                    MinecartRevolution.handleThrowable(e);
+                }
+            }
+
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                }
+                catch (IOException e) {
+                    MinecartRevolution.handleThrowable(e);
+                }
+            }
+        }
     }
 
     private Lang() {

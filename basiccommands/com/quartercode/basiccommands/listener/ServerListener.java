@@ -22,7 +22,7 @@ public class ServerListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PluginEnableEvent event) {
+    public void onPluginEnable(PluginEnableEvent event) {
 
         if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.autoUpdate)) {
             VersionUtil.tryUpdate(null, Bukkit.getConsoleSender());

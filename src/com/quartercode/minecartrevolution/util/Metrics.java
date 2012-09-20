@@ -77,9 +77,9 @@ public class Metrics {
     private Object              optOutLock            = new Object();
     private volatile int        taskId                = -1;
 
-    public Metrics(MinecartRevolution minecartRevoluion, File configurationFile) throws IOException {
+    public Metrics(MinecartRevolution minecartRevolution, File configurationFile) throws IOException {
 
-        minecartRevolution = minecartRevoluion;
+        this.minecartRevolution = minecartRevolution;
 
         this.configurationFile = configurationFile;
         configuration = YamlConfiguration.loadConfiguration(configurationFile);

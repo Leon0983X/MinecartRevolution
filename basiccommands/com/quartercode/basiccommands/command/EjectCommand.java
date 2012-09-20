@@ -24,7 +24,11 @@ public class EjectCommand extends Command {
     public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
 
         if (commandSender instanceof Player) {
-            ((Player) commandSender).getVehicle().eject();
+            Player player = (Player) commandSender;
+
+            if (player.getVehicle() != null) {
+                player.getVehicle().eject();
+            }
         }
     }
 

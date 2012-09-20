@@ -57,13 +57,13 @@ public class InfoCommand extends Command {
                 sender.sendMessage("");
             }
 
-            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.GREEN + " was born at a Tuesday, on 21th February ");
-            sender.sendMessage(ChatColor.GREEN + "2012" + ChatColor.GOLD + ", and filled with creativity.");
-            sender.sendMessage("The first was with only a few lines of code, and it was the ");
-            sender.sendMessage("beginning of a big thing, this big thing is called ");
-            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.RESET + ". Today it's one of the largest & most ");
+            sender.sendMessage("This plugin was born at a Tuesday, on");
+            sender.sendMessage(ChatColor.DARK_PURPLE + "21th February 2012" + ChatColor.RESET + ", and filled with creativity.");
+            sender.sendMessage("The first run was with only a few lines of code, and that");
+            sender.sendMessage("was the beginning of a big thing which's called");
+            sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.RESET + ". Today it's one of the largest & most");
             sender.sendMessage("versatile Minecart plugins ever made.");
-            sender.sendMessage(ChatColor.AQUA + "There's no limit with " + ChatColor.GOLD + Conf.NAME);
+            sender.sendMessage(ChatColor.AQUA + "There's no limit with " + ChatColor.GOLD + Conf.NAME + ChatColor.RESET + "!");
         }
 
         private int getDownloadCount() {

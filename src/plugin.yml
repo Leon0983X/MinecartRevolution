@@ -1,16 +1,16 @@
 name: MinecartRevolution
-version: 0 (1.3.1 B-R2)
-description: MinecartRevolution is a minecart-plugin which adds new awesome features to the minecarts.
+version: 1.0
+description: MinecartRevolution is a modern Minecart-Plugin which features simple functions for beginners and professional ones.
 authors: [QuarterCode]
 load: startup
-website: http://www.MinecartRevolution.com
+website: http://dev.bukkit.org/server-mods/MinecartRevolution
 main: com.quartercode.minecartrevolution.MinecartRevolution
 
 
 
 commands:
   minecartrevolution:
-    description: The main command for controlling MinecartRevolution.
+    description: The main command for controlling MinecartRevolution
     usage: /<command> <Command Label> [Parameters ...]
     aliases: [mr, minecart, cart, carts, minecartr, mrevolution]
 

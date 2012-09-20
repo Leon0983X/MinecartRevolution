@@ -109,6 +109,10 @@ public class MinecartRevolution extends JavaPlugin {
 
         Lang.setLanguage((String) configuration.get(GlobalConfig.language));
 
+        if (!Lang.isCurrentLanguageAvaiable()) {
+            Lang.extractCurrentLanguage();
+        }
+
         enableListeners();
         enableExecutors();
         enablePlugins();

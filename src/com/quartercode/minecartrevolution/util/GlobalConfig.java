@@ -2,6 +2,7 @@
 package com.quartercode.minecartrevolution.util;
 
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.get.Lang;
 
 public class GlobalConfig extends Config {
 
@@ -26,7 +27,7 @@ public class GlobalConfig extends Config {
     @Override
     public void setDefaults() {
 
-        addDefault(language, "english");
+        addDefault(language, Lang.standardLanguage);
 
         addDefault(autoUpdate, false);
         addDefault(checkVersionOnStart, true);

@@ -21,7 +21,7 @@ public class UpdateCommand extends Command {
     @Override
     public CommandInfo getInfo() {
 
-        return new CommandInfo(true, null, Lang.getValue("basiccommands.update.description"), "update", "update");
+        return new CommandInfo(true, null, Lang.getValue("basiccommands.update.description"), "version.update", "update");
     }
 
     @Override

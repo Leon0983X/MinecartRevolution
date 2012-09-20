@@ -1,0 +1,62 @@
+name=English
+
+noLangValue=$red$There's no language value for $key$ in the language $language$ ($languageFile$)!
+
+command.noCommand2=$red$The $name$-Command $label$ doesn't exist!
+command.noPermission=$red$You don't have the permission to use this command!
+
+control.place=$gray$Placed a $name$
+control.destroy=$gray$Destroyed a $name$
+control.place=$gray$You created a $type$ control!
+control.destroy=$gray$You destroyed a $type$ control!
+control.place.noPermission=$red$You don't have the permission to place this control!
+control.destroy.noPermission=$red$You don't have the permission to destroy this control!
+
+basiccommands.help.description=Shows a help page
+basiccommands.help.start=$name$ Help
+basiccommands.help.aliases=Aliases: $darkGreen$$aliases$
+
+basiccommands.info.description=Shows a info page
+basiccommands.info.start=$name$ Info
+
+basiccommands.version.latest=$green$You have already the latest version of $name$!
+
+basiccommands.getversion.description=Returns your plugin version
+basiccommands.getversion.return=$gold$Your MinecartRevolution version: $darkGreen$$version$
+
+basiccommands.versioncheck.description=Checks if a new version of $name$ is avaiable
+basiccommands.versioncheck.check=Checking $name$ version ...
+basiccommands.versioncheck.newVersion=$gold$There's a new version ($newVersion$) avaiable! Update with '$updateCommand$'!
+
+basiccommands.update.description=Updates your $name$ to the latest version
+basiccommands.update.update=Updating $name$ ...
+basiccommands.update.updated=Successfully updated $name$!
+basiccommands.update.error=$red$An error ocurred while updating!
+basiccommands.update.download=Downloading $file$ ...
+basiccommands.update.downloaded=Successfully downloaded $file$!
+basiccommands.update.reload=Reloading server ...
+basiccommands.update.reloaded=Successfully reloaded server!
+
+basiccommands.removecarts.description=Removes all minecarts in one or more worlds
+basiccommands.removecarts.cleared=$green$Successfully removed $count$ minecarts in world "$world$" with radius $radius$!
+basiccommands.removecarts.broadcast=$gold$$sender$ removed $count$ minecarts in world "$world$" with radius $radius$!
+
+basiccommands.stopcarts.description=Stops all minecarts in one or more worlds
+basiccommands.stopcarts.stopped=$green$Successfully stops $count$ minecarts in world "$world$" with radius $radius$!
+basiccommands.stopcarts.broadcast=$gold$$sender$ stops $count$ minecarts in world "$world$" with radius $radius$!
+
+basiccommands.eject.description=Ejects you from a minecart
+
+basiccontrols.blocks.controlsign.name=Control Sign Block
+basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the block
+
+basiccontrols.blocks.booster.name=Booster
+basiccontrols.blocks.booster.description=Boosts the minecart
+basiccontrols.blocks.brake.name=Brake
+basiccontrols.blocks.brake.description=Slows the minecart
+
+basiccontrols.signs.expression.name=Expression
+basiccontrols.signs.expression.description=Controls the minecart with Expressions
+
+basiccontrols.signs.announce.name=Announce
+basiccontrols.signs.announce.description=Sends a message to the minecart passenger

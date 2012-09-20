@@ -33,11 +33,11 @@ public class HelpCommand extends Command {
 
     private void showHelp(CommandSender commandSender, String usedMrCommand) {
 
-        commandSender.sendMessage(ChatColor.GREEN + "========== [" + Lang.getValue("basiccommands.help.start") + "] ==========");
+        commandSender.sendMessage(ChatColor.GREEN + "==========[ " + Lang.getValue("basiccommands.help.start") + " ]==========");
 
-        String aliases = "";
+        String aliases = ChatColor.DARK_GREEN + "/minecartrevolution" + ChatColor.AQUA + ", ";
         for (String alias : minecartRevolution.getCommand("minecartrevolution").getAliases()) {
-            aliases += alias + ", ";
+            aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
         commandSender.sendMessage(Lang.getValue("basiccommands.help.aliases", "aliases", aliases));
