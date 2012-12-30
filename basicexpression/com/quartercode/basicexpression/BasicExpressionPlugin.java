@@ -12,6 +12,7 @@ import com.quartercode.basicexpression.command.HealthCommand;
 import com.quartercode.basicexpression.command.IntersectionCommand;
 import com.quartercode.basicexpression.command.KillCommand;
 import com.quartercode.basicexpression.command.SpeedCommand;
+import com.quartercode.basicexpression.command.TimeCommand;
 import com.quartercode.basicexpression.command.VerticalCommand;
 import com.quartercode.basicexpression.constant.HealthConstant;
 import com.quartercode.basicexpression.constant.SpeedConstant;
@@ -30,7 +31,7 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicExpression", new Version("0"));
+        return new PluginInfo("BasicExpression", new Version("1.0"));
     }
 
     @Override
@@ -52,8 +53,10 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         addExpressionCommand(new KillCommand(minecartRevolution));
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new CollectCommand(minecartRevolution));
+        addExpressionCommand(new TimeCommand());
 
         addExpressionConstant(new SpeedConstant());
         addExpressionConstant(new HealthConstant());
     }
+
 }

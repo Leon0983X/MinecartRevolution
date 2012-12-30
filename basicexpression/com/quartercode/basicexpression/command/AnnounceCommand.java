@@ -28,9 +28,7 @@ public class AnnounceCommand implements ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter != null) {
-            if (minecart.getPassenger() != null && minecart.getPassenger() instanceof Player) {
-                ((Player) minecart.getPassenger()).sendMessage(String.valueOf(parameter));
-            }
+            ((Player) minecart.getPassenger()).sendMessage(String.valueOf(parameter));
         }
     }
 

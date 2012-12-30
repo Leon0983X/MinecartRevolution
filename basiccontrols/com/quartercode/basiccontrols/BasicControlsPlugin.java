@@ -21,7 +21,7 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicControls", new Version("0"));
+        return new PluginInfo("BasicControls", new Version("1.0"));
     }
 
     @Override

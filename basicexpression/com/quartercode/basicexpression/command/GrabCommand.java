@@ -28,18 +28,16 @@ public class GrabCommand implements ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (minecart.getPassenger() == null) {
-            double radius = 5;
+        double radius = 5;
 
-            if (parameter != null && parameter instanceof Double) {
-                radius = (Double) parameter;
-            }
+        if (parameter != null && parameter instanceof Double) {
+            radius = (Double) parameter;
+        }
 
-            for (final Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
-                if (entity instanceof Player) {
-                    minecart.setPassenger(entity);
-                    return;
-                }
+        for (final Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
+            if (entity instanceof Player) {
+                minecart.setPassenger(entity);
+                return;
             }
         }
     }

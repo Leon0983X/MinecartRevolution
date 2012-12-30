@@ -36,32 +36,30 @@ public class CollectCommand implements ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (minecart instanceof StorageMinecart) {
-            int radius = 5;
-            final List<String> items = new ArrayList<String>();
+        int radius = 5;
+        final List<String> items = new ArrayList<String>();
 
-            if (parameter != null) {
-                for (final String part : String.valueOf(parameter).split(",")) {
-                    try {
-                        if (part.startsWith("r")) {
-                            radius = Integer.parseInt(part.replaceAll("r", ""));
-                        } else {
-                            items.add(part);
-                        }
-                    }
-                    catch (final NumberFormatException e) {
-                        MinecartRevolution.handleSilenceThrowable(e);
+        if (parameter != null) {
+            for (final String part : String.valueOf(parameter).split(",")) {
+                try {
+                    if (part.startsWith("r")) {
+                        radius = Integer.parseInt(part.replaceAll("r", ""));
+                    } else {
+                        items.add(part);
                     }
                 }
-            }
-
-            if (items.size() > 0) {
-                for (final String item : items) {
-                    collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
+                catch (final NumberFormatException e) {
+                    MinecartRevolution.handleSilenceThrowable(e);
                 }
-            } else {
-                collectItems((StorageMinecart) minecart, radius, -1);
             }
+        }
+
+        if (items.size() > 0) {
+            for (final String item : items) {
+                collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
+            }
+        } else {
+            collectItems((StorageMinecart) minecart, radius, -1);
         }
     }
 

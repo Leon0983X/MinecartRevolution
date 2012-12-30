@@ -28,12 +28,6 @@
 
 package com.quartercode.minecartrevolution.util;
 
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.scheduler.BukkitTask;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +45,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.scheduler.BukkitTask;
 
 /**
  * <p>
@@ -80,8 +80,7 @@ public class Metrics {
      */
     private static final String     REPORT_URL            = "/report/%s";
     /**
-     * The separator to use for custom data. This MUST NOT change unless you are hosting your own version of metrics and
-     * want to change it.
+     * The separator to use for custom data. This MUST NOT change unless you are hosting your own version of metrics and want to change it.
      */
     private static final String     CUSTOM_DATA_SEPARATOR = "~~";
     /**
@@ -154,8 +153,7 @@ public class Metrics {
     }
 
     /**
-     * Construct and create a Graph that can be used to separate specific plotters to their own graphs on the metrics
-     * website. Plotters can be added to the graph object returned.
+     * Construct and create a Graph that can be used to separate specific plotters to their own graphs on the metrics website. Plotters can be added to the graph object returned.
      * 
      * @param name The name of the graph
      * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
@@ -209,9 +207,8 @@ public class Metrics {
     }
 
     /**
-     * Start measuring statistics. This will immediately create an async repeating task as the plugin and send the
-     * initial data to the metrics backend, and then after that it will post in increments of PING_INTERVAL * 1200
-     * ticks.
+     * Start measuring statistics. This will immediately create an async repeating task as the plugin and send the initial data to the metrics backend, and then after that it will post in increments
+     * of PING_INTERVAL * 1200 ticks.
      * 
      * @return True if statistics measuring is running, otherwise false.
      */
@@ -233,6 +230,7 @@ public class Metrics {
 
                 private boolean firstPost = true;
 
+                @Override
                 public void run() {
 
                     try {
@@ -243,7 +241,7 @@ public class Metrics {
 	task.cancel();
 	task = null;
 	// Tell all plotters to stop gathering information.
-	for (Graph graph : graphs) {
+	for (final Graph graph : graphs) {
 	    graph.onOptOut();
 	}
                             }
@@ -258,7 +256,7 @@ public class Metrics {
                         // Each post thereafter will be a ping
                         firstPost = false;
                     }
-                    catch (IOException e) {
+                    catch (final IOException e) {
                         if (debug) {
                             Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
                         }
@@ -282,13 +280,13 @@ public class Metrics {
                 // Reload the metrics file
                 configuration.load(getConfigFile());
             }
-            catch (IOException ex) {
+            catch (final IOException ex) {
                 if (debug) {
                     Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
                 }
                 return true;
             }
-            catch (InvalidConfigurationException ex) {
+            catch (final InvalidConfigurationException ex) {
                 if (debug) {
                     Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
                 }
@@ -355,7 +353,7 @@ public class Metrics {
         // plugin.getDataFolder() => base/plugins/PluginA/
         // pluginsFolder => base/plugins/
         // The base is not necessarily relative to the startup directory.
-        File pluginsFolder = plugin.getDataFolder().getParentFile();
+        final File pluginsFolder = plugin.getDataFolder().getParentFile();
 
         // return => base/plugins/PluginMetrics/config.yml
         return new File(new File(pluginsFolder, "PluginMetrics"), "config.yml");
@@ -367,12 +365,12 @@ public class Metrics {
     private void postPlugin(final boolean isPing) throws IOException {
 
         // Server software specific section
-        PluginDescriptionFile description = plugin.getDescription();
-        String pluginName = description.getName();
-        boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
-        String pluginVersion = description.getVersion();
-        String serverVersion = Bukkit.getVersion();
-        int playersOnline = Bukkit.getServer().getOnlinePlayers().length;
+        final PluginDescriptionFile description = plugin.getDescription();
+        final String pluginName = description.getName();
+        final boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
+        final String pluginVersion = description.getVersion();
+        final String serverVersion = Bukkit.getVersion();
+        final int playersOnline = Bukkit.getServer().getOnlinePlayers().length;
 
         // END server software specific section -- all code below does not use any code outside of this class / Java
 
@@ -387,11 +385,11 @@ public class Metrics {
         encodeDataPair(data, "revision", String.valueOf(REVISION));
 
         // New data as of R6
-        String osname = System.getProperty("os.name");
+        final String osname = System.getProperty("os.name");
         String osarch = System.getProperty("os.arch");
-        String osversion = System.getProperty("os.version");
-        String java_version = System.getProperty("java.version");
-        int coreCount = Runtime.getRuntime().availableProcessors();
+        final String osversion = System.getProperty("os.version");
+        final String java_version = System.getProperty("java.version");
+        final int coreCount = Runtime.getRuntime().availableProcessors();
 
         // normalize os arch .. amd64 -> x86_64
         if (osarch.equals("amd64")) {
@@ -418,7 +416,7 @@ public class Metrics {
             while (iter.hasNext()) {
                 final Graph graph = iter.next();
 
-                for (Plotter plotter : graph.getPlotters()) {
+                for (final Plotter plotter : graph.getPlotters()) {
                     // The key name to send to the metrics server
                     // The format is C-GRAPHNAME-PLOTTERNAME where separator - is defined at the top
                     // Legacy (R4) submitters use the format Custom%s, or CustomPLOTTERNAME
@@ -435,7 +433,7 @@ public class Metrics {
         }
 
         // Create the url
-        URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(pluginName)));
+        final URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(pluginName)));
 
         // Connect to the website
         URLConnection connection;
@@ -474,7 +472,7 @@ public class Metrics {
                     while (iter.hasNext()) {
                         final Graph graph = iter.next();
 
-                        for (Plotter plotter : graph.getPlotters()) {
+                        for (final Plotter plotter : graph.getPlotters()) {
                             plotter.reset();
                         }
                     }
@@ -494,7 +492,7 @@ public class Metrics {
             Class.forName("mineshafter.MineServer");
             return true;
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             return false;
         }
     }
@@ -535,8 +533,7 @@ public class Metrics {
     public static class Graph {
 
         /**
-         * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is
-         * rejected
+         * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is rejected
          */
         private final String       name;
         /**
@@ -643,9 +640,8 @@ public class Metrics {
         }
 
         /**
-         * Get the current value for the plotted point. Since this function defers to an external function it may or may
-         * not return immediately thus cannot be guaranteed to be thread friendly or safe. This function can be called
-         * from any thread so care should be taken when accessing resources that need to be synchronized.
+         * Get the current value for the plotted point. Since this function defers to an external function it may or may not return immediately thus cannot be guaranteed to be thread friendly or safe.
+         * This function can be called from any thread so care should be taken when accessing resources that need to be synchronized.
          * 
          * @return the current value for the point to be plotted.
          */
@@ -685,5 +681,5 @@ public class Metrics {
             return plotter.name.equals(name) && plotter.getValue() == getValue();
         }
     }
-    
+
 }
