@@ -60,3 +60,6 @@ basiccontrols.signs.expression.description=Controls the minecart with Expression
 
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger
+
+basiccontrols.signs.health.name=Health
+basiccontrols.signs.health.description=Heals the living entity in the minecart
