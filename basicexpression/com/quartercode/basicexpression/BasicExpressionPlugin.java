@@ -4,6 +4,7 @@ package com.quartercode.basicexpression;
 import com.quartercode.basicexpression.command.AnnounceCommand;
 import com.quartercode.basicexpression.command.ClearCommand;
 import com.quartercode.basicexpression.command.CollectCommand;
+import com.quartercode.basicexpression.command.CommandCommand;
 import com.quartercode.basicexpression.command.EffectCommand;
 import com.quartercode.basicexpression.command.EjectCommand;
 import com.quartercode.basicexpression.command.FileCommand;
@@ -56,6 +57,7 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         addExpressionCommand(new CollectCommand(minecartRevolution));
         addExpressionCommand(new TimeCommand());
         addExpressionCommand(new WeatherCommand());
+        addExpressionCommand(new CommandCommand(minecartRevolution));
 
         addExpressionConstant(new SpeedConstant());
         addExpressionConstant(new HealthConstant());

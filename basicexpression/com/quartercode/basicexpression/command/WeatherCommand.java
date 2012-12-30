@@ -7,6 +7,10 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class WeatherCommand implements ExpressionCommand {
 
+    public WeatherCommand() {
+
+    }
+
     @Override
     public ExpressionCommandInfo getInfo() {
 
