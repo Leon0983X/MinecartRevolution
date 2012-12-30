@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class Perm {
 
-    public static boolean has(Player player, String permission) {
+    public static boolean has(final Player player, final String permission) {
 
         if (player == null) {
             return false;

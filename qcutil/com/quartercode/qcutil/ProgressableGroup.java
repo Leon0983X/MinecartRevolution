@@ -7,7 +7,7 @@ public class ProgressableGroup {
 
     protected Progressable progressableListener;
 
-    public ProgressableGroup(Progressable progressableListener) {
+    public ProgressableGroup(final Progressable progressableListener) {
 
         this.progressableListener = progressableListener;
     }
@@ -17,13 +17,13 @@ public class ProgressableGroup {
         return new Progressable() {
 
             @Override
-            public void setProgressStatus(String status) {
+            public void setProgressStatus(final String status) {
 
                 progressableListener.setProgressStatus(status);
             }
 
             @Override
-            public void setProgressPercent(float percent) {
+            public void setProgressPercent(final float percent) {
 
                 progressableListener.setProgressPercent(percent);
             }
@@ -40,7 +40,7 @@ public class ProgressableGroup {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -51,7 +51,7 @@ public class ProgressableGroup {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ProgressableGroup other = (ProgressableGroup) obj;
+        final ProgressableGroup other = (ProgressableGroup) obj;
         if (progressableListener == null) {
             if (other.progressableListener != null) {
                 return false;

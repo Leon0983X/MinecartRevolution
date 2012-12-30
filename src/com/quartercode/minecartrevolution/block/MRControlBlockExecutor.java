@@ -21,15 +21,15 @@ public class MRControlBlockExecutor {
         return controlBlocks;
     }
 
-    public void setControlBlocks(List<ControlBlock> controlBlocks) {
+    public void setControlBlocks(final List<ControlBlock> controlBlocks) {
 
         this.controlBlocks = controlBlocks;
     }
 
-    public List<Block> getBlocks(Location railLocation) {
+    public List<Block> getBlocks(final Location railLocation) {
 
-        List<Block> blocks = new ArrayList<Block>();
-        Location location = railLocation.clone();
+        final List<Block> blocks = new ArrayList<Block>();
+        final Location location = railLocation.clone();
 
         location.subtract(0, 1, 0);
         if (isControlBlock(location.getBlock())) {
@@ -48,14 +48,14 @@ public class MRControlBlockExecutor {
         return blocks;
     }
 
-    public boolean isControlBlock(Block block) {
+    public boolean isControlBlock(final Block block) {
 
-        int blockId = block.getTypeId();
+        final int blockId = block.getTypeId();
 
-        for (ControlBlock controlBlock : controlBlocks) {
-            ControlBlockInfo info = controlBlock.getInfo();
+        for (final ControlBlock controlBlock : controlBlocks) {
+            final ControlBlockInfo info = controlBlock.getInfo();
 
-            for (int cbBlockId : info.getBlockIds()) {
+            for (final int cbBlockId : info.getBlockIds()) {
                 if (cbBlockId == blockId) {
                     return true;
                 }
@@ -65,23 +65,23 @@ public class MRControlBlockExecutor {
         return false;
     }
 
-    public void execute(Minecart minecart) {
+    public void execute(final Minecart minecart) {
 
-        Location location = minecart.getLocation();
+        final Location location = minecart.getLocation();
 
-        for (Block block : getBlocks(location)) {
+        for (final Block block : getBlocks(location)) {
             executeControlBlock(block, minecart);
         }
     }
 
-    public void executeControlBlock(Block block, Minecart minecart) {
+    public void executeControlBlock(final Block block, final Minecart minecart) {
 
-        int blockId = block.getTypeId();
+        final int blockId = block.getTypeId();
 
-        for (ControlBlock controlBlock : controlBlocks) {
-            ControlBlockInfo controlBlockInfo = controlBlock.getInfo();
+        for (final ControlBlock controlBlock : controlBlocks) {
+            final ControlBlockInfo controlBlockInfo = controlBlock.getInfo();
 
-            for (int cbBlockId : controlBlockInfo.getBlockIds()) {
+            for (final int cbBlockId : controlBlockInfo.getBlockIds()) {
                 if (cbBlockId == blockId) {
                     controlBlock.execute(minecart, block.getLocation(), blockId, block);
                     break;

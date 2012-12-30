@@ -14,9 +14,9 @@ public class ResourceManager implements Serializable {
 
     public static final List<String> DEFAULT_FILE_PATTERNS = getFilePatterns("", ".lang", "_");
 
-    public static List<String> getFilePatterns(String prefix, String suffix, String seperator) {
+    public static List<String> getFilePatterns(final String prefix, final String suffix, final String seperator) {
 
-        List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<String>();
         list.add(prefix + "$language$_$country$_$variant$".replaceAll("_", seperator) + suffix);
         list.add(prefix + "$language$_$country$".replaceAll("_", seperator) + suffix);
         list.add(prefix + "$language$" + suffix);
@@ -34,18 +34,18 @@ public class ResourceManager implements Serializable {
         setLocaleToDefault();
     }
 
-    public ResourceManager(File directory) {
+    public ResourceManager(final File directory) {
 
         setDirectory(directory);
         setLocaleToDefault();
     }
 
-    public ResourceManager(Locale locale) {
+    public ResourceManager(final Locale locale) {
 
         setLocale(locale);
     }
 
-    public ResourceManager(File directory, Locale locale) {
+    public ResourceManager(final File directory, final Locale locale) {
 
         setDirectory(directory);
         setLocale(locale);
@@ -56,7 +56,7 @@ public class ResourceManager implements Serializable {
         return directory;
     }
 
-    public void setDirectory(File directory) {
+    public void setDirectory(final File directory) {
 
         this.directory = directory;
     }
@@ -66,7 +66,7 @@ public class ResourceManager implements Serializable {
         return locale;
     }
 
-    public void setLocale(Locale locale) {
+    public void setLocale(final Locale locale) {
 
         this.locale = locale;
     }
@@ -81,12 +81,12 @@ public class ResourceManager implements Serializable {
         return filePatterns;
     }
 
-    public void setFilePatterns(List<String> filePatterns) {
+    public void setFilePatterns(final List<String> filePatterns) {
 
         this.filePatterns = filePatterns;
     }
 
-    protected String parsePattern(String rawPattern) {
+    protected String parsePattern(final String rawPattern) {
 
         String parsedPattern = rawPattern;
 
@@ -99,8 +99,8 @@ public class ResourceManager implements Serializable {
 
     public File getResource() {
 
-        for (String pattern : filePatterns) {
-            File resource = new File(directory, parsePattern(pattern));
+        for (final String pattern : filePatterns) {
+            final File resource = new File(directory, parsePattern(pattern));
             if (resource.exists()) {
                 return resource;
             }
@@ -121,7 +121,7 @@ public class ResourceManager implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -132,7 +132,7 @@ public class ResourceManager implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ResourceManager other = (ResourceManager) obj;
+        final ResourceManager other = (ResourceManager) obj;
         if (directory == null) {
             if (other.directory != null) {
                 return false;

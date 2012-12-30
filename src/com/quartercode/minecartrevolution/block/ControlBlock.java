@@ -14,17 +14,17 @@ public abstract class ControlBlock extends Control {
 
     private static final int[][] controlSignOffsets = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 0, 1 }, { 0, 0, -1 }, { 0, -1, 0 } };
 
-    public boolean hasSontrolSign(Location blockLocation) {
+    public boolean hasSontrolSign(final Location blockLocation) {
 
         return getControlSigns(blockLocation).size() > 0;
     }
 
-    public List<Sign> getControlSigns(Location blockLocation) {
+    public List<Sign> getControlSigns(final Location blockLocation) {
 
-        List<Sign> signs = new ArrayList<Sign>();
+        final List<Sign> signs = new ArrayList<Sign>();
 
-        for (int[] offsets : controlSignOffsets) {
-            Location location = blockLocation.clone();
+        for (final int[] offsets : controlSignOffsets) {
+            final Location location = blockLocation.clone();
             location.add(offsets[0], offsets[1], offsets[2]);
 
             if (location.getBlock().getType() == Material.SIGN || location.getBlock().getType() == Material.SIGN_POST || location.getBlock().getType() == Material.WALL_SIGN) {

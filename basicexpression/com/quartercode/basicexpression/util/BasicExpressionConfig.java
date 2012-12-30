@@ -6,7 +6,7 @@ import com.quartercode.minecartrevolution.plugin.PluginConfig;
 
 public class BasicExpressionConfig extends PluginConfig {
 
-    public BasicExpressionConfig(MinecartRevolutionPlugin minecartRevolutionPlugin) {
+    public BasicExpressionConfig(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         super(minecartRevolutionPlugin);
     }

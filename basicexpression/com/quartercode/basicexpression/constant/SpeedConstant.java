@@ -19,7 +19,7 @@ public class SpeedConstant implements ExpressionConstant {
     }
 
     @Override
-    public Object getValue(Minecart minecart) {
+    public Object getValue(final Minecart minecart) {
 
         return MinecartUtil.getSpeed(minecart);
     }

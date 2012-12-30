@@ -3,13 +3,13 @@ package com.quartercode.minecartrevolution.command;
 
 public class CommandInfo {
 
-    private boolean  ignoreCase;
-    private String   parameterUsage;
-    private String   description;
-    private String   permission;
-    private String[] labels;
+    private final boolean  ignoreCase;
+    private final String   parameterUsage;
+    private final String   description;
+    private final String   permission;
+    private final String[] labels;
 
-    public CommandInfo(boolean ignoreCase, String parameterUsage, String description, String permission, String... labels) {
+    public CommandInfo(final boolean ignoreCase, final String parameterUsage, final String description, final String permission, final String... labels) {
 
         this.ignoreCase = ignoreCase;
         this.parameterUsage = parameterUsage;

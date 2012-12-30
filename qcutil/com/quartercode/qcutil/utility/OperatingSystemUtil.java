@@ -14,7 +14,7 @@ public class OperatingSystemUtil {
 
         public final int bits;
 
-        BitArchitecture(int bits) {
+        BitArchitecture(final int bits) {
 
             this.bits = bits;
         }
@@ -33,7 +33,7 @@ public class OperatingSystemUtil {
 
     public static OperatingSystem getPlatform() {
 
-        String platformName = getPlatformName();
+        final String platformName = getPlatformName();
 
         if (platformName.toLowerCase().contains("win")) {
             return OperatingSystem.WINDOWS;
@@ -60,8 +60,8 @@ public class OperatingSystemUtil {
 
     public static BitArchitecture getBitArchitecture() throws NumberFormatException {
 
-        int bits = getBitArchitectureBits();
-        for (BitArchitecture architecture : BitArchitecture.values()) {
+        final int bits = getBitArchitectureBits();
+        for (final BitArchitecture architecture : BitArchitecture.values()) {
             if (bits == architecture.bits) {
                 return architecture;
             }

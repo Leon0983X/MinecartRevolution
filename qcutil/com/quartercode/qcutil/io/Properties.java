@@ -30,70 +30,70 @@ public class Properties extends java.util.Properties {
         super();
     }
 
-    public Properties(Properties properties) {
+    public Properties(final Properties properties) {
 
         super(properties);
     }
 
-    public Properties(Properties properties, String name) {
+    public Properties(final Properties properties, final String name) {
 
         super(properties);
         setName(name);
     }
 
-    public Properties(InputStream inputStream) throws IOException {
+    public Properties(final InputStream inputStream) throws IOException {
 
         super();
         load(inputStream);
     }
 
-    public Properties(InputStream inputStream, String name) throws IOException {
+    public Properties(final InputStream inputStream, final String name) throws IOException {
 
         super();
         load(inputStream);
         setName(name);
     }
 
-    public Properties(Reader reader) throws IOException {
+    public Properties(final Reader reader) throws IOException {
 
         super();
         load(reader);
     }
 
-    public Properties(Reader reader, String name) throws IOException {
+    public Properties(final Reader reader, final String name) throws IOException {
 
         super();
         load(reader);
         setName(name);
     }
 
-    public Properties(File file) throws FileNotFoundException, IOException {
+    public Properties(final File file) throws FileNotFoundException, IOException {
 
         super();
         load(file);
     }
 
-    public Properties(File file, String name) throws FileNotFoundException, IOException {
+    public Properties(final File file, final String name) throws FileNotFoundException, IOException {
 
         super();
         load(file);
         setName(name);
     }
 
-    public Properties(String string) throws IOException {
+    public Properties(final String string) throws IOException {
 
         super();
         load(string);
     }
 
-    public Properties(String string, String name) throws IOException {
+    public Properties(final String string, final String name) throws IOException {
 
         super();
         load(string);
         setName(name);
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 
         this.name = name;
     }
@@ -103,7 +103,7 @@ public class Properties extends java.util.Properties {
         return name;
     }
 
-    public void setVariableSeperators(char[] variableSeperators) {
+    public void setVariableSeperators(final char[] variableSeperators) {
 
         this.variableSeperators = variableSeperators;
     }
@@ -113,7 +113,7 @@ public class Properties extends java.util.Properties {
         return variableSeperators;
     }
 
-    protected String getStandardValue(String value, String standardValue) {
+    protected String getStandardValue(final String value, final String standardValue) {
 
         if (value == null) {
             return standardValue;
@@ -123,33 +123,33 @@ public class Properties extends java.util.Properties {
     }
 
     @Override
-    public String getProperty(String key) {
+    public String getProperty(final String key) {
 
         return getProperty(key, variableSeperators);
     }
 
     @Override
-    public String getProperty(String key, String standardValue) {
+    public String getProperty(final String key, final String standardValue) {
 
         return getStandardValue(getProperty(key, variableSeperators), standardValue);
     }
 
-    public String getProperty(String key, Properties otherSearchProperties) {
+    public String getProperty(final String key, final Properties otherSearchProperties) {
 
         return getProperty(key, variableSeperators, otherSearchProperties);
     }
 
-    public String getProperty(String key, String standardValue, Properties otherSearchProperties) {
+    public String getProperty(final String key, final String standardValue, final Properties otherSearchProperties) {
 
         return getStandardValue(getProperty(key, variableSeperators, otherSearchProperties), standardValue);
     }
 
-    public String getProperty(String key, char[] variableSeperators, Properties... otherSearchProperties) {
+    public String getProperty(final String key, final char[] variableSeperators, final Properties... otherSearchProperties) {
 
         String value = super.getProperty(key);
         if (value == null) {
-            for (Properties properties : otherSearchProperties) {
-                String localValue = ((java.util.Properties) properties).getProperty(key);
+            for (final Properties properties : otherSearchProperties) {
+                final String localValue = ((java.util.Properties) properties).getProperty(key);
                 if (localValue != null) {
                     value = localValue;
                     break;
@@ -159,13 +159,13 @@ public class Properties extends java.util.Properties {
 
         if (value != null) {
             for (int counter = 0; counter < value.length(); counter++) {
-                String nowChar = String.valueOf(value.charAt(counter));
+                final String nowChar = String.valueOf(value.charAt(counter));
 
                 if (nowChar.equals(String.valueOf(variableSeperators[0]))) {
                     String parseString = "";
 
                     for (int counter2 = counter + 1; counter2 < value.length(); counter2++) {
-                        String nowChar2 = String.valueOf(value.charAt(counter2));
+                        final String nowChar2 = String.valueOf(value.charAt(counter2));
                         if (nowChar2.equals(String.valueOf(variableSeperators[1]))) {
                             break;
                         } else {
@@ -173,7 +173,7 @@ public class Properties extends java.util.Properties {
                         }
                     }
 
-                    String parsedString = getProperty(parseString);
+                    final String parsedString = getProperty(parseString);
                     if (parsedString != null) {
                         value = value.replaceAll(String.valueOf(variableSeperators[0]) + parseString + String.valueOf(variableSeperators[1]), parsedString);
                     }
@@ -186,30 +186,30 @@ public class Properties extends java.util.Properties {
         }
     }
 
-    public String getProperty(String key, String standardValue, char[] variableSeperators, Properties... otherSearchProperties) {
+    public String getProperty(final String key, final String standardValue, final char[] variableSeperators, final Properties... otherSearchProperties) {
 
         return getStandardValue(getProperty(key, variableSeperators, otherSearchProperties), standardValue);
     }
 
-    public void setProperties(Map<String, String> map) {
+    public void setProperties(final Map<String, String> map) {
 
         clear();
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
+        for (final Map.Entry<String, String> entry : map.entrySet()) {
             setProperty(entry.getKey(), entry.getValue());
         }
     }
 
     public Map<String, String> getProperties() {
 
-        Map<String, String> propertiesMap = new HashMap<String, String>();
-        ArrayList<String> keyList = new ArrayList<String>();
-        ArrayList<String> valueList = new ArrayList<String>();
+        final Map<String, String> propertiesMap = new HashMap<String, String>();
+        final ArrayList<String> keyList = new ArrayList<String>();
+        final ArrayList<String> valueList = new ArrayList<String>();
 
-        for (Object key : keySet()) {
+        for (final Object key : keySet()) {
             keyList.add(String.valueOf(key));
         }
-        for (Object object : values()) {
+        for (final Object object : values()) {
             valueList.add(String.valueOf(object));
         }
 
@@ -224,17 +224,17 @@ public class Properties extends java.util.Properties {
         }
     }
 
-    public void load(File file) throws FileNotFoundException, IOException {
+    public void load(final File file) throws FileNotFoundException, IOException {
 
         load(new FileReader(file));
     }
 
-    public void load(String string) throws IOException {
+    public void load(final String string) throws IOException {
 
         load(new StringReader(string));
     }
 
-    protected String getComments(String... defaultComments) {
+    protected String getComments(final String... defaultComments) {
 
         if (defaultComments != null && defaultComments.length > 0) {
             return toCommentsString(defaultComments);
@@ -249,7 +249,7 @@ public class Properties extends java.util.Properties {
         }
     }
 
-    protected String toCommentsString(String... comments) {
+    protected String toCommentsString(final String... comments) {
 
         String comment = "";
         for (int counter = 0; counter < comments.length; counter++) {
@@ -263,24 +263,24 @@ public class Properties extends java.util.Properties {
         return comment;
     }
 
-    public void store(OutputStream outputStream, String... comments) throws IOException {
+    public void store(final OutputStream outputStream, final String... comments) throws IOException {
 
         super.store(outputStream, getComments(comments));
     }
 
-    public void store(Writer writer, String... comments) throws IOException {
+    public void store(final Writer writer, final String... comments) throws IOException {
 
         super.store(writer, getComments(comments));
     }
 
-    public void store(File file, String... comments) throws FileNotFoundException, IOException {
+    public void store(final File file, final String... comments) throws FileNotFoundException, IOException {
 
         store(new FileWriter(file), getComments(comments));
     }
 
-    public String storeToString(String... comments) throws IOException {
+    public String storeToString(final String... comments) throws IOException {
 
-        StringWriter writer = new StringWriter();
+        final StringWriter writer = new StringWriter();
         store(writer, comments);
         return writer.getBuffer().toString();
     }
@@ -297,7 +297,7 @@ public class Properties extends java.util.Properties {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -308,7 +308,7 @@ public class Properties extends java.util.Properties {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Properties other = (Properties) obj;
+        final Properties other = (Properties) obj;
         if (getProperties() == null) {
             if (other.getProperties() != null) {
                 return false;

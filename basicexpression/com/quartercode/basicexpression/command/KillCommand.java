@@ -10,9 +10,9 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class KillCommand implements ExpressionCommand {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public KillCommand(MinecartRevolution minecartRevolution) {
+    public KillCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -24,13 +24,13 @@ public class KillCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return true;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter == null) {
             kill(minecart);
@@ -41,7 +41,7 @@ public class KillCommand implements ExpressionCommand {
         }
     }
 
-    private void kill(Minecart minecart) {
+    private void kill(final Minecart minecart) {
 
         minecart.eject();
         minecart.remove();

@@ -8,15 +8,15 @@ public class PrefixArgumentFilter implements ArgumentFilter {
 
     protected String[] prefixes;
 
-    public PrefixArgumentFilter(String... prefixes) {
+    public PrefixArgumentFilter(final String... prefixes) {
 
         this.prefixes = prefixes;
     }
 
     @Override
-    public boolean isMark(String mark) {
+    public boolean isMark(final String mark) {
 
-        for (String prefix : prefixes) {
+        for (final String prefix : prefixes) {
             if (mark.startsWith(prefix)) {
                 return true;
             }
@@ -26,9 +26,9 @@ public class PrefixArgumentFilter implements ArgumentFilter {
     }
 
     @Override
-    public boolean equalsWithMarkString(String argument, String markString, boolean ignoreCase) {
+    public boolean equalsWithMarkString(final String argument, final String markString, final boolean ignoreCase) {
 
-        for (String prefix : prefixes) {
+        for (final String prefix : prefixes) {
             if (ignoreCase) {
                 if (argument.equalsIgnoreCase(prefix + markString)) {
                     return true;
@@ -53,7 +53,7 @@ public class PrefixArgumentFilter implements ArgumentFilter {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -64,7 +64,7 @@ public class PrefixArgumentFilter implements ArgumentFilter {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PrefixArgumentFilter other = (PrefixArgumentFilter) obj;
+        final PrefixArgumentFilter other = (PrefixArgumentFilter) obj;
         if (!Arrays.equals(prefixes, other.prefixes)) {
             return false;
         }

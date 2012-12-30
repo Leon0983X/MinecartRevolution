@@ -13,9 +13,9 @@ import com.quartercode.minecartrevolution.get.Lang;
 
 public class ControlSignBlock extends ControlBlock {
 
-    private BasicControlsPlugin basicControlsPlugin;
+    private final BasicControlsPlugin basicControlsPlugin;
 
-    public ControlSignBlock(BasicControlsPlugin basicControlsPlugin) {
+    public ControlSignBlock(final BasicControlsPlugin basicControlsPlugin) {
 
         this.basicControlsPlugin = basicControlsPlugin;
     }
@@ -27,10 +27,10 @@ public class ControlSignBlock extends ControlBlock {
     }
 
     @Override
-    public void execute(Minecart minecart, Location blockLocation, int blockId, Block block) {
+    public void execute(final Minecart minecart, final Location blockLocation, final int blockId, final Block block) {
 
         if (hasSontrolSign(blockLocation)) {
-            for (Sign sign : getControlSigns(blockLocation)) {
+            for (final Sign sign : getControlSigns(blockLocation)) {
                 basicControlsPlugin.getControlSignExecutor().executeControlSign(sign.getLocation(), minecart);
             }
         }

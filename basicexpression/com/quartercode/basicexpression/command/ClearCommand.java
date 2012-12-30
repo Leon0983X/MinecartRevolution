@@ -12,9 +12,9 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class ClearCommand implements ExpressionCommand {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public ClearCommand(MinecartRevolution minecartRevolution) {
+    public ClearCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -26,13 +26,13 @@ public class ClearCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return minecart instanceof InventoryHolder || minecart.getPassenger() != null && minecart.getPassenger() instanceof InventoryHolder;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         Inventory inventory;
 
@@ -47,8 +47,8 @@ public class ClearCommand implements ExpressionCommand {
         if (parameter == null) {
             inventory.clear();
         } else {
-            List<String> itemList = new ArrayList<String>();
-            for (String string : String.valueOf(parameter).split(",")) {
+            final List<String> itemList = new ArrayList<String>();
+            for (final String string : String.valueOf(parameter).split(",")) {
                 itemList.add(string);
             }
 

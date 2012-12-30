@@ -13,16 +13,16 @@ import com.quartercode.qcutil.ds.OnceList;
 
 public class ObjectUtil {
 
-    public static Field[] getAllFields(Class<?> c) {
+    public static Field[] getAllFields(final Class<?> c) {
 
-        List<Field> fields = new OnceList<Field>();
+        final List<Field> fields = new OnceList<Field>();
 
         fields.addAll(Arrays.asList(c.getDeclaredFields()));
         if (c.getSuperclass() != null) {
             fields.addAll(Arrays.asList(getAllFields(c.getSuperclass())));
         }
 
-        Field[] fieldArray = new Field[fields.size()];
+        final Field[] fieldArray = new Field[fields.size()];
         for (int counter = 0; counter < fields.size(); counter++) {
             fieldArray[counter] = fields.get(counter);
         }
@@ -30,20 +30,20 @@ public class ObjectUtil {
         return fieldArray;
     }
 
-    public static Field searchField(Class<?> c, String name) {
+    public static Field searchField(final Class<?> c, final String name) {
 
         try {
             return c.getDeclaredField(name);
         }
-        catch (NoSuchFieldException e) {
-            Field superFiled = searchField(c.getSuperclass(), name);
+        catch (final NoSuchFieldException e) {
+            final Field superFiled = searchField(c.getSuperclass(), name);
             return superFiled;
         }
     }
 
-    public static String generateObjectStringWithNames(Object object, String... fieldNames) {
+    public static String generateObjectStringWithNames(final Object object, final String... fieldNames) {
 
-        Field[] fields = new Field[fieldNames.length];
+        final Field[] fields = new Field[fieldNames.length];
         for (int counter = 0; counter < fieldNames.length; counter++) {
             fields[counter] = searchField(object.getClass(), fieldNames[counter]);
         }
@@ -51,13 +51,13 @@ public class ObjectUtil {
         return generateObjectStringWithFields(object, fields);
     }
 
-    public static String generateObjectStringWithFields(Object object, Field... fields) {
+    public static String generateObjectStringWithFields(final Object object, final Field... fields) {
 
         AccessibleObject.setAccessible(fields, true);
-        Map<String, String> fieldValues = new LinkedHashMap<String, String>();
+        final Map<String, String> fieldValues = new LinkedHashMap<String, String>();
 
         for (int counter = 0; counter < fields.length; counter++) {
-            Field field = fields[counter];
+            final Field field = fields[counter];
             if (!fieldValues.containsKey(fields[counter].getName())) {
 
                 try {
@@ -67,15 +67,15 @@ public class ObjectUtil {
                         fieldValues.put(fields[counter].getName(), "null");
                     }
                 }
-                catch (Throwable t) {
+                catch (final Throwable t) {
                     QcUtil.handleThrowable(t);
                 }
             }
         }
 
-        Object[] fieldDeclarations = new Object[fieldValues.size() * 2];
+        final Object[] fieldDeclarations = new Object[fieldValues.size() * 2];
         int counter = 0;
-        for (Entry<String, String> entry : fieldValues.entrySet()) {
+        for (final Entry<String, String> entry : fieldValues.entrySet()) {
             fieldDeclarations[counter] = entry.getKey();
             fieldDeclarations[counter + 1] = entry.getValue();
             counter += 2;
@@ -84,7 +84,7 @@ public class ObjectUtil {
         return generateObjectString(object, fieldDeclarations);
     }
 
-    public static String generateObjectString(Object object, Object... fields) {
+    public static String generateObjectString(final Object object, final Object... fields) {
 
         if (fields.length <= 0) {
             return generateObjectStringWithFields(object, getAllFields(object.getClass()));
@@ -98,8 +98,8 @@ public class ObjectUtil {
             }
             toString = toString.substring(0, toString.length() - 2);
 
-            int objectHashCode = object.hashCode();
-            int objectIdentyHashCode = System.identityHashCode(object);
+            final int objectHashCode = object.hashCode();
+            final int objectIdentyHashCode = System.identityHashCode(object);
             if (objectHashCode != objectIdentyHashCode) {
                 toString += ", hashCode=" + object.hashCode();
             }

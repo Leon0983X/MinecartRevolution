@@ -21,7 +21,7 @@ public class VersioncheckCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
         if (VersionUtil.newVersionAvaiable()) {
             commandSender.sendMessage(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "/mr update"));

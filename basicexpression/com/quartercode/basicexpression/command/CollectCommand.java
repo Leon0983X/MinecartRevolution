@@ -14,9 +14,9 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class CollectCommand implements ExpressionCommand {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public CollectCommand(MinecartRevolution minecartRevolution) {
+    public CollectCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -28,20 +28,20 @@ public class CollectCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return minecart instanceof StorageMinecart;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (minecart instanceof StorageMinecart) {
             int radius = 5;
-            List<String> items = new ArrayList<String>();
+            final List<String> items = new ArrayList<String>();
 
             if (parameter != null) {
-                for (String part : String.valueOf(parameter).split(",")) {
+                for (final String part : String.valueOf(parameter).split(",")) {
                     try {
                         if (part.startsWith("r")) {
                             radius = Integer.parseInt(part.replaceAll("r", ""));
@@ -49,27 +49,27 @@ public class CollectCommand implements ExpressionCommand {
                             items.add(part);
                         }
                     }
-                    catch (NumberFormatException e) {
+                    catch (final NumberFormatException e) {
                         MinecartRevolution.handleSilenceThrowable(e);
                     }
                 }
             }
 
-            for (String item : items) {
+            for (final String item : items) {
                 collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
             }
         }
     }
 
-    private void collectItems(StorageMinecart storageMinecart, int radius, int itemId) {
+    private void collectItems(final StorageMinecart storageMinecart, final int radius, final int itemId) {
 
         if (storageMinecart.getInventory().firstEmpty() < 0) {
             return;
         }
 
-        for (Entity entity : storageMinecart.getNearbyEntities(radius, radius, radius)) {
+        for (final Entity entity : storageMinecart.getNearbyEntities(radius, radius, radius)) {
             if (entity instanceof Item) {
-                Item item = (Item) entity;
+                final Item item = (Item) entity;
                 if (item.isDead()) {
                     continue;
                 } else if (itemId > 0 && item.getItemStack().getTypeId() != itemId) {

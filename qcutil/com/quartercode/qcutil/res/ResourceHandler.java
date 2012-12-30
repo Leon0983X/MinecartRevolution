@@ -5,7 +5,7 @@ public class ResourceHandler {
 
     protected ResourceManager resourceManager;
 
-    public ResourceHandler(ResourceManager resourceManager) {
+    public ResourceHandler(final ResourceManager resourceManager) {
 
         setResourceManager(resourceManager);
     }
@@ -15,7 +15,7 @@ public class ResourceHandler {
         return resourceManager;
     }
 
-    public void setResourceManager(ResourceManager resourceManager) {
+    public void setResourceManager(final ResourceManager resourceManager) {
 
         this.resourceManager = resourceManager;
     }

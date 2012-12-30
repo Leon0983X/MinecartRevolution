@@ -20,9 +20,9 @@ import com.quartercode.minecartrevolution.sign.ControlSignInfo;
 
 public class BlockListener implements Listener {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public BlockListener(MinecartRevolution minecartRevolution) {
+    public BlockListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
 
@@ -30,14 +30,14 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent event) {
+    public void onBlockPlace(final BlockPlaceEvent event) {
 
         if (event.getBlock().getType() == Material.RAILS || event.getBlock().getType() == Material.POWERED_RAIL || event.getBlock().getType() == Material.DETECTOR_RAIL) {
-            for (Block block : minecartRevolution.getControlBlockExecutor().getBlocks(event.getBlock().getLocation())) {
-                for (ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
-                    ControlBlockInfo info = controlBlock.getInfo();
+            for (final Block block : minecartRevolution.getControlBlockExecutor().getBlocks(event.getBlock().getLocation())) {
+                for (final ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
+                    final ControlBlockInfo info = controlBlock.getInfo();
 
-                    for (int blockId : info.getBlockIds()) {
+                    for (final int blockId : info.getBlockIds()) {
                         if (blockId == block.getTypeId()) {
                             if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
 	event.setCancelled(true);
@@ -53,14 +53,14 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
+    public void onBlockBreak(final BlockBreakEvent event) {
 
         if (event.getBlock().getType() == Material.RAILS || event.getBlock().getType() == Material.POWERED_RAIL || event.getBlock().getType() == Material.DETECTOR_RAIL) {
-            for (Block block : minecartRevolution.getControlBlockExecutor().getBlocks(event.getBlock().getLocation())) {
-                for (ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
-                    ControlBlockInfo info = controlBlock.getInfo();
+            for (final Block block : minecartRevolution.getControlBlockExecutor().getBlocks(event.getBlock().getLocation())) {
+                for (final ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
+                    final ControlBlockInfo info = controlBlock.getInfo();
 
-                    for (int blockId : info.getBlockIds()) {
+                    for (final int blockId : info.getBlockIds()) {
                         if (blockId == block.getTypeId()) {
                             if (!Perm.has(event.getPlayer(), info.getDestroyPermission())) {
 	event.setCancelled(true);
@@ -76,15 +76,15 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onSignChange(SignChangeEvent event) {
+    public void onSignChange(final SignChangeEvent event) {
 
         String label = event.getLine(0);
         label = ControlSignInfo.getUnformattedLabel(label);
 
-        for (ControlSign controlSign : minecartRevolution.getControlSignExecutor().getControlSigns()) {
-            ControlSignInfo info = controlSign.getInfo();
+        for (final ControlSign controlSign : minecartRevolution.getControlSignExecutor().getControlSigns()) {
+            final ControlSignInfo info = controlSign.getInfo();
 
-            for (String signLabel : info.getLabels()) {
+            for (final String signLabel : info.getLabels()) {
                 if (signLabel.equals(label)) {
                     if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
                         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
@@ -103,17 +103,17 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onSignBreak(BlockBreakEvent event) {
+    public void onSignBreak(final BlockBreakEvent event) {
 
         if (event.getBlock().getType() == Material.SIGN || event.getBlock().getType() == Material.SIGN_POST || event.getBlock().getType() == Material.WALL_SIGN) {
-            Sign sign = (Sign) event.getBlock().getState();
+            final Sign sign = (Sign) event.getBlock().getState();
             String label = sign.getLine(0);
             label = ControlSignInfo.getUnformattedLabel(label);
 
-            for (ControlSign controlSign : minecartRevolution.getControlSignExecutor().getControlSigns()) {
-                ControlSignInfo info = controlSign.getInfo();
+            for (final ControlSign controlSign : minecartRevolution.getControlSignExecutor().getControlSigns()) {
+                final ControlSignInfo info = controlSign.getInfo();
 
-                for (String signLabel : info.getLabels()) {
+                for (final String signLabel : info.getLabels()) {
                     if (signLabel.equalsIgnoreCase(label)) {
                         if (!Perm.has(event.getPlayer(), info.getDestroyPermission())) {
                             event.setCancelled(true);

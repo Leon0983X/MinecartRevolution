@@ -12,7 +12,7 @@ public class LogFormatterFactory {
         return new LogFormatter() {
 
             @Override
-            public String format(String record, LogLevel logLevel) {
+            public String format(final String record, final LogLevel logLevel) {
 
                 return new SimpleDateFormat(timestampFormat).format(new Date()) + " " + record;
             }

@@ -13,10 +13,10 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 
 public class MinecartListener implements Listener {
 
-    private MinecartRevolution      minecartRevolution;
-    private Map<Minecart, Location> minecartMap = new HashMap<Minecart, Location>();
+    private final MinecartRevolution      minecartRevolution;
+    private final Map<Minecart, Location> minecartMap = new HashMap<Minecart, Location>();
 
-    public MinecartListener(MinecartRevolution minecartRevolution) {
+    public MinecartListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
 
@@ -24,16 +24,16 @@ public class MinecartListener implements Listener {
     }
 
     @EventHandler
-    public void onVehicleUpdate(VehicleUpdateEvent event) {
+    public void onVehicleUpdate(final VehicleUpdateEvent event) {
 
         if (event.getVehicle() instanceof Minecart) {
-            Minecart minecart = (Minecart) event.getVehicle();
+            final Minecart minecart = (Minecart) event.getVehicle();
             if (minecartRevolution.getExpressionExecutor().getMinecartExpressions().containsKey(minecart)) {
-                for (String expression : minecartRevolution.getExpressionExecutor().getMinecartExpressions().get(minecart)) {
+                for (final String expression : minecartRevolution.getExpressionExecutor().getMinecartExpressions().get(minecart)) {
                     try {
                         minecartRevolution.getExpressionExecutor().execute(minecart, expression);
                     }
-                    catch (Exception e) {
+                    catch (final Exception e) {
                         MinecartRevolution.handleSilenceThrowable(e);
                     }
                 }
@@ -42,19 +42,19 @@ public class MinecartListener implements Listener {
     }
 
     @EventHandler
-    public void onVehicleMove(VehicleMoveEvent event) {
+    public void onVehicleMove(final VehicleMoveEvent event) {
 
         if (event.getVehicle() instanceof Minecart) {
             executeControls((Minecart) event.getVehicle());
         }
     }
 
-    private void executeControls(Minecart minecart) {
+    private void executeControls(final Minecart minecart) {
 
-        Location location = minecart.getLocation();
+        final Location location = minecart.getLocation();
 
         if (minecartMap.containsKey(minecart)) {
-            Location storedLocation = minecartMap.get(minecart);
+            final Location storedLocation = minecartMap.get(minecart);
             if (storedLocation.getBlockX() == location.getBlockX() && storedLocation.getBlockY() == location.getBlockY() && storedLocation.getBlockZ() == location.getBlockZ()) {
                 return;
             } else {

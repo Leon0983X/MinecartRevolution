@@ -11,10 +11,10 @@ public class SystemOutputListener implements Listener {
     }
 
     @Override
-    public Object onEvent(Event event) {
+    public Object onEvent(final Event event) {
 
-        String record = (String) event.getProperty("logrecord");
-        LogLevel logLevel = (LogLevel) event.getProperty("loglevel");
+        final String record = (String) event.getProperty("logrecord");
+        final LogLevel logLevel = (LogLevel) event.getProperty("loglevel");
 
         if (!logLevel.isCritical()) {
             System.out.println(record);

@@ -16,7 +16,7 @@ public class BasicControlsConfig extends PluginConfig {
     public static final String brakeBlock             = block + ".brake";
     public static final String brakeBlockExpression   = brakeBlock + ".expression";
 
-    public BasicControlsConfig(MinecartRevolutionPlugin minecartRevolutionPlugin) {
+    public BasicControlsConfig(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         super(minecartRevolutionPlugin);
     }

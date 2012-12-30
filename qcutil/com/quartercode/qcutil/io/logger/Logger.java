@@ -16,20 +16,20 @@ public class Logger {
     protected List<LogFormatter> formatters = new ArrayList<LogFormatter>();
     protected List<Listener>     listeners  = new ArrayList<Listener>();
 
-    public Logger(String name) {
+    public Logger(final String name) {
 
         setName(name);
         setStandardFormatters();
         setStandardListeners();
     }
 
-    public Logger(List<Listener> listeners) {
+    public Logger(final List<Listener> listeners) {
 
         setStandardFormatters();
         setListeners(listeners);
     }
 
-    public Logger(String name, List<Listener> listeners) {
+    public Logger(final String name, final List<Listener> listeners) {
 
         setName(name);
         setStandardFormatters();
@@ -41,7 +41,7 @@ public class Logger {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 
         this.name = name;
     }
@@ -51,7 +51,7 @@ public class Logger {
         return formatters;
     }
 
-    public void setFormatters(List<LogFormatter> formatters) {
+    public void setFormatters(final List<LogFormatter> formatters) {
 
         this.formatters = formatters;
     }
@@ -68,7 +68,7 @@ public class Logger {
         return listeners;
     }
 
-    public void setListeners(List<Listener> listeners) {
+    public void setListeners(final List<Listener> listeners) {
 
         this.listeners = listeners;
     }
@@ -79,46 +79,46 @@ public class Logger {
         listeners.add(new SystemOutputListener());
     }
 
-    protected String formatRecord(LogLevel logLevel, String record) {
+    protected String formatRecord(final LogLevel logLevel, final String record) {
 
         String formattedRecord = record;
 
-        for (LogFormatter formatter : formatters) {
+        for (final LogFormatter formatter : formatters) {
             formattedRecord = formatter.format(formattedRecord, logLevel);
         }
 
         return formattedRecord;
     }
 
-    public void log(LogLevel logLevel, String record) {
+    public void log(final LogLevel logLevel, final String record) {
 
         if (logLevel != null) {
-            String logEntry = formatRecord(logLevel, record);
+            final String logEntry = formatRecord(logLevel, record);
             new Event(listeners, "logger", this, "loglevel", logLevel, "rawrecord", record, "logrecord", logEntry).fire();
         }
     }
 
-    public void info(String record) {
+    public void info(final String record) {
 
         log(LogLevel.INFO, record);
     }
 
-    public void warning(String record) {
+    public void warning(final String record) {
 
         log(LogLevel.WARNING, record);
     }
 
-    public void exception(String record) {
+    public void exception(final String record) {
 
         log(LogLevel.EXCEPTION, record);
     }
 
-    public void error(String record) {
+    public void error(final String record) {
 
         log(LogLevel.ERROR, record);
     }
 
-    public void handleThrowable(Throwable throwable) {
+    public void handleThrowable(final Throwable throwable) {
 
         LogLevel logLevel;
         if (throwable instanceof RuntimeException && ! (throwable instanceof RuntimeException)) {
@@ -128,7 +128,7 @@ public class Logger {
         }
 
         log(logLevel, throwable.toString());
-        for (StackTraceElement stackTraceElement : throwable.getStackTrace()) {
+        for (final StackTraceElement stackTraceElement : throwable.getStackTrace()) {
             log(logLevel, "    at " + stackTraceElement.toString());
         }
     }
@@ -145,7 +145,7 @@ public class Logger {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -156,7 +156,7 @@ public class Logger {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Logger other = (Logger) obj;
+        final Logger other = (Logger) obj;
         if (formatters == null) {
             if (other.formatters != null) {
                 return false;

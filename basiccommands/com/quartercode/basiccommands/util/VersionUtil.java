@@ -37,11 +37,10 @@ public class VersionUtil {
     private static URL          feedUrl;
 
     static {
-
         try {
             feedUrl = new URL(URLConf.BUKKIT_DEV_FILEFEED);
         }
-        catch (MalformedURLException e) {
+        catch (final MalformedURLException e) {
             MinecartRevolution.handleThrowable(e);
         }
     }
@@ -56,10 +55,10 @@ public class VersionUtil {
                 return new Version(title.split(" ")[1]);
             }
         }
-        catch (UnknownHostException e) {
+        catch (final UnknownHostException e) {
             MinecartRevolution.handleSilenceThrowable(e);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             MinecartRevolution.handleThrowable(e);
         }
 
@@ -68,7 +67,7 @@ public class VersionUtil {
 
     public static boolean newVersionAvaiable() {
 
-        Version latestVersion = getLatestVersion();
+        final Version latestVersion = getLatestVersion();
 
         if (latestVersion != null) {
             if (latestVersion.bigger(Conf.VERSION)) {
@@ -81,7 +80,7 @@ public class VersionUtil {
         return false;
     }
 
-    public static boolean tryUpdate(Logger logger, CommandSender commandSender) {
+    public static boolean tryUpdate(final Logger logger, final CommandSender commandSender) {
 
         if (newVersionAvaiable()) {
             forceUpdate(logger, commandSender);
@@ -91,10 +90,10 @@ public class VersionUtil {
         }
     }
 
-    public static void forceUpdate(Logger logger, CommandSender commandSender) {
+    public static void forceUpdate(final Logger logger, final CommandSender commandSender) {
 
         try {
-            URL url = new URL(getFileURL(getFeedData().get("link")));
+            final URL url = new URL(getFileURL(getFeedData().get("link")));
 
             sendMessage(logger, commandSender, Lang.getValue("basiccommands.update.update"), true);
 
@@ -109,17 +108,17 @@ public class VersionUtil {
 
             sendMessage(logger, commandSender, Lang.getValue("basiccommands.update.updated"), true);
         }
-        catch (UnknownHostException e) {
+        catch (final UnknownHostException e) {
             sendMessage(null, commandSender, Lang.getValue("basiccommands.update.error"), false);
             MinecartRevolution.handleSilenceThrowable(e);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             sendMessage(null, commandSender, Lang.getValue("basiccommands.update.error"), false);
             MinecartRevolution.handleThrowable(e);
         }
     }
 
-    private static void sendMessage(Logger logger, CommandSender commandSender, String message, boolean recolor) {
+    private static void sendMessage(final Logger logger, final CommandSender commandSender, String message, final boolean recolor) {
 
         if (recolor) {
             message = ChatColor.GOLD + message;
@@ -133,11 +132,11 @@ public class VersionUtil {
         }
     }
 
-    private static String getFileURL(String link) throws IOException {
+    private static String getFileURL(final String link) throws IOException {
 
-        URL url = new URL(link);
+        final URL url = new URL(link);
         URLConnection connection = url.openConnection();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         String line;
         while ( (line = reader.readLine()) != null) {
@@ -153,13 +152,13 @@ public class VersionUtil {
 
     private static Map<String, String> getFeedData() throws IOException, XMLStreamException {
 
-        Map<String, String> returnMap = new HashMap<String, String>();
+        final Map<String, String> returnMap = new HashMap<String, String>();
         String title = null;
         String link = null;
 
-        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        InputStream inputStream = feedUrl.openStream();
-        XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream);
+        final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        final InputStream inputStream = feedUrl.openStream();
+        final XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream);
 
         while (eventReader.hasNext()) {
             XMLEvent event = eventReader.nextEvent();

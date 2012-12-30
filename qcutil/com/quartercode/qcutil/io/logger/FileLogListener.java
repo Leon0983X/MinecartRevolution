@@ -18,16 +18,16 @@ public class FileLogListener implements Listener {
         return new Listener() {
 
             @Override
-            public Object onEvent(Event event) {
+            public Object onEvent(final Event event) {
 
                 try {
-                    File file = (File) event.getProperty("logfile");
-                    PrintWriter fileWriter = (PrintWriter) event.getProperty("filewriter");
+                    final File file = (File) event.getProperty("logfile");
+                    final PrintWriter fileWriter = (PrintWriter) event.getProperty("filewriter");
                     if (!file.read().isEmpty()) {
                         fileWriter.println();
                     }
                 }
-                catch (Throwable t) {
+                catch (final Throwable t) {
                     QcUtil.handleThrowable(t);
                 }
 
@@ -36,7 +36,7 @@ public class FileLogListener implements Listener {
         };
     }
 
-    public static String getDefaultLogMarkString(String info) {
+    public static String getDefaultLogMarkString(final String info) {
 
         return "----- " + info + " --------------------";
     }
@@ -46,9 +46,9 @@ public class FileLogListener implements Listener {
         return new Listener() {
 
             @Override
-            public Object onEvent(Event event) {
+            public Object onEvent(final Event event) {
 
-                PrintWriter fileWriter = (PrintWriter) event.getProperty("filewriter");
+                final PrintWriter fileWriter = (PrintWriter) event.getProperty("filewriter");
                 fileWriter.println(logMarkString);
 
                 return null;
@@ -60,7 +60,7 @@ public class FileLogListener implements Listener {
     protected Logger      logger;
     protected PrintWriter fileWriter;
 
-    public FileLogListener(File logFile, Logger logger, Listener... newLogListeners) throws FileNotFoundException, IOException {
+    public FileLogListener(final File logFile, final Logger logger, final Listener... newLogListeners) throws FileNotFoundException, IOException {
 
         this.logFile = logFile;
         this.logger = logger;
@@ -81,7 +81,7 @@ public class FileLogListener implements Listener {
         fileWriter = new PrintWriter(logFile);
 
         if (oldLog != null) {
-            for (String logRecord : oldLog) {
+            for (final String logRecord : oldLog) {
                 fileWriter.println(logRecord);
             }
         }
@@ -91,12 +91,12 @@ public class FileLogListener implements Listener {
     }
 
     @Override
-    public Object onEvent(Event event) {
+    public Object onEvent(final Event event) {
 
-        Logger logger = (Logger) event.getProperty("logger");
+        final Logger logger = (Logger) event.getProperty("logger");
 
         if (this.logger.equals(logger)) {
-            String record = (String) event.getProperty("logrecord");
+            final String record = (String) event.getProperty("logrecord");
             fileWriter.println(record);
             fileWriter.flush();
         }
@@ -116,7 +116,7 @@ public class FileLogListener implements Listener {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -127,7 +127,7 @@ public class FileLogListener implements Listener {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        FileLogListener other = (FileLogListener) obj;
+        final FileLogListener other = (FileLogListener) obj;
         if (fileWriter == null) {
             if (other.fileWriter != null) {
                 return false;

@@ -26,30 +26,19 @@ public class File extends java.io.File {
 
     public static final String lineSeperator    = System.getProperty("line.seperator");
 
-    public static java.io.File convert(File file) {
+    public static java.io.File convert(final File file) {
 
         return new java.io.File(file.getPath());
     }
 
-    public static File convert(java.io.File file) {
+    public static File convert(final java.io.File file) {
 
         return new File(file.getPath());
     }
 
-    public static java.io.File[] convert(File[] oldFiles) {
+    public static java.io.File[] convert(final File[] oldFiles) {
 
-        java.io.File[] newFiles = new java.io.File[oldFiles.length];
-
-        for (int counter = 0; counter < oldFiles.length; counter++) {
-            newFiles[counter] = convert(oldFiles[counter]);
-        }
-
-        return newFiles;
-    }
-
-    public static File[] convert(java.io.File[] oldFiles) {
-
-        File[] newFiles = new File[oldFiles.length];
+        final java.io.File[] newFiles = new java.io.File[oldFiles.length];
 
         for (int counter = 0; counter < oldFiles.length; counter++) {
             newFiles[counter] = convert(oldFiles[counter]);
@@ -58,22 +47,33 @@ public class File extends java.io.File {
         return newFiles;
     }
 
-    public File(String path) {
+    public static File[] convert(final java.io.File[] oldFiles) {
+
+        final File[] newFiles = new File[oldFiles.length];
+
+        for (int counter = 0; counter < oldFiles.length; counter++) {
+            newFiles[counter] = convert(oldFiles[counter]);
+        }
+
+        return newFiles;
+    }
+
+    public File(final String path) {
 
         super(path);
     }
 
-    public File(URI uri) {
+    public File(final URI uri) {
 
         super(uri);
     }
 
-    public File(String pathPart1, String pathPart2) {
+    public File(final String pathPart1, final String pathPart2) {
 
         super(pathPart1, pathPart2);
     }
 
-    public File(File pathPart1, String pathPart2) {
+    public File(final File pathPart1, final String pathPart2) {
 
         super(pathPart1, pathPart2);
     }
@@ -85,26 +85,26 @@ public class File extends java.io.File {
     }
 
     @Override
-    public File[] listFiles(FileFilter fileFilter) {
+    public File[] listFiles(final FileFilter fileFilter) {
 
         return convert(super.listFiles(fileFilter));
     }
 
     @Override
-    public File[] listFiles(FilenameFilter filenameFilter) {
+    public File[] listFiles(final FilenameFilter filenameFilter) {
 
         return convert(super.listFiles(filenameFilter));
     }
 
-    public boolean deleteRecursive(Progressable progressable) {
+    public boolean deleteRecursive(final Progressable progressable) {
 
         return deleteRecursive(this, progressable);
     }
 
-    protected boolean deleteRecursive(File file, Progressable progressable) {
+    protected boolean deleteRecursive(final File file, final Progressable progressable) {
 
         if (file.isDirectory()) {
-            for (File entry : file.listFiles()) {
+            for (final File entry : file.listFiles()) {
                 entry.deleteRecursive(progressable);
             }
         }
@@ -128,24 +128,24 @@ public class File extends java.io.File {
         });
     }
 
-    public void copy(File destination, Progressable progressable) throws FileNotFoundException, IOException {
+    public void copy(final File destination, final Progressable progressable) throws FileNotFoundException, IOException {
 
         copy(this, destination, progressable);
     }
 
-    protected void copy(File source, File destination, Progressable progressable) throws FileNotFoundException, IOException {
+    protected void copy(final File source, final File destination, final Progressable progressable) throws FileNotFoundException, IOException {
 
         if (source.isDirectory()) {
             destination.mkdirs();
 
-            for (File entry : source.listFiles()) {
+            for (final File entry : source.listFiles()) {
                 entry.copy(new File(source, entry.getName()), new File(destination, entry.getName()), progressable);
             }
         } else {
-            byte[] buffer = new byte[32768];
+            final byte[] buffer = new byte[32768];
 
-            FileInputStream in = new FileInputStream(source);
-            FileOutputStream out = new FileOutputStream(destination);
+            final FileInputStream in = new FileInputStream(source);
+            final FileOutputStream out = new FileOutputStream(destination);
 
             int numberOfBytes;
             while ( (numberOfBytes = in.read(buffer)) > 0) {
@@ -160,7 +160,7 @@ public class File extends java.io.File {
     protected double currentZipFileSize;
     protected double currentZipExtracted = 0;
 
-    public void unzip(File destination, Progressable progress) throws ZipException, IOException {
+    public void unzip(final File destination, final Progressable progress) throws ZipException, IOException {
 
         if (progress != null) {
             progress.setProgressStatus("Extracting " + getName());
@@ -168,17 +168,17 @@ public class File extends java.io.File {
 
         currentZipFileSize = length();
 
-        ZipFile zipFile = new ZipFile(this);
+        final ZipFile zipFile = new ZipFile(this);
 
-        for (ZipEntry zipEntry : Collections.list(zipFile.entries())) {
+        for (final ZipEntry zipEntry : Collections.list(zipFile.entries())) {
             extractZipEntry(zipFile, zipEntry, destination, progress);
         }
     }
 
-    protected void extractZipEntry(ZipFile zipFile, ZipEntry zipEntry, File destination, Progressable progress) throws IOException {
+    protected void extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry, final File destination, final Progressable progress) throws IOException {
 
-        File file = new File(destination, zipEntry.getName());
-        byte[] BUFFER = new byte[0xFFFF];
+        final File file = new File(destination, zipEntry.getName());
+        final byte[] BUFFER = new byte[0xFFFF];
 
         if (zipEntry.isDirectory()) {
             file.mkdirs();
@@ -210,7 +210,7 @@ public class File extends java.io.File {
 
     public String read() throws FileNotFoundException, IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader(this));
+        final BufferedReader reader = new BufferedReader(new FileReader(this));
 
         String string = "";
         String currentLine = "";
@@ -222,20 +222,20 @@ public class File extends java.io.File {
         return string;
     }
 
-    public void write(String string) throws FileNotFoundException, IOException {
+    public void write(final String string) throws FileNotFoundException, IOException {
 
         if (!getParentFile().exists()) {
             getParentFile().mkdirs();
         }
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(this));
+        final BufferedWriter writer = new BufferedWriter(new FileWriter(this));
 
         writer.write(string);
 
         writer.close();
     }
 
-    public void append(String string) throws FileNotFoundException, IOException {
+    public void append(final String string) throws FileNotFoundException, IOException {
 
         if (exists()) {
             write(read() + string);

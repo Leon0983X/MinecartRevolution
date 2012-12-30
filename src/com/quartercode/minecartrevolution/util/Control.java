@@ -7,13 +7,13 @@ import com.quartercode.minecartrevolution.plugin.PluginManager;
 
 public abstract class Control {
 
-    protected boolean executeExpression(Minecart minecart, String expression) {
+    protected boolean executeExpression(final Minecart minecart, final String expression) {
 
         if (expression != null && !expression.isEmpty()) {
             try {
                 PluginManager.getMinecartRevolution().getExpressionExecutor().execute(minecart, expression);
             }
-            catch (Exception e) {
+            catch (final Exception e) {
                 MinecartRevolution.handleSilenceThrowable(e);
             }
 

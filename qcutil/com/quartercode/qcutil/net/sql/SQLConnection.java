@@ -18,7 +18,7 @@ public abstract class SQLConnection {
     protected String     dbUser;
     protected String     dbPassword;
 
-    protected SQLConnection(String host, String port, String username, String password) {
+    protected SQLConnection(final String host, final String port, final String username, final String password) {
 
         super();
 
@@ -28,7 +28,7 @@ public abstract class SQLConnection {
         dbPassword = password;
     }
 
-    public void selectDatabase(String database) throws ClassNotFoundException, SQLException {
+    public void selectDatabase(final String database) throws ClassNotFoundException, SQLException {
 
         this.database = database;
 
@@ -53,7 +53,7 @@ public abstract class SQLConnection {
         return connection != null;
     }
 
-    public void selectTable(String table) {
+    public void selectTable(final String table) {
 
         this.table = table;
     }
@@ -63,13 +63,13 @@ public abstract class SQLConnection {
         return table;
     }
 
-    public ResultSet executeQuery(String sqlQuery) throws SQLException {
+    public ResultSet executeQuery(final String sqlQuery) throws SQLException {
 
         if (connection != null) {
             Statement query;
             query = connection.createStatement();
             if (sqlQuery.contains("SELECT")) {
-                ResultSet resultSet = query.executeQuery(sqlQuery);
+                final ResultSet resultSet = query.executeQuery(sqlQuery);
                 return resultSet;
             } else {
                 query.executeUpdate(sqlQuery);
@@ -80,7 +80,7 @@ public abstract class SQLConnection {
         }
     }
 
-    protected String handleValue(Object value) {
+    protected String handleValue(final Object value) {
 
         if (value instanceof String) {
             return "'" + value + "'";
@@ -89,65 +89,65 @@ public abstract class SQLConnection {
         }
     }
 
-    public boolean exists(String col, Object value) {
+    public boolean exists(final String col, final Object value) {
 
         try {
             getCell(col, col, value);
             return true;
         }
-        catch (SQLException e) {
+        catch (final SQLException e) {
             return false;
         }
     }
 
-    public ResultSet get(String col) throws SQLException {
+    public ResultSet get(final String col) throws SQLException {
 
-        ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table);
+        final ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table);
         return resultSet;
     }
 
-    public ResultSet getWhere(String col, String whereClause) throws SQLException {
+    public ResultSet getWhere(final String col, final String whereClause) throws SQLException {
 
-        ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table + " WHERE " + whereClause);
+        final ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table + " WHERE " + whereClause);
         return resultSet;
     }
 
-    public ResultSet getWhereValue(String col, String whereCol, Object whereValue) throws SQLException {
+    public ResultSet getWhereValue(final String col, final String whereCol, final Object whereValue) throws SQLException {
 
-        ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table + " WHERE " + whereCol + " = " + handleValue(whereValue));
+        final ResultSet resultSet = executeQuery("SELECT " + col + " FROM " + table + " WHERE " + whereCol + " = " + handleValue(whereValue));
         return resultSet;
     }
 
-    public Object getCell(String col, String whereClause) throws SQLException {
+    public Object getCell(final String col, final String whereClause) throws SQLException {
 
-        ResultSet resultSet = getWhere(col, whereClause);
+        final ResultSet resultSet = getWhere(col, whereClause);
         resultSet.next();
         return resultSet.getObject(col);
     }
 
-    public Object getCell(String col, String whereCol, Object whereValue) throws SQLException {
+    public Object getCell(final String col, final String whereCol, final Object whereValue) throws SQLException {
 
-        ResultSet resultSet = getWhereValue(col, whereCol, whereValue);
+        final ResultSet resultSet = getWhereValue(col, whereCol, whereValue);
         resultSet.next();
         return resultSet.getObject(col);
     }
 
-    public void set(String col, Object value) throws SQLException {
+    public void set(final String col, final Object value) throws SQLException {
 
         executeQuery("UPDATE " + table + " SET " + col + " = " + handleValue(value));
     }
 
-    public void set(String col, String whereClause, Object value) throws SQLException {
+    public void set(final String col, final String whereClause, final Object value) throws SQLException {
 
         executeQuery("UPDATE " + table + " SET " + col + " = " + handleValue(value) + " WHERE " + whereClause);
     }
 
-    public void set(String col, String whereCol, Object whereValue, Object value) throws SQLException {
+    public void set(final String col, final String whereCol, final Object whereValue, final Object value) throws SQLException {
 
         executeQuery("UPDATE " + table + " SET " + col + " = " + handleValue(value) + " WHERE " + whereCol + " = " + handleValue(whereValue));
     }
 
-    public void insert(Object[] values) throws SQLException {
+    public void insert(final Object[] values) throws SQLException {
 
         String valuesString = "";
         for (int counter = 0; counter < values.length; counter++) {
@@ -160,7 +160,7 @@ public abstract class SQLConnection {
         executeQuery("INSERT INTO " + table + " VALUES (" + valuesString + ")");
     }
 
-    public void insert(String[] cols, Object[] values) throws SQLException {
+    public void insert(final String[] cols, final Object[] values) throws SQLException {
 
         if (cols.length != values.length) {
             return;
@@ -201,7 +201,7 @@ public abstract class SQLConnection {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -212,7 +212,7 @@ public abstract class SQLConnection {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        SQLConnection other = (SQLConnection) obj;
+        final SQLConnection other = (SQLConnection) obj;
         if (connection == null) {
             if (other.connection != null) {
                 return false;

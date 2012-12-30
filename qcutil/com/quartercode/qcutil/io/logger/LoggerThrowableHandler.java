@@ -8,7 +8,7 @@ public class LoggerThrowableHandler implements ThrowableHandler {
 
     protected Logger logger;
 
-    public LoggerThrowableHandler(Logger logger) {
+    public LoggerThrowableHandler(final Logger logger) {
 
         setLogger(logger);
     }
@@ -18,13 +18,13 @@ public class LoggerThrowableHandler implements ThrowableHandler {
         return logger;
     }
 
-    public void setLogger(Logger logger) {
+    public void setLogger(final Logger logger) {
 
         this.logger = logger;
     }
 
     @Override
-    public void handleThrowable(Throwable throwable) {
+    public void handleThrowable(final Throwable throwable) {
 
         logger.handleThrowable(throwable);
     }
@@ -39,7 +39,7 @@ public class LoggerThrowableHandler implements ThrowableHandler {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -50,7 +50,7 @@ public class LoggerThrowableHandler implements ThrowableHandler {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        LoggerThrowableHandler other = (LoggerThrowableHandler) obj;
+        final LoggerThrowableHandler other = (LoggerThrowableHandler) obj;
         if (logger == null) {
             if (other.logger != null) {
                 return false;

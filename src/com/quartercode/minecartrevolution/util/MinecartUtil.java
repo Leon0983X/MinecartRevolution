@@ -6,9 +6,9 @@ import org.bukkit.util.Vector;
 
 public class MinecartUtil {
 
-    public static double getSpeed(Minecart minecart) {
+    public static double getSpeed(final Minecart minecart) {
 
-        Vector velocity = minecart.getVelocity();
+        final Vector velocity = minecart.getVelocity();
 
         if (velocity.getX() > 0) {
             return velocity.getX();
@@ -23,9 +23,9 @@ public class MinecartUtil {
         }
     }
 
-    public static void setSpeed(Minecart minecart, double speed) {
+    public static void setSpeed(final Minecart minecart, final double speed) {
 
-        Vector velocity = minecart.getVelocity();
+        final Vector velocity = minecart.getVelocity();
 
         if (velocity.getX() > 0) {
             velocity.setX(speed);
@@ -40,19 +40,19 @@ public class MinecartUtil {
         minecart.setVelocity(velocity);
     }
 
-    public static void addSpeed(Minecart minecart, double speed) {
+    public static void addSpeed(final Minecart minecart, final double speed) {
 
         setSpeed(minecart, getSpeed(minecart) + speed);
     }
 
-    public static void subtractSpeed(Minecart minecart, double speed) {
+    public static void subtractSpeed(final Minecart minecart, final double speed) {
 
         addSpeed(minecart, -speed);
     }
 
-    public static void multiplySpeed(Minecart minecart, double factor) {
+    public static void multiplySpeed(final Minecart minecart, final double factor) {
 
-        Vector velocity = minecart.getVelocity();
+        final Vector velocity = minecart.getVelocity();
 
         velocity.setX(velocity.getX() * factor);
         velocity.setZ(velocity.getZ() * factor);
@@ -60,9 +60,9 @@ public class MinecartUtil {
         minecart.setVelocity(velocity);
     }
 
-    public static void divideSpeed(Minecart minecart, double factor) {
+    public static void divideSpeed(final Minecart minecart, final double factor) {
 
-        Vector velocity = minecart.getVelocity();
+        final Vector velocity = minecart.getVelocity();
 
         velocity.setX(velocity.getX() / factor);
         velocity.setZ(velocity.getZ() / factor);

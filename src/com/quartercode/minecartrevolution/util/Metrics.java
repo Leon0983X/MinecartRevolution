@@ -61,23 +61,23 @@ import com.quartercode.qcutil.io.File;
 
 public class Metrics {
 
-    private static final int    REVISION              = 5;
-    private static final String BASE_URL              = "http://mcstats.org";
-    private static final String REPORT_URL            = "/report/%s";
-    private static final String CUSTOM_DATA_SEPARATOR = "~~";
-    private static final int    PING_INTERVAL         = 10;
+    private static final int         REVISION              = 5;
+    private static final String      BASE_URL              = "http://mcstats.org";
+    private static final String      REPORT_URL            = "/report/%s";
+    private static final String      CUSTOM_DATA_SEPARATOR = "~~";
+    private static final int         PING_INTERVAL         = 10;
 
-    private MinecartRevolution  minecartRevolution;
-    private Set<Graph>          graphs                = Collections.synchronizedSet(new HashSet<Graph>());
-    private Graph               defaultGraph          = new Graph("Default");
-    private File                configurationFile;
-    private YamlConfiguration   configuration;
-    private String              guid;
+    private final MinecartRevolution minecartRevolution;
+    private final Set<Graph>         graphs                = Collections.synchronizedSet(new HashSet<Graph>());
+    private final Graph              defaultGraph          = new Graph("Default");
+    private final File               configurationFile;
+    private final YamlConfiguration  configuration;
+    private final String             guid;
 
-    private Object              optOutLock            = new Object();
-    private volatile int        taskId                = -1;
+    private final Object             optOutLock            = new Object();
+    private volatile int             taskId                = -1;
 
-    public Metrics(MinecartRevolution minecartRevolution, File configurationFile) throws IOException {
+    public Metrics(final MinecartRevolution minecartRevolution, final File configurationFile) throws IOException {
 
         this.minecartRevolution = minecartRevolution;
 
@@ -95,10 +95,10 @@ public class Metrics {
         guid = configuration.getString("guid");
     }
 
-    public Graph createGraph(String name) {
+    public Graph createGraph(final String name) {
 
         if (name != null) {
-            Graph graph = new Graph(name);
+            final Graph graph = new Graph(name);
             graphs.add(graph);
 
             return graph;
@@ -107,14 +107,14 @@ public class Metrics {
         }
     }
 
-    public void addGraph(Graph graph) {
+    public void addGraph(final Graph graph) {
 
         if (graph != null) {
             graphs.add(graph);
         }
     }
 
-    public void addCustomData(Plotter plotter) {
+    public void addCustomData(final Plotter plotter) {
 
         if (plotter != null) {
             defaultGraph.addPlotter(plotter);
@@ -147,7 +147,7 @@ public class Metrics {
 	Bukkit.getScheduler().cancelTask(taskId);
 	taskId = -1;
 
-	for (Graph graph : graphs) {
+	for (final Graph graph : graphs) {
 	    graph.onOptOut();
 	}
                             }
@@ -156,7 +156,7 @@ public class Metrics {
                         postPlugin(!firstPost);
                         firstPost = false;
                     }
-                    catch (IOException e) {
+                    catch (final IOException e) {
                         MinecartRevolution.handleSilenceThrowable(e);
                     }
                 }
@@ -172,11 +172,11 @@ public class Metrics {
             try {
                 configuration.load(configurationFile);
             }
-            catch (IOException e) {
+            catch (final IOException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
                 return true;
             }
-            catch (InvalidConfigurationException e) {
+            catch (final InvalidConfigurationException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
                 return true;
             }
@@ -214,11 +214,11 @@ public class Metrics {
         }
     }
 
-    private void postPlugin(boolean isPing) throws IOException {
+    private void postPlugin(final boolean isPing) throws IOException {
 
-        PluginDescriptionFile description = minecartRevolution.getDescription();
+        final PluginDescriptionFile description = minecartRevolution.getDescription();
 
-        StringBuilder data = new StringBuilder();
+        final StringBuilder data = new StringBuilder();
         data.append(encode("guid")).append('=').append(encode(guid));
         encodeDataPair(data, "version", description.getVersion());
         encodeDataPair(data, "server", Bukkit.getVersion());
@@ -230,20 +230,20 @@ public class Metrics {
         }
 
         synchronized (graphs) {
-            Iterator<Graph> iter = graphs.iterator();
+            final Iterator<Graph> iter = graphs.iterator();
 
             while (iter.hasNext()) {
-                Graph graph = iter.next();
+                final Graph graph = iter.next();
 
-                for (Plotter plotter : graph.getPlotters()) {
-                    String key = String.format("C%s%s%s%s", CUSTOM_DATA_SEPARATOR, graph.getName(), CUSTOM_DATA_SEPARATOR, plotter.getColumnName());
-                    String value = Integer.toString(plotter.getValue());
+                for (final Plotter plotter : graph.getPlotters()) {
+                    final String key = String.format("C%s%s%s%s", CUSTOM_DATA_SEPARATOR, graph.getName(), CUSTOM_DATA_SEPARATOR, plotter.getColumnName());
+                    final String value = Integer.toString(plotter.getValue());
                     encodeDataPair(data, key, value);
                 }
             }
         }
 
-        URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(minecartRevolution.getDescription().getName())));
+        final URL url = new URL(BASE_URL + String.format(REPORT_URL, encode(minecartRevolution.getDescription().getName())));
         URLConnection connection;
 
         if (isMineshafterPresent()) {
@@ -254,12 +254,12 @@ public class Metrics {
 
         connection.setDoOutput(true);
 
-        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+        final OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         writer.write(data.toString());
         writer.flush();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String response = reader.readLine();
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final String response = reader.readLine();
 
         writer.close();
         reader.close();
@@ -269,11 +269,11 @@ public class Metrics {
         } else {
             if (response.contains("OK This is your first update this hour")) {
                 synchronized (graphs) {
-                    Iterator<Graph> iterator = graphs.iterator();
+                    final Iterator<Graph> iterator = graphs.iterator();
 
                     while (iterator.hasNext()) {
-                        Graph graph = iterator.next();
-                        for (Plotter plotter : graph.getPlotters()) {
+                        final Graph graph = iterator.next();
+                        for (final Plotter plotter : graph.getPlotters()) {
                             plotter.reset();
                         }
                     }
@@ -288,27 +288,27 @@ public class Metrics {
             Class.forName("mineshafter.MineServer");
             return true;
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             return false;
         }
     }
 
-    private static void encodeDataPair(StringBuilder buffer, String key, String value) throws UnsupportedEncodingException {
+    private static void encodeDataPair(final StringBuilder buffer, final String key, final String value) throws UnsupportedEncodingException {
 
         buffer.append('&').append(encode(key)).append('=').append(encode(value));
     }
 
-    private static String encode(String text) throws UnsupportedEncodingException {
+    private static String encode(final String text) throws UnsupportedEncodingException {
 
         return URLEncoder.encode(text, "UTF-8");
     }
 
     public static class Graph {
 
-        private String       name;
-        private Set<Plotter> plotters = new LinkedHashSet<Plotter>();
+        private final String       name;
+        private final Set<Plotter> plotters = new LinkedHashSet<Plotter>();
 
-        private Graph(String name) {
+        private Graph(final String name) {
 
             this.name = name;
         }
@@ -323,12 +323,12 @@ public class Metrics {
             return Collections.unmodifiableSet(plotters);
         }
 
-        public void addPlotter(Plotter plotter) {
+        public void addPlotter(final Plotter plotter) {
 
             plotters.add(plotter);
         }
 
-        public void removePlotter(Plotter plotter) {
+        public void removePlotter(final Plotter plotter) {
 
             plotters.remove(plotter);
         }
@@ -340,13 +340,13 @@ public class Metrics {
         }
 
         @Override
-        public boolean equals(Object object) {
+        public boolean equals(final Object object) {
 
             if (! (object instanceof Graph)) {
                 return false;
             }
 
-            Graph graph = (Graph) object;
+            final Graph graph = (Graph) object;
             return graph.name.equals(name);
         }
 
@@ -357,14 +357,14 @@ public class Metrics {
 
     public static abstract class Plotter {
 
-        private String name;
+        private final String name;
 
         public Plotter() {
 
             this("Default");
         }
 
-        public Plotter(String name) {
+        public Plotter(final String name) {
 
             this.name = name;
         }
@@ -387,13 +387,13 @@ public class Metrics {
         }
 
         @Override
-        public boolean equals(Object object) {
+        public boolean equals(final Object object) {
 
             if (! (object instanceof Plotter)) {
                 return false;
             }
 
-            Plotter plotter = (Plotter) object;
+            final Plotter plotter = (Plotter) object;
             return plotter.name.equals(name) && plotter.getValue() == getValue();
         }
     }

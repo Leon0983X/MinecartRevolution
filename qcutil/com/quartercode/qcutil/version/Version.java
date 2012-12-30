@@ -21,7 +21,7 @@ public class Version implements Serializable, Comparable<Version> {
         super();
     }
 
-    public Version(String versionString) {
+    public Version(final String versionString) {
 
         super();
 
@@ -33,7 +33,7 @@ public class Version implements Serializable, Comparable<Version> {
         return versionString;
     }
 
-    public void setVersionString(String versionString) {
+    public void setVersionString(final String versionString) {
 
         this.versionString = versionString;
     }
@@ -56,18 +56,18 @@ public class Version implements Serializable, Comparable<Version> {
         }
     }
 
-    protected int[] splitVersionNumbers(String versionNumbers) throws NumberFormatException {
+    protected int[] splitVersionNumbers(final String versionNumbers) throws NumberFormatException {
 
-        ArrayList<Integer> versionNumbersList = new ArrayList<Integer>();
+        final ArrayList<Integer> versionNumbersList = new ArrayList<Integer>();
 
-        String[] versionParts = versionNumbers.split("\\.");
+        final String[] versionParts = versionNumbers.split("\\.");
         for (int counter = 0; counter < versionParts.length; counter++) {
             if (!versionParts[counter].contains("_")) {
                 versionNumbersList.add(Integer.parseInt(versionParts[counter]));
             } else {
-                String[] versionPartParts = versionParts[counter].split("_");
+                final String[] versionPartParts = versionParts[counter].split("_");
                 if (counter == versionParts.length - 1) {
-                    for (String versionPartPart : versionPartParts) {
+                    for (final String versionPartPart : versionPartParts) {
                         versionNumbersList.add(Integer.parseInt(versionPartPart));
                     }
                 } else {
@@ -76,19 +76,19 @@ public class Version implements Serializable, Comparable<Version> {
             }
         }
 
-        int[] versionNumbersArray = new int[versionNumbersList.size()];
+        final int[] versionNumbersArray = new int[versionNumbersList.size()];
         for (int counter = 0; counter < versionNumbersList.size(); counter++) {
             versionNumbersArray[counter] = versionNumbersList.get(counter);
         }
         return versionNumbersArray;
     }
 
-    public boolean bigger(Version otherVersion) throws NumberFormatException {
+    public boolean bigger(final Version otherVersion) throws NumberFormatException {
 
         if (equals(otherVersion)) {
             return false;
         } else {
-            String[] prefixOrder = { "Pre", "Alpha", "Beta", "" };
+            final String[] prefixOrder = { "Pre", "Alpha", "Beta", "" };
 
             int thisVersionPrefix = prefixOrder.length - 1;
             for (int counter = 0; counter < prefixOrder.length; counter++) {
@@ -108,8 +108,8 @@ public class Version implements Serializable, Comparable<Version> {
             } else if (thisVersionPrefix < otherVersionPrefix) {
                 return false;
             } else {
-                int[] thisVersionParts = splitVersionNumbers(getVersionNumbers());
-                int[] otherVersionParts = splitVersionNumbers(otherVersion.getVersionNumbers());
+                final int[] thisVersionParts = splitVersionNumbers(getVersionNumbers());
+                final int[] otherVersionParts = splitVersionNumbers(otherVersion.getVersionNumbers());
 
                 for (int counter = 0; counter < thisVersionParts.length; counter++) {
                     if (thisVersionParts.length > counter && otherVersionParts.length > counter) {
@@ -130,7 +130,7 @@ public class Version implements Serializable, Comparable<Version> {
         }
     }
 
-    public boolean lesser(Version otherVersion) {
+    public boolean lesser(final Version otherVersion) {
 
         if (equals(otherVersion)) {
             return false;
@@ -140,7 +140,7 @@ public class Version implements Serializable, Comparable<Version> {
     }
 
     @Override
-    public int compareTo(Version o) {
+    public int compareTo(final Version o) {
 
         if (bigger(o)) {
             return 1;
@@ -161,7 +161,7 @@ public class Version implements Serializable, Comparable<Version> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -172,7 +172,7 @@ public class Version implements Serializable, Comparable<Version> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Version other = (Version) obj;
+        final Version other = (Version) obj;
         if (versionString == null) {
             if (other.versionString != null) {
                 return false;

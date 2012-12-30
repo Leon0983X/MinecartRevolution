@@ -12,9 +12,9 @@ import com.quartercode.qcutil.args.Arguments;
 
 public class HelpCommand extends Command {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public HelpCommand(MinecartRevolution minecartRevolution) {
+    public HelpCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -26,28 +26,28 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
         showHelp(commandSender, usedMrCommand);
     }
 
-    private void showHelp(CommandSender commandSender, String usedMrCommand) {
+    private void showHelp(final CommandSender commandSender, final String usedMrCommand) {
 
         commandSender.sendMessage(ChatColor.GREEN + "==========[ " + Lang.getValue("basiccommands.help.start") + " ]==========");
 
         String aliases = ChatColor.DARK_GREEN + "/minecartrevolution" + ChatColor.AQUA + ", ";
-        for (String alias : minecartRevolution.getCommand("minecartrevolution").getAliases()) {
+        for (final String alias : minecartRevolution.getCommand("minecartrevolution").getAliases()) {
             aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
         commandSender.sendMessage(Lang.getValue("basiccommands.help.aliases", "aliases", aliases));
 
-        List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
+        final List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
 
-        for (Command command : commands) {
-            CommandInfo commandInfo = command.getInfo();
+        for (final Command command : commands) {
+            final CommandInfo commandInfo = command.getInfo();
 
-            for (String label : commandInfo.getLabels()) {
+            for (final String label : commandInfo.getLabels()) {
                 String printLabel = "";
                 if (!label.equalsIgnoreCase("<empty>")) {
                     printLabel = " " + label;
@@ -63,7 +63,7 @@ public class HelpCommand extends Command {
         }
     }
 
-    private void printHelpMessage(CommandSender sender, String command, String description) {
+    private void printHelpMessage(final CommandSender sender, final String command, final String description) {
 
         sender.sendMessage(ChatColor.GOLD + command);
         sender.sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + description);

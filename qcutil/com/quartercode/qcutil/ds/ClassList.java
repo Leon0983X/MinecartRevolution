@@ -12,12 +12,12 @@ public class ClassList extends OnceList<Class<?>> {
         super();
     }
 
-    public ClassList(Collection<Class<?>> collection) {
+    public ClassList(final Collection<Class<?>> collection) {
 
         super(collection);
     }
 
-    public ClassList(int initialCapacity) {
+    public ClassList(final int initialCapacity) {
 
         super(initialCapacity);
     }

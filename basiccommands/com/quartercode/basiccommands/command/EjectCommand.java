@@ -21,10 +21,10 @@ public class EjectCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
         if (commandSender instanceof Player) {
-            Player player = (Player) commandSender;
+            final Player player = (Player) commandSender;
 
             if (player.getVehicle() != null) {
                 player.getVehicle().eject();

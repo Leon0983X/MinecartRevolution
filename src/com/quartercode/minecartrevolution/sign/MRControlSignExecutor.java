@@ -24,17 +24,17 @@ public class MRControlSignExecutor {
         return controlSigns;
     }
 
-    public void setControlSigns(List<ControlSign> controlSigns) {
+    public void setControlSigns(final List<ControlSign> controlSigns) {
 
         this.controlSigns = controlSigns;
     }
 
-    public void execute(Minecart minecart) {
+    public void execute(final Minecart minecart) {
 
-        Location location = minecart.getLocation();
+        final Location location = minecart.getLocation();
 
-        for (int[] offsets : controlSignOffsets) {
-            Location signLocation = location.clone();
+        for (final int[] offsets : controlSignOffsets) {
+            final Location signLocation = location.clone();
             signLocation.add(offsets[0], offsets[1], offsets[2]);
 
             if (signLocation.getBlock().getType() == Material.SIGN || signLocation.getBlock().getType() == Material.SIGN_POST) {
@@ -43,17 +43,17 @@ public class MRControlSignExecutor {
         }
     }
 
-    public boolean executeControlSign(Location location, Minecart minecart) {
+    public boolean executeControlSign(final Location location, final Minecart minecart) {
 
         boolean executed = false;
 
         if (location.getBlock().getState() instanceof Sign) {
-            Sign sign = (Sign) location.getBlock().getState();
+            final Sign sign = (Sign) location.getBlock().getState();
 
-            for (ControlSign controlSign : controlSigns) {
-                ControlSignInfo controlSignInfo = controlSign.getInfo();
+            for (final ControlSign controlSign : controlSigns) {
+                final ControlSignInfo controlSignInfo = controlSign.getInfo();
 
-                for (String label : controlSignInfo.getLabels()) {
+                for (final String label : controlSignInfo.getLabels()) {
                     if (ControlSignInfo.getFormattedLabel(label).equalsIgnoreCase(sign.getLine(0))) {
                         controlSign.execute(minecart, location, sign.getLine(0), sign);
                         executed = true;

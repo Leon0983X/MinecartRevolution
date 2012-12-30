@@ -5,10 +5,10 @@ import com.quartercode.qcutil.version.Version;
 
 public class PluginInfo {
 
-    private String  name;
-    private Version version;
+    private final String  name;
+    private final Version version;
 
-    public PluginInfo(String name, Version version) {
+    public PluginInfo(final String name, final Version version) {
 
         this.name = name;
         this.version = version;

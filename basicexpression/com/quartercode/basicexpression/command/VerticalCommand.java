@@ -19,16 +19,16 @@ public class VerticalCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return true;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter != null && parameter instanceof Double) {
-            Location location = minecart.getLocation();
+            final Location location = minecart.getLocation();
             location.add(0, (Double) parameter, 0);
             minecart.teleport(location);
         }

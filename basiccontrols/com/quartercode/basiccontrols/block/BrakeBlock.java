@@ -13,9 +13,9 @@ import com.quartercode.minecartrevolution.get.Lang;
 
 public class BrakeBlock extends ControlBlock {
 
-    private BasicControlsPlugin basicControlsPlugin;
+    private final BasicControlsPlugin basicControlsPlugin;
 
-    public BrakeBlock(BasicControlsPlugin basicControlsPlugin) {
+    public BrakeBlock(final BasicControlsPlugin basicControlsPlugin) {
 
         this.basicControlsPlugin = basicControlsPlugin;
     }
@@ -27,7 +27,7 @@ public class BrakeBlock extends ControlBlock {
     }
 
     @Override
-    public void execute(Minecart minecart, Location blockLocation, int blockId, Block block) {
+    public void execute(final Minecart minecart, final Location blockLocation, final int blockId, final Block block) {
 
         executeExpression(minecart, (String) basicControlsPlugin.getConfig().get(BasicControlsConfig.brakeBlockExpression));
     }

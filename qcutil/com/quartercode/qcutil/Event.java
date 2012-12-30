@@ -20,28 +20,28 @@ public class Event implements Serializable {
 
     }
 
-    public Event(List<? extends Listener> listeners) {
+    public Event(final List<? extends Listener> listeners) {
 
         this.listeners = listeners;
     }
 
-    public Event(Map<String, Object> properties) {
+    public Event(final Map<String, Object> properties) {
 
         this.properties = properties;
     }
 
-    public Event(Object... properties) {
+    public Event(final Object... properties) {
 
         setProperties(properties);
     }
 
-    public Event(List<? extends Listener> listeners, Map<String, Object> properties) {
+    public Event(final List<? extends Listener> listeners, final Map<String, Object> properties) {
 
         this.listeners = listeners;
         this.properties = properties;
     }
 
-    public Event(List<? extends Listener> listeners, Object... properties) {
+    public Event(final List<? extends Listener> listeners, final Object... properties) {
 
         this.listeners = listeners;
         setProperties(properties);
@@ -52,12 +52,12 @@ public class Event implements Serializable {
         return listeners;
     }
 
-    public Object getProperty(String key) {
+    public Object getProperty(final String key) {
 
         return properties.get(key);
     }
 
-    protected void setProperties(Object... properties) {
+    protected void setProperties(final Object... properties) {
 
         this.properties = new HashMap<String, Object>();
         for (int counter = 0; counter < properties.length; counter += 2) {
@@ -74,8 +74,8 @@ public class Event implements Serializable {
 
         fired = true;
 
-        List<Object> results = new ArrayList<Object>();
-        for (Listener listener : listeners) {
+        final List<Object> results = new ArrayList<Object>();
+        for (final Listener listener : listeners) {
             results.add(listener.onEvent(this));
         }
 
@@ -94,7 +94,7 @@ public class Event implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -105,7 +105,7 @@ public class Event implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Event other = (Event) obj;
+        final Event other = (Event) obj;
         if (fired != other.fired) {
             return false;
         }

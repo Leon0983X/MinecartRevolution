@@ -13,12 +13,12 @@ public class ScriptExecutor {
 
     protected ScriptEngine scriptEngine;
 
-    public ScriptExecutor(String language) throws ScriptException {
+    public ScriptExecutor(final String language) throws ScriptException {
 
         initalize(language);
     }
 
-    protected void initalize(String language) throws ScriptException {
+    protected void initalize(final String language) throws ScriptException {
 
         scriptEngine = new ScriptEngineManager().getEngineByName(language);
     }
@@ -28,27 +28,27 @@ public class ScriptExecutor {
         return scriptEngine;
     }
 
-    public void set(String variable, Object value) {
+    public void set(final String variable, final Object value) {
 
         scriptEngine.put(variable, value);
     }
 
-    public Object get(String variable) {
+    public Object get(final String variable) {
 
         return scriptEngine.get(variable);
     }
 
-    public void importJavaPackage(String packageName) throws ScriptException {
+    public void importJavaPackage(final String packageName) throws ScriptException {
 
         execute("importPackage(" + packageName + ");");
     }
 
-    public void execute(String script) throws ScriptException {
+    public void execute(final String script) throws ScriptException {
 
         scriptEngine.eval(script);
     }
 
-    public void execute(File scriptFile) throws ScriptException, FileNotFoundException, IOException {
+    public void execute(final File scriptFile) throws ScriptException, FileNotFoundException, IOException {
 
         execute(scriptFile.read());
     }
@@ -63,7 +63,7 @@ public class ScriptExecutor {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -74,7 +74,7 @@ public class ScriptExecutor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ScriptExecutor other = (ScriptExecutor) obj;
+        final ScriptExecutor other = (ScriptExecutor) obj;
         if (scriptEngine == null) {
             if (other.scriptEngine != null) {
                 return false;

@@ -12,12 +12,12 @@ public class QcUtil {
         return defaultThrowableHandler;
     }
 
-    public static void setDefaultThrowableHandler(ThrowableHandler defaultThrowableHandler) {
+    public static void setDefaultThrowableHandler(final ThrowableHandler defaultThrowableHandler) {
 
         QcUtil.defaultThrowableHandler = defaultThrowableHandler;
     }
 
-    public static void handleThrowable(Throwable throwable) {
+    public static void handleThrowable(final Throwable throwable) {
 
         if (defaultThrowableHandler != null) {
             defaultThrowableHandler.handleThrowable(throwable);

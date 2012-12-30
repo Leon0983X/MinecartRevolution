@@ -2,7 +2,6 @@ name: MinecartRevolution
 version: 1.0
 description: MinecartRevolution is a modern Minecart-Plugin which features simple functions for beginners and professional ones.
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
-load: startup
 website: http://dev.bukkit.org/server-mods/MinecartRevolution
 dev-url: http://dev.bukkit.org/server-mods/MinecartRevolution
 main: com.quartercode.minecartrevolution.MinecartRevolution

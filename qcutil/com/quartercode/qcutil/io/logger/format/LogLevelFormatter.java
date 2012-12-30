@@ -10,7 +10,7 @@ public class LogLevelFormatter extends LogFormatter {
     }
 
     @Override
-    public String format(String record, LogLevel logLevel) {
+    public String format(final String record, final LogLevel logLevel) {
 
         return String.format("%-15s", "[" + logLevel.getPrefix() + "]") + record;
     }

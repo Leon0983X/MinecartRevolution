@@ -16,7 +16,7 @@ public class MRExpressionExecutor {
     public static final String COMMAND_END_MARKER = ";";
     public static final char[] OPERATORS          = { '+', '-', '*', '/' };
 
-    public static String getExpression(String[] lines) {
+    public static String getExpression(final String[] lines) {
 
         String expression = "";
 
@@ -33,9 +33,9 @@ public class MRExpressionExecutor {
         return expression;
     }
 
-    private List<ExpressionCommand>     expressionCommands;
-    private List<ExpressionConstant>    expressionConstants;
-    private Map<Minecart, List<String>> minecartExpressions;
+    private List<ExpressionCommand>           expressionCommands;
+    private List<ExpressionConstant>          expressionConstants;
+    private final Map<Minecart, List<String>> minecartExpressions;
 
     public MRExpressionExecutor() {
 
@@ -49,7 +49,7 @@ public class MRExpressionExecutor {
         return expressionCommands;
     }
 
-    public void setExpressionCommands(List<ExpressionCommand> expressionCommands) {
+    public void setExpressionCommands(final List<ExpressionCommand> expressionCommands) {
 
         this.expressionCommands = expressionCommands;
     }
@@ -59,7 +59,7 @@ public class MRExpressionExecutor {
         return expressionConstants;
     }
 
-    public void setExpressionConstants(List<ExpressionConstant> expressionConstants) {
+    public void setExpressionConstants(final List<ExpressionConstant> expressionConstants) {
 
         this.expressionConstants = expressionConstants;
     }
@@ -69,11 +69,11 @@ public class MRExpressionExecutor {
         return minecartExpressions;
     }
 
-    public void execute(Minecart minecart, String expression) throws ScriptException {
+    public void execute(final Minecart minecart, final String expression) throws ScriptException {
 
-        String[] expressionParts = expression.split(COMMAND_END_MARKER);
+        final String[] expressionParts = expression.split(COMMAND_END_MARKER);
 
-        for (String expressionPart : expressionParts) {
+        for (final String expressionPart : expressionParts) {
             if (expressionPart.equalsIgnoreCase("-") || expressionPart.startsWith("remove") || expressionPart.equalsIgnoreCase("- all") || expressionPart.startsWith("remove all")) {
                 if (minecartExpressions.containsKey(minecart)) {
                     minecartExpressions.remove(minecart);
@@ -86,16 +86,16 @@ public class MRExpressionExecutor {
                 minecartExpressions.get(minecart).add(expressionPart.replaceAll("\\+ ", "").replaceAll("add ", ""));
             } else if (expressionPart.startsWith("- ") || expressionPart.startsWith("remove ")) {
                 if (minecartExpressions.containsKey(minecart)) {
-                    String command = expressionPart.replaceAll("\\- ", "").replaceAll("remove ", "").split(" ")[0];
+                    final String command = expressionPart.replaceAll("\\- ", "").replaceAll("remove ", "").split(" ")[0];
 
-                    List<String> removalExpressions = new ArrayList<String>();
-                    for (String minecartExpression : minecartExpressions.get(minecart)) {
+                    final List<String> removalExpressions = new ArrayList<String>();
+                    for (final String minecartExpression : minecartExpressions.get(minecart)) {
                         if (minecartExpression.startsWith(command)) {
                             removalExpressions.add(minecartExpression);
                         }
                     }
 
-                    for (String removalExpression : removalExpressions) {
+                    for (final String removalExpression : removalExpressions) {
                         minecartExpressions.get(minecart).remove(removalExpression);
                     }
 
@@ -104,15 +104,15 @@ public class MRExpressionExecutor {
                     }
                 }
             } else {
-                String[] splittedExpressionPart = splitExpression(expressionPart);
+                final String[] splittedExpressionPart = splitExpression(expressionPart);
 
-                for (ExpressionCommand expressionCommand : expressionCommands) {
-                    String command = splittedExpressionPart[0];
+                for (final ExpressionCommand expressionCommand : expressionCommands) {
+                    final String command = splittedExpressionPart[0];
 
                     if (command != null) {
-                        ExpressionCommandInfo info = expressionCommand.getInfo();
+                        final ExpressionCommandInfo info = expressionCommand.getInfo();
 
-                        for (String ecCommandLabel : info.getCommandLabels()) {
+                        for (final String ecCommandLabel : info.getCommandLabels()) {
                             if (ecCommandLabel.equalsIgnoreCase(command)) {
 	if (expressionCommand.canExecute(minecart)) {
 	    if (splittedExpressionPart.length == 1) {
@@ -123,7 +123,7 @@ public class MRExpressionExecutor {
 	        parameterString = replaceConstants(parameterString, minecart);
 	        parameterString = generateJavaScript(parameterString);
 
-	        ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
+	        final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
 	        scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
 	        Object parameter = scriptExecutor.get("result");
 
@@ -143,7 +143,7 @@ public class MRExpressionExecutor {
         }
     }
 
-    private String[] splitExpression(String expression) {
+    private String[] splitExpression(final String expression) {
 
         for (int counter = 0; counter < expression.length(); counter++) {
             if (expression.charAt(counter) == ' ') {
@@ -154,18 +154,18 @@ public class MRExpressionExecutor {
         return new String[] { expression };
     }
 
-    private String replaceConstants(String parameter, Minecart minecart) {
+    private String replaceConstants(String parameter, final Minecart minecart) {
 
-        for (ExpressionConstant expressionConstant : expressionConstants) {
-            ExpressionConstantInfo info2 = expressionConstant.getInfo();
+        for (final ExpressionConstant expressionConstant : expressionConstants) {
+            final ExpressionConstantInfo info2 = expressionConstant.getInfo();
 
             String[] constantLabels = info2.getConstantLabels();
             Arrays.sort(constantLabels, new StringLengthComperator());
-            List<String> temp = Arrays.asList(constantLabels);
+            final List<String> temp = Arrays.asList(constantLabels);
             Collections.reverse(temp);
             constantLabels = temp.toArray(new String[constantLabels.length]);
 
-            for (String constantLabel : constantLabels) {
+            for (final String constantLabel : constantLabels) {
                 parameter = String.valueOf(parameter).replaceAll("\\$" + constantLabel, String.valueOf(expressionConstant.getValue(minecart)));
             }
         }
@@ -173,9 +173,9 @@ public class MRExpressionExecutor {
         return parameter;
     }
 
-    private String generateJavaScript(String string) {
+    private String generateJavaScript(final String string) {
 
-        String stringMark = "\"";
+        final String stringMark = "\"";
         String javaScript = "";
         boolean stringOpen = false;
 
@@ -184,7 +184,7 @@ public class MRExpressionExecutor {
         }
 
         for (int counter = 0; counter < string.length(); counter++) {
-            char c = string.charAt(counter);
+            final char c = string.charAt(counter);
 
             if (isMathSymbol(c) || isOperator(c)) {
                 if (stringOpen) {
@@ -223,25 +223,25 @@ public class MRExpressionExecutor {
         return javaScript;
     }
 
-    private boolean isNumber(String string) {
+    private boolean isNumber(final String string) {
 
         try {
             Double.parseDouble(string);
             return true;
         }
-        catch (NumberFormatException e) {
+        catch (final NumberFormatException e) {
             return false;
         }
     }
 
-    private boolean isMathSymbol(char c) {
+    private boolean isMathSymbol(final char c) {
 
         return isNumber(String.valueOf(c)) || c == '.' || c == '(' || c == ')';
     }
 
-    private boolean isOperator(char c) {
+    private boolean isOperator(final char c) {
 
-        for (char operator : OPERATORS) {
+        for (final char operator : OPERATORS) {
             if (c == operator) {
                 return true;
             }

@@ -21,19 +21,19 @@ public class Arguments implements Serializable {
         argumentFilter = STANDARD_ARGUMENT_FILTER;
     }
 
-    public Arguments(List<String> arguments) {
+    public Arguments(final List<String> arguments) {
 
         this();
         setArguments(arguments);
     }
 
-    public Arguments(String[] arguments) {
+    public Arguments(final String[] arguments) {
 
         this();
         setArguments(arguments);
     }
 
-    public Arguments(String arguments) {
+    public Arguments(final String arguments) {
 
         this();
         setArguments(arguments);
@@ -48,17 +48,17 @@ public class Arguments implements Serializable {
         }
     }
 
-    public void setArguments(List<String> arguments) {
+    public void setArguments(final List<String> arguments) {
 
         this.arguments = arguments;
     }
 
-    public void setArguments(String[] arguments) {
+    public void setArguments(final String[] arguments) {
 
         this.arguments = Arrays.asList(arguments);
     }
 
-    public void setArguments(String arguments) {
+    public void setArguments(final String arguments) {
 
         setArguments(arguments.split(" "));
     }
@@ -70,7 +70,7 @@ public class Arguments implements Serializable {
 
     public String[] getArgumentArray() {
 
-        String[] array = new String[arguments.size()];
+        final String[] array = new String[arguments.size()];
         for (int counter = 0; counter < arguments.size(); counter++) {
             array[counter] = arguments.get(counter);
         }
@@ -91,14 +91,14 @@ public class Arguments implements Serializable {
         return argumentString;
     }
 
-    public void addArguments(String... arguments) {
+    public void addArguments(final String... arguments) {
 
         this.arguments.addAll(Arrays.asList(arguments));
     }
 
-    public void removeArguments(int startIndex, int endIndex) {
+    public void removeArguments(final int startIndex, final int endIndex) {
 
-        ArrayList<String> removeList = new ArrayList<String>();
+        final ArrayList<String> removeList = new ArrayList<String>();
         for (int counter = startIndex; counter <= endIndex; counter++) {
             removeList.add(arguments.get(counter));
         }
@@ -111,14 +111,14 @@ public class Arguments implements Serializable {
         return argumentFilter;
     }
 
-    public void setArgumentFilter(ArgumentFilter argumentFilter) {
+    public void setArgumentFilter(final ArgumentFilter argumentFilter) {
 
         this.argumentFilter = argumentFilter;
     }
 
-    public boolean isMarkSet(String mark, boolean ignoreCase) {
+    public boolean isMarkSet(final String mark, final boolean ignoreCase) {
 
-        for (String argument : arguments) {
+        for (final String argument : arguments) {
             if (argumentFilter.equalsWithMarkString(argument.toString(), mark.toString(), ignoreCase)) {
                 return true;
             }
@@ -127,12 +127,12 @@ public class Arguments implements Serializable {
         return false;
     }
 
-    public boolean isParameterSet(String mark, boolean ignoreCase) {
+    public boolean isParameterSet(final String mark, final boolean ignoreCase) {
 
         return getParameter(mark, ignoreCase) != null;
     }
 
-    public String getArgument(int index) {
+    public String getArgument(final int index) {
 
         if (index < arguments.size()) {
             return arguments.get(index);
@@ -141,7 +141,7 @@ public class Arguments implements Serializable {
         }
     }
 
-    public String getMark(int index) {
+    public String getMark(final int index) {
 
         if (argumentFilter.isMark(getArgument(index))) {
             return arguments.get(index);
@@ -150,7 +150,7 @@ public class Arguments implements Serializable {
         }
     }
 
-    public String getParameter(int index) {
+    public String getParameter(final int index) {
 
         if (!argumentFilter.isMark(getArgument(index + 1))) {
             return arguments.get(index + 1);
@@ -159,7 +159,7 @@ public class Arguments implements Serializable {
         }
     }
 
-    public String getParameter(String mark, boolean ignoreCase) {
+    public String getParameter(final String mark, final boolean ignoreCase) {
 
         if (isMarkSet(mark, ignoreCase)) {
             for (int counter = 0; counter < arguments.size(); counter++) {
@@ -183,7 +183,7 @@ public class Arguments implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -194,7 +194,7 @@ public class Arguments implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Arguments other = (Arguments) obj;
+        final Arguments other = (Arguments) obj;
         if (argumentFilter == null) {
             if (other.argumentFilter != null) {
                 return false;

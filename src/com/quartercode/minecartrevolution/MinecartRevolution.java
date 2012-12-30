@@ -25,12 +25,12 @@ public class MinecartRevolution extends JavaPlugin {
 
     private static MinecartRevolution minecartRevolution;
 
-    public static void handleThrowable(Throwable throwable) {
+    public static void handleThrowable(final Throwable throwable) {
 
         QcUtil.handleThrowable(throwable);
     }
 
-    public static void handleSilenceThrowable(Throwable throwable) {
+    public static void handleSilenceThrowable(final Throwable throwable) {
 
         if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.printSilenceErrors)) {
             handleThrowable(throwable);
@@ -154,7 +154,7 @@ public class MinecartRevolution extends JavaPlugin {
             metrics = new Metrics(this, new File("plugins" + java.io.File.separator + "PluginMetrics", "config.yml"));
             metrics.start();
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             handleSilenceThrowable(e);
         }
     }

@@ -21,7 +21,7 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
 
     protected URL             url;
 
-    public NetConnection(URL url) {
+    public NetConnection(final URL url) {
 
         super();
 
@@ -33,38 +33,38 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
         return url;
     }
 
-    public void setURL(URL url) {
+    public void setURL(final URL url) {
 
         this.url = url;
     }
 
-    public void download(File destination, Progressable progress) throws FileNotFoundException, ProtocolException, IOException {
+    public void download(final File destination, final Progressable progress) throws FileNotFoundException, ProtocolException, IOException {
 
         if (progress != null) {
-            String[] parts = url.getFile().split("/");
+            final String[] parts = url.getFile().split("/");
             progress.setProgressStatus("Downloading " + parts[parts.length - 1]);
         }
 
         destination.getParentFile().mkdirs();
 
-        OutputStream outputStream = new FileOutputStream(destination);
+        final OutputStream outputStream = new FileOutputStream(destination);
         outputStream.flush();
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
 
-        byte[] tempBuffer = new byte[4096];
+        final byte[] tempBuffer = new byte[4096];
 
-        InputStream inputStream = connection.getInputStream();
-        double fileSize = connection.getContentLength();
+        final InputStream inputStream = connection.getInputStream();
+        final double fileSize = connection.getContentLength();
         int counter;
         while ( (counter = inputStream.read(tempBuffer)) > 0) {
             outputStream.write(tempBuffer, 0, counter);
             outputStream.flush();
 
-            double destinationFileSize = destination.length();
-            double downloaded = destinationFileSize / fileSize;
+            final double destinationFileSize = destination.length();
+            final double downloaded = destinationFileSize / fileSize;
 
             if (progress != null) {
                 progress.setProgressPercent((int) (downloaded * 100));
@@ -75,33 +75,33 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
         outputStream.close();
     }
 
-    public void downloadOriginalName(File destinationFolder, Progressable progressable) throws FileNotFoundException, ProtocolException, IOException {
+    public void downloadOriginalName(final File destinationFolder, final Progressable progressable) throws FileNotFoundException, ProtocolException, IOException {
 
         download(new File(destinationFolder, url.getFile().split("/")[url.getFile().split("/").length - 1]), progressable);
     }
 
-    public void downloadOriginalPath(File destinationFolder, Progressable progressable) throws FileNotFoundException, ProtocolException, IOException {
+    public void downloadOriginalPath(final File destinationFolder, final Progressable progressable) throws FileNotFoundException, ProtocolException, IOException {
 
         download(new File(destinationFolder, url.getFile()), progressable);
     }
 
-    public String getContent(Progressable progressable) throws IOException {
+    public String getContent(final Progressable progressable) throws IOException {
 
         String fileContent = "";
-        InputStream inputStream = url.openStream();
+        final InputStream inputStream = url.openStream();
         fileContent = new Scanner(inputStream).useDelimiter("\\Z").next();
         inputStream.close();
 
         return fileContent;
     }
 
-    public void touch(Progressable progressable) throws IOException {
+    public void touch(final Progressable progressable) throws IOException {
 
         url.openStream().close();
     }
 
     @Override
-    public int compareTo(NetConnection o) {
+    public int compareTo(final NetConnection o) {
 
         return url.toString().compareTo(o.url.toString());
     }
@@ -116,7 +116,7 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -127,7 +127,7 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        NetConnection other = (NetConnection) obj;
+        final NetConnection other = (NetConnection) obj;
         if (url == null) {
             if (other.url != null) {
                 return false;

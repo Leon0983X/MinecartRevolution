@@ -29,14 +29,14 @@ public class InfoCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
         sendInfo(commandSender);
     }
 
-    private void sendInfo(CommandSender sender) {
+    private void sendInfo(final CommandSender sender) {
 
-        InfoThread thread = new InfoThread();
+        final InfoThread thread = new InfoThread();
         thread.sender = sender;
         thread.start();
     }
@@ -48,7 +48,7 @@ public class InfoCommand extends Command {
         @Override
         public void run() {
 
-            int downloadCount = getDownloadCount();
+            final int downloadCount = getDownloadCount();
 
             sender.sendMessage(ChatColor.GREEN + "========== [" + Lang.getValue("basiccommands.info.start") + "] ==========");
 
@@ -69,8 +69,8 @@ public class InfoCommand extends Command {
         private int getDownloadCount() {
 
             try {
-                URL url = new URL(URLConf.BUKKIT_DEV_URL);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+                final URL url = new URL(URLConf.BUKKIT_DEV_URL);
+                final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
                 String line;
                 while ( (line = reader.readLine()) != null) {
@@ -79,17 +79,17 @@ public class InfoCommand extends Command {
                             line = reader.readLine();
                             return Integer.parseInt(line.split("\"")[1].trim());
                         }
-                        catch (NumberFormatException e) {
+                        catch (final NumberFormatException e) {
                             return -1;
                         }
                     }
                 }
                 reader.close();
             }
-            catch (MalformedURLException e) {
+            catch (final MalformedURLException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
             }
-            catch (IOException e) {
+            catch (final IOException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
             }
 

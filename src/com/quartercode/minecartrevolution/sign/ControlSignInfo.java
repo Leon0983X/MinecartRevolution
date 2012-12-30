@@ -3,12 +3,12 @@ package com.quartercode.minecartrevolution.sign;
 
 public class ControlSignInfo {
 
-    public static String getFormattedLabel(String label) {
+    public static String getFormattedLabel(final String label) {
 
         return "[" + label + "]";
     }
 
-    public static String getUnformattedLabel(String label) {
+    public static String getUnformattedLabel(final String label) {
 
         if (label.startsWith("[") && label.endsWith("]")) {
             return label.substring(1, label.length() - 1);
@@ -17,13 +17,13 @@ public class ControlSignInfo {
         }
     }
 
-    private String   name;
-    private String   description;
-    private String   placePermission;
-    private String   destroyPermission;
-    private String[] labels;
+    private final String   name;
+    private final String   description;
+    private final String   placePermission;
+    private final String   destroyPermission;
+    private final String[] labels;
 
-    public ControlSignInfo(String name, String description, String placePermission, String destroyPermission, String... labels) {
+    public ControlSignInfo(final String name, final String description, final String placePermission, final String destroyPermission, final String... labels) {
 
         this.name = name;
         this.description = description;

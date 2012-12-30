@@ -6,7 +6,7 @@ import com.quartercode.minecartrevolution.plugin.PluginConfig;
 
 public class BasicCommandsConfig extends PluginConfig {
 
-    public BasicCommandsConfig(MinecartRevolutionPlugin minecartRevolutionPlugin) {
+    public BasicCommandsConfig(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         super(minecartRevolutionPlugin);
     }

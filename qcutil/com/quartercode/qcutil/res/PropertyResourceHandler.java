@@ -7,18 +7,18 @@ import com.quartercode.qcutil.io.Properties;
 
 public class PropertyResourceHandler extends ResourceHandler {
 
-    public PropertyResourceHandler(ResourceManager resourceManager) {
+    public PropertyResourceHandler(final ResourceManager resourceManager) {
 
         super(resourceManager);
     }
 
-    public String getProperty(String key, String... variables) {
+    public String getProperty(final String key, final String... variables) {
 
         try {
-            File resource = resourceManager.getResource();
+            final File resource = resourceManager.getResource();
 
             if (resource != null) {
-                Properties resourceProperties = new Properties(resource);
+                final Properties resourceProperties = new Properties(resource);
 
                 String result = resourceProperties.getProperty(key);
                 if (result != null) {
@@ -30,10 +30,11 @@ public class PropertyResourceHandler extends ResourceHandler {
                 return result;
             }
         }
-        catch (Throwable t) {
+        catch (final Throwable t) {
             QcUtil.handleThrowable(t);
         }
 
         return "";
     }
+
 }

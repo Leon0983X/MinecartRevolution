@@ -22,10 +22,10 @@ public class ExpressionSign extends ControlSign {
     }
 
     @Override
-    public void execute(Minecart minecart, Location signLocation, String label, Sign sign) {
+    public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        String[] lines = { sign.getLine(1), sign.getLine(2), sign.getLine(3) };
-        String expression = MRExpressionExecutor.getExpression(lines);
+        final String[] lines = { sign.getLine(1), sign.getLine(2), sign.getLine(3) };
+        final String expression = MRExpressionExecutor.getExpression(lines);
         if (expression == null || expression.isEmpty()) {
             return;
         }

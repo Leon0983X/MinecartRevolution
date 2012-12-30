@@ -65,27 +65,27 @@ public abstract class MinecartRevolutionPlugin {
         return config;
     }
 
-    public void addCommand(Command command) {
+    public void addCommand(final Command command) {
 
         getCommandExecutor().getCommands().add(command);
     }
 
-    public void addControlBlock(ControlBlock controlBlock) {
+    public void addControlBlock(final ControlBlock controlBlock) {
 
         getControlBlockExecutor().getControlBlocks().add(controlBlock);
     }
 
-    public void addControlSign(ControlSign controlSign) {
+    public void addControlSign(final ControlSign controlSign) {
 
         getControlSignExecutor().getControlSigns().add(controlSign);
     }
 
-    public void addExpressionCommand(ExpressionCommand expressionCommand) {
+    public void addExpressionCommand(final ExpressionCommand expressionCommand) {
 
         getExpressionExecutor().getExpressionCommands().add(expressionCommand);
     }
 
-    public void addExpressionConstant(ExpressionConstant expressionConstant) {
+    public void addExpressionConstant(final ExpressionConstant expressionConstant) {
 
         getExpressionExecutor().getExpressionConstants().add(expressionConstant);
     }

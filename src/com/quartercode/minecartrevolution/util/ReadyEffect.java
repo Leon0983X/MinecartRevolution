@@ -5,10 +5,10 @@ import org.bukkit.Effect;
 
 public class ReadyEffect {
 
-    private Effect effect;
-    private int    strength;
+    private final Effect effect;
+    private final int    strength;
 
-    public ReadyEffect(Effect effect, int strength) {
+    public ReadyEffect(final Effect effect, final int strength) {
 
         this.effect = effect;
         this.strength = strength;

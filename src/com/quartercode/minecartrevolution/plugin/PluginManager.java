@@ -10,7 +10,7 @@ public class PluginManager {
     private static MinecartRevolution             minecartRevolution;
     private static List<MinecartRevolutionPlugin> plugins = new OnceList<MinecartRevolutionPlugin>();
 
-    public static void registerMinecartRevolution(MinecartRevolution minecartRevolution) {
+    public static void registerMinecartRevolution(final MinecartRevolution minecartRevolution) {
 
         PluginManager.minecartRevolution = minecartRevolution;
     }
@@ -20,7 +20,7 @@ public class PluginManager {
         return minecartRevolution;
     }
 
-    public static void registerPlugin(MinecartRevolutionPlugin minecartRevolutionPlugin) {
+    public static void registerPlugin(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         if (minecartRevolution == null) {
             throw new IllegalStateException("A plugin can only registered after MinecartRevolution was loaded [" + minecartRevolutionPlugin.getInfo().getName() + "]");
@@ -30,7 +30,7 @@ public class PluginManager {
         }
     }
 
-    public static void enablePlugin(MinecartRevolutionPlugin minecartRevolutionPlugin) {
+    public static void enablePlugin(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         minecartRevolution.getLogger().info("Enabling plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' ...");
         minecartRevolutionPlugin.onEnable();

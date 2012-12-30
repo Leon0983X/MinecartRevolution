@@ -13,9 +13,9 @@ import com.quartercode.minecartrevolution.get.Lang;
 
 public class BoosterBlock extends ControlBlock {
 
-    private BasicControlsPlugin basicControlsPlugin;
+    private final BasicControlsPlugin basicControlsPlugin;
 
-    public BoosterBlock(BasicControlsPlugin basicControlsPlugin) {
+    public BoosterBlock(final BasicControlsPlugin basicControlsPlugin) {
 
         this.basicControlsPlugin = basicControlsPlugin;
     }
@@ -27,7 +27,7 @@ public class BoosterBlock extends ControlBlock {
     }
 
     @Override
-    public void execute(Minecart minecart, Location blockLocation, int blockId, Block block) {
+    public void execute(final Minecart minecart, final Location blockLocation, final int blockId, final Block block) {
 
         executeExpression(minecart, (String) basicControlsPlugin.getConfig().get(BasicControlsConfig.boosterBlockExpression));
     }

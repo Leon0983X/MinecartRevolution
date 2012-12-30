@@ -20,13 +20,13 @@ public class GrabCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return minecart.getPassenger() == null;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (minecart.getPassenger() == null) {
             double radius = 5;
@@ -35,7 +35,7 @@ public class GrabCommand implements ExpressionCommand {
                 radius = (Double) parameter;
             }
 
-            for (Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
+            for (final Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
                 if (entity instanceof Player) {
                     minecart.setPassenger(entity);
                     return;

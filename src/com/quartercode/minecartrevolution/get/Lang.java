@@ -30,6 +30,7 @@ public class Lang {
     protected static PropertyResourceHandler resourceHandler  = new PropertyResourceHandler(resourceManager);
 
     static {
+
         resourceManager.getFilePatterns().add("english.lang");
     }
 
@@ -38,9 +39,9 @@ public class Lang {
         return resourceManager;
     }
 
-    public static String getValue(String key, String... variables) {
+    public static String getValue(final String key, final String... variables) {
 
-        List<String> variableList = new ArrayList<String>(Arrays.asList(variables));
+        final List<String> variableList = new ArrayList<String>(Arrays.asList(variables));
 
         addVariable(variableList, "name", Conf.NAME);
         addVariable(variableList, "nameLc", Conf.NAME_LC);
@@ -74,10 +75,10 @@ public class Lang {
         addVariable(variableList, "under", ChatColor.UNDERLINE);
         addVariable(variableList, "underline", ChatColor.UNDERLINE);
 
-        String result = resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
+        final String result = resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
 
         if (result == null) {
-            String languageName = resourceHandler.getProperty("name");
+            final String languageName = resourceHandler.getProperty("name");
             String noLangValue = resourceHandler.getProperty("noLangValue", key, "key", key, "language", languageName, "languageFile", getLanguage() + ".lang");
 
             if (noLangValue == null) {
@@ -91,7 +92,7 @@ public class Lang {
         }
     }
 
-    private static void addVariable(List<String> variableList, String key, Object value) {
+    private static void addVariable(final List<String> variableList, final String key, final Object value) {
 
         variableList.add(key);
         variableList.add(String.valueOf(value));
@@ -102,7 +103,7 @@ public class Lang {
         return resourceManager.getLocale();
     }
 
-    public static void setLocale(Locale locale) {
+    public static void setLocale(final Locale locale) {
 
         resourceManager.setLocale(locale);
     }
@@ -112,7 +113,7 @@ public class Lang {
         return getLocale().getLanguage();
     }
 
-    public static void setLanguage(String language) {
+    public static void setLanguage(final String language) {
 
         setLocale(new Locale(language));
     }
@@ -127,7 +128,7 @@ public class Lang {
         extractFromJAR(Lang.class.getResource("/languages/" + getLanguage() + ".lang"), new File(FileConf.LANGUAGES + java.io.File.separator + getLanguage() + ".lang"));
     }
 
-    private static void extractFromJAR(URL url, File destination) {
+    private static void extractFromJAR(final URL url, final File destination) {
 
         InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -139,13 +140,13 @@ public class Lang {
             outputStream = new FileOutputStream(destination);
             outputStream.flush();
 
-            URLConnection castConnection = url.openConnection();
+            final URLConnection castConnection = url.openConnection();
 
             if (castConnection instanceof JarURLConnection) {
-                JarURLConnection connection = (JarURLConnection) url.openConnection();
+                final JarURLConnection connection = (JarURLConnection) url.openConnection();
                 connection.connect();
 
-                byte[] tempBuffer = new byte[4096];
+                final byte[] tempBuffer = new byte[4096];
 
                 inputStream = connection.getInputStream();
                 int counter;
@@ -155,10 +156,10 @@ public class Lang {
                 }
             }
         }
-        catch (FileNotFoundException e) {
+        catch (final FileNotFoundException e) {
             MinecartRevolution.handleThrowable(e);
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             MinecartRevolution.handleThrowable(e);
         }
         finally {
@@ -166,7 +167,7 @@ public class Lang {
                 try {
                     inputStream.close();
                 }
-                catch (IOException e) {
+                catch (final IOException e) {
                     MinecartRevolution.handleThrowable(e);
                 }
             }
@@ -175,7 +176,7 @@ public class Lang {
                 try {
                     outputStream.close();
                 }
-                catch (IOException e) {
+                catch (final IOException e) {
                     MinecartRevolution.handleThrowable(e);
                 }
             }

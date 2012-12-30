@@ -11,9 +11,9 @@ import com.quartercode.qcutil.args.Arguments;
 
 public class UpdateCommand extends Command {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public UpdateCommand(MinecartRevolution minecartRevolution) {
+    public UpdateCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -25,7 +25,7 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
         VersionUtil.forceUpdate(minecartRevolution.getLogger(), commandSender);
     }

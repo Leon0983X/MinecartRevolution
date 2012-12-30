@@ -16,9 +16,9 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class IntersectionCommand implements ExpressionCommand {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public IntersectionCommand(MinecartRevolution minecartRevolution) {
+    public IntersectionCommand(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
     }
@@ -30,17 +30,17 @@ public class IntersectionCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return true;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter != null && String.valueOf(parameter).split(":").length == 2) {
-            String type = String.valueOf(parameter).split(":")[0];
-            String direction = String.valueOf(parameter).split(":")[1];
+            final String type = String.valueOf(parameter).split(":")[0];
+            final String direction = String.valueOf(parameter).split(":")[1];
             String newDirection = null;
 
             if (type.equalsIgnoreCase("n") || type.equalsIgnoreCase("e") || type.equalsIgnoreCase("s") || type.equalsIgnoreCase("w")) {
@@ -67,7 +67,7 @@ public class IntersectionCommand implements ExpressionCommand {
                 newDirection = direction;
             } else if (type.equalsIgnoreCase("nocargo")) {
                 if (minecart.getPassenger() instanceof Player) {
-                    Player player = (Player) minecart.getPassenger();
+                    final Player player = (Player) minecart.getPassenger();
                     for (int counter = 0; counter < player.getInventory().getSize(); counter++) {
                         if (player.getInventory().getItem(counter) != null) {
                             return;
@@ -75,7 +75,7 @@ public class IntersectionCommand implements ExpressionCommand {
                     }
                     newDirection = direction;
                 } else if (minecart instanceof StorageMinecart) {
-                    StorageMinecart storageMinecart = (StorageMinecart) minecart;
+                    final StorageMinecart storageMinecart = (StorageMinecart) minecart;
                     for (int counter = 0; counter < storageMinecart.getInventory().getSize(); counter++) {
                         if (storageMinecart.getInventory().getItem(counter) != null) {
                             return;
@@ -86,28 +86,28 @@ public class IntersectionCommand implements ExpressionCommand {
                     newDirection = direction;
                 }
             } else if (type.contains("p-") && minecart.getPassenger() instanceof Player) {
-                Player player = (Player) minecart.getPassenger();
-                String[] variables = type.split("-");
+                final Player player = (Player) minecart.getPassenger();
+                final String[] variables = type.split("-");
                 if (player.getName().equalsIgnoreCase(variables[1])) {
                     newDirection = direction;
                 }
             } else if (type.contains("invc-")) {
                 if (minecart.getPassenger() instanceof Player) {
-                    Player player = (Player) minecart.getPassenger();
-                    String[] variables = type.split("-");
+                    final Player player = (Player) minecart.getPassenger();
+                    final String[] variables = type.split("-");
                     if (player.getInventory().contains(minecartRevolution.getAliasConfig().getId(variables[1]))) {
                         newDirection = direction;
                     }
                 } else if (minecart instanceof StorageMinecart) {
-                    StorageMinecart storageMinecart = (StorageMinecart) minecart;
-                    String[] variables = type.split("-");
+                    final StorageMinecart storageMinecart = (StorageMinecart) minecart;
+                    final String[] variables = type.split("-");
                     if (storageMinecart.getInventory().contains(minecartRevolution.getAliasConfig().getId(variables[1]))) {
                         newDirection = direction;
                     }
                 }
             } else if (type.contains("ihold-") && minecart.getPassenger() instanceof Player) {
-                Player player = (Player) minecart.getPassenger();
-                String[] variables = type.split("-");
+                final Player player = (Player) minecart.getPassenger();
+                final String[] variables = type.split("-");
                 if (player.getInventory().getItemInHand().getTypeId() == minecartRevolution.getAliasConfig().getId(variables[1])) {
                     newDirection = direction;
                 }
@@ -119,11 +119,11 @@ public class IntersectionCommand implements ExpressionCommand {
         }
     }
 
-    private void driveMinecart(Minecart minecart, String newDriveDirection) {
+    private void driveMinecart(final Minecart minecart, final String newDriveDirection) {
 
-        Vector speed = new Vector();
-        double speedNumber = MinecartUtil.getSpeed(minecart);
-        Location newLocation = minecart.getLocation();
+        final Vector speed = new Vector();
+        final double speedNumber = MinecartUtil.getSpeed(minecart);
+        final Location newLocation = minecart.getLocation();
         if (newDriveDirection.equalsIgnoreCase("r") || newDriveDirection.equalsIgnoreCase("l") || newDriveDirection.equalsIgnoreCase("m")) {
             if (minecart.getVelocity().getX() > 0.0D) {
                 if (newDriveDirection.equalsIgnoreCase("r")) {

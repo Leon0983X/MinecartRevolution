@@ -11,16 +11,16 @@ public class MaterialAliasConfig extends Config {
         super(FileConf.MATERIAL_ALIAS_CONF);
     }
 
-    public int getId(String material) {
+    public int getId(final String material) {
 
         try {
             return (int) Double.parseDouble(material);
         }
-        catch (NumberFormatException e) {
+        catch (final NumberFormatException e) {
             try {
                 return getConfig().getInt(material);
             }
-            catch (NumberFormatException e1) {
+            catch (final NumberFormatException e1) {
                 MinecartRevolution.handleSilenceThrowable(e1);
                 return 0;
             }

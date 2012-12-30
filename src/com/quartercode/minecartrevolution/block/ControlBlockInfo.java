@@ -3,13 +3,13 @@ package com.quartercode.minecartrevolution.block;
 
 public class ControlBlockInfo {
 
-    private String name;
-    private String description;
-    private String placePermission;
-    private String destroyPermission;
-    private int[]  blockIds;
+    private final String name;
+    private final String description;
+    private final String placePermission;
+    private final String destroyPermission;
+    private final int[]  blockIds;
 
-    public ControlBlockInfo(String name, String description, String placePermission, String destroyPermission, int... blockIds) {
+    public ControlBlockInfo(final String name, final String description, final String placePermission, final String destroyPermission, final int... blockIds) {
 
         this.name = name;
         this.description = description;

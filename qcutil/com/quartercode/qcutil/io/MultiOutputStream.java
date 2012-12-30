@@ -12,7 +12,7 @@ public class MultiOutputStream extends OutputStream {
 
     protected List<OutputStream> outputStreams;
 
-    public MultiOutputStream(OutputStream... outputStreams) {
+    public MultiOutputStream(final OutputStream... outputStreams) {
 
         this.outputStreams = new ArrayList<OutputStream>(Arrays.asList(outputStreams));
     }
@@ -22,7 +22,7 @@ public class MultiOutputStream extends OutputStream {
         return outputStreams;
     }
 
-    public void setOutputStreams(List<OutputStream> outputStreams) {
+    public void setOutputStreams(final List<OutputStream> outputStreams) {
 
         this.outputStreams = outputStreams;
     }
@@ -30,7 +30,7 @@ public class MultiOutputStream extends OutputStream {
     @Override
     public void close() throws IOException {
 
-        for (OutputStream outputStream : outputStreams) {
+        for (final OutputStream outputStream : outputStreams) {
             outputStream.close();
         }
     }
@@ -38,31 +38,31 @@ public class MultiOutputStream extends OutputStream {
     @Override
     public void flush() throws IOException {
 
-        for (OutputStream outputStream : outputStreams) {
+        for (final OutputStream outputStream : outputStreams) {
             outputStream.flush();
         }
     }
 
     @Override
-    public void write(int b) throws IOException {
+    public void write(final int b) throws IOException {
 
-        for (OutputStream outputStream : outputStreams) {
+        for (final OutputStream outputStream : outputStreams) {
             outputStream.write(b);
         }
     }
 
     @Override
-    public void write(byte[] b) throws IOException {
+    public void write(final byte[] b) throws IOException {
 
-        for (OutputStream outputStream : outputStreams) {
+        for (final OutputStream outputStream : outputStreams) {
             outputStream.write(b);
         }
     }
 
     @Override
-    public void write(byte[] b, int off, int len) throws IOException {
+    public void write(final byte[] b, final int off, final int len) throws IOException {
 
-        for (OutputStream outputStream : outputStreams) {
+        for (final OutputStream outputStream : outputStreams) {
             outputStream.write(b, off, len);
         }
     }
@@ -77,7 +77,7 @@ public class MultiOutputStream extends OutputStream {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -88,7 +88,7 @@ public class MultiOutputStream extends OutputStream {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        MultiOutputStream other = (MultiOutputStream) obj;
+        final MultiOutputStream other = (MultiOutputStream) obj;
         if (outputStreams == null) {
             if (other.outputStreams != null) {
                 return false;

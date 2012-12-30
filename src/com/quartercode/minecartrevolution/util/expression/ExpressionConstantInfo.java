@@ -3,9 +3,9 @@ package com.quartercode.minecartrevolution.util.expression;
 
 public class ExpressionConstantInfo {
 
-    private String[] constantLabels;
+    private final String[] constantLabels;
 
-    public ExpressionConstantInfo(String... constantLabels) {
+    public ExpressionConstantInfo(final String... constantLabels) {
 
         this.constantLabels = constantLabels;
     }

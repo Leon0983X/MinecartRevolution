@@ -15,9 +15,9 @@ import com.quartercode.qcutil.io.File;
 
 public class FileCommand implements ExpressionCommand {
 
-    private MRExpressionExecutor expressionExecutor;
+    private final MRExpressionExecutor expressionExecutor;
 
-    public FileCommand(MRExpressionExecutor expressionExecutor) {
+    public FileCommand(final MRExpressionExecutor expressionExecutor) {
 
         this.expressionExecutor = expressionExecutor;
     }
@@ -29,13 +29,13 @@ public class FileCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return true;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         File file = new File(FileConf.EXPRESSIONS, String.valueOf(parameter));
         if (!file.exists()) {
@@ -47,9 +47,9 @@ public class FileCommand implements ExpressionCommand {
 
         try {
             if (file.exists()) {
-                List<String> lines = new ArrayList<String>();
+                final List<String> lines = new ArrayList<String>();
 
-                BufferedReader reader = new BufferedReader(new FileReader(file));
+                final BufferedReader reader = new BufferedReader(new FileReader(file));
                 String line;
                 while ( (line = reader.readLine()) != null) {
                     lines.add(line);
@@ -59,7 +59,7 @@ public class FileCommand implements ExpressionCommand {
                 expressionExecutor.execute(minecart, MRExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
             }
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             MinecartRevolution.handleSilenceThrowable(e);
         }
     }

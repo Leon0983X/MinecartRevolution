@@ -12,12 +12,12 @@ public class MultiWriter extends Writer {
 
     protected List<Writer> writers;
 
-    public MultiWriter(Writer... writers) {
+    public MultiWriter(final Writer... writers) {
 
         this.writers = new ArrayList<Writer>(Arrays.asList(writers));
     }
 
-    public void setWriters(List<Writer> writers) {
+    public void setWriters(final List<Writer> writers) {
 
         this.writers = writers;
     }
@@ -30,7 +30,7 @@ public class MultiWriter extends Writer {
     @Override
     public void close() throws IOException {
 
-        for (Writer writer : writers) {
+        for (final Writer writer : writers) {
             writer.close();
         }
     }
@@ -38,31 +38,31 @@ public class MultiWriter extends Writer {
     @Override
     public void flush() throws IOException {
 
-        for (Writer writer : writers) {
+        for (final Writer writer : writers) {
             writer.flush();
         }
     }
 
     @Override
-    public void write(int c) throws IOException {
+    public void write(final int c) throws IOException {
 
-        for (Writer writer : writers) {
+        for (final Writer writer : writers) {
             writer.write(c);
         }
     }
 
     @Override
-    public void write(char[] cbuf) throws IOException {
+    public void write(final char[] cbuf) throws IOException {
 
-        for (Writer writer : writers) {
+        for (final Writer writer : writers) {
             writer.write(cbuf);
         }
     }
 
     @Override
-    public void write(char[] cbuf, int off, int len) throws IOException {
+    public void write(final char[] cbuf, final int off, final int len) throws IOException {
 
-        for (Writer writer : writers) {
+        for (final Writer writer : writers) {
             writer.write(cbuf, off, len);
         }
     }
@@ -77,7 +77,7 @@ public class MultiWriter extends Writer {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -88,7 +88,7 @@ public class MultiWriter extends Writer {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        MultiWriter other = (MultiWriter) obj;
+        final MultiWriter other = (MultiWriter) obj;
         if (writers == null) {
             if (other.writers != null) {
                 return false;

@@ -14,7 +14,7 @@ public class ObserverOutputStream extends OutputStream {
     protected OutputStream   outputStream;
     protected List<Listener> listeners = new ArrayList<Listener>();
 
-    public ObserverOutputStream(OutputStream outputStream) {
+    public ObserverOutputStream(final OutputStream outputStream) {
 
         this.outputStream = outputStream;
     }
@@ -24,7 +24,7 @@ public class ObserverOutputStream extends OutputStream {
         return outputStream;
     }
 
-    public void setListeners(List<Listener> listeners) {
+    public void setListeners(final List<Listener> listeners) {
 
         this.listeners = listeners;
     }
@@ -49,21 +49,21 @@ public class ObserverOutputStream extends OutputStream {
     }
 
     @Override
-    public void write(int b) throws IOException {
+    public void write(final int b) throws IOException {
 
         outputStream.write(b);
         new Event(listeners, "type", "write int", "data", b).fire();
     }
 
     @Override
-    public void write(byte b[]) throws IOException {
+    public void write(final byte b[]) throws IOException {
 
         outputStream.write(b);
         new Event(listeners, "type", "write bytearray", "data", b).fire();
     }
 
     @Override
-    public void write(byte b[], int off, int len) throws IOException {
+    public void write(final byte b[], final int off, final int len) throws IOException {
 
         outputStream.write(b, off, len);
         new Event(listeners, "type", "write bytearray part", "data", b, "off", off, "len", len).fire();
@@ -80,7 +80,7 @@ public class ObserverOutputStream extends OutputStream {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -91,7 +91,7 @@ public class ObserverOutputStream extends OutputStream {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ObserverOutputStream other = (ObserverOutputStream) obj;
+        final ObserverOutputStream other = (ObserverOutputStream) obj;
         if (listeners == null) {
             if (other.listeners != null) {
                 return false;

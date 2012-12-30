@@ -30,16 +30,16 @@ public class StopcartsCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String usedMrCommand, String label, Arguments arguments) {
+    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
 
-        List<World> worlds = new ArrayList<World>();
+        final List<World> worlds = new ArrayList<World>();
         int radius = -1;
 
         if (arguments.isParameterSet("w", true)) {
             if (arguments.getParameter("w", true).equalsIgnoreCase("all")) {
                 worlds.addAll(Bukkit.getWorlds());
             } else {
-                for (String worldName : arguments.getParameter("w", true).split(",")) {
+                for (final String worldName : arguments.getParameter("w", true).split(",")) {
                     if (Bukkit.getWorld(worldName) != null) {
                         worlds.add(Bukkit.getWorld(worldName));
                     }
@@ -57,26 +57,26 @@ public class StopcartsCommand extends Command {
             try {
                 radius = Integer.parseInt(arguments.getParameter("r", true));
             }
-            catch (NumberFormatException e) {
+            catch (final NumberFormatException e) {
                 MinecartRevolution.handleSilenceThrowable(e);
             }
         }
 
         if (commandSender instanceof Player) {
-            for (World world : worlds) {
+            for (final World world : worlds) {
                 stop(world, radius, ((Player) commandSender).getLocation(), commandSender, commandSender.getName());
             }
         } else {
-            for (World world : worlds) {
+            for (final World world : worlds) {
                 stop(world, radius, new Location(world, 0, 0, 0), commandSender, "Console");
             }
         }
     }
 
-    private void stop(World world, int radius, Location location, CommandSender commandSender, String sender) {
+    private void stop(final World world, final int radius, final Location location, final CommandSender commandSender, final String sender) {
 
         int count = 0;
-        for (Entity entity : world.getEntities()) {
+        for (final Entity entity : world.getEntities()) {
             if (entity instanceof Minecart) {
                 if (entity.getLocation().distance(location) <= radius) {
                     entity.setVelocity(new Vector(0, 0, 0));

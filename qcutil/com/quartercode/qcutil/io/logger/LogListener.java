@@ -14,20 +14,20 @@ public class LogListener implements Listener {
     protected PrintStream outputStream;
     protected PrintWriter writer;
 
-    public LogListener(OutputStream outputStream) {
+    public LogListener(final OutputStream outputStream) {
 
         this.outputStream = new PrintStream(outputStream);
     }
 
-    public LogListener(Writer writer) {
+    public LogListener(final Writer writer) {
 
         this.writer = new PrintWriter(writer);
     }
 
     @Override
-    public Object onEvent(Event event) {
+    public Object onEvent(final Event event) {
 
-        String record = (String) event.getProperty("logrecord");
+        final String record = (String) event.getProperty("logrecord");
 
         if (outputStream != null) {
             outputStream.println(record);
@@ -51,7 +51,7 @@ public class LogListener implements Listener {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -62,7 +62,7 @@ public class LogListener implements Listener {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        LogListener other = (LogListener) obj;
+        final LogListener other = (LogListener) obj;
         if (outputStream == null) {
             if (other.outputStream != null) {
                 return false;

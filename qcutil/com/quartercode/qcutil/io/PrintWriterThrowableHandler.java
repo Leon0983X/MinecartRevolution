@@ -9,7 +9,7 @@ public class PrintWriterThrowableHandler implements ThrowableHandler {
 
     protected PrintWriter printWriter;
 
-    public PrintWriterThrowableHandler(PrintWriter printWriter) {
+    public PrintWriterThrowableHandler(final PrintWriter printWriter) {
 
         setPrintWriter(printWriter);
     }
@@ -19,13 +19,13 @@ public class PrintWriterThrowableHandler implements ThrowableHandler {
         return printWriter;
     }
 
-    public void setPrintWriter(PrintWriter printWriter) {
+    public void setPrintWriter(final PrintWriter printWriter) {
 
         this.printWriter = printWriter;
     }
 
     @Override
-    public void handleThrowable(Throwable throwable) {
+    public void handleThrowable(final Throwable throwable) {
 
         throwable.printStackTrace(printWriter);
     }
@@ -40,7 +40,7 @@ public class PrintWriterThrowableHandler implements ThrowableHandler {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -51,7 +51,7 @@ public class PrintWriterThrowableHandler implements ThrowableHandler {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PrintWriterThrowableHandler other = (PrintWriterThrowableHandler) obj;
+        final PrintWriterThrowableHandler other = (PrintWriterThrowableHandler) obj;
         if (printWriter == null) {
             if (other.printWriter != null) {
                 return false;

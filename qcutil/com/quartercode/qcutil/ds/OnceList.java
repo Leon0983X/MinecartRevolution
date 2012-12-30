@@ -15,18 +15,18 @@ public class OnceList<E> extends ArrayList<E> {
         super();
     }
 
-    public OnceList(Collection<? extends E> collection) {
+    public OnceList(final Collection<? extends E> collection) {
 
         super(collection);
     }
 
-    public OnceList(int initialCapacity) {
+    public OnceList(final int initialCapacity) {
 
         super(initialCapacity);
     }
 
     @Override
-    public boolean add(E element) {
+    public boolean add(final E element) {
 
         if (!contains(element)) {
             return super.add(element);
@@ -36,7 +36,7 @@ public class OnceList<E> extends ArrayList<E> {
     }
 
     @Override
-    public void add(int index, E element) {
+    public void add(final int index, final E element) {
 
         if (!contains(element)) {
             super.add(index, element);
@@ -44,10 +44,10 @@ public class OnceList<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> collection) {
+    public boolean addAll(final Collection<? extends E> collection) {
 
         boolean result = true;
-        for (E element : collection) {
+        for (final E element : collection) {
             if (!contains(element)) {
                 if (!add(element)) {
                     result = false;
@@ -59,9 +59,9 @@ public class OnceList<E> extends ArrayList<E> {
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends E> collection) {
+    public boolean addAll(final int index, final Collection<? extends E> collection) {
 
-        Iterator<? extends E> iterator = collection.iterator();
+        final Iterator<? extends E> iterator = collection.iterator();
         E element = null;
         for (int counter = index; iterator.hasNext(); counter++, element = iterator.next()) {
             add(counter, element);
@@ -71,7 +71,7 @@ public class OnceList<E> extends ArrayList<E> {
     }
 
     @Override
-    public E set(int index, E element) {
+    public E set(final int index, final E element) {
 
         if (!contains(element)) {
             return super.set(index, element);

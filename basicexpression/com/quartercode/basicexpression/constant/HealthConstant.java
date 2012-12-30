@@ -19,7 +19,7 @@ public class HealthConstant implements ExpressionConstant {
     }
 
     @Override
-    public Object getValue(Minecart minecart) {
+    public Object getValue(final Minecart minecart) {
 
         if (minecart.getPassenger() != null && minecart.getPassenger() instanceof Player) {
             return ((Player) minecart.getPassenger()).getHealth();

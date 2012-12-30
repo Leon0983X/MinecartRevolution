@@ -12,7 +12,7 @@ public abstract class Config {
     protected FileConfiguration configuration;
     protected File              file;
 
-    protected Config(File file) {
+    protected Config(final File file) {
 
         this.file = file;
         configuration = YamlConfiguration.loadConfiguration(file);
@@ -23,7 +23,7 @@ public abstract class Config {
         return configuration;
     }
 
-    public Object get(String path) {
+    public Object get(final String path) {
 
         if (configuration.isBoolean(path)) {
             return configuration.getBoolean(path);
@@ -48,7 +48,7 @@ public abstract class Config {
         }
     }
 
-    public void set(String path, Object value) {
+    public void set(final String path, final Object value) {
 
         configuration.set(path, value);
     }
@@ -58,12 +58,12 @@ public abstract class Config {
         try {
             configuration.save(file);
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             MinecartRevolution.handleThrowable(e);
         }
     }
 
-    protected void addDefault(String path, Object value) {
+    protected void addDefault(final String path, final Object value) {
 
         if (!configuration.contains(path)) {
             configuration.set(path, value);

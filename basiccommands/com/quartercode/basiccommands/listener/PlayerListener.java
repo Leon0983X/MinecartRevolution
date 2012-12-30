@@ -13,9 +13,9 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 
 public class PlayerListener implements Listener {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public PlayerListener(MinecartRevolution minecartRevolution) {
+    public PlayerListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
 
@@ -23,9 +23,9 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(final PlayerJoinEvent event) {
 
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
 
         if (Perm.has(player, "update.update") && (Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.checkVersionOnJoin)) {
             if (VersionUtil.newVersionAvaiable()) {

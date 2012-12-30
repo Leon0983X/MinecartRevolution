@@ -48,7 +48,7 @@ public abstract class LogLevel implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -59,7 +59,7 @@ public abstract class LogLevel implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        LogLevel other = (LogLevel) obj;
+        final LogLevel other = (LogLevel) obj;
         if (getPrefix() == null) {
             if (other.getPrefix() != null) {
                 return false;

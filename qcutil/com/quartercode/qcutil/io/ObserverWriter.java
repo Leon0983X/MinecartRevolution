@@ -14,7 +14,7 @@ public class ObserverWriter extends Writer {
     protected Writer         writer;
     protected List<Listener> listeners = new ArrayList<Listener>();
 
-    public ObserverWriter(Writer writer) {
+    public ObserverWriter(final Writer writer) {
 
         this.writer = writer;
     }
@@ -24,7 +24,7 @@ public class ObserverWriter extends Writer {
         return writer;
     }
 
-    public void setListeners(List<Listener> listeners) {
+    public void setListeners(final List<Listener> listeners) {
 
         this.listeners = listeners;
     }
@@ -49,42 +49,42 @@ public class ObserverWriter extends Writer {
     }
 
     @Override
-    public void write(int c) throws IOException {
+    public void write(final int c) throws IOException {
 
         writer.write(c);
         new Event(listeners, "type", "write int", "data", c).fire();
     }
 
     @Override
-    public void write(char cbuf[]) throws IOException {
+    public void write(final char cbuf[]) throws IOException {
 
         writer.write(cbuf);
         new Event(listeners, "type", "write chararray", "data", cbuf).fire();
     }
 
     @Override
-    public void write(char cbuf[], int off, int len) throws IOException {
+    public void write(final char cbuf[], final int off, final int len) throws IOException {
 
         writer.write(cbuf, off, len);
         new Event(listeners, "type", "write chararray part", "data", cbuf, "off", off, "len", len).fire();
     }
 
     @Override
-    public void write(String str) throws IOException {
+    public void write(final String str) throws IOException {
 
         writer.write(str);
         new Event(listeners, "type", "write string", "data", str).fire();
     }
 
     @Override
-    public void write(String str, int off, int len) throws IOException {
+    public void write(final String str, final int off, final int len) throws IOException {
 
         writer.write(str, off, len);
         new Event(listeners, "type", "write string part", "data", str, "off", off, "len", len).fire();
     }
 
     @Override
-    public Writer append(CharSequence csq) throws IOException {
+    public Writer append(final CharSequence csq) throws IOException {
 
         writer.append(csq);
         new Event(listeners, "type", "append charsequence", "data", csq).fire();
@@ -92,7 +92,7 @@ public class ObserverWriter extends Writer {
     }
 
     @Override
-    public Writer append(CharSequence csq, int start, int end) throws IOException {
+    public Writer append(final CharSequence csq, final int start, final int end) throws IOException {
 
         writer.append(csq, start, end);
         new Event(listeners, "type", "append charsequence part", "data", csq, "start", start, "end", end).fire();
@@ -100,7 +100,7 @@ public class ObserverWriter extends Writer {
     }
 
     @Override
-    public Writer append(char c) throws IOException {
+    public Writer append(final char c) throws IOException {
 
         writer.append(c);
         new Event(listeners, "type", "append char", "data", c).fire();
@@ -118,7 +118,7 @@ public class ObserverWriter extends Writer {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -129,7 +129,7 @@ public class ObserverWriter extends Writer {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ObserverWriter other = (ObserverWriter) obj;
+        final ObserverWriter other = (ObserverWriter) obj;
         if (listeners == null) {
             if (other.listeners != null) {
                 return false;

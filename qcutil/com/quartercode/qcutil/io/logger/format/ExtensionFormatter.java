@@ -13,7 +13,7 @@ public class ExtensionFormatter extends LogFormatter {
 
     }
 
-    public ExtensionFormatter(String... extensions) {
+    public ExtensionFormatter(final String... extensions) {
 
         if (extensions.length >= 1) {
             setPrefix(extensions[0]);
@@ -28,7 +28,7 @@ public class ExtensionFormatter extends LogFormatter {
         return prefix;
     }
 
-    public void setPrefix(String prefix) {
+    public void setPrefix(final String prefix) {
 
         this.prefix = prefix;
     }
@@ -38,13 +38,13 @@ public class ExtensionFormatter extends LogFormatter {
         return suffix;
     }
 
-    public void setSuffix(String suffix) {
+    public void setSuffix(final String suffix) {
 
         this.suffix = suffix;
     }
 
     @Override
-    public String format(String record, LogLevel logLevel) {
+    public String format(String record, final LogLevel logLevel) {
 
         if (prefix != null) {
             record = prefix + record;
@@ -67,7 +67,7 @@ public class ExtensionFormatter extends LogFormatter {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -78,7 +78,7 @@ public class ExtensionFormatter extends LogFormatter {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ExtensionFormatter other = (ExtensionFormatter) obj;
+        final ExtensionFormatter other = (ExtensionFormatter) obj;
         if (prefix == null) {
             if (other.prefix != null) {
                 return false;

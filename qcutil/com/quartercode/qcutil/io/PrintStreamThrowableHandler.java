@@ -9,7 +9,7 @@ public class PrintStreamThrowableHandler implements ThrowableHandler {
 
     protected PrintStream printStream;
 
-    public PrintStreamThrowableHandler(PrintStream printStream) {
+    public PrintStreamThrowableHandler(final PrintStream printStream) {
 
         setPrintStream(printStream);
     }
@@ -19,13 +19,13 @@ public class PrintStreamThrowableHandler implements ThrowableHandler {
         return printStream;
     }
 
-    public void setPrintStream(PrintStream printStream) {
+    public void setPrintStream(final PrintStream printStream) {
 
         this.printStream = printStream;
     }
 
     @Override
-    public void handleThrowable(Throwable throwable) {
+    public void handleThrowable(final Throwable throwable) {
 
         throwable.printStackTrace(printStream);
     }
@@ -40,7 +40,7 @@ public class PrintStreamThrowableHandler implements ThrowableHandler {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) {
             return true;
@@ -51,7 +51,7 @@ public class PrintStreamThrowableHandler implements ThrowableHandler {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PrintStreamThrowableHandler other = (PrintStreamThrowableHandler) obj;
+        final PrintStreamThrowableHandler other = (PrintStreamThrowableHandler) obj;
         if (printStream == null) {
             if (other.printStream != null) {
                 return false;

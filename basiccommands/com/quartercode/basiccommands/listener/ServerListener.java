@@ -12,9 +12,9 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 
 public class ServerListener implements Listener {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
-    public ServerListener(MinecartRevolution minecartRevolution) {
+    public ServerListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
 
@@ -22,7 +22,7 @@ public class ServerListener implements Listener {
     }
 
     @EventHandler
-    public void onPluginEnable(PluginEnableEvent event) {
+    public void onPluginEnable(final PluginEnableEvent event) {
 
         if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.autoUpdate)) {
             VersionUtil.tryUpdate(null, Bukkit.getConsoleSender());

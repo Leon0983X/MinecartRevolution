@@ -21,7 +21,7 @@ public class AnnounceSign extends ControlSign {
     }
 
     @Override
-    public void execute(Minecart minecart, Location signLocation, String label, Sign sign) {
+    public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
         executeExpression(minecart, "announce " + sign.getLine(1) + sign.getLine(2) + sign.getLine(3));
     }
