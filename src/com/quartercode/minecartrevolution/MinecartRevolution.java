@@ -151,7 +151,7 @@ public class MinecartRevolution extends JavaPlugin {
     private void enableMetrics() {
 
         try {
-            metrics = new Metrics(this, new File("plugins" + java.io.File.separator + "PluginMetrics", "config.yml"));
+            metrics = new Metrics(this);
             metrics.start();
         }
         catch (final IOException e) {
