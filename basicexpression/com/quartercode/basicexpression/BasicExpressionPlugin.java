@@ -14,6 +14,7 @@ import com.quartercode.basicexpression.command.KillCommand;
 import com.quartercode.basicexpression.command.SpeedCommand;
 import com.quartercode.basicexpression.command.TimeCommand;
 import com.quartercode.basicexpression.command.VerticalCommand;
+import com.quartercode.basicexpression.command.WeatherCommand;
 import com.quartercode.basicexpression.constant.HealthConstant;
 import com.quartercode.basicexpression.constant.SpeedConstant;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
@@ -54,6 +55,7 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new CollectCommand(minecartRevolution));
         addExpressionCommand(new TimeCommand());
+        addExpressionCommand(new WeatherCommand());
 
         addExpressionConstant(new SpeedConstant());
         addExpressionConstant(new HealthConstant());
