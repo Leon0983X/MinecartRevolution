@@ -18,13 +18,13 @@ public class WeatherCommand implements ExpressionCommand {
     }
 
     @Override
-    public boolean canExecute(Minecart minecart) {
+    public boolean canExecute(final Minecart minecart) {
 
         return true;
     }
 
     @Override
-    public void execute(Minecart minecart, Object parameter) {
+    public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter != null) {
             if (String.valueOf(parameter).equalsIgnoreCase("sun") || String.valueOf(parameter).equalsIgnoreCase("s")) {

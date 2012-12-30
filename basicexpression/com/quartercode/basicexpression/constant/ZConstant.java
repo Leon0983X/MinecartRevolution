@@ -18,7 +18,7 @@ public class ZConstant implements ExpressionConstant {
     }
 
     @Override
-    public Object getValue(Minecart minecart) {
+    public Object getValue(final Minecart minecart) {
 
         return minecart.getLocation().getZ();
     }
