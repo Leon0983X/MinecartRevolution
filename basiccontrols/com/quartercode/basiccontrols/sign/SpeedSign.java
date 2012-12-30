@@ -8,22 +8,22 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
 
-public class WeatherSign extends ControlSign {
+public class SpeedSign extends ControlSign {
 
-    public WeatherSign() {
+    public SpeedSign() {
 
     }
 
     @Override
     public ControlSignInfo getInfo() {
 
-        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.weather.name"), Lang.getValue("basiccontrols.signs.weather.description"), "weather.place", "weather.destroy", "weather", "Weather");
+        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.speed.name"), Lang.getValue("basiccontrols.signs.speed.description"), "speed.place", "speed.destroy", "speed", "Speed");
     }
 
     @Override
     public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        executeExpression(minecart, "weather " + sign.getLine(1));
+        executeExpression(minecart, "speed " + sign.getLine(1));
     }
 
 }

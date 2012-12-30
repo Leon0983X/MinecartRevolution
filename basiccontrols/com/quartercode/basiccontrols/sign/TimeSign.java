@@ -23,7 +23,7 @@ public class TimeSign extends ControlSign {
     @Override
     public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        executeExpression(minecart, "time " + sign.getLine(1) + sign.getLine(2) + sign.getLine(3));
+        executeExpression(minecart, "time " + sign.getLine(1));
     }
 
 }

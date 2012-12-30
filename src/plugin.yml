@@ -183,3 +183,14 @@ permissions:
     description: Gives access to place the MinecartRevolution Weather sign
   minecartrevolution.control.sign.weather.destroy:
     description: Gives access to destroy the MinecartRevolution Weather sign
+    
+    
+  minecartrevolution.control.sign.speed.*:
+    description: Gives access to use the MinecartRevolution Speed sign
+    children:
+      minecartrevolution.control.sign.speed.place: true
+      minecartrevolution.control.sign.speed.destroy: true
+  minecartrevolution.control.sign.speed.place:
+    description: Gives access to place the MinecartRevolution Speed sign
+  minecartrevolution.control.sign.speed.destroy:
+    description: Gives access to destroy the MinecartRevolution Speed sign

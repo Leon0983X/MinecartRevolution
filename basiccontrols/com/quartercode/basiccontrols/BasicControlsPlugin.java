@@ -7,6 +7,7 @@ import com.quartercode.basiccontrols.block.ControlSignBlock;
 import com.quartercode.basiccontrols.sign.AnnounceSign;
 import com.quartercode.basiccontrols.sign.ExpressionSign;
 import com.quartercode.basiccontrols.sign.HealthSign;
+import com.quartercode.basiccontrols.sign.SpeedSign;
 import com.quartercode.basiccontrols.sign.TimeSign;
 import com.quartercode.basiccontrols.sign.WeatherSign;
 import com.quartercode.basiccontrols.util.BasicControlsConfig;
@@ -43,6 +44,7 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlSign(new HealthSign());
         addControlSign(new TimeSign());
         addControlSign(new WeatherSign());
+        addControlSign(new SpeedSign());
     }
 
 }

@@ -69,3 +69,6 @@ basiccontrols.signs.time.description=Sets the time of the current world the mine
 
 basiccontrols.signs.weather.name=Weather
 basiccontrols.signs.weather.description=Sets the weather of the current world the minecart is in
+
+basiccontrols.signs.speed.name=Speed
+basiccontrols.signs.speed.description=Sets the speed of the minecart
