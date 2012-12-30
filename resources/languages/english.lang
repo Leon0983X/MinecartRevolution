@@ -66,3 +66,6 @@ basiccontrols.signs.health.description=Heals the living entity in the minecart
 
 basiccontrols.signs.time.name=Time
 basiccontrols.signs.time.description=Sets the time of the current world the minecart is in
+
+basiccontrols.signs.weather.name=Weather
+basiccontrols.signs.weather.description=Sets the weather of the current world the minecart is in

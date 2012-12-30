@@ -172,3 +172,14 @@ permissions:
     description: Gives access to place the MinecartRevolution Time sign
   minecartrevolution.control.sign.time.destroy:
     description: Gives access to destroy the MinecartRevolution Time sign
+    
+    
+  minecartrevolution.control.sign.weather.*:
+    description: Gives access to use the MinecartRevolution Weather sign
+    children:
+      minecartrevolution.control.sign.weather.place: true
+      minecartrevolution.control.sign.weather.destroy: true
+  minecartrevolution.control.sign.weather.place:
+    description: Gives access to place the MinecartRevolution Weather sign
+  minecartrevolution.control.sign.weather.destroy:
+    description: Gives access to destroy the MinecartRevolution Weather sign
