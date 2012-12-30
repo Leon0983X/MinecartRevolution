@@ -4,6 +4,7 @@ package com.quartercode.basiccommands.command;
 import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.command.Command;
 import com.quartercode.minecartrevolution.command.CommandInfo;
@@ -40,33 +41,31 @@ public class HelpCommand extends Command {
             aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
-        commandSender.sendMessage(Lang.getValue("basiccommands.help.aliases", "aliases", aliases));
+        commandSender.sendMessage("Aliases: " + aliases);
 
         final List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
 
         for (final Command command : commands) {
             final CommandInfo commandInfo = command.getInfo();
 
-            for (final String label : commandInfo.getLabels()) {
-                String printLabel = "";
-                if (!label.equalsIgnoreCase("<empty>")) {
-                    printLabel = " " + label;
-                }
+            if (! (commandSender instanceof Player) || commandInfo.getPermission() == null || ((Player) commandSender).hasPermission(commandInfo.getPermission())) {
+                for (final String label : commandInfo.getLabels()) {
+                    String printLabel = "";
+                    if (!label.equalsIgnoreCase("<empty>")) {
+                        printLabel = " " + label;
+                    }
 
-                String parameterUsage = "";
-                if (commandInfo.getParameterUsage() != null && !commandInfo.getParameterUsage().isEmpty()) {
-                    parameterUsage = " " + commandInfo.getParameterUsage();
-                }
+                    String parameterUsage = "";
+                    if (commandInfo.getParameterUsage() != null && !commandInfo.getParameterUsage().isEmpty()) {
+                        parameterUsage = " " + commandInfo.getParameterUsage();
+                    }
 
-                printHelpMessage(commandSender, "/" + usedMrCommand + printLabel + parameterUsage, commandInfo.getDescription());
+                    commandSender.sendMessage(ChatColor.GOLD + "/" + usedMrCommand + printLabel + parameterUsage);
+                }
             }
+
+            commandSender.sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + commandInfo.getDescription());
         }
-    }
-
-    private void printHelpMessage(final CommandSender sender, final String command, final String description) {
-
-        sender.sendMessage(ChatColor.GOLD + command);
-        sender.sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + description);
     }
 
 }

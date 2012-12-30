@@ -24,14 +24,16 @@ public class ServerListener implements Listener {
     @EventHandler
     public void onPluginEnable(final PluginEnableEvent event) {
 
-        if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.autoUpdate)) {
-            VersionUtil.tryUpdate(null, Bukkit.getConsoleSender());
-        } else if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.checkVersionOnStart)) {
-            if (VersionUtil.newVersionAvaiable()) {
-                if (Bukkit.getConsoleSender() != null) {
-                    Bukkit.getConsoleSender().sendMessage(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "mr update"));
-                } else {
-                    minecartRevolution.getLogger().info(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "mr update"));
+        if (event.getPlugin().equals(minecartRevolution)) {
+            if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.autoUpdate)) {
+                VersionUtil.tryUpdate(null, Bukkit.getConsoleSender());
+            } else if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.checkVersionOnStart)) {
+                if (VersionUtil.newVersionAvaiable()) {
+                    if (Bukkit.getConsoleSender() != null) {
+                        Bukkit.getConsoleSender().sendMessage(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "mr update"));
+                    } else {
+                        minecartRevolution.getLogger().info(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "mr update"));
+                    }
                 }
             }
         }
