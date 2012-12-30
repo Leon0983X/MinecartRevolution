@@ -161,3 +161,14 @@ permissions:
     description: Gives access to place the MinecartRevolution Health sign
   minecartrevolution.control.sign.health.destroy:
     description: Gives access to destroy the MinecartRevolution Health sign
+    
+    
+  minecartrevolution.control.sign.time.*:
+    description: Gives access to use the MinecartRevolution Time sign
+    children:
+      minecartrevolution.control.sign.time.place: true
+      minecartrevolution.control.sign.time.destroy: true
+  minecartrevolution.control.sign.time.place:
+    description: Gives access to place the MinecartRevolution Time sign
+  minecartrevolution.control.sign.time.destroy:
+    description: Gives access to destroy the MinecartRevolution Time sign

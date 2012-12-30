@@ -8,22 +8,22 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
 
-public class AnnounceSign extends ControlSign {
+public class TimeSign extends ControlSign {
 
-    public AnnounceSign() {
+    public TimeSign() {
 
     }
 
     @Override
     public ControlSignInfo getInfo() {
 
-        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.announce.name"), Lang.getValue("basiccontrols.signs.announce.description"), "announce.place", "announce.destroy", "announce", "Announce");
+        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.time.name"), Lang.getValue("basiccontrols.signs.time.description"), "time.place", "time.destroy", "time", "Time");
     }
 
     @Override
     public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        executeExpression(minecart, "announce " + sign.getLine(1) + sign.getLine(2) + sign.getLine(3));
+        executeExpression(minecart, "time " + sign.getLine(1) + sign.getLine(2) + sign.getLine(3));
     }
 
 }
