@@ -55,8 +55,12 @@ public class CollectCommand implements ExpressionCommand {
                 }
             }
 
-            for (final String item : items) {
-                collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
+            if (items.size() > 0) {
+                for (final String item : items) {
+                    collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
+                }
+            } else {
+                collectItems((StorageMinecart) minecart, radius, -1);
             }
         }
     }
