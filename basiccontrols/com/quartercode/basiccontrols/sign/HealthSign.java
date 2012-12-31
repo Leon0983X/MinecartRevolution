@@ -17,7 +17,7 @@ public class HealthSign extends ControlSign {
     @Override
     public ControlSignInfo getInfo() {
 
-        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.health.name"), Lang.getValue("basiccontrols.signs.health.description"), "health.place", "health.destroy", "health", "Health");
+        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.health.name"), Lang.getValue("basiccontrols.signs.health.description"), "health.place", "health.destroy", "health");
     }
 
     @Override

@@ -33,6 +33,12 @@ public class HealthCommand implements ExpressionCommand {
             health = (Double) parameter;
         }
 
+        if (health < 0) {
+            health = 0;
+        } else if (health > 20) {
+            health = 20;
+        }
+
         ((LivingEntity) minecart.getPassenger()).setHealth((int) health);
     }
 

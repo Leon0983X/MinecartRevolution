@@ -90,17 +90,6 @@ permissions:
       minecartrevolution.control.block.brake.*: true
 
 
-  minecartrevolution.control.block.controlsign.*:
-    description: Gives access to use the MinecartRevolution Control Sign block
-    children:
-      minecartrevolution.control.block.controlsign.place: true
-      minecartrevolution.control.block.controlsign.destroy: true
-  minecartrevolution.control.block.controlsign.place:
-    description: Gives access to place the MinecartRevolution Control Sign block
-  minecartrevolution.control.block.controlsign.destroy:
-    description: Gives access to destroy the MinecartRevolution Control Sign block
-
-
   minecartrevolution.control.block.booster.*:
     description: Gives access to use the MinecartRevolution Booster block
     children:
@@ -123,22 +112,21 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Brake block
 
 
+  minecartrevolution.control.block.controlsign.*:
+    description: Gives access to use the MinecartRevolution Control Sign block
+    children:
+      minecartrevolution.control.block.controlsign.place: true
+      minecartrevolution.control.block.controlsign.destroy: true
+  minecartrevolution.control.block.controlsign.place:
+    description: Gives access to place the MinecartRevolution Control Sign block
+  minecartrevolution.control.block.controlsign.destroy:
+    description: Gives access to destroy the MinecartRevolution Control Sign block
+
 
   minecartrevolution.control.sign.*:
     description: Gives access to use all MinecartRevolution control signs
     children:
       minecartrevolution.control.sign.minecartcontrol.*: true
-
-
-  minecartrevolution.control.sign.expression.*:
-    description: Gives access to use the MinecartRevolution Expression sign
-    children:
-      minecartrevolution.control.sign.expression.place: true
-      minecartrevolution.control.sign.expression.destroy: true
-  minecartrevolution.control.sign.expression.place:
-    description: Gives access to place the MinecartRevolution Expression sign
-  minecartrevolution.control.sign.expression.destroy:
-    description: Gives access to destroy the MinecartRevolution Expression sign
 
 
   minecartrevolution.control.sign.announce.*:
@@ -152,6 +140,28 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Announce sign
 
 
+  minecartrevolution.control.sign.clear.*:
+    description: Gives access to use the MinecartRevolution Clear sign
+    children:
+      minecartrevolution.control.sign.clear.place: true
+      minecartrevolution.control.sign.clear.destroy: true
+  minecartrevolution.control.sign.clear.place:
+    description: Gives access to place the MinecartRevolution Clear sign
+  minecartrevolution.control.sign.clear.destroy:
+    description: Gives access to destroy the MinecartRevolution Clear sign
+
+
+  minecartrevolution.control.sign.expression.*:
+    description: Gives access to use the MinecartRevolution Expression sign
+    children:
+      minecartrevolution.control.sign.expression.place: true
+      minecartrevolution.control.sign.expression.destroy: true
+  minecartrevolution.control.sign.expression.place:
+    description: Gives access to place the MinecartRevolution Expression sign
+  minecartrevolution.control.sign.expression.destroy:
+    description: Gives access to destroy the MinecartRevolution Expression sign
+
+
   minecartrevolution.control.sign.health.*:
     description: Gives access to use the MinecartRevolution Health sign
     children:
@@ -161,6 +171,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Health sign
   minecartrevolution.control.sign.health.destroy:
     description: Gives access to destroy the MinecartRevolution Health sign
+
+
+  minecartrevolution.control.sign.speed.*:
+    description: Gives access to use the MinecartRevolution Speed sign
+    children:
+      minecartrevolution.control.sign.speed.place: true
+      minecartrevolution.control.sign.speed.destroy: true
+  minecartrevolution.control.sign.speed.place:
+    description: Gives access to place the MinecartRevolution Speed sign
+  minecartrevolution.control.sign.speed.destroy:
+    description: Gives access to destroy the MinecartRevolution Speed sign
 
 
   minecartrevolution.control.sign.time.*:
@@ -183,14 +204,3 @@ permissions:
     description: Gives access to place the MinecartRevolution Weather sign
   minecartrevolution.control.sign.weather.destroy:
     description: Gives access to destroy the MinecartRevolution Weather sign
-
-
-  minecartrevolution.control.sign.speed.*:
-    description: Gives access to use the MinecartRevolution Speed sign
-    children:
-      minecartrevolution.control.sign.speed.place: true
-      minecartrevolution.control.sign.speed.destroy: true
-  minecartrevolution.control.sign.speed.place:
-    description: Gives access to place the MinecartRevolution Speed sign
-  minecartrevolution.control.sign.speed.destroy:
-    description: Gives access to destroy the MinecartRevolution Speed sign

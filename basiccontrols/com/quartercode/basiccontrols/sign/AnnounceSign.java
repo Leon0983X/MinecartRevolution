@@ -17,7 +17,7 @@ public class AnnounceSign extends ControlSign {
     @Override
     public ControlSignInfo getInfo() {
 
-        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.announce.name"), Lang.getValue("basiccontrols.signs.announce.description"), "announce.place", "announce.destroy", "announce", "Announce");
+        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.announce.name"), Lang.getValue("basiccontrols.signs.announce.description"), "announce.place", "announce.destroy", "announce");
     }
 
     @Override
