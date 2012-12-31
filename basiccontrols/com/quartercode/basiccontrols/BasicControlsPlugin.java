@@ -45,8 +45,8 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         config.setDefaults();
         config.save();
 
-        addControlBlock(new BoosterBlock(this));
-        addControlBlock(new BrakeBlock(this));
+        addControlBlock(new BoosterBlock());
+        addControlBlock(new BrakeBlock());
         addControlBlock(new ControlSignBlock(this));
         addControlBlock(new EjectBlock());
         addControlBlock(new KillBlock());
@@ -65,6 +65,9 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlSign(new SpeedSign());
         addControlSign(new TimeSign());
         addControlSign(new WeatherSign());
+
+        ((BasicControlsConfig) config).addBlocks(getControlBlockExecutor().getControlBlocks());
+        config.save();
     }
 
 }

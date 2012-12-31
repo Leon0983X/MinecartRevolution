@@ -118,7 +118,7 @@ public class MRExpressionExecutor {
 	if (expressionCommand.canExecute(minecart)) {
 	    if (splittedExpressionPart.length == 1) {
 	        expressionCommand.execute(minecart, null);
-	        return;
+	        continue;
 	    } else if (splittedExpressionPart.length == 2) {
 	        String parameterString = splittedExpressionPart[1];
 	        parameterString = replaceConstants(parameterString, minecart);
@@ -133,7 +133,7 @@ public class MRExpressionExecutor {
 	        }
 
 	        expressionCommand.execute(minecart, parameter);
-	        return;
+	        continue;
 	    }
 	}
                             }

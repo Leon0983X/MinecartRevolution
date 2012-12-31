@@ -7,7 +7,7 @@ public class ControlBlockInfo {
     private final String description;
     private final String placePermission;
     private final String destroyPermission;
-    private final int[]  blockIds;
+    private int[]        blockIds;
 
     public ControlBlockInfo(final String name, final String description, final String placePermission, final String destroyPermission, final int... blockIds) {
 
@@ -41,6 +41,11 @@ public class ControlBlockInfo {
     public int[] getBlockIds() {
 
         return blockIds;
+    }
+
+    public void setBlockIds(final int[] blockIds) {
+
+        this.blockIds = blockIds;
     }
 
 }

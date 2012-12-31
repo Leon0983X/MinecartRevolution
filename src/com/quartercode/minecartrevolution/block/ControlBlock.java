@@ -19,6 +19,8 @@ public abstract class ControlBlock extends Control {
         return getControlSigns(blockLocation).size() > 0;
     }
 
+    protected ControlBlockInfo info;
+
     public List<Sign> getControlSigns(final Location blockLocation) {
 
         final List<Sign> signs = new ArrayList<Sign>();
@@ -35,7 +37,10 @@ public abstract class ControlBlock extends Control {
         return signs;
     }
 
-    public abstract ControlBlockInfo getInfo();
+    public ControlBlockInfo getInfo() {
+
+        return info;
+    }
 
     public abstract void execute(Minecart minecart, Location blockLocation, int blockId, Block block);
 
