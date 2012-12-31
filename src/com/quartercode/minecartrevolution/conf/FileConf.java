@@ -16,7 +16,8 @@ public class FileConf {
     public static final File   LANGUAGES           = new File(PLUGIN_FOLDER, "languages");
     public static final File   PLUGINS             = new File(PLUGIN_FOLDER, "plugins");
     public static final File   MAIN_CONF           = new File(PLUGIN_FOLDER, MAIN_CONF_NAME);
-    public static final File   MATERIAL_ALIAS_CONF = new File(PLUGIN_FOLDER, "aliases.yml");
+    // public static final File MATERIAL_ALIAS_CONF = new File(PLUGIN_FOLDER, "aliases.yml");
+    public static final File   MATERIAL_ALIAS_CONF = new File("plugins" + File.separator + "Essentials", "items.csv");
 
     static {
         PLUGIN_FOLDER.mkdirs();

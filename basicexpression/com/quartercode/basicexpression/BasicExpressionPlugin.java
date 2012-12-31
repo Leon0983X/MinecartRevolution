@@ -48,15 +48,15 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         config.save();
 
         addExpressionCommand(new AnnounceCommand());
-        addExpressionCommand(new ClearCommand(minecartRevolution));
-        addExpressionCommand(new CollectCommand(minecartRevolution));
+        addExpressionCommand(new ClearCommand());
+        addExpressionCommand(new CollectCommand());
         addExpressionCommand(new CommandCommand(minecartRevolution));
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
         addExpressionCommand(new FileCommand(getExpressionExecutor()));
         addExpressionCommand(new GrabCommand());
         addExpressionCommand(new HealthCommand());
-        addExpressionCommand(new IntersectionCommand(minecartRevolution));
+        addExpressionCommand(new IntersectionCommand());
         addExpressionCommand(new KillCommand(minecartRevolution));
         addExpressionCommand(new SpeedCommand());
         addExpressionCommand(new TimeCommand());

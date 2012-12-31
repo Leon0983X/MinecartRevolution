@@ -47,28 +47,53 @@ basiccommands.stopcarts.broadcast=$gold$$sender$ stops $count$ minecarts in worl
 
 basiccommands.eject.description=Ejects you from a minecart
 
-basiccontrols.blocks.controlsign.name=Control Sign Block
-basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the block
-
 basiccontrols.blocks.booster.name=Booster
 basiccontrols.blocks.booster.description=Boosts the minecart
+
 basiccontrols.blocks.brake.name=Brake
 basiccontrols.blocks.brake.description=Slows the minecart
 
-basiccontrols.signs.expression.name=Expression
-basiccontrols.signs.expression.description=Controls the minecart with Expressions
+basiccontrols.blocks.controlsign.name=Control Sign Block
+basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the block
 
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger
 
+basiccontrols.signs.clear.name=Clear
+basiccontrols.signs.clear.description=Clears the inventory of the minecart
+
+basiccontrols.signs.collect.name=Collect
+basiccontrols.signs.collect.description=Collects all items with an optional radius and item ids
+
+basiccontrols.signs.command.name=Command
+basiccontrols.signs.command.description=Executes a command as the riding player
+
+basiccontrols.signs.effect.name=Effect
+basiccontrols.signs.effect.description=Executes a given effect
+
+basiccontrols.signs.expression.name=Expression
+basiccontrols.signs.expression.description=Controls the minecart with Expressions
+
+basiccontrols.signs.file.name=File
+basiccontrols.signs.file.description=Executes a script file like the file-command
+
+basiccontrols.signs.grab.name=Grab
+basiccontrols.signs.grab.description=Grabs the nearest player in the given radius
+
 basiccontrols.signs.health.name=Health
 basiccontrols.signs.health.description=Heals the living entity in the minecart
+
+basiccontrols.signs.intersection.name=Intersection
+basiccontrols.signs.intersection.description=Sorts the minecarts on different tracks with conditions
+
+basiccontrols.signs.jump.name=Jump
+basiccontrols.signs.jump.description=Let the minecart jump the given amount of blocks
+
+basiccontrols.signs.speed.name=Speed
+basiccontrols.signs.speed.description=Sets the speed of the minecart
 
 basiccontrols.signs.time.name=Time
 basiccontrols.signs.time.description=Sets the time of the current world the minecart is in
 
 basiccontrols.signs.weather.name=Weather
 basiccontrols.signs.weather.description=Sets the weather of the current world the minecart is in
-
-basiccontrols.signs.speed.name=Speed
-basiccontrols.signs.speed.description=Sets the speed of the minecart

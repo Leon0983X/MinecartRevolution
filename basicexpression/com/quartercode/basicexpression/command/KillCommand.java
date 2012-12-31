@@ -32,17 +32,6 @@ public class KillCommand implements ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (parameter == null) {
-            kill(minecart);
-        } else if (String.valueOf(parameter).equalsIgnoreCase("empty")) {
-            if (minecart.getPassenger() == null) {
-                kill(minecart);
-            }
-        }
-    }
-
-    private void kill(final Minecart minecart) {
-
         minecart.eject();
         minecart.remove();
 

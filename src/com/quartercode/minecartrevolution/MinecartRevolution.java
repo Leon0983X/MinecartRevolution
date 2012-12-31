@@ -15,7 +15,6 @@ import com.quartercode.minecartrevolution.plugin.PluginManager;
 import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.QcUtil;
@@ -42,7 +41,6 @@ public class MinecartRevolution extends JavaPlugin {
     private MRControlSignExecutor  controlSignExecutor;
     private MRExpressionExecutor   expressionExecutor;
     private Config                 configuration;
-    private MaterialAliasConfig    aliasConfig;
     private Metrics                metrics;
 
     private BasicCommandsPlugin    commandsPlugin;
@@ -79,11 +77,6 @@ public class MinecartRevolution extends JavaPlugin {
         return configuration;
     }
 
-    public MaterialAliasConfig getAliasConfig() {
-
-        return aliasConfig;
-    }
-
     @Override
     public File getFile() {
 
@@ -102,10 +95,6 @@ public class MinecartRevolution extends JavaPlugin {
         configuration = new GlobalConfig();
         configuration.setDefaults();
         configuration.save();
-
-        aliasConfig = new MaterialAliasConfig();
-        aliasConfig.setDefaults();
-        aliasConfig.save();
 
         Lang.setLanguage((String) configuration.get(GlobalConfig.language));
 

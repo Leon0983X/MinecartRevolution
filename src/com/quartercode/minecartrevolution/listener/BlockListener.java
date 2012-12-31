@@ -85,7 +85,7 @@ public class BlockListener implements Listener {
             final ControlSignInfo info = controlSign.getInfo();
 
             for (final String signLabel : info.getLabels()) {
-                if (signLabel.equals(label)) {
+                if (signLabel.equalsIgnoreCase(label)) {
                     if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
                         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
                             event.getBlock().setTypeId(0);

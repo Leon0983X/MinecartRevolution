@@ -23,7 +23,25 @@ public class CollectSign extends ControlSign {
     @Override
     public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        executeExpression(minecart, "collect " + sign.getLine(1) + sign.getLine(2) + sign.getLine(3));
+        String expression = "";
+        if (!sign.getLine(1).isEmpty()) {
+            expression += "r" + sign.getLine(1);
+        }
+
+        if (!sign.getLine(2).isEmpty()) {
+            if (!sign.getLine(1).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(2);
+        }
+        if (!sign.getLine(3).isEmpty()) {
+            if (!sign.getLine(2).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(3);
+        }
+
+        executeExpression(minecart, "collect " + expression);
     }
 
 }

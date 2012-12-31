@@ -8,19 +8,18 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PoweredMinecart;
 import org.bukkit.entity.StorageMinecart;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class IntersectionCommand implements ExpressionCommand {
 
-    private final MinecartRevolution minecartRevolution;
+    public IntersectionCommand() {
 
-    public IntersectionCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -95,20 +94,20 @@ public class IntersectionCommand implements ExpressionCommand {
                 if (minecart.getPassenger() instanceof Player) {
                     final Player player = (Player) minecart.getPassenger();
                     final String[] variables = type.split("-");
-                    if (player.getInventory().contains(minecartRevolution.getAliasConfig().getId(variables[1]))) {
+                    if (contains(player.getInventory(), variables[1])) {
                         newDirection = direction;
                     }
                 } else if (minecart instanceof StorageMinecart) {
                     final StorageMinecart storageMinecart = (StorageMinecart) minecart;
                     final String[] variables = type.split("-");
-                    if (storageMinecart.getInventory().contains(minecartRevolution.getAliasConfig().getId(variables[1]))) {
+                    if (contains(storageMinecart.getInventory(), variables[1])) {
                         newDirection = direction;
                     }
                 }
             } else if (type.contains("ihold-") && minecart.getPassenger() instanceof Player) {
                 final Player player = (Player) minecart.getPassenger();
                 final String[] variables = type.split("-");
-                if (player.getInventory().getItemInHand().getTypeId() == minecartRevolution.getAliasConfig().getId(variables[1])) {
+                if (MaterialAliasConfig.equals(player.getItemInHand(), variables[1])) {
                     newDirection = direction;
                 }
             }
@@ -186,6 +185,17 @@ public class IntersectionCommand implements ExpressionCommand {
 
         minecart.setVelocity(speed);
         minecart.teleport(newLocation);
+    }
+
+    private boolean contains(final Inventory inventory, final String string) {
+
+        for (final ItemStack itemStack : inventory.getContents()) {
+            if (MaterialAliasConfig.equals(itemStack, string)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

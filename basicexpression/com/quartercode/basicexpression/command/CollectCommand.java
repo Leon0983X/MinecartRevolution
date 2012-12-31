@@ -9,16 +9,14 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.StorageMinecart;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class CollectCommand implements ExpressionCommand {
 
-    private final MinecartRevolution minecartRevolution;
+    public CollectCommand() {
 
-    public CollectCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -56,14 +54,14 @@ public class CollectCommand implements ExpressionCommand {
 
         if (items.size() > 0) {
             for (final String item : items) {
-                collectItems((StorageMinecart) minecart, radius, minecartRevolution.getAliasConfig().getId(item));
+                collectItems((StorageMinecart) minecart, radius, item);
             }
         } else {
-            collectItems((StorageMinecart) minecart, radius, -1);
+            collectItems((StorageMinecart) minecart, radius, null);
         }
     }
 
-    private void collectItems(final StorageMinecart storageMinecart, final int radius, final int itemId) {
+    private void collectItems(final StorageMinecart storageMinecart, final int radius, final String string) {
 
         if (storageMinecart.getInventory().firstEmpty() < 0) {
             return;
@@ -74,7 +72,7 @@ public class CollectCommand implements ExpressionCommand {
                 final Item item = (Item) entity;
                 if (item.isDead()) {
                     continue;
-                } else if (itemId > 0 && item.getItemStack().getTypeId() != itemId) {
+                } else if (string != null && !MaterialAliasConfig.equals(item.getItemStack(), string)) {
                     continue;
                 }
 
