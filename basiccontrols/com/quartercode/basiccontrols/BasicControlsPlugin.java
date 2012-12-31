@@ -5,6 +5,9 @@ import com.quartercode.basiccontrols.block.BoosterBlock;
 import com.quartercode.basiccontrols.block.BrakeBlock;
 import com.quartercode.basiccontrols.block.ControlSignBlock;
 import com.quartercode.basiccontrols.sign.AnnounceSign;
+import com.quartercode.basiccontrols.sign.ClearSign;
+import com.quartercode.basiccontrols.sign.CollectSign;
+import com.quartercode.basiccontrols.sign.CommandSign;
 import com.quartercode.basiccontrols.sign.ExpressionSign;
 import com.quartercode.basiccontrols.sign.HealthSign;
 import com.quartercode.basiccontrols.sign.SpeedSign;
@@ -40,6 +43,9 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlBlock(new ControlSignBlock(this));
 
         addControlSign(new AnnounceSign());
+        addControlSign(new ClearSign());
+        addControlSign(new CollectSign());
+        addControlSign(new CommandSign());
         addControlSign(new ExpressionSign());
         addControlSign(new HealthSign());
         addControlSign(new SpeedSign());

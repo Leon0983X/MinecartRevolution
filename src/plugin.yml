@@ -151,6 +151,28 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Clear sign
 
 
+  minecartrevolution.control.sign.collect.*:
+    description: Gives access to use the MinecartRevolution Collect sign
+    children:
+      minecartrevolution.control.sign.collect.place: true
+      minecartrevolution.control.sign.collect.destroy: true
+  minecartrevolution.control.sign.collect.place:
+    description: Gives access to place the MinecartRevolution Collect sign
+  minecartrevolution.control.sign.collect.destroy:
+    description: Gives access to destroy the MinecartRevolution Collect sign
+
+
+  minecartrevolution.control.sign.command.*:
+    description: Gives access to use the MinecartRevolution Command sign
+    children:
+      minecartrevolution.control.sign.command.place: true
+      minecartrevolution.control.sign.command.destroy: true
+  minecartrevolution.control.sign.command.place:
+    description: Gives access to place the MinecartRevolution Command sign
+  minecartrevolution.control.sign.command.destroy:
+    description: Gives access to destroy the MinecartRevolution Command sign
+
+
   minecartrevolution.control.sign.expression.*:
     description: Gives access to use the MinecartRevolution Expression sign
     children:
