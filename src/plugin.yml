@@ -150,8 +150,8 @@ permissions:
     description: Gives access to place the MinecartRevolution Announce sign
   minecartrevolution.control.sign.announce.destroy:
     description: Gives access to destroy the MinecartRevolution Announce sign
-    
-    
+
+
   minecartrevolution.control.sign.health.*:
     description: Gives access to use the MinecartRevolution Health sign
     children:
@@ -161,8 +161,8 @@ permissions:
     description: Gives access to place the MinecartRevolution Health sign
   minecartrevolution.control.sign.health.destroy:
     description: Gives access to destroy the MinecartRevolution Health sign
-    
-    
+
+
   minecartrevolution.control.sign.time.*:
     description: Gives access to use the MinecartRevolution Time sign
     children:
@@ -172,8 +172,8 @@ permissions:
     description: Gives access to place the MinecartRevolution Time sign
   minecartrevolution.control.sign.time.destroy:
     description: Gives access to destroy the MinecartRevolution Time sign
-    
-    
+
+
   minecartrevolution.control.sign.weather.*:
     description: Gives access to use the MinecartRevolution Weather sign
     children:
@@ -183,8 +183,8 @@ permissions:
     description: Gives access to place the MinecartRevolution Weather sign
   minecartrevolution.control.sign.weather.destroy:
     description: Gives access to destroy the MinecartRevolution Weather sign
-    
-    
+
+
   minecartrevolution.control.sign.speed.*:
     description: Gives access to use the MinecartRevolution Speed sign
     children:
