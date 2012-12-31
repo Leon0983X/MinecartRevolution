@@ -48,27 +48,27 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         config.save();
 
         addExpressionCommand(new AnnounceCommand());
-        addExpressionCommand(new FileCommand(getExpressionExecutor()));
-        addExpressionCommand(new SpeedCommand());
-        addExpressionCommand(new VerticalCommand());
-        addExpressionCommand(new EjectCommand());
         addExpressionCommand(new ClearCommand(minecartRevolution));
-        addExpressionCommand(new HealthCommand());
+        addExpressionCommand(new CollectCommand(minecartRevolution));
+        addExpressionCommand(new CommandCommand(minecartRevolution));
+        addExpressionCommand(new EffectCommand());
+        addExpressionCommand(new EjectCommand());
+        addExpressionCommand(new FileCommand(getExpressionExecutor()));
         addExpressionCommand(new GrabCommand());
+        addExpressionCommand(new HealthCommand());
         addExpressionCommand(new IntersectionCommand(minecartRevolution));
         addExpressionCommand(new KillCommand(minecartRevolution));
-        addExpressionCommand(new EffectCommand());
-        addExpressionCommand(new CollectCommand(minecartRevolution));
+        addExpressionCommand(new SpeedCommand());
         addExpressionCommand(new TimeCommand());
+        addExpressionCommand(new VerticalCommand());
         addExpressionCommand(new WeatherCommand());
-        addExpressionCommand(new CommandCommand(minecartRevolution));
 
+        addExpressionConstant(new HealthConstant());
+        addExpressionConstant(new SpeedConstant());
+        addExpressionConstant(new TimeConstant());
         addExpressionConstant(new XConstant());
         addExpressionConstant(new YConstant());
         addExpressionConstant(new ZConstant());
-        addExpressionConstant(new SpeedConstant());
-        addExpressionConstant(new HealthConstant());
-        addExpressionConstant(new TimeConstant());
     }
 
 }
