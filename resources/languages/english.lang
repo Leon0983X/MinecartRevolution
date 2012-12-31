@@ -22,11 +22,11 @@ basiccommands.info.start=$name$ Info
 basiccommands.version.latest=$green$You have already the latest version of $name$!
 
 basiccommands.getversion.description=Returns your plugin version
-basiccommands.getversion.return=$gold$Your MinecartRevolution version: $darkGreen$$version$
+basiccommands.getversion.return=$gold$Your $name$ version: $darkGreen$$version$
 
 basiccommands.versioncheck.description=Checks if a new version of $name$ is avaiable
 basiccommands.versioncheck.check=Checking $name$ version ...
-basiccommands.versioncheck.newVersion=$gold$There's a new version ($newVersion$) avaiable! Update with '$updateCommand$'!
+basiccommands.versioncheck.newVersion=$gold$There's a new version of $name$ ($newVersion$) avaiable! Update with '$updateCommand$'!
 
 basiccommands.update.description=Updates your $name$ to the latest version
 basiccommands.update.update=Updating $name$ ...
