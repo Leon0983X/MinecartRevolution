@@ -23,7 +23,7 @@ public class ControlSignBlock extends ControlBlock {
     @Override
     public ControlBlockInfo getInfo() {
 
-        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", Material.STONE.getId());
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", Material.BRICK.getId());
     }
 
     @Override
