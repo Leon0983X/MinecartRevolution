@@ -65,7 +65,7 @@ public class EffectUtil {
 
     public static void playLightning(final Minecart minecart) {
 
-        minecart.getWorld().strikeLightningEffect(minecart.getLocation().add(0, 6, 0));
+        minecart.getWorld().strikeLightningEffect(minecart.getLocation());
     }
 
 }

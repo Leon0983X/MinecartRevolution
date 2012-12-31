@@ -23,7 +23,15 @@ public class EffectSign extends ControlSign {
     @Override
     public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
 
-        executeExpression(minecart, "effect " + sign.getLine(1));
+        for (final String line : new String[] { sign.getLine(1), sign.getLine(2), sign.getLine(3) }) {
+            if (line.startsWith("+")) {
+                executeExpression(minecart, "+ effect " + line.replaceAll("+", "").trim());
+            } else if (line.startsWith("-")) {
+                executeExpression(minecart, "- effect " + line.replaceAll("-", "").trim());
+            } else {
+                executeExpression(minecart, "effect " + line);
+            }
+        }
     }
 
 }

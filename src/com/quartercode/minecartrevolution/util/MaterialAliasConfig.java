@@ -85,7 +85,11 @@ public class MaterialAliasConfig {
 
     public static boolean equals(final ItemStack itemStack, final String string) {
 
-        return itemStack.getTypeId() == getId(string) && itemStack.getData().getData() == getData(string);
+        if (itemStack == null || string == null) {
+            return false;
+        } else {
+            return itemStack.getTypeId() == getId(string) && itemStack.getData().getData() == getData(string);
+        }
     }
 
 }

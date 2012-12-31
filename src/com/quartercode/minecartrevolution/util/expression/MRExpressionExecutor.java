@@ -69,8 +69,9 @@ public class MRExpressionExecutor {
         return minecartExpressions;
     }
 
-    public void execute(final Minecart minecart, final String expression) throws ScriptException {
+    public void execute(final Minecart minecart, String expression) throws ScriptException {
 
+        expression = expression.trim();
         final String[] expressionParts = expression.split(COMMAND_END_MARKER);
 
         for (final String expressionPart : expressionParts) {

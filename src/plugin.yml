@@ -123,10 +123,46 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Control Sign block
 
 
+  minecartrevolution.control.block.eject.*:
+    description: Gives access to use the MinecartRevolution Eject block
+    children:
+      minecartrevolution.control.block.eject.place: true
+      minecartrevolution.control.block.eject.destroy: true
+  minecartrevolution.control.block.eject.place:
+    description: Gives access to place the MinecartRevolution Eject block
+  minecartrevolution.control.block.eject.destroy:
+    description: Gives access to destroy the MinecartRevolution Eject block
+
+
+  minecartrevolution.control.block.kill.*:
+    description: Gives access to use the MinecartRevolution Kill block
+    children:
+      minecartrevolution.control.kill.controlsign.place: true
+      minecartrevolution.control.kill.controlsign.destroy: true
+  minecartrevolution.control.kill.controlsign.place:
+    description: Gives access to place the MinecartRevolution Kill block
+  minecartrevolution.control.kill.controlsign.destroy:
+    description: Gives access to destroy the MinecartRevolution Kill block
+
+
+
   minecartrevolution.control.sign.*:
     description: Gives access to use all MinecartRevolution control signs
     children:
-      minecartrevolution.control.sign.minecartcontrol.*: true
+      minecartrevolution.control.sign.announce.*: true
+      minecartrevolution.control.sign.clear.*: true
+      minecartrevolution.control.sign.collect.*: true
+      minecartrevolution.control.sign.command.*: true
+      minecartrevolution.control.sign.effect.*: true
+      minecartrevolution.control.sign.expression.*: true
+      minecartrevolution.control.sign.file.*: true
+      minecartrevolution.control.sign.grab.*: true
+      minecartrevolution.control.sign.health.*: true
+      minecartrevolution.control.sign.intersection.*: true
+      minecartrevolution.control.sign.jump.*: true
+      minecartrevolution.control.sign.speed.*: true
+      minecartrevolution.control.sign.time.*: true
+      minecartrevolution.control.sign.weather.*: true
 
 
   minecartrevolution.control.sign.announce.*:

@@ -1,8 +1,6 @@
 
 package com.quartercode.basicexpression.command;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.entity.Minecart;
 import org.bukkit.inventory.Inventory;
@@ -21,7 +19,7 @@ public class ClearCommand implements ExpressionCommand {
     @Override
     public ExpressionCommandInfo getInfo() {
 
-        return new ExpressionCommandInfo("c", "clear");
+        return new ExpressionCommandInfo("cl", "clear");
     }
 
     @Override
@@ -46,12 +44,7 @@ public class ClearCommand implements ExpressionCommand {
         if (parameter == null) {
             inventory.clear();
         } else {
-            final List<String> itemList = new ArrayList<String>();
-            for (final String string : String.valueOf(parameter).split(",")) {
-                itemList.add(string);
-            }
-
-            for (final String item : itemList) {
+            for (final String item : String.valueOf(parameter).split(",")) {
                 for (int slot = 0; slot < inventory.getSize(); slot++) {
                     if (MaterialAliasConfig.equals(inventory.getItem(slot), item)) {
                         inventory.setItem(slot, new ItemStack(Material.AIR));

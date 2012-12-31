@@ -56,6 +56,12 @@ basiccontrols.blocks.brake.description=Slows the minecart
 basiccontrols.blocks.controlsign.name=Control Sign Block
 basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the block
 
+basiccontrols.blocks.eject.name=Eject
+basiccontrols.blocks.eject.description=Ejects the passenger from a minecart
+
+basiccontrols.blocks.kill.name=Kill
+basiccontrols.blocks.kill.description=Removes the minecart and ejects the passenger
+
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger
 
