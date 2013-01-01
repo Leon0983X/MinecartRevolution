@@ -74,11 +74,14 @@ basiccontrols.blocks.reverse.description=Reverses the direction of the minecart
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger
 
+basiccontrols.signs.chest.name=Chest
+basiccontrols.signs.chest.description=Transfers items between chests and storage minecarts
+
 basiccontrols.signs.clear.name=Clear
 basiccontrols.signs.clear.description=Clears the inventory of the minecart
 
 basiccontrols.signs.collect.name=Collect
-basiccontrols.signs.collect.description=Collects all items with an optional radius and item ids
+basiccontrols.signs.collect.description=Collects item drops
 
 basiccontrols.signs.command.name=Command
 basiccontrols.signs.command.description=Executes a command as the riding player

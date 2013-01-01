@@ -201,6 +201,17 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Announce sign
 
 
+  minecartrevolution.control.sign.chest.*:
+    description: Gives access to use the MinecartRevolution Chest sign
+    children:
+      minecartrevolution.control.sign.chest.place: true
+      minecartrevolution.control.sign.chest.destroy: true
+  minecartrevolution.control.sign.chest.place:
+    description: Gives access to place the MinecartRevolution Chest sign
+  minecartrevolution.control.sign.chest.destroy:
+    description: Gives access to destroy the MinecartRevolution Chest sign
+
+
   minecartrevolution.control.sign.clear.*:
     description: Gives access to use the MinecartRevolution Clear sign
     children:

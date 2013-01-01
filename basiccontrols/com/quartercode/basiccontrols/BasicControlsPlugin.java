@@ -9,6 +9,7 @@ import com.quartercode.basiccontrols.block.ElevatorBlock;
 import com.quartercode.basiccontrols.block.KillBlock;
 import com.quartercode.basiccontrols.block.ReverseBlock;
 import com.quartercode.basiccontrols.sign.AnnounceSign;
+import com.quartercode.basiccontrols.sign.ChestSign;
 import com.quartercode.basiccontrols.sign.ClearSign;
 import com.quartercode.basiccontrols.sign.CollectSign;
 import com.quartercode.basiccontrols.sign.CommandSign;
@@ -58,6 +59,7 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlBlock(new ReverseBlock());
 
         addControlSign(new AnnounceSign());
+        addControlSign(new ChestSign());
         addControlSign(new ClearSign());
         addControlSign(new CollectSign());
         addControlSign(new CommandSign());

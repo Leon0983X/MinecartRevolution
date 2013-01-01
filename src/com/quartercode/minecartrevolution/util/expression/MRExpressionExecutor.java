@@ -125,9 +125,14 @@ public class MRExpressionExecutor {
 	        parameterString = generateJavaScript(parameterString);
 
 	        final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
-	        scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
-	        Object parameter = scriptExecutor.get("result");
+	        try {
+	            scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
+	        }
+	        catch (ScriptException e) {
+	            return;
+	        }
 
+	        Object parameter = scriptExecutor.get("result");
 	        if (isNumber(String.valueOf(parameter))) {
 	            parameter = Double.parseDouble(String.valueOf(parameter));
 	        }
