@@ -29,8 +29,9 @@ public class MRControlSignExecutor {
         this.controlSigns = controlSigns;
     }
 
-    public void execute(final Minecart minecart) {
+    public List<Sign> getSigns(final Minecart minecart) {
 
+        final List<Sign> signs = new ArrayList<Sign>();
         final Location location = minecart.getLocation();
 
         for (final int[] offsets : controlSignOffsets) {
@@ -38,27 +39,32 @@ public class MRControlSignExecutor {
             signLocation.add(offsets[0], offsets[1], offsets[2]);
 
             if (signLocation.getBlock().getType() == Material.SIGN || signLocation.getBlock().getType() == Material.SIGN_POST) {
-                executeControlSign(signLocation, minecart);
+                signs.add((Sign) signLocation.getBlock().getState());
             }
+        }
+
+        return signs;
+    }
+
+    public void execute(final Minecart minecart) {
+
+        for (final Sign sign : getSigns(minecart)) {
+            executeControlSign(sign, minecart);
         }
     }
 
-    public void executeControlSign(final Location location, final Minecart minecart) {
+    public void executeControlSign(final Sign sign, final Minecart minecart) {
 
-        if (location.getBlock().isBlockIndirectlyPowered()) {
+        if (sign.getBlock().isBlockIndirectlyPowered()) {
             return;
         }
 
-        if (location.getBlock().getState() instanceof Sign) {
-            final Sign sign = (Sign) location.getBlock().getState();
+        for (final ControlSign controlSign : controlSigns) {
+            final ControlSignInfo controlSignInfo = controlSign.getInfo();
 
-            for (final ControlSign controlSign : controlSigns) {
-                final ControlSignInfo controlSignInfo = controlSign.getInfo();
-
-                for (final String label : controlSignInfo.getLabels()) {
-                    if (ControlSignInfo.getFormattedLabel(label).equalsIgnoreCase(sign.getLine(0))) {
-                        controlSign.execute(minecart, location, sign.getLine(0), sign);
-                    }
+            for (final String label : controlSignInfo.getLabels()) {
+                if (ControlSignInfo.getFormattedLabel(label).equalsIgnoreCase(sign.getLine(0))) {
+                    controlSign.execute(minecart, sign.getLocation(), sign.getLine(0), sign);
                 }
             }
         }

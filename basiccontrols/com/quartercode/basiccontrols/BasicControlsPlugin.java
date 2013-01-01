@@ -17,9 +17,11 @@ import com.quartercode.basiccontrols.sign.ExpressionSign;
 import com.quartercode.basiccontrols.sign.FileSign;
 import com.quartercode.basiccontrols.sign.GrabSign;
 import com.quartercode.basiccontrols.sign.HealthSign;
+import com.quartercode.basiccontrols.sign.HoldSign;
 import com.quartercode.basiccontrols.sign.IntersectionSign;
 import com.quartercode.basiccontrols.sign.JumpSign;
 import com.quartercode.basiccontrols.sign.SpeedSign;
+import com.quartercode.basiccontrols.sign.StationSign;
 import com.quartercode.basiccontrols.sign.TimeSign;
 import com.quartercode.basiccontrols.sign.WeatherSign;
 import com.quartercode.basiccontrols.util.BasicControlsConfig;
@@ -64,9 +66,11 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlSign(new FileSign());
         addControlSign(new GrabSign());
         addControlSign(new HealthSign());
+        addControlSign(new HoldSign());
         addControlSign(new IntersectionSign());
         addControlSign(new JumpSign());
         addControlSign(new SpeedSign());
+        addControlSign(new StationSign(minecartRevolution));
         addControlSign(new TimeSign());
         addControlSign(new WeatherSign());
 

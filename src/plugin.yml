@@ -289,6 +289,17 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Health sign
 
 
+  minecartrevolution.control.sign.hold.*:
+    description: Gives access to use the MinecartRevolution Hold sign
+    children:
+      minecartrevolution.control.sign.hold.place: true
+      minecartrevolution.control.sign.hold.destroy: true
+  minecartrevolution.control.sign.hold.place:
+    description: Gives access to place the MinecartRevolution Hold sign
+  minecartrevolution.control.sign.hold.destroy:
+    description: Gives access to destroy the MinecartRevolution Hold sign
+
+
   minecartrevolution.control.sign.intersection.*:
     description: Gives access to use the MinecartRevolution Intersection sign
     children:
@@ -320,6 +331,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Speed sign
   minecartrevolution.control.sign.speed.destroy:
     description: Gives access to destroy the MinecartRevolution Speed sign
+
+
+  minecartrevolution.control.sign.station.*:
+    description: Gives access to use the MinecartRevolution Station sign
+    children:
+      minecartrevolution.control.sign.station.place: true
+      minecartrevolution.control.sign.station.destroy: true
+  minecartrevolution.control.sign.station.place:
+    description: Gives access to place the MinecartRevolution Station sign
+  minecartrevolution.control.sign.station.destroy:
+    description: Gives access to destroy the MinecartRevolution Station sign
 
 
   minecartrevolution.control.sign.time.*:

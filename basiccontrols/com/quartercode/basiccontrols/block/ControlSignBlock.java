@@ -31,7 +31,7 @@ public class ControlSignBlock extends ControlBlock {
 
         if (hasSontrolSign(blockLocation)) {
             for (final Sign sign : getControlSigns(blockLocation)) {
-                basicControlsPlugin.getControlSignExecutor().executeControlSign(sign.getLocation(), minecart);
+                basicControlsPlugin.getControlSignExecutor().executeControlSign(sign, minecart);
             }
         }
     }

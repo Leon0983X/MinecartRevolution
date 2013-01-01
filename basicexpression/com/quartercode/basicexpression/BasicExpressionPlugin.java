@@ -10,6 +10,7 @@ import com.quartercode.basicexpression.command.EjectCommand;
 import com.quartercode.basicexpression.command.FileCommand;
 import com.quartercode.basicexpression.command.GrabCommand;
 import com.quartercode.basicexpression.command.HealthCommand;
+import com.quartercode.basicexpression.command.HoldCommand;
 import com.quartercode.basicexpression.command.IntersectionCommand;
 import com.quartercode.basicexpression.command.KillCommand;
 import com.quartercode.basicexpression.command.ReverseCommand;
@@ -58,6 +59,7 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         addExpressionCommand(new FileCommand(getExpressionExecutor()));
         addExpressionCommand(new GrabCommand());
         addExpressionCommand(new HealthCommand());
+        addExpressionCommand(new HoldCommand(minecartRevolution));
         addExpressionCommand(new IntersectionCommand());
         addExpressionCommand(new KillCommand(minecartRevolution));
         addExpressionCommand(new ReverseCommand());

@@ -12,6 +12,7 @@ control.destroy=$gray$You destroyed a $type$ control!
 control.place.noPermission=$red$You don't have the permission to place this control!
 control.destroy.noPermission=$red$You don't have the permission to destroy this control!
 
+
 basiccommands.help.description=Shows a help page
 basiccommands.help.start=$name$ Help
 basiccommands.help.aliases=Aliases: $darkGreen$$aliases$
@@ -47,6 +48,7 @@ basiccommands.stopcarts.broadcast=$gold$$sender$ stops $count$ minecarts in worl
 
 basiccommands.eject.description=Ejects you from a minecart
 
+
 basiccontrols.blocks.booster.name=Booster
 basiccontrols.blocks.booster.description=Boosts the minecart
 
@@ -67,6 +69,7 @@ basiccontrols.blocks.kill.description=Removes the minecart and ejects the passen
 
 basiccontrols.blocks.reverse.name=Reverse
 basiccontrols.blocks.reverse.description=Reverses the direction of the minecart
+
 
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger
@@ -95,6 +98,9 @@ basiccontrols.signs.grab.description=Grabs the nearest player in the given radiu
 basiccontrols.signs.health.name=Health
 basiccontrols.signs.health.description=Heals the living entity in the minecart
 
+basiccontrols.signs.hold.name=Hold
+basiccontrols.signs.hold.description=Holds the minecart a given amount of seconds
+
 basiccontrols.signs.intersection.name=Intersection
 basiccontrols.signs.intersection.description=Sorts the minecarts on different tracks with conditions
 
@@ -103,6 +109,9 @@ basiccontrols.signs.jump.description=Let the minecart jump the given amount of b
 
 basiccontrols.signs.speed.name=Speed
 basiccontrols.signs.speed.description=Sets the speed of the minecart
+
+basiccontrols.signs.station.name=Station
+basiccontrols.signs.station.description=Executes a station function
 
 basiccontrols.signs.time.name=Time
 basiccontrols.signs.time.description=Sets the time of the current world the minecart is in
