@@ -16,14 +16,14 @@ import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class IntersectionCommand implements ExpressionCommand {
+public class IntersectionCommand extends ExpressionCommand {
 
     public IntersectionCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("i", "intersection");
     }

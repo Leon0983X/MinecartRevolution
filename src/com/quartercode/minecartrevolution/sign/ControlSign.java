@@ -8,7 +8,18 @@ import com.quartercode.minecartrevolution.util.Control;
 
 public abstract class ControlSign extends Control {
 
-    public abstract ControlSignInfo getInfo();
+    private ControlSignInfo info;
+
+    public final ControlSignInfo getInfo() {
+
+        if (info == null) {
+            info = createInfo();
+        }
+
+        return info;
+    }
+
+    protected abstract ControlSignInfo createInfo();
 
     public abstract void execute(Minecart minecart, Location signLocation, String label, Sign sign);
 

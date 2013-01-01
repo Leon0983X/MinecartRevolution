@@ -15,7 +15,7 @@ public class TimeSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.time.name"), Lang.getValue("basiccontrols.signs.time.description"), "time.place", "time.destroy", "time");
     }

@@ -18,7 +18,12 @@ public class ControlSignBlock extends ControlBlock {
     public ControlSignBlock(final BasicControlsPlugin basicControlsPlugin) {
 
         this.basicControlsPlugin = basicControlsPlugin;
-        info = new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", Material.BRICK.getId());
+    }
+
+    @Override
+    protected ControlBlockInfo createInfo() {
+
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", Material.BRICK.getId());
     }
 
     @Override

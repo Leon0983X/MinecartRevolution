@@ -24,7 +24,7 @@ public class StopcartsCommand extends Command {
     }
 
     @Override
-    public CommandInfo getInfo() {
+    protected CommandInfo createInfo() {
 
         return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.stopcarts.description"), "stopcarts", "stopcarts");
     }

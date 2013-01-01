@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class GrabCommand implements ExpressionCommand {
+public class GrabCommand extends ExpressionCommand {
 
     public GrabCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("g", "grab");
     }

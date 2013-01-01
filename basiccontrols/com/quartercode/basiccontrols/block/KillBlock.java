@@ -13,7 +13,12 @@ public class KillBlock extends ControlBlock {
 
     public KillBlock() {
 
-        info = new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.kill.name"), Lang.getValue("basiccontrols.blocks.kill.description"), "kill.place", "kill.destroy", Material.MOSSY_COBBLESTONE.getId());
+    }
+
+    @Override
+    protected ControlBlockInfo createInfo() {
+
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.kill.name"), Lang.getValue("basiccontrols.blocks.kill.description"), "kill.place", "kill.destroy", Material.MOSSY_COBBLESTONE.getId());
     }
 
     @Override

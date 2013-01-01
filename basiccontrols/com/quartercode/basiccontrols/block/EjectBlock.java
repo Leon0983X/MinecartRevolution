@@ -13,7 +13,12 @@ public class EjectBlock extends ControlBlock {
 
     public EjectBlock() {
 
-        info = new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.eject.name"), Lang.getValue("basiccontrols.blocks.eject.description"), "eject.place", "eject.destroy", Material.IRON_BLOCK.getId());
+    }
+
+    @Override
+    protected ControlBlockInfo createInfo() {
+
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.eject.name"), Lang.getValue("basiccontrols.blocks.eject.description"), "eject.place", "eject.destroy", Material.IRON_BLOCK.getId());
     }
 
     @Override

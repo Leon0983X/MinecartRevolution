@@ -15,7 +15,7 @@ public class WeatherSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.weather.name"), Lang.getValue("basiccontrols.signs.weather.description"), "weather.place", "weather.destroy", "weather");
     }

@@ -6,14 +6,14 @@ import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
 
-public class HealthConstant implements ExpressionConstant {
+public class HealthConstant extends ExpressionConstant {
 
     public HealthConstant() {
 
     }
 
     @Override
-    public ExpressionConstantInfo getInfo() {
+    protected ExpressionConstantInfo createInfo() {
 
         return new ExpressionConstantInfo("h", "health");
     }

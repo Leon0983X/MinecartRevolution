@@ -8,7 +8,7 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class KillCommand implements ExpressionCommand {
+public class KillCommand extends ExpressionCommand {
 
     private final MinecartRevolution minecartRevolution;
 
@@ -18,7 +18,7 @@ public class KillCommand implements ExpressionCommand {
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("k", "kill");
     }

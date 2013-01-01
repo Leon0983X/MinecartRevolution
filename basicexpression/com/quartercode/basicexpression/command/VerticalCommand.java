@@ -6,14 +6,14 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class VerticalCommand implements ExpressionCommand {
+public class VerticalCommand extends ExpressionCommand {
 
     public VerticalCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("v", "vert", "vertical");
     }

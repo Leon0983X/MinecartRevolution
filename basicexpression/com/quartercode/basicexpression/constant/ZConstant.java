@@ -5,14 +5,14 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
 
-public class ZConstant implements ExpressionConstant {
+public class ZConstant extends ExpressionConstant {
 
     public ZConstant() {
 
     }
 
     @Override
-    public ExpressionConstantInfo getInfo() {
+    protected ExpressionConstantInfo createInfo() {
 
         return new ExpressionConstantInfo("z");
     }

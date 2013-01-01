@@ -15,7 +15,7 @@ public class EffectSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.effect.name"), Lang.getValue("basiccontrols.signs.effect.description"), "effect.place", "effect.destroy", "effect");
     }

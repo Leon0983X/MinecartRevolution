@@ -15,7 +15,7 @@ public class SpeedSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.speed.name"), Lang.getValue("basiccontrols.signs.speed.description"), "speed.place", "speed.destroy", "speed");
     }

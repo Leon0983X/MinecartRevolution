@@ -6,14 +6,14 @@ import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
 
-public class SpeedConstant implements ExpressionConstant {
+public class SpeedConstant extends ExpressionConstant {
 
     public SpeedConstant() {
 
     }
 
     @Override
-    public ExpressionConstantInfo getInfo() {
+    protected ExpressionConstantInfo createInfo() {
 
         return new ExpressionConstantInfo("s", "speed");
     }

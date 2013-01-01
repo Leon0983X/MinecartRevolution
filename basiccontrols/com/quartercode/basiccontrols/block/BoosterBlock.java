@@ -14,7 +14,12 @@ public class BoosterBlock extends ControlBlock {
 
     public BoosterBlock() {
 
-        info = new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.booster.name"), Lang.getValue("basiccontrols.blocks.booster.description"), "booster.place", "booster.destroy", Material.GOLD_BLOCK.getId());
+    }
+
+    @Override
+    protected ControlBlockInfo createInfo() {
+
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.booster.name"), Lang.getValue("basiccontrols.blocks.booster.description"), "booster.place", "booster.destroy", Material.GOLD_BLOCK.getId());
     }
 
     @Override

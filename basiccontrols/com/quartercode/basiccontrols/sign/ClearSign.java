@@ -15,7 +15,7 @@ public class ClearSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.clear.name"), Lang.getValue("basiccontrols.signs.clear.description"), "clear.place", "clear.destroy", "clear");
     }

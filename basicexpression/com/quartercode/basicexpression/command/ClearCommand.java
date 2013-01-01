@@ -10,14 +10,14 @@ import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class ClearCommand implements ExpressionCommand {
+public class ClearCommand extends ExpressionCommand {
 
     public ClearCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+     protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("cl", "clear");
     }

@@ -2,20 +2,20 @@
 package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.util.EffectUtil;
+import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class EffectCommand extends ExpressionCommand {
+public class ReverseCommand extends ExpressionCommand {
 
-    public EffectCommand() {
+    public ReverseCommand() {
 
     }
 
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("ef", "effect");
+        return new ExpressionCommandInfo("r", "reverse");
     }
 
     @Override
@@ -27,9 +27,11 @@ public class EffectCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (parameter != null) {
-            EffectUtil.playEffect(minecart, String.valueOf(parameter));
-        }
+        final Vector vector = minecart.getVelocity();
+        vector.setX(-vector.getX());
+        vector.setZ(-vector.getZ());
+
+        minecart.setVelocity(vector);
     }
 
 }

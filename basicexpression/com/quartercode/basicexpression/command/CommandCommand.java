@@ -7,7 +7,7 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class CommandCommand implements ExpressionCommand {
+public class CommandCommand extends ExpressionCommand {
 
     private final MinecartRevolution minecartRevolution;
 
@@ -17,7 +17,7 @@ public class CommandCommand implements ExpressionCommand {
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("cmd", "command");
     }

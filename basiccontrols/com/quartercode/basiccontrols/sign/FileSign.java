@@ -15,7 +15,7 @@ public class FileSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.file.name"), Lang.getValue("basiccontrols.signs.file.description"), "file.place", "file.destroy", "file");
     }

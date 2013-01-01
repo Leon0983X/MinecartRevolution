@@ -15,7 +15,7 @@ public class JumpSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.jump.name"), Lang.getValue("basiccontrols.signs.jump.description"), "jump.place", "jump.destroy", "jump", "vertical");
     }

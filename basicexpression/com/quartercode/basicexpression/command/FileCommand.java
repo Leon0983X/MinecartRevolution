@@ -13,7 +13,7 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
 
-public class FileCommand implements ExpressionCommand {
+public class FileCommand extends ExpressionCommand {
 
     private final MRExpressionExecutor expressionExecutor;
 
@@ -23,7 +23,7 @@ public class FileCommand implements ExpressionCommand {
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("f", "file");
     }

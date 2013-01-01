@@ -41,6 +41,31 @@ public class Lang {
 
     public static String getValue(final String key, final String... variables) {
 
+        final String result = readValue(key, variables);
+
+        if (result == null) {
+            final String languageName = readValue("name");
+            String noLangValue = readValue("noLangValue", "key", key, "language", languageName, "languageFile", getLanguage() + ".lang");
+
+            if (noLangValue == null) {
+                noLangValue = ChatColor.RED + "There's no language value for " + key + " in the language " + languageName + " (" + getLanguage() + ".lang)!";
+            }
+
+            Bukkit.getConsoleSender().sendMessage(noLangValue);
+            return noLangValue;
+        } else {
+            return result;
+        }
+    }
+
+    private static void addVariable(final List<String> variableList, final String key, final Object value) {
+
+        variableList.add(key);
+        variableList.add(String.valueOf(value));
+    }
+
+    private static String readValue(String key, String... variables) {
+
         final List<String> variableList = new ArrayList<String>(Arrays.asList(variables));
 
         addVariable(variableList, "name", Conf.NAME);
@@ -75,27 +100,7 @@ public class Lang {
         addVariable(variableList, "under", ChatColor.UNDERLINE);
         addVariable(variableList, "underline", ChatColor.UNDERLINE);
 
-        final String result = resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
-
-        if (result == null) {
-            final String languageName = resourceHandler.getProperty("name");
-            String noLangValue = resourceHandler.getProperty("noLangValue", key, "key", key, "language", languageName, "languageFile", getLanguage() + ".lang");
-
-            if (noLangValue == null) {
-                noLangValue = ChatColor.RED + "There's no language value for " + key + " in the language " + languageName + " (" + getLanguage() + ".lang)!";
-            }
-
-            Bukkit.getConsoleSender().sendMessage(noLangValue);
-            return noLangValue;
-        } else {
-            return result;
-        }
-    }
-
-    private static void addVariable(final List<String> variableList, final String key, final Object value) {
-
-        variableList.add(key);
-        variableList.add(String.valueOf(value));
+        return resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
     }
 
     public static Locale getLocale() {

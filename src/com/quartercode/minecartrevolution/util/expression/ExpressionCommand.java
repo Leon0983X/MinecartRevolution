@@ -3,12 +3,23 @@ package com.quartercode.minecartrevolution.util.expression;
 
 import org.bukkit.entity.Minecart;
 
-public interface ExpressionCommand {
+public abstract class ExpressionCommand {
 
-    public ExpressionCommandInfo getInfo();
+    private ExpressionCommandInfo info;
 
-    public boolean canExecute(Minecart minecart);
+    public final ExpressionCommandInfo getInfo() {
 
-    public void execute(Minecart minecart, Object parameter);
+        if (info == null) {
+            info = createInfo();
+        }
+
+        return info;
+    }
+
+    protected abstract ExpressionCommandInfo createInfo();
+
+    public abstract boolean canExecute(Minecart minecart);
+
+    public abstract void execute(Minecart minecart, Object parameter);
 
 }

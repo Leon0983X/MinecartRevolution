@@ -13,14 +13,14 @@ import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class CollectCommand implements ExpressionCommand {
+public class CollectCommand extends ExpressionCommand {
 
     public CollectCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("co", "collect");
     }

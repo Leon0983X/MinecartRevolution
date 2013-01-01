@@ -6,14 +6,14 @@ import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class SpeedCommand implements ExpressionCommand {
+public class SpeedCommand extends ExpressionCommand {
 
     public SpeedCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("s", "speed");
     }

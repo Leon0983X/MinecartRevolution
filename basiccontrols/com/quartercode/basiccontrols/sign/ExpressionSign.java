@@ -16,7 +16,7 @@ public class ExpressionSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.expression.name"), Lang.getValue("basiccontrols.signs.expression.description"), "expression.place", "expression.destroy", "revo", "control", "script", "expression");
     }

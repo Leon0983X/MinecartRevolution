@@ -14,7 +14,7 @@ public class GetVersionCommand extends Command {
     }
 
     @Override
-    public CommandInfo getInfo() {
+    protected CommandInfo createInfo() {
 
         return new CommandInfo(true, null, Lang.getValue("basiccommands.getversion.description"), "getversion", "getversion", "getv", "version");
     }

@@ -6,16 +6,16 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class EjectCommand implements ExpressionCommand {
+public class EjectCommand extends ExpressionCommand {
 
     public EjectCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("e", "eject");
+        return new ExpressionCommandInfo("ej", "eject");
     }
 
     @Override

@@ -3,10 +3,21 @@ package com.quartercode.minecartrevolution.util.expression;
 
 import org.bukkit.entity.Minecart;
 
-public interface ExpressionConstant {
+public abstract class ExpressionConstant {
 
-    public ExpressionConstantInfo getInfo();
+    private ExpressionConstantInfo info;
 
-    public Object getValue(Minecart minecart);
+    public final ExpressionConstantInfo getInfo() {
+
+        if (info == null) {
+            info = createInfo();
+        }
+
+        return info;
+    }
+
+    protected abstract ExpressionConstantInfo createInfo();
+
+    public abstract Object getValue(Minecart minecart);
 
 }

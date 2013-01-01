@@ -6,14 +6,14 @@ import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class AnnounceCommand implements ExpressionCommand {
+public class AnnounceCommand extends ExpressionCommand {
 
     public AnnounceCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("a", "announce");
     }

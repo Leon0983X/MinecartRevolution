@@ -9,22 +9,22 @@ import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.block.ControlBlockInfo;
 import com.quartercode.minecartrevolution.get.Lang;
 
-public class BrakeBlock extends ControlBlock {
+public class ReverseBlock extends ControlBlock {
 
-    public BrakeBlock() {
+    public ReverseBlock() {
 
     }
 
     @Override
     protected ControlBlockInfo createInfo() {
 
-        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.brake.name"), Lang.getValue("basiccontrols.blocks.brake.description"), "brake.place", "brake.destroy", Material.SOUL_SAND.getId());
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.reverse.name"), Lang.getValue("basiccontrols.blocks.reverse.description"), "reverse.place", "reverse.destroy", Material.WOOL.getId());
     }
 
     @Override
     public void execute(final Minecart minecart, final Location blockLocation, final int blockId, final Block block) {
 
-        executeExpression(minecart, "speed $speed / 5");
+        executeExpression(minecart, "reverse");
     }
 
 }

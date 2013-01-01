@@ -2,7 +2,7 @@ name=English
 
 noLangValue=$red$There's no language value for $key$ in the language $language$ ($languageFile$)!
 
-command.noCommand2=$red$The $name$-Command $label$ doesn't exist!
+command.noCommand=$red$The $name$-Command $label$ doesn't exist!
 command.noPermission=$red$You don't have the permission to use this command!
 
 control.place=$gray$Placed a $name$
@@ -59,8 +59,14 @@ basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the 
 basiccontrols.blocks.eject.name=Eject
 basiccontrols.blocks.eject.description=Ejects the passenger from a minecart
 
+basiccontrols.blocks.elevator.name=Elevator
+basiccontrols.blocks.elevator.description=Elevates the minecart to the next elevator block above
+
 basiccontrols.blocks.kill.name=Kill
 basiccontrols.blocks.kill.description=Removes the minecart and ejects the passenger
+
+basiccontrols.blocks.reverse.name=Reverse
+basiccontrols.blocks.reverse.description=Reverses the direction of the minecart
 
 basiccontrols.signs.announce.name=Announce
 basiccontrols.signs.announce.description=Sends a message to the minecart passenger

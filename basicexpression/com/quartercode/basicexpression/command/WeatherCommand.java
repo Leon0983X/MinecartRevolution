@@ -5,14 +5,14 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
-public class WeatherCommand implements ExpressionCommand {
+public class WeatherCommand extends ExpressionCommand {
 
     public WeatherCommand() {
 
     }
 
     @Override
-    public ExpressionCommandInfo getInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("w", "weather");
     }

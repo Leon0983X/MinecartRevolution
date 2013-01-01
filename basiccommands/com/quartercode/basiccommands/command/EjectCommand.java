@@ -15,7 +15,7 @@ public class EjectCommand extends Command {
     }
 
     @Override
-    public CommandInfo getInfo() {
+    protected CommandInfo createInfo() {
 
         return new CommandInfo(true, null, Lang.getValue("basiccommands.eject.description"), "eject", "eject");
     }

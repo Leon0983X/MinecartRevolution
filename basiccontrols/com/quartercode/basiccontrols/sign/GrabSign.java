@@ -15,7 +15,7 @@ public class GrabSign extends ControlSign {
     }
 
     @Override
-    public ControlSignInfo getInfo() {
+    protected ControlSignInfo createInfo() {
 
         return new ControlSignInfo(Lang.getValue("basiccontrols.signs.grab.name"), Lang.getValue("basiccontrols.signs.grab.description"), "grab.place", "grab.destroy", "grab");
     }

@@ -85,9 +85,12 @@ permissions:
   minecartrevolution.control.block.*:
     description: Gives access to use all MinecartRevolution control blocks
     children:
-      minecartrevolution.control.block.controlsign.*: true
       minecartrevolution.control.block.booster.*: true
       minecartrevolution.control.block.brake.*: true
+      minecartrevolution.control.block.controlsign.*: true
+      minecartrevolution.control.block.eject.*: true
+      minecartrevolution.control.block.kill.*: true
+      minecartrevolution.control.block.reverse.*: true
 
 
   minecartrevolution.control.block.booster.*:
@@ -134,6 +137,17 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Eject block
 
 
+  minecartrevolution.control.block.elevator.*:
+    description: Gives access to use the MinecartRevolution Elevator block
+    children:
+      minecartrevolution.control.block.elevator.place: true
+      minecartrevolution.control.block.elevator.destroy: true
+  minecartrevolution.control.block.elevator.place:
+    description: Gives access to place the MinecartRevolution Elevator block
+  minecartrevolution.control.block.elevator.destroy:
+    description: Gives access to destroy the MinecartRevolution Elevator block
+
+
   minecartrevolution.control.block.kill.*:
     description: Gives access to use the MinecartRevolution Kill block
     children:
@@ -143,6 +157,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Kill block
   minecartrevolution.control.kill.controlsign.destroy:
     description: Gives access to destroy the MinecartRevolution Kill block
+
+
+  minecartrevolution.control.block.reverse.*:
+    description: Gives access to use the MinecartRevolution Reverse block
+    children:
+      minecartrevolution.control.reverse.controlsign.place: true
+      minecartrevolution.control.reverse.controlsign.destroy: true
+  minecartrevolution.control.reverse.controlsign.place:
+    description: Gives access to place the MinecartRevolution Reverse block
+  minecartrevolution.control.reverse.controlsign.destroy:
+    description: Gives access to destroy the MinecartRevolution Reverse block
 
 
 
