@@ -18,7 +18,7 @@ The Code
 
 The sourcecode is splitted in seperated folders:
 
-* /src contains the main code of MinecartRevolution, like listeners and executors.
+* /core contains the main code of MinecartRevolution, like listeners and executors.
 * /qcutil contains a Bukkit-Version of the Java-Libraray QcUtil.
 * /basiccommands contains a MinecartRevolution-Plugin for the main Chat-Commands, like /help.
 * /basiccontrols contains a MinecartRevolution-Plugin for the main Controls, like Boosters, Brakes and even the Expression-Sign.
