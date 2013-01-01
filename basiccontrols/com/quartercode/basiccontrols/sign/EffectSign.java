@@ -25,9 +25,9 @@ public class EffectSign extends ControlSign {
 
         for (final String line : new String[] { sign.getLine(1), sign.getLine(2), sign.getLine(3) }) {
             if (line.startsWith("+")) {
-                executeExpression(minecart, "+ effect " + line.replaceAll("+", "").trim());
+                executeExpression(minecart, "+ effect " + line.replaceAll("\\+", "").trim());
             } else if (line.startsWith("-")) {
-                executeExpression(minecart, "- effect " + line.replaceAll("-", "").trim());
+                executeExpression(minecart, "- effect " + line.replaceAll("\\-", "").trim());
             } else {
                 executeExpression(minecart, "effect " + line);
             }

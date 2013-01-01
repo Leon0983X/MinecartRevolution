@@ -43,9 +43,11 @@ public class MRControlSignExecutor {
         }
     }
 
-    public boolean executeControlSign(final Location location, final Minecart minecart) {
+    public void executeControlSign(final Location location, final Minecart minecart) {
 
-        boolean executed = false;
+        if (location.getBlock().isBlockIndirectlyPowered()) {
+            return;
+        }
 
         if (location.getBlock().getState() instanceof Sign) {
             final Sign sign = (Sign) location.getBlock().getState();
@@ -56,13 +58,10 @@ public class MRControlSignExecutor {
                 for (final String label : controlSignInfo.getLabels()) {
                     if (ControlSignInfo.getFormattedLabel(label).equalsIgnoreCase(sign.getLine(0))) {
                         controlSign.execute(minecart, location, sign.getLine(0), sign);
-                        executed = true;
                     }
                 }
             }
         }
-
-        return executed;
     }
 
 }

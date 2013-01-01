@@ -48,7 +48,7 @@ public class MRControlBlockExecutor {
         return blocks;
     }
 
-    public boolean isControlBlock(final Block block) {
+    private boolean isControlBlock(final Block block) {
 
         final int blockId = block.getTypeId();
 
@@ -74,7 +74,11 @@ public class MRControlBlockExecutor {
         }
     }
 
-    public void executeControlBlock(final Block block, final Minecart minecart) {
+    private void executeControlBlock(final Block block, final Minecart minecart) {
+
+        if (block.isBlockIndirectlyPowered()) {
+            return;
+        }
 
         final int blockId = block.getTypeId();
 

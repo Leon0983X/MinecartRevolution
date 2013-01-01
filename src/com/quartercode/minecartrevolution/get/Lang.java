@@ -64,7 +64,7 @@ public class Lang {
         variableList.add(String.valueOf(value));
     }
 
-    private static String readValue(String key, String... variables) {
+    private static String readValue(final String key, final String... variables) {
 
         final List<String> variableList = new ArrayList<String>(Arrays.asList(variables));
 

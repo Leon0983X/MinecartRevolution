@@ -17,7 +17,7 @@ public class ClearCommand extends ExpressionCommand {
     }
 
     @Override
-     protected ExpressionCommandInfo createInfo() {
+    protected ExpressionCommandInfo createInfo() {
 
         return new ExpressionCommandInfo("cl", "clear");
     }
