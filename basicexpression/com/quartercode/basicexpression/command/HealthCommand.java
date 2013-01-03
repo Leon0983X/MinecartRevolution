@@ -15,7 +15,7 @@ public class HealthCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("h", "health");
+        return new ExpressionCommandInfo("he", "health");
     }
 
     @Override

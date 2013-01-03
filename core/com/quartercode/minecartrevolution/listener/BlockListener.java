@@ -17,6 +17,7 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.get.Perm;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
+import com.quartercode.minecartrevolution.util.ItemData;
 
 public class BlockListener implements Listener {
 
@@ -37,8 +38,8 @@ public class BlockListener implements Listener {
                 for (final ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
                     final ControlBlockInfo info = controlBlock.getInfo();
 
-                    for (final int blockId : info.getBlockIds()) {
-                        if (blockId == block.getTypeId()) {
+                    for (final ItemData itemData : info.getItemDatas()) {
+                        if (itemData.equals(block)) {
                             if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
 	event.setCancelled(true);
 	event.getPlayer().sendMessage(Lang.getValue("control.place.noPermission"));
@@ -60,8 +61,8 @@ public class BlockListener implements Listener {
                 for (final ControlBlock controlBlock : minecartRevolution.getControlBlockExecutor().getControlBlocks()) {
                     final ControlBlockInfo info = controlBlock.getInfo();
 
-                    for (final int blockId : info.getBlockIds()) {
-                        if (blockId == block.getTypeId()) {
+                    for (final ItemData itemData : info.getItemDatas()) {
+                        if (itemData.equals(block)) {
                             if (!Perm.has(event.getPlayer(), info.getDestroyPermission())) {
 	event.setCancelled(true);
 	event.getPlayer().sendMessage(Lang.getValue("control.destroy.noPermission"));

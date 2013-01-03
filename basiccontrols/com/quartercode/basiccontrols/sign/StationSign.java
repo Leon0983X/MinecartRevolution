@@ -2,7 +2,6 @@
 package com.quartercode.basiccontrols.sign;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
@@ -34,10 +33,8 @@ public class StationSign extends ControlSign implements Listener {
     }
 
     @Override
-    public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
+    public void execute(final Minecart minecart, final String label, final Sign sign) {
 
-        System.out.println(label);
-        
         minecart.setVelocity(new Vector(0, 0, 0));
     }
 

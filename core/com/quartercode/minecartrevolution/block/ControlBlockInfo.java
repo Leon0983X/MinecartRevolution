@@ -1,21 +1,23 @@
 
 package com.quartercode.minecartrevolution.block;
 
+import com.quartercode.minecartrevolution.util.ItemData;
+
 public class ControlBlockInfo {
 
     private final String name;
     private final String description;
     private final String placePermission;
     private final String destroyPermission;
-    private int[]        blockIds;
+    private ItemData[]   itemDatas;
 
-    public ControlBlockInfo(final String name, final String description, final String placePermission, final String destroyPermission, final int... blockIds) {
+    public ControlBlockInfo(final String name, final String description, final String placePermission, final String destroyPermission, final ItemData... itemDatas) {
 
         this.name = name;
         this.description = description;
         this.placePermission = "control.block." + placePermission;
         this.destroyPermission = "control.block." + destroyPermission;
-        this.blockIds = blockIds;
+        this.itemDatas = itemDatas;
     }
 
     public String getName() {
@@ -38,14 +40,14 @@ public class ControlBlockInfo {
         return destroyPermission;
     }
 
-    public int[] getBlockIds() {
+    public ItemData[] getItemDatas() {
 
-        return blockIds;
+        return itemDatas;
     }
 
-    public void setBlockIds(final int[] blockIds) {
+    public void setItemDatas(final ItemData[] itemDatas) {
 
-        this.blockIds = blockIds;
+        this.itemDatas = itemDatas;
     }
 
 }

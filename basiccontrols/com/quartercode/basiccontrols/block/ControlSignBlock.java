@@ -1,7 +1,6 @@
 
 package com.quartercode.basiccontrols.block;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -10,6 +9,7 @@ import com.quartercode.basiccontrols.BasicControlsPlugin;
 import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.block.ControlBlockInfo;
 import com.quartercode.minecartrevolution.get.Lang;
+import com.quartercode.minecartrevolution.util.ItemData;
 
 public class ControlSignBlock extends ControlBlock {
 
@@ -23,14 +23,14 @@ public class ControlSignBlock extends ControlBlock {
     @Override
     protected ControlBlockInfo createInfo() {
 
-        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", Material.BRICK.getId());
+        return new ControlBlockInfo(Lang.getValue("basiccontrols.blocks.controlsign.name"), Lang.getValue("basiccontrols.blocks.controlsign.description"), "controlsign.place", "controlsign.destroy", new ItemData(Material.BRICK));
     }
 
     @Override
-    public void execute(final Minecart minecart, final Location blockLocation, final int blockId, final Block block) {
+    public void execute(final Minecart minecart, final Block block) {
 
-        if (hasSontrolSign(blockLocation)) {
-            for (final Sign sign : getControlSigns(blockLocation)) {
+        if (hasSontrolSign(block.getLocation())) {
+            for (final Sign sign : getControlSigns(block.getLocation())) {
                 basicControlsPlugin.getControlSignExecutor().executeControlSign(sign, minecart);
             }
         }

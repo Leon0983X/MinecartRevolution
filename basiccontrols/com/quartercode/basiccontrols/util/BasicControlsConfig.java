@@ -2,9 +2,11 @@
 package com.quartercode.basiccontrols.util;
 
 import java.util.List;
+import org.bukkit.Material;
 import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.plugin.MinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginConfig;
+import com.quartercode.minecartrevolution.util.ItemData;
 
 public class BasicControlsConfig extends PluginConfig {
 
@@ -24,24 +26,28 @@ public class BasicControlsConfig extends PluginConfig {
     public void addBlocks(final List<ControlBlock> controlBlocks) {
 
         for (final ControlBlock controlBlock : controlBlocks) {
-            final String path = BasicControlsConfig.BLOCK + "." + controlBlock.getInfo().getName().toLowerCase().replaceAll(" ", "_") + ".ids";
+            final String path = BasicControlsConfig.BLOCK + "." + controlBlock.getInfo().getName().toLowerCase().replaceAll(" ", "_") + ".blocks";
 
             String blocks = "";
-            for (final int blockId : controlBlock.getInfo().getBlockIds()) {
-                blocks += blockId + ",";
+            for (final ItemData itemData : controlBlock.getInfo().getItemDatas()) {
+                blocks += itemData.getMaterial().getId() + (itemData.getData() == 0 ? "" : ":" + itemData.getData()) + ",";
             }
             blocks = blocks.substring(0, blocks.length() - 1);
             addDefault(path, blocks);
 
             blocks = String.valueOf(get(path));
-            final String[] blockIdStrings = blocks.split(",");
-            final int[] blockIds = new int[blockIdStrings.length];
+            final String[] blockDataStrings = blocks.split(",");
+            final ItemData[] itemDatas = new ItemData[blockDataStrings.length];
 
-            for (int counter = 0; counter < blockIdStrings.length; counter++) {
-                blockIds[counter] = Integer.parseInt(blockIdStrings[counter]);
+            for (int counter = 0; counter < blockDataStrings.length; counter++) {
+                if (blockDataStrings[counter].contains(":")) {
+                    itemDatas[counter] = new ItemData(Material.getMaterial(Integer.parseInt(blockDataStrings[counter].split(":")[0])), Byte.parseByte(blockDataStrings[counter].split(":")[1]));
+                } else {
+                    itemDatas[counter] = new ItemData(Material.getMaterial(Integer.parseInt(blockDataStrings[counter])));
+                }
             }
 
-            controlBlock.getInfo().setBlockIds(blockIds);
+            controlBlock.getInfo().setItemDatas(itemDatas);
         }
     }
 

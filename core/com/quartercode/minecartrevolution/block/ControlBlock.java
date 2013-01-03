@@ -48,6 +48,6 @@ public abstract class ControlBlock extends Control {
 
     protected abstract ControlBlockInfo createInfo();
 
-    public abstract void execute(Minecart minecart, Location blockLocation, int blockId, Block block);
+    public abstract void execute(Minecart minecart, Block block);
 
 }

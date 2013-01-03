@@ -128,7 +128,7 @@ public class MRExpressionExecutor {
 	        try {
 	            scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
 	        }
-	        catch (ScriptException e) {
+	        catch (final ScriptException e) {
 	            return;
 	        }
 

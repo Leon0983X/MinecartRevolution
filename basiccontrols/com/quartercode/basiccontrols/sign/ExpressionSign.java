@@ -1,7 +1,6 @@
 
 package com.quartercode.basiccontrols.sign;
 
-import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.get.Lang;
@@ -22,7 +21,7 @@ public class ExpressionSign extends ControlSign {
     }
 
     @Override
-    public void execute(final Minecart minecart, final Location signLocation, final String label, final Sign sign) {
+    public void execute(final Minecart minecart, final String label, final Sign sign) {
 
         final String[] lines = { sign.getLine(1), sign.getLine(2), sign.getLine(3) };
         final String expression = MRExpressionExecutor.getExpression(lines);

@@ -64,7 +64,7 @@ public class MRControlSignExecutor {
 
             for (final String label : controlSignInfo.getLabels()) {
                 if (ControlSignInfo.getFormattedLabel(label).equalsIgnoreCase(sign.getLine(0))) {
-                    controlSign.execute(minecart, sign.getLocation(), sign.getLine(0), sign);
+                    controlSign.execute(minecart, sign.getLine(0), sign);
                 }
             }
         }

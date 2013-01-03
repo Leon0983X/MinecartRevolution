@@ -80,7 +80,7 @@ public class ChestCommand extends ExpressionCommand {
                 }
             }
 
-            if (String.valueOf(parameter).startsWith(">")) {
+            if (String.valueOf(parameter).startsWith("<")) {
                 if (items.size() > 0) {
                     for (final String item : items) {
                         toMinecart(chest, storageMinecart, item);
@@ -88,7 +88,7 @@ public class ChestCommand extends ExpressionCommand {
                 } else {
                     toMinecart(chest, storageMinecart, null);
                 }
-            } else if (String.valueOf(parameter).startsWith("<")) {
+            } else if (String.valueOf(parameter).startsWith(">")) {
                 if (items.size() > 0) {
                     for (final String item : items) {
                         toChest(chest, storageMinecart, item);
@@ -107,7 +107,7 @@ public class ChestCommand extends ExpressionCommand {
                 return;
             }
 
-            if (storageMinecart.getInventory().getItem(counter) != null && (string == null || MaterialAliasConfig.equals(storageMinecart.getInventory().getItem(counter), string))) {
+            if (storageMinecart.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(storageMinecart.getInventory().getItem(counter), string)) {
                 chest.getInventory().addItem(new ItemStack[] { storageMinecart.getInventory().getItem(counter) });
                 storageMinecart.getInventory().setItem(counter, new ItemStack(Material.AIR));
             }
@@ -121,7 +121,7 @@ public class ChestCommand extends ExpressionCommand {
                 return;
             }
 
-            if (chest.getInventory().getItem(counter) != null && (string == null || MaterialAliasConfig.equals(chest.getInventory().getItem(counter), string))) {
+            if (chest.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(chest.getInventory().getItem(counter), string)) {
                 storageMinecart.getInventory().addItem(new ItemStack[] { chest.getInventory().getItem(counter) });
                 chest.getInventory().setItem(counter, new ItemStack(Material.AIR));
             }

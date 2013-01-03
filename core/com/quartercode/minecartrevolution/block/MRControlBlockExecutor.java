@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.util.ItemData;
 
 public class MRControlBlockExecutor {
 
@@ -50,13 +51,11 @@ public class MRControlBlockExecutor {
 
     private boolean isControlBlock(final Block block) {
 
-        final int blockId = block.getTypeId();
-
         for (final ControlBlock controlBlock : controlBlocks) {
             final ControlBlockInfo info = controlBlock.getInfo();
 
-            for (final int cbBlockId : info.getBlockIds()) {
-                if (cbBlockId == blockId) {
+            for (final ItemData itemData : info.getItemDatas()) {
+                if (itemData.equals(block)) {
                     return true;
                 }
             }
@@ -80,14 +79,12 @@ public class MRControlBlockExecutor {
             return;
         }
 
-        final int blockId = block.getTypeId();
-
         for (final ControlBlock controlBlock : controlBlocks) {
-            final ControlBlockInfo controlBlockInfo = controlBlock.getInfo();
+            final ControlBlockInfo info = controlBlock.getInfo();
 
-            for (final int cbBlockId : controlBlockInfo.getBlockIds()) {
-                if (cbBlockId == blockId) {
-                    controlBlock.execute(minecart, block.getLocation(), blockId, block);
+            for (final ItemData itemData : info.getItemDatas()) {
+                if (itemData.equals(block)) {
+                    controlBlock.execute(minecart, block);
                     break;
                 }
             }
