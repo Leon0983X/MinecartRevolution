@@ -6,7 +6,6 @@ import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.block.MRControlBlockExecutor;
 import com.quartercode.minecartrevolution.command.Command;
 import com.quartercode.minecartrevolution.command.MRCommandExecutor;
-import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
@@ -15,80 +14,35 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
 
-public abstract class MinecartRevolutionPlugin {
+public interface MinecartRevolutionPlugin {
 
-    protected MinecartRevolution minecartRevolution;
-    protected Config             config;
+    public MinecartRevolution getMinecartRevolution();
 
-    protected MinecartRevolutionPlugin() {
+    public void setMinecartRevolution(MinecartRevolution minecartRevolution);
 
-        PluginManager.registerPlugin(this);
-    }
+    public MRCommandExecutor getCommandExecutor();
 
-    public MinecartRevolution getMinecartRevolution() {
+    public MRControlBlockExecutor getControlBlockExecutor();
 
-        return minecartRevolution;
-    }
+    public MRControlSignExecutor getControlSignExecutor();
 
-    public MRCommandExecutor getCommandExecutor() {
+    public MRExpressionExecutor getExpressionExecutor();
 
-        return minecartRevolution.getCommandExecutor();
-    }
+    public File getPluginFolder();
 
-    public MRControlBlockExecutor getControlBlockExecutor() {
+    public File getConfigFile();
 
-        return minecartRevolution.getControlBlockExecutor();
-    }
+    public Config getConfiguration();
 
-    public MRControlSignExecutor getControlSignExecutor() {
+    public void addCommand(final Command command);
 
-        return minecartRevolution.getControlSignExecutor();
-    }
+    public void addControlBlock(final ControlBlock controlBlock);
 
-    public MRExpressionExecutor getExpressionExecutor() {
+    public void addControlSign(final ControlSign controlSign);
 
-        return minecartRevolution.getExpressionExecutor();
-    }
+    public void addExpressionCommand(final ExpressionCommand expressionCommand);
 
-    public File getPluginFolder() {
-
-        return new File(FileConf.PLUGINS, getInfo().getName());
-    }
-
-    public File getConfigFile() {
-
-        return new File(getPluginFolder(), FileConf.MAIN_CONF_NAME);
-    }
-
-    public Config getConfig() {
-
-        return config;
-    }
-
-    public void addCommand(final Command command) {
-
-        getCommandExecutor().getCommands().add(command);
-    }
-
-    public void addControlBlock(final ControlBlock controlBlock) {
-
-        getControlBlockExecutor().getControlBlocks().add(controlBlock);
-    }
-
-    public void addControlSign(final ControlSign controlSign) {
-
-        getControlSignExecutor().getControlSigns().add(controlSign);
-    }
-
-    public void addExpressionCommand(final ExpressionCommand expressionCommand) {
-
-        getExpressionExecutor().getExpressionCommands().add(expressionCommand);
-    }
-
-    public void addExpressionConstant(final ExpressionConstant expressionConstant) {
-
-        getExpressionExecutor().getExpressionConstants().add(expressionConstant);
-    }
+    public void addExpressionConstant(final ExpressionConstant expressionConstant);
 
     public abstract PluginInfo getInfo();
 

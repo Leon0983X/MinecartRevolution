@@ -25,9 +25,9 @@ public class ServerListener implements Listener {
     public void onPluginEnable(final PluginEnableEvent event) {
 
         if (event.getPlugin().equals(minecartRevolution)) {
-            if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.autoUpdate)) {
+            if (minecartRevolution.getConfiguration().getBool(GlobalConfig.AUTO_UPDATE)) {
                 VersionUtil.tryUpdate(null, Bukkit.getConsoleSender());
-            } else if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.checkVersionOnStart)) {
+            } else if (minecartRevolution.getConfiguration().getBool(GlobalConfig.CHECK_VERSION_ON_START)) {
                 if (VersionUtil.newVersionAvaiable()) {
                     if (Bukkit.getConsoleSender() != null) {
                         Bukkit.getConsoleSender().sendMessage(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "mr update"));

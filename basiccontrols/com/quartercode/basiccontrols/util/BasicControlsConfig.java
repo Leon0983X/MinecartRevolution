@@ -10,8 +10,8 @@ import com.quartercode.minecartrevolution.util.ItemData;
 
 public class BasicControlsConfig extends PluginConfig {
 
-    public static final String CONTROL = "control";
-    public static final String BLOCK   = CONTROL + ".block";
+    private static final String CONTROL = "control";
+    private static final String BLOCK   = CONTROL + ".block";
 
     public BasicControlsConfig(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 

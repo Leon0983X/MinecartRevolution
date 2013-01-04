@@ -31,7 +31,7 @@ public class MinecartRevolution extends JavaPlugin {
 
     public static void handleSilenceThrowable(final Throwable throwable) {
 
-        if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.printSilenceErrors)) {
+        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PRINT_SILENCE_ERRORS)) {
             handleThrowable(throwable);
         }
     }
@@ -96,7 +96,7 @@ public class MinecartRevolution extends JavaPlugin {
         configuration.setDefaults();
         configuration.save();
 
-        Lang.setLanguage((String) configuration.get(GlobalConfig.language));
+        Lang.setLanguage(configuration.get(GlobalConfig.LANGUAGE));
 
         if (!Lang.isCurrentLanguageAvaiable()) {
             Lang.extractCurrentLanguage();

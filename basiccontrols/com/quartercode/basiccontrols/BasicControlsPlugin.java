@@ -26,11 +26,11 @@ import com.quartercode.basiccontrols.sign.StationSign;
 import com.quartercode.basiccontrols.sign.TimeSign;
 import com.quartercode.basiccontrols.sign.WeatherSign;
 import com.quartercode.basiccontrols.util.BasicControlsConfig;
-import com.quartercode.minecartrevolution.plugin.MinecartRevolutionPlugin;
+import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
 
-public class BasicControlsPlugin extends MinecartRevolutionPlugin {
+public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
 
     public BasicControlsPlugin() {
 
@@ -72,7 +72,7 @@ public class BasicControlsPlugin extends MinecartRevolutionPlugin {
         addControlSign(new IntersectionSign());
         addControlSign(new JumpSign());
         addControlSign(new SpeedSign());
-        addControlSign(new StationSign(minecartRevolution));
+        addControlSign(new StationSign(getMinecartRevolution()));
         addControlSign(new TimeSign());
         addControlSign(new WeatherSign());
 

@@ -4,13 +4,18 @@ package com.quartercode.basicexpression.command;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
+import com.quartercode.basicexpression.BasicExpressionPlugin;
+import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class GrabCommand extends ExpressionCommand {
 
-    public GrabCommand() {
+    private final BasicExpressionPlugin plugin;
 
+    public GrabCommand(final BasicExpressionPlugin plugin) {
+
+        this.plugin = plugin;
     }
 
     @Override
@@ -31,7 +36,9 @@ public class GrabCommand extends ExpressionCommand {
         double radius = 5;
 
         if (parameter != null && parameter instanceof Double) {
-            radius = (Double) parameter;
+            if (plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS) < 0 || (Double) parameter <= plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS)) {
+                radius = (Double) parameter;
+            }
         }
 
         for (final Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {

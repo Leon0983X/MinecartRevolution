@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
 
         final Player player = event.getPlayer();
 
-        if (Perm.has(player, "update.update") && (Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.checkVersionOnJoin)) {
+        if (Perm.has(player, "update.update") && minecartRevolution.getConfiguration().getBool(GlobalConfig.CHECK_VERSION_ON_JOIN)) {
             if (VersionUtil.newVersionAvaiable()) {
                 player.sendMessage(Lang.getValue("basiccommands.versioncheck.newVersion", "newVersion", VersionUtil.getLatestVersion().getVersionString(), "updateCommand", "/mr update"));
             }

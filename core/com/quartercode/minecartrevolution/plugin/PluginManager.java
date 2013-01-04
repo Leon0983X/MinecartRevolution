@@ -23,9 +23,9 @@ public class PluginManager {
     public static void registerPlugin(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         if (minecartRevolution == null) {
-            throw new IllegalStateException("A plugin can only registered after MinecartRevolution was loaded [" + minecartRevolutionPlugin.getInfo().getName() + "]");
+            throw new IllegalStateException("A plugin can only be registered after MinecartRevolution was loaded [" + minecartRevolutionPlugin.getInfo().getName() + "]");
         } else {
-            minecartRevolutionPlugin.minecartRevolution = minecartRevolution;
+            minecartRevolutionPlugin.setMinecartRevolution(minecartRevolution);
             plugins.add(minecartRevolutionPlugin);
         }
     }

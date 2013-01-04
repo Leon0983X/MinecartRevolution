@@ -24,10 +24,10 @@ import com.quartercode.qcutil.res.ResourceManager;
 
 public class Lang {
 
-    public static final String               standardLanguage = "english";
+    public static final String               STANDARD_LANGUAGE = "english";
 
-    protected static ResourceManager         resourceManager  = new ResourceManager(FileConf.LANGUAGES);
-    protected static PropertyResourceHandler resourceHandler  = new PropertyResourceHandler(resourceManager);
+    protected static ResourceManager         resourceManager   = new ResourceManager(FileConf.LANGUAGES);
+    protected static PropertyResourceHandler resourceHandler   = new PropertyResourceHandler(resourceManager);
 
     static {
 

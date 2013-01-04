@@ -27,11 +27,11 @@ import com.quartercode.basicexpression.constant.XConstant;
 import com.quartercode.basicexpression.constant.YConstant;
 import com.quartercode.basicexpression.constant.ZConstant;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
-import com.quartercode.minecartrevolution.plugin.MinecartRevolutionPlugin;
+import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
 
-public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
+public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
 
     public BasicExpressionPlugin() {
 
@@ -51,21 +51,21 @@ public class BasicExpressionPlugin extends MinecartRevolutionPlugin {
         config.setDefaults();
         config.save();
 
-        addExpressionCommand(new AnnounceCommand());
+        addExpressionCommand(new AnnounceCommand(this));
         addExpressionCommand(new ChestCommand());
         addExpressionCommand(new ClearCommand());
-        addExpressionCommand(new CollectCommand());
-        addExpressionCommand(new CommandCommand(minecartRevolution));
+        addExpressionCommand(new CollectCommand(this));
+        addExpressionCommand(new CommandCommand(getMinecartRevolution()));
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
         addExpressionCommand(new FileCommand(getExpressionExecutor()));
-        addExpressionCommand(new GrabCommand());
+        addExpressionCommand(new GrabCommand(this));
         addExpressionCommand(new HealthCommand());
-        addExpressionCommand(new HoldCommand(minecartRevolution));
+        addExpressionCommand(new HoldCommand(getMinecartRevolution()));
         addExpressionCommand(new IntersectionCommand());
-        addExpressionCommand(new KillCommand(minecartRevolution));
+        addExpressionCommand(new KillCommand(getMinecartRevolution()));
         addExpressionCommand(new ReverseCommand());
-        addExpressionCommand(new SpeedCommand());
+        addExpressionCommand(new SpeedCommand(this));
         addExpressionCommand(new TimeCommand());
         addExpressionCommand(new VerticalCommand());
         addExpressionCommand(new WeatherCommand());

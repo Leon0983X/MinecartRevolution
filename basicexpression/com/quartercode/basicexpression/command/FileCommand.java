@@ -37,12 +37,12 @@ public class FileCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        File file = new File(FileConf.EXPRESSIONS, String.valueOf(parameter));
+        File file = new File(FileConf.SCRIPTS, String.valueOf(parameter));
         if (!file.exists()) {
-            file = new File(FileConf.EXPRESSIONS, String.valueOf(parameter) + ".revo");
+            file = new File(FileConf.SCRIPTS, String.valueOf(parameter) + ".revo");
         }
         if (!file.exists()) {
-            file = new File(FileConf.EXPRESSIONS, String.valueOf(parameter) + ".txt");
+            file = new File(FileConf.SCRIPTS, String.valueOf(parameter) + ".txt");
         }
 
         try {

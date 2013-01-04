@@ -13,8 +13,8 @@ import com.quartercode.qcutil.script.ScriptExecutor;
 
 public class MRExpressionExecutor {
 
-    public static final String COMMAND_END_MARKER = ";";
-    public static final char[] OPERATORS          = { '+', '-', '*', '/' };
+    private static final String COMMAND_END_MARKER = ";";
+    private static final char[] OPERATORS          = { '+', '-', '*', '/' };
 
     public static String getExpression(final String[] lines) {
 

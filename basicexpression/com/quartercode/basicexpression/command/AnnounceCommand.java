@@ -3,13 +3,18 @@ package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
+import com.quartercode.basicexpression.BasicExpressionPlugin;
+import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class AnnounceCommand extends ExpressionCommand {
 
-    public AnnounceCommand() {
+    private final BasicExpressionPlugin plugin;
 
+    public AnnounceCommand(final BasicExpressionPlugin plugin) {
+
+        this.plugin = plugin;
     }
 
     @Override
@@ -28,7 +33,11 @@ public class AnnounceCommand extends ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         if (parameter != null) {
-            ((Player) minecart.getPassenger()).sendMessage(String.valueOf(parameter).replaceAll("&", "§"));
+            if (plugin.getConfiguration().getBool(BasicExpressionConfig.ANNOUNCE_ALLOW_COLOR_CODES)) {
+                ((Player) minecart.getPassenger()).sendMessage(String.valueOf(parameter).replaceAll("&", "§"));
+            } else {
+                ((Player) minecart.getPassenger()).sendMessage(String.valueOf(parameter));
+            }
         }
     }
 

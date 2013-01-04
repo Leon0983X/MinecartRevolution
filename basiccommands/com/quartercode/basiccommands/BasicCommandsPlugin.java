@@ -12,11 +12,11 @@ import com.quartercode.basiccommands.command.VersioncheckCommand;
 import com.quartercode.basiccommands.listener.PlayerListener;
 import com.quartercode.basiccommands.listener.ServerListener;
 import com.quartercode.basiccommands.util.BasicCommandsConfig;
-import com.quartercode.minecartrevolution.plugin.MinecartRevolutionPlugin;
+import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
 
-public class BasicCommandsPlugin extends MinecartRevolutionPlugin {
+public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
 
     public BasicCommandsPlugin() {
 
@@ -36,14 +36,14 @@ public class BasicCommandsPlugin extends MinecartRevolutionPlugin {
         config.setDefaults();
         config.save();
 
-        new PlayerListener(minecartRevolution);
-        new ServerListener(minecartRevolution);
+        new PlayerListener(getMinecartRevolution());
+        new ServerListener(getMinecartRevolution());
 
-        addCommand(new HelpCommand(minecartRevolution));
+        addCommand(new HelpCommand(getMinecartRevolution()));
         addCommand(new InfoCommand());
         addCommand(new GetVersionCommand());
         addCommand(new VersioncheckCommand());
-        addCommand(new UpdateCommand(minecartRevolution));
+        addCommand(new UpdateCommand(getMinecartRevolution()));
         addCommand(new RemovecartsCommand());
         addCommand(new StopcartsCommand());
         addCommand(new EjectCommand());

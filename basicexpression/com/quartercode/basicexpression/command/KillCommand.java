@@ -35,7 +35,7 @@ public class KillCommand extends ExpressionCommand {
         minecart.eject();
         minecart.remove();
 
-        if ((Boolean) minecartRevolution.getConfiguration().get(GlobalConfig.playEffects)) {
+        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
             DEffect.SMOKE.play(minecart);
         }
     }
