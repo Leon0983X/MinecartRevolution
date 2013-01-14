@@ -8,7 +8,7 @@ public class ExpressionCommandInfo {
     private final TypeArray typeArray;
     private final String[]  commandLabels;
 
-    public ExpressionCommandInfo(TypeArray typeArray, final String... commandLabels) {
+    public ExpressionCommandInfo(final TypeArray typeArray, final String... commandLabels) {
 
         this.typeArray = typeArray;
         this.commandLabels = commandLabels;

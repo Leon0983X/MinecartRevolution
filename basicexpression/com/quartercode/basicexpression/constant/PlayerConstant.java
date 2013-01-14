@@ -21,7 +21,7 @@ public class PlayerConstant extends ExpressionConstant {
     @Override
     public Object getValue(final Minecart minecart) {
 
-        if (minecart.getPassenger() != null && minecart.getPassenger() instanceof Player) {
+        if (minecart.getPassenger() instanceof Player) {
             return ((Player) minecart.getPassenger()).getName();
         } else {
             return "Empty";

@@ -10,7 +10,7 @@ public class TypeArray {
         private final Class<?> c;
         private final boolean  isNumber;
 
-        private Type(Class<?> c, boolean isNumber) {
+        private Type(final Class<?> c, final boolean isNumber) {
 
             this.c = c;
             this.isNumber = isNumber;
@@ -21,9 +21,9 @@ public class TypeArray {
             return c;
         }
 
-        public boolean isInstance(Object object) {
+        public boolean isInstance(final Object object) {
 
-            return (object != null && object.getClass().equals(c)) || (c == null && object == null);
+            return object != null && object.getClass().equals(c) || c == null && object == null;
         }
 
         public boolean isNumber() {
@@ -34,7 +34,7 @@ public class TypeArray {
 
     private final Type[] types;
 
-    public TypeArray(Type... types) {
+    public TypeArray(final Type... types) {
 
         this.types = types;
     }
@@ -44,9 +44,9 @@ public class TypeArray {
         return types;
     }
 
-    public boolean isInstance(Object object) {
+    public boolean isInstance(final Object object) {
 
-        for (Type type : types) {
+        for (final Type type : types) {
             if (type.isInstance(object)) {
                 return true;
             }
@@ -57,7 +57,7 @@ public class TypeArray {
 
     public boolean isOneNumber() {
 
-        for (Type type : types) {
+        for (final Type type : types) {
             if (type.isNumber) {
                 return true;
             }

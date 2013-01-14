@@ -6,7 +6,7 @@ import java.util.List;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.StorageMinecart;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
@@ -35,7 +35,7 @@ public class CollectCommand extends ExpressionCommand {
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart instanceof StorageMinecart;
+        return minecart instanceof InventoryHolder;
     }
 
     @Override
@@ -63,20 +63,20 @@ public class CollectCommand extends ExpressionCommand {
 
         if (items.size() > 0) {
             for (final String item : items) {
-                collectItems((StorageMinecart) minecart, radius, item);
+                collectItems((InventoryHolder) minecart, minecart, radius, item);
             }
         } else {
-            collectItems((StorageMinecart) minecart, radius, null);
+            collectItems((InventoryHolder) minecart, minecart, radius, null);
         }
     }
 
-    private void collectItems(final StorageMinecart storageMinecart, final int radius, final String string) {
+    private void collectItems(final InventoryHolder inventoryMinecart, final Minecart minecart, final int radius, final String string) {
 
-        if (storageMinecart.getInventory().firstEmpty() < 0) {
+        if (inventoryMinecart.getInventory().firstEmpty() < 0) {
             return;
         }
 
-        for (final Entity entity : storageMinecart.getNearbyEntities(radius, radius, radius)) {
+        for (final Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
             if (entity instanceof Item) {
                 final Item item = (Item) entity;
                 if (item.isDead()) {
@@ -85,7 +85,7 @@ public class CollectCommand extends ExpressionCommand {
                     continue;
                 }
 
-                storageMinecart.getInventory().addItem(new ItemStack[] { item.getItemStack() });
+                inventoryMinecart.getInventory().addItem(new ItemStack[] { item.getItemStack() });
                 item.remove();
             }
         }

@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.StorageMinecart;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
@@ -30,7 +30,7 @@ public class ChestCommand extends ExpressionCommand {
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart instanceof StorageMinecart;
+        return minecart instanceof InventoryHolder;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ChestCommand extends ExpressionCommand {
             return;
         }
 
-        final StorageMinecart storageMinecart = (StorageMinecart) minecart;
+        final InventoryHolder inventoryMinecart = (InventoryHolder) minecart;
         String data = String.valueOf(parameter);
 
         if (String.valueOf(parameter).startsWith("+")) {
@@ -84,45 +84,45 @@ public class ChestCommand extends ExpressionCommand {
         if (String.valueOf(parameter).startsWith("+")) {
             if (items.size() > 0) {
                 for (final String item : items) {
-                    toMinecart(chest, storageMinecart, item);
+                    toMinecart(chest, inventoryMinecart, item);
                 }
             } else {
-                toMinecart(chest, storageMinecart, null);
+                toMinecart(chest, inventoryMinecart, null);
             }
         } else if (String.valueOf(parameter).startsWith("-")) {
             if (items.size() > 0) {
                 for (final String item : items) {
-                    toChest(chest, storageMinecart, item);
+                    toChest(chest, inventoryMinecart, item);
                 }
             } else {
-                toChest(chest, storageMinecart, null);
+                toChest(chest, inventoryMinecart, null);
             }
         }
     }
 
-    private void toChest(final Chest chest, final StorageMinecart storageMinecart, final String string) {
+    private void toChest(final Chest chest, final InventoryHolder inventoryMinecart, final String string) {
 
-        for (int counter = 0; counter < storageMinecart.getInventory().getSize(); counter++) {
+        for (int counter = 0; counter < inventoryMinecart.getInventory().getSize(); counter++) {
             if (chest.getInventory().firstEmpty() < 0) {
                 return;
             }
 
-            if (storageMinecart.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(storageMinecart.getInventory().getItem(counter), string)) {
-                chest.getInventory().addItem(new ItemStack[] { storageMinecart.getInventory().getItem(counter) });
-                storageMinecart.getInventory().setItem(counter, new ItemStack(Material.AIR));
+            if (inventoryMinecart.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(inventoryMinecart.getInventory().getItem(counter), string)) {
+                chest.getInventory().addItem(new ItemStack[] { inventoryMinecart.getInventory().getItem(counter) });
+                inventoryMinecart.getInventory().setItem(counter, new ItemStack(Material.AIR));
             }
         }
     }
 
-    private void toMinecart(final Chest chest, final StorageMinecart storageMinecart, final String string) {
+    private void toMinecart(final Chest chest, final InventoryHolder inventoryMinecart, final String string) {
 
         for (int counter = 0; counter < chest.getInventory().getSize(); counter++) {
-            if (storageMinecart.getInventory().firstEmpty() < 0) {
+            if (inventoryMinecart.getInventory().firstEmpty() < 0) {
                 return;
             }
 
             if (chest.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(chest.getInventory().getItem(counter), string)) {
-                storageMinecart.getInventory().addItem(new ItemStack[] { chest.getInventory().getItem(counter) });
+                inventoryMinecart.getInventory().addItem(new ItemStack[] { chest.getInventory().getItem(counter) });
                 chest.getInventory().setItem(counter, new ItemStack(Material.AIR));
             }
         }

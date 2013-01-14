@@ -1,8 +1,8 @@
 
 package com.quartercode.basicexpression.command;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
@@ -27,13 +27,13 @@ public class CommandCommand extends ExpressionCommand {
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart.getPassenger() instanceof Player;
+        return minecart.getPassenger() instanceof CommandSender;
     }
 
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        minecartRevolution.getServer().dispatchCommand((Player) minecart.getPassenger(), String.valueOf(parameter));
+        minecartRevolution.getServer().dispatchCommand((CommandSender) minecart.getPassenger(), String.valueOf(parameter));
     }
 
 }

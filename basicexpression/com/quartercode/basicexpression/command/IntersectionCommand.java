@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.PoweredMinecart;
 import org.bukkit.entity.StorageMinecart;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
@@ -60,6 +61,8 @@ public class IntersectionCommand extends ExpressionCommand {
                 newDirection = direction;
             } else if (type.equalsIgnoreCase("standard") && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
                 newDirection = direction;
+            } else if (type.equalsIgnoreCase("invcart") && minecart instanceof InventoryHolder) {
+                newDirection = direction;
             } else if (type.equalsIgnoreCase("player") && minecart.getPassenger() instanceof Player) {
                 newDirection = direction;
             } else if (type.equalsIgnoreCase("mob") && (minecart.getPassenger() instanceof Monster || minecart.getPassenger() instanceof Animals)) {
@@ -93,16 +96,14 @@ public class IntersectionCommand extends ExpressionCommand {
                     newDirection = direction;
                 }
             } else if (type.contains("invc-")) {
-                if (minecart.getPassenger() instanceof Player) {
-                    final Player player = (Player) minecart.getPassenger();
+                if (minecart.getPassenger() instanceof InventoryHolder) {
                     final String[] variables = type.split("-");
-                    if (contains(player.getInventory(), variables[1])) {
+                    if (contains( ((InventoryHolder) minecart.getPassenger()).getInventory(), variables[1])) {
                         newDirection = direction;
                     }
-                } else if (minecart instanceof StorageMinecart) {
-                    final StorageMinecart storageMinecart = (StorageMinecart) minecart;
+                } else if (minecart instanceof InventoryHolder) {
                     final String[] variables = type.split("-");
-                    if (contains(storageMinecart.getInventory(), variables[1])) {
+                    if (contains( ((InventoryHolder) minecart).getInventory(), variables[1])) {
                         newDirection = direction;
                     }
                 }

@@ -1,8 +1,8 @@
 
 package com.quartercode.basicexpression.constant;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
 
@@ -21,8 +21,8 @@ public class HealthConstant extends ExpressionConstant {
     @Override
     public Object getValue(final Minecart minecart) {
 
-        if (minecart.getPassenger() != null && minecart.getPassenger() instanceof Player) {
-            return ((Player) minecart.getPassenger()).getHealth();
+        if (minecart.getPassenger() instanceof LivingEntity) {
+            return ((LivingEntity) minecart.getPassenger()).getHealth();
         } else {
             return 0;
         }
