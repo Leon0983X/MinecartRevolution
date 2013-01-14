@@ -12,6 +12,8 @@ import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -27,7 +29,7 @@ public class CollectCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("co", "collect");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE, Type.STRING, Type.DOUBLE), "co", "collect");
     }
 
     @Override

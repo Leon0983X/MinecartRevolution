@@ -6,6 +6,8 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -21,7 +23,7 @@ public class GrabCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("g", "grab");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE, Type.DOUBLE), "g", "grab");
     }
 
     @Override
@@ -35,7 +37,7 @@ public class GrabCommand extends ExpressionCommand {
 
         double radius = 5;
 
-        if (parameter != null && parameter instanceof Double) {
+        if (parameter != null) {
             if (plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS) < 0 || (Double) parameter <= plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS)) {
                 radius = (Double) parameter;
             }

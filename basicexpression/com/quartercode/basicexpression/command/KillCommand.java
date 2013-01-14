@@ -5,6 +5,8 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.EffectUtil.DEffect;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -20,7 +22,7 @@ public class KillCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("k", "kill");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE), "k", "kill");
     }
 
     @Override

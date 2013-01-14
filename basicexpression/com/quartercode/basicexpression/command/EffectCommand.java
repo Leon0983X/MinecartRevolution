@@ -3,6 +3,8 @@ package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.util.EffectUtil;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -15,7 +17,7 @@ public class EffectCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("ef", "effect");
+        return new ExpressionCommandInfo(new TypeArray(Type.STRING), "ef", "effect");
     }
 
     @Override
@@ -27,9 +29,7 @@ public class EffectCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (parameter != null) {
-            EffectUtil.playEffect(minecart, String.valueOf(parameter));
-        }
+        EffectUtil.playEffect(minecart, String.valueOf(parameter));
     }
 
 }

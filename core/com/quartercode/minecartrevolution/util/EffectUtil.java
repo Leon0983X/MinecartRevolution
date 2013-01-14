@@ -6,7 +6,7 @@ import org.bukkit.entity.Minecart;
 
 public class EffectUtil {
 
-    public static enum DEffect {
+    public enum DEffect {
 
         SMOKE (new ReadyEffect(Effect.SMOKE, 1), new ReadyEffect(Effect.EXTINGUISH, 1)), FLAMES (new ReadyEffect(Effect.MOBSPAWNER_FLAMES, 1)), ENDER (new ReadyEffect(Effect.ENDER_SIGNAL, 1)), DOOR (new ReadyEffect(Effect.DOOR_TOGGLE, 1)), POTION (new ReadyEffect(Effect.POTION_BREAK, 1)), DISPENSER (new ReadyEffect(Effect.CLICK1, 1)), PRESSURE (new ReadyEffect(Effect.CLICK2, 1)), BOW (new ReadyEffect(Effect.BOW_FIRE, 1)), GHAST (new ReadyEffect(Effect.GHAST_SHRIEK, 1)), SHOOT (new ReadyEffect(Effect.GHAST_SHOOT, 1)), STEP (new ReadyEffect(Effect.ZOMBIE_DESTROY_DOOR, 1), new ReadyEffect(Effect.EXTINGUISH, 1));
 

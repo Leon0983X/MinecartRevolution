@@ -3,6 +3,8 @@ package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -15,7 +17,7 @@ public class ReverseCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("r", "reverse");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE), "r", "reverse");
     }
 
     @Override

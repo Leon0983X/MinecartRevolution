@@ -2,6 +2,8 @@
 package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -14,7 +16,7 @@ public class WeatherCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("w", "weather");
+        return new ExpressionCommandInfo(new TypeArray(Type.STRING), "w", "weather");
     }
 
     @Override

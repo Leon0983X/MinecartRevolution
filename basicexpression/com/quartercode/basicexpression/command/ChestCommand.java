@@ -10,6 +10,8 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.StorageMinecart;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -22,7 +24,7 @@ public class ChestCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("ch", "chest");
+        return new ExpressionCommandInfo(new TypeArray(Type.STRING), "ch", "chest");
     }
 
     @Override
@@ -34,68 +36,66 @@ public class ChestCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (parameter instanceof String && minecart instanceof StorageMinecart) {
-            Chest chest = null;
+        Chest chest = null;
 
-            Location minecartLocation = minecart.getLocation();
-            minecartLocation.setX(minecart.getLocation().getX() + 1.0D);
-            if (minecartLocation.getBlock().getType() == Material.CHEST) {
-                chest = (Chest) minecartLocation.getBlock().getState();
-            }
-            minecartLocation = minecart.getLocation();
-            minecartLocation.setX(minecart.getLocation().getX() - 1.0D);
-            if (minecartLocation.getBlock().getType() == Material.CHEST) {
-                chest = (Chest) minecartLocation.getBlock().getState();
-            }
-            minecartLocation = minecart.getLocation();
-            minecartLocation.setZ(minecart.getLocation().getZ() + 1.0D);
-            if (minecartLocation.getBlock().getType() == Material.CHEST) {
-                chest = (Chest) minecartLocation.getBlock().getState();
-            }
-            minecartLocation = minecart.getLocation();
-            minecartLocation.setZ(minecart.getLocation().getZ() - 1.0D);
-            if (minecartLocation.getBlock().getType() == Material.CHEST) {
-                chest = (Chest) minecartLocation.getBlock().getState();
-            }
+        Location minecartLocation = minecart.getLocation();
+        minecartLocation.setX(minecart.getLocation().getX() + 1.0D);
+        if (minecartLocation.getBlock().getType() == Material.CHEST) {
+            chest = (Chest) minecartLocation.getBlock().getState();
+        }
+        minecartLocation = minecart.getLocation();
+        minecartLocation.setX(minecart.getLocation().getX() - 1.0D);
+        if (minecartLocation.getBlock().getType() == Material.CHEST) {
+            chest = (Chest) minecartLocation.getBlock().getState();
+        }
+        minecartLocation = minecart.getLocation();
+        minecartLocation.setZ(minecart.getLocation().getZ() + 1.0D);
+        if (minecartLocation.getBlock().getType() == Material.CHEST) {
+            chest = (Chest) minecartLocation.getBlock().getState();
+        }
+        minecartLocation = minecart.getLocation();
+        minecartLocation.setZ(minecart.getLocation().getZ() - 1.0D);
+        if (minecartLocation.getBlock().getType() == Material.CHEST) {
+            chest = (Chest) minecartLocation.getBlock().getState();
+        }
 
-            if (chest == null) {
-                return;
+        if (chest == null) {
+            return;
+        }
+
+        final StorageMinecart storageMinecart = (StorageMinecart) minecart;
+        String data = String.valueOf(parameter);
+
+        if (String.valueOf(parameter).startsWith("+")) {
+            data = data.replaceAll("\\+", "").trim();
+        } else if (String.valueOf(parameter).startsWith("-")) {
+            data = data.replaceAll("-", "").trim();
+        } else {
+            return;
+        }
+
+        final List<String> items = new ArrayList<String>();
+        for (final String part : data.split(",")) {
+            if (!part.isEmpty()) {
+                items.add(part);
             }
+        }
 
-            final StorageMinecart storageMinecart = (StorageMinecart) minecart;
-            String data = String.valueOf(parameter);
-
-            if (String.valueOf(parameter).startsWith(">")) {
-                data = data.replaceAll(">", "").trim();
-            } else if (String.valueOf(parameter).startsWith("<")) {
-                data = data.replaceAll("<", "").trim();
+        if (String.valueOf(parameter).startsWith("+")) {
+            if (items.size() > 0) {
+                for (final String item : items) {
+                    toMinecart(chest, storageMinecart, item);
+                }
             } else {
-                return;
+                toMinecart(chest, storageMinecart, null);
             }
-
-            final List<String> items = new ArrayList<String>();
-            for (final String part : data.split(",")) {
-                if (!part.isEmpty()) {
-                    items.add(part);
+        } else if (String.valueOf(parameter).startsWith("-")) {
+            if (items.size() > 0) {
+                for (final String item : items) {
+                    toChest(chest, storageMinecart, item);
                 }
-            }
-
-            if (String.valueOf(parameter).startsWith("<")) {
-                if (items.size() > 0) {
-                    for (final String item : items) {
-                        toMinecart(chest, storageMinecart, item);
-                    }
-                } else {
-                    toMinecart(chest, storageMinecart, null);
-                }
-            } else if (String.valueOf(parameter).startsWith(">")) {
-                if (items.size() > 0) {
-                    for (final String item : items) {
-                        toChest(chest, storageMinecart, item);
-                    }
-                } else {
-                    toChest(chest, storageMinecart, null);
-                }
+            } else {
+                toChest(chest, storageMinecart, null);
             }
         }
     }

@@ -8,6 +8,8 @@ import java.util.List;
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
@@ -25,7 +27,7 @@ public class FileCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("f", "file");
+        return new ExpressionCommandInfo(new TypeArray(Type.STRING, Type.DOUBLE), "f", "file");
     }
 
     @Override

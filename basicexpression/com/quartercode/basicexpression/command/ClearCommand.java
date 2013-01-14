@@ -7,6 +7,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -19,13 +21,13 @@ public class ClearCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("cl", "clear");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE, Type.STRING, Type.DOUBLE), "cl", "clear");
     }
 
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart instanceof InventoryHolder || minecart.getPassenger() != null && minecart.getPassenger() instanceof InventoryHolder;
+        return minecart instanceof InventoryHolder || minecart.getPassenger() instanceof InventoryHolder;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ClearCommand extends ExpressionCommand {
 
         if (minecart instanceof InventoryHolder) {
             inventory = ((InventoryHolder) minecart).getInventory();
-        } else if (minecart.getPassenger() != null && minecart.getPassenger() instanceof InventoryHolder) {
+        } else if (minecart.getPassenger() instanceof InventoryHolder) {
             inventory = ((InventoryHolder) minecart.getPassenger()).getInventory();
         } else {
             return;

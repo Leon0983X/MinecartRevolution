@@ -116,24 +116,27 @@ public class MRExpressionExecutor {
                         for (final String ecCommandLabel : info.getCommandLabels()) {
                             if (ecCommandLabel.equalsIgnoreCase(command)) {
 	if (expressionCommand.canExecute(minecart)) {
-	    if (splittedExpressionPart.length == 1) {
+	    if (splittedExpressionPart.length == 1 && info.getTypeArray().isInstance(null)) {
 	        expressionCommand.execute(minecart, null);
 	        continue;
 	    } else if (splittedExpressionPart.length == 2) {
 	        String parameterString = splittedExpressionPart[1];
 	        parameterString = replaceConstants(parameterString, minecart);
-	        parameterString = generateJavaScript(parameterString);
 
-	        final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
-	        try {
-	            scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
-	        }
-	        catch (final ScriptException e) {
-	            return;
+	        if (info.getTypeArray().isOneNumber()) {
+	            parameterString = generateJavaScript(parameterString);
+	            final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
+	            try {
+	                scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
+	            }
+	            catch (final ScriptException e) {
+	                return;
+	            }
+	            parameterString = String.valueOf(scriptExecutor.get("result"));
 	        }
 
-	        Object parameter = scriptExecutor.get("result");
-	        if (isNumber(String.valueOf(parameter))) {
+	        Object parameter = parameterString;
+	        if (info.getTypeArray().isOneNumber() && isNumber(String.valueOf(parameter))) {
 	            parameter = Double.parseDouble(String.valueOf(parameter));
 	        }
 

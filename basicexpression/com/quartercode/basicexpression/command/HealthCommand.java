@@ -3,6 +3,8 @@ package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.util.TypeArray;
+import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
@@ -15,13 +17,13 @@ public class HealthCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo("he", "health");
+        return new ExpressionCommandInfo(new TypeArray(Type.NONE, Type.DOUBLE), "he", "health");
     }
 
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart.getPassenger() != null && minecart.getPassenger() instanceof LivingEntity;
+        return minecart.getPassenger() instanceof LivingEntity;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class HealthCommand extends ExpressionCommand {
 
         double health = 20;
 
-        if (parameter != null && parameter instanceof Double) {
+        if (parameter != null) {
             health = (Double) parameter;
         }
 
