@@ -56,7 +56,7 @@ public class IntersectionCommand extends ExpressionCommand {
                 newDirection = direction;
             } else if (type.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {
                 newDirection = direction;
-            } else if (type.equalsIgnoreCase("standard") && minecart instanceof Minecart && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
+            } else if (type.equalsIgnoreCase("standard") && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
                 newDirection = direction;
             } else if (type.equalsIgnoreCase("player") && minecart.getPassenger() instanceof Player) {
                 newDirection = direction;
