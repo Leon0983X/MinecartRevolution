@@ -23,7 +23,7 @@ public class StationSign extends ControlSign implements Listener {
     public StationSign(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
-        Bukkit.getPluginManager().registerEvents(this, minecartRevolution);
+        Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
     @Override

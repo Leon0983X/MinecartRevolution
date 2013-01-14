@@ -17,8 +17,7 @@ public class ServerListener implements Listener {
     public ServerListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
-
-        minecartRevolution.getServer().getPluginManager().registerEvents(this, minecartRevolution);
+        Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
     @EventHandler

@@ -1,6 +1,7 @@
 
 package com.quartercode.minecartrevolution.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,8 +27,7 @@ public class BlockListener implements Listener {
     public BlockListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
-
-        minecartRevolution.getServer().getPluginManager().registerEvents(this, minecartRevolution);
+        Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
     @EventHandler

@@ -333,6 +333,17 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Jump sign
 
 
+  minecartrevolution.control.sign.lock.*:
+    description: Gives access to use the MinecartRevolution Lock sign
+    children:
+      minecartrevolution.control.sign.lock.place: true
+      minecartrevolution.control.sign.lock.destroy: true
+  minecartrevolution.control.sign.lock.place:
+    description: Gives access to place the MinecartRevolution Lock sign
+  minecartrevolution.control.sign.lock.destroy:
+    description: Gives access to destroy the MinecartRevolution Lock sign
+
+
   minecartrevolution.control.sign.speed.*:
     description: Gives access to use the MinecartRevolution Speed sign
     children:

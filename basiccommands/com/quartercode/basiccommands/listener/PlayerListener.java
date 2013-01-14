@@ -1,6 +1,7 @@
 
 package com.quartercode.basiccommands.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,8 +19,7 @@ public class PlayerListener implements Listener {
     public PlayerListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
-
-        minecartRevolution.getServer().getPluginManager().registerEvents(this, minecartRevolution);
+        Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
     @EventHandler

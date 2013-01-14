@@ -43,7 +43,7 @@ public class HoldCommand extends ExpressionCommand {
             final Vector oldVelocity = minecart.getVelocity();
             minecart.setVelocity(new Vector(0, 0, 0));
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(minecartRevolution, new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(minecartRevolution.getPlugin(), new Runnable() {
 
                 @Override
                 public void run() {

@@ -2,7 +2,8 @@
 package com.quartercode.minecartrevolution;
 
 import java.io.IOException;
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.logging.Logger;
+import org.bukkit.plugin.PluginDescriptionFile;
 import com.quartercode.basiccommands.BasicCommandsPlugin;
 import com.quartercode.basiccontrols.BasicControlsPlugin;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
@@ -18,9 +19,8 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.QcUtil;
-import com.quartercode.qcutil.io.File;
 
-public class MinecartRevolution extends JavaPlugin {
+public class MinecartRevolution {
 
     private static MinecartRevolution minecartRevolution;
 
@@ -36,20 +36,28 @@ public class MinecartRevolution extends JavaPlugin {
         }
     }
 
-    private MRCommandExecutor      commandExecutor;
-    private MRControlBlockExecutor controlBlockExecutor;
-    private MRControlSignExecutor  controlSignExecutor;
-    private MRExpressionExecutor   expressionExecutor;
-    private Config                 configuration;
-    private Metrics                metrics;
+    private final MinecartRevolutionPlugin plugin;
 
-    private BasicCommandsPlugin    commandsPlugin;
-    private BasicControlsPlugin    controlsPlugin;
-    private BasicExpressionPlugin  expressionPlugin;
+    private MRCommandExecutor              commandExecutor;
+    private MRControlBlockExecutor         controlBlockExecutor;
+    private MRControlSignExecutor          controlSignExecutor;
+    private MRExpressionExecutor           expressionExecutor;
+    private Config                         configuration;
+    private Metrics                        metrics;
 
-    public MinecartRevolution() {
+    private BasicCommandsPlugin            commandsPlugin;
+    private BasicControlsPlugin            controlsPlugin;
+    private BasicExpressionPlugin          expressionPlugin;
 
+    public MinecartRevolution(final MinecartRevolutionPlugin plugin) {
+
+        this.plugin = plugin;
         minecartRevolution = this;
+    }
+
+    public MinecartRevolutionPlugin getPlugin() {
+
+        return plugin;
     }
 
     public MRCommandExecutor getCommandExecutor() {
@@ -77,20 +85,27 @@ public class MinecartRevolution extends JavaPlugin {
         return configuration;
     }
 
-    @Override
-    public File getFile() {
+    public String getName() {
 
-        return (File) super.getFile();
+        return plugin.getName();
     }
 
-    @Override
-    public void onLoad() {
+    public PluginDescriptionFile getDescription() {
+
+        return plugin.getDescription();
+    }
+
+    public Logger getLogger() {
+
+        return plugin.getLogger();
+    }
+
+    public void load() {
 
         PluginManager.registerMinecartRevolution(this);
     }
 
-    @Override
-    public void onEnable() {
+    public void enable() {
 
         configuration = new GlobalConfig();
         configuration.setDefaults();
@@ -117,7 +132,7 @@ public class MinecartRevolution extends JavaPlugin {
     private void enableExecutors() {
 
         commandExecutor = new MRCommandExecutor();
-        getCommand("minecartrevolution").setExecutor(commandExecutor);
+        plugin.getCommand("minecartrevolution").setExecutor(commandExecutor);
 
         controlBlockExecutor = new MRControlBlockExecutor();
 
@@ -140,17 +155,12 @@ public class MinecartRevolution extends JavaPlugin {
     private void enableMetrics() {
 
         try {
-            metrics = new Metrics(this);
+            metrics = new Metrics(plugin);
             metrics.start();
         }
         catch (final IOException e) {
             handleSilenceThrowable(e);
         }
-    }
-
-    @Override
-    public void onDisable() {
-
     }
 
 }

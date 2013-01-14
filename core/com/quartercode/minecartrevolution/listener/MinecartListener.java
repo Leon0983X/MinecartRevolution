@@ -3,6 +3,7 @@ package com.quartercode.minecartrevolution.listener;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
@@ -19,8 +20,7 @@ public class MinecartListener implements Listener {
     public MinecartListener(final MinecartRevolution minecartRevolution) {
 
         this.minecartRevolution = minecartRevolution;
-
-        minecartRevolution.getServer().getPluginManager().registerEvents(this, minecartRevolution);
+        Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
     @EventHandler

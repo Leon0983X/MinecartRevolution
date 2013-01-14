@@ -110,6 +110,9 @@ basiccontrols.signs.intersection.description=Sorts the minecarts on different tr
 basiccontrols.signs.jump.name=Jump
 basiccontrols.signs.jump.description=Let the minecart jump the given amount of blocks
 
+basiccontrols.signs.lock.name=Lock
+basiccontrols.signs.lock.description=Locks or unlocks the minecart for actions
+
 basiccontrols.signs.speed.name=Speed
 basiccontrols.signs.speed.description=Sets the speed of the minecart
 

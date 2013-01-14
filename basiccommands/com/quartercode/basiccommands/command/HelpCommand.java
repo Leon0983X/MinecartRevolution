@@ -37,7 +37,7 @@ public class HelpCommand extends Command {
         commandSender.sendMessage(ChatColor.GREEN + "==========[ " + Lang.getValue("basiccommands.help.start") + " ]==========");
 
         String aliases = ChatColor.DARK_GREEN + "/minecartrevolution" + ChatColor.AQUA + ", ";
-        for (final String alias : minecartRevolution.getCommand("minecartrevolution").getAliases()) {
+        for (final String alias : minecartRevolution.getPlugin().getCommand("minecartrevolution").getAliases()) {
             aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
