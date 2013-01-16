@@ -22,7 +22,7 @@ public class SpeedCommand extends ExpressionCommand {
     @Override
     protected ExpressionCommandInfo createInfo() {
 
-        return new ExpressionCommandInfo(new TypeArray(Type.DOUBLE), "s", "speed");
+        return new ExpressionCommandInfo(new TypeArray(Type.DOUBLE), "sp", "speed");
     }
 
     @Override

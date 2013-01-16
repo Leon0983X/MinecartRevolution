@@ -4,7 +4,7 @@ description: MinecartRevolution is a modern Minecart-Plugin which features simpl
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
 website: http://dev.bukkit.org/server-mods/MinecartRevolution
 dev-url: http://dev.bukkit.org/server-mods/MinecartRevolution
-main: com.quartercode.minecartrevolution.MinecartRevolution
+main: com.quartercode.minecartrevolution.MinecartRevolutionPlugin
 
 
 
@@ -342,6 +342,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Lock sign
   minecartrevolution.control.sign.lock.destroy:
     description: Gives access to destroy the MinecartRevolution Lock sign
+
+
+  minecartrevolution.control.sign.sensor.*:
+    description: Gives access to use the MinecartRevolution Sensor sign
+    children:
+      minecartrevolution.control.sign.sensor.place: true
+      minecartrevolution.control.sign.sensor.destroy: true
+  minecartrevolution.control.sign.sensor.place:
+    description: Gives access to place the MinecartRevolution Sensor sign
+  minecartrevolution.control.sign.sensor.destroy:
+    description: Gives access to destroy the MinecartRevolution Sensor sign
 
 
   minecartrevolution.control.sign.speed.*:

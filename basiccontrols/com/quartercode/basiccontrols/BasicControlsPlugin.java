@@ -22,6 +22,7 @@ import com.quartercode.basiccontrols.sign.HoldSign;
 import com.quartercode.basiccontrols.sign.IntersectionSign;
 import com.quartercode.basiccontrols.sign.JumpSign;
 import com.quartercode.basiccontrols.sign.LockSign;
+import com.quartercode.basiccontrols.sign.SensorSign;
 import com.quartercode.basiccontrols.sign.SpeedSign;
 import com.quartercode.basiccontrols.sign.StationSign;
 import com.quartercode.basiccontrols.sign.TimeSign;
@@ -73,6 +74,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
         addControlSign(new IntersectionSign());
         addControlSign(new JumpSign());
         addControlSign(new LockSign());
+        addControlSign(new SensorSign());
         addControlSign(new SpeedSign());
         addControlSign(new StationSign(getMinecartRevolution()));
         addControlSign(new TimeSign());

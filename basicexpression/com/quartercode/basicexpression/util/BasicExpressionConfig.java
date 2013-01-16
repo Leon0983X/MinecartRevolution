@@ -15,6 +15,9 @@ public class BasicExpressionConfig extends PluginConfig {
     private static final String GRAB                       = "grab";
     public static final String  GRAB_MAX_RADIUS            = GRAB + ".maxRadius";
 
+    private static final String SENSOR                     = "sensor";
+    public static final String  SENSOR_POWER_TIME          = SENSOR + ".powerTime";
+
     private static final String SPEED                      = "speed";
     public static final String  SPEED_MAX_SPEED            = SPEED + ".maxSpeed";
 
@@ -29,6 +32,7 @@ public class BasicExpressionConfig extends PluginConfig {
         addDefault(ANNOUNCE_ALLOW_COLOR_CODES, true);
         addDefault(COLLECT_MAX_RADIUS, 20);
         addDefault(GRAB_MAX_RADIUS, 20);
+        addDefault(SENSOR_POWER_TIME, 1);
         addDefault(SPEED_MAX_SPEED, 100);
     }
 

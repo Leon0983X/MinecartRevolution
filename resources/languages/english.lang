@@ -113,6 +113,9 @@ basiccontrols.signs.jump.description=Let the minecart jump the given amount of b
 basiccontrols.signs.lock.name=Lock
 basiccontrols.signs.lock.description=Locks or unlocks the minecart for actions
 
+basiccontrols.signs.sensor.name=Sensor
+basiccontrols.signs.sensor.description=Powers a nearby leaver with conditions
+
 basiccontrols.signs.speed.name=Speed
 basiccontrols.signs.speed.description=Sets the speed of the minecart
 

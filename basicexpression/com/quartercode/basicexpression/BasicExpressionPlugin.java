@@ -16,6 +16,7 @@ import com.quartercode.basicexpression.command.IntersectionCommand;
 import com.quartercode.basicexpression.command.KillCommand;
 import com.quartercode.basicexpression.command.LockCommand;
 import com.quartercode.basicexpression.command.ReverseCommand;
+import com.quartercode.basicexpression.command.SensorCommand;
 import com.quartercode.basicexpression.command.SpeedCommand;
 import com.quartercode.basicexpression.command.TimeCommand;
 import com.quartercode.basicexpression.command.VerticalCommand;
@@ -67,6 +68,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new KillCommand(getMinecartRevolution()));
         addExpressionCommand(new LockCommand(getMinecartRevolution()));
         addExpressionCommand(new ReverseCommand());
+        addExpressionCommand(new SensorCommand(this));
         addExpressionCommand(new SpeedCommand(this));
         addExpressionCommand(new TimeCommand());
         addExpressionCommand(new VerticalCommand());

@@ -41,35 +41,34 @@ public class IntersectionCommand extends ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         if (String.valueOf(parameter).split(":").length == 2) {
-            final String type = String.valueOf(parameter).split(":")[0];
-            final String direction = String.valueOf(parameter).split(":")[1];
-            String newDirection = null;
+            final String term = String.valueOf(parameter).split(":")[0];
+            final String action = String.valueOf(parameter).split(":")[1];
 
-            if (type.equalsIgnoreCase("n") || type.equalsIgnoreCase("e") || type.equalsIgnoreCase("s") || type.equalsIgnoreCase("w")) {
-                if (type.equalsIgnoreCase("n") && minecart.getVelocity().getZ() > 0.0D) {
-                    newDirection = direction;
-                } else if (type.equalsIgnoreCase("e") && minecart.getVelocity().getX() < 0.0D) {
-                    newDirection = direction;
-                } else if (type.equalsIgnoreCase("s") && minecart.getVelocity().getZ() < 0.0D) {
-                    newDirection = direction;
-                } else if (type.equalsIgnoreCase("w") && minecart.getVelocity().getX() > 0.0D) {
-                    newDirection = direction;
+            if (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("e") || term.equalsIgnoreCase("s") || term.equalsIgnoreCase("w")) {
+                if (term.equalsIgnoreCase("n") && minecart.getVelocity().getZ() > 0.0D) {
+                    execute(minecart, action);
+                } else if (term.equalsIgnoreCase("e") && minecart.getVelocity().getX() < 0.0D) {
+                    execute(minecart, action);
+                } else if (term.equalsIgnoreCase("s") && minecart.getVelocity().getZ() < 0.0D) {
+                    execute(minecart, action);
+                } else if (term.equalsIgnoreCase("w") && minecart.getVelocity().getX() > 0.0D) {
+                    execute(minecart, action);
                 }
-            } else if (type.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("standard") && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("invcart") && minecart instanceof InventoryHolder) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("player") && minecart.getPassenger() instanceof Player) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("mob") && (minecart.getPassenger() instanceof Monster || minecart.getPassenger() instanceof Animals)) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("empty") && minecart.isEmpty()) {
-                newDirection = direction;
-            } else if (type.equalsIgnoreCase("nocargo")) {
+            } else if (term.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("standard") && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("invcart") && minecart instanceof InventoryHolder) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("player") && minecart.getPassenger() instanceof Player) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("mob") && (minecart.getPassenger() instanceof Monster || minecart.getPassenger() instanceof Animals)) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("empty") && minecart.isEmpty()) {
+                execute(minecart, action);
+            } else if (term.equalsIgnoreCase("nocargo")) {
                 if (minecart.getPassenger() instanceof Player) {
                     final Player player = (Player) minecart.getPassenger();
                     for (int counter = 0; counter < player.getInventory().getSize(); counter++) {
@@ -77,7 +76,7 @@ public class IntersectionCommand extends ExpressionCommand {
                             return;
                         }
                     }
-                    newDirection = direction;
+                    execute(minecart, action);
                 } else if (minecart instanceof StorageMinecart) {
                     final StorageMinecart storageMinecart = (StorageMinecart) minecart;
                     for (int counter = 0; counter < storageMinecart.getInventory().getSize(); counter++) {
@@ -85,104 +84,100 @@ public class IntersectionCommand extends ExpressionCommand {
                             return;
                         }
                     }
-                    newDirection = direction;
+                    execute(minecart, action);
                 } else {
-                    newDirection = direction;
+                    execute(minecart, action);
                 }
-            } else if (type.contains("p-") && minecart.getPassenger() instanceof Player) {
+            } else if (term.contains("p-") && minecart.getPassenger() instanceof Player) {
                 final Player player = (Player) minecart.getPassenger();
-                final String[] variables = type.split("-");
+                final String[] variables = term.split("-");
                 if (player.getName().equalsIgnoreCase(variables[1])) {
-                    newDirection = direction;
+                    execute(minecart, action);
                 }
-            } else if (type.contains("invc-")) {
+            } else if (term.contains("invc-")) {
                 if (minecart.getPassenger() instanceof InventoryHolder) {
-                    final String[] variables = type.split("-");
+                    final String[] variables = term.split("-");
                     if (contains( ((InventoryHolder) minecart.getPassenger()).getInventory(), variables[1])) {
-                        newDirection = direction;
+                        execute(minecart, action);
                     }
                 } else if (minecart instanceof InventoryHolder) {
-                    final String[] variables = type.split("-");
+                    final String[] variables = term.split("-");
                     if (contains( ((InventoryHolder) minecart).getInventory(), variables[1])) {
-                        newDirection = direction;
+                        execute(minecart, action);
                     }
                 }
-            } else if (type.contains("ihold-") && minecart.getPassenger() instanceof Player) {
+            } else if (term.contains("ihold-") && minecart.getPassenger() instanceof Player) {
                 final Player player = (Player) minecart.getPassenger();
-                final String[] variables = type.split("-");
+                final String[] variables = term.split("-");
                 if (MaterialAliasConfig.equals(player.getItemInHand(), variables[1])) {
-                    newDirection = direction;
+                    execute(minecart, action);
                 }
-            }
-
-            if (newDirection != null) {
-                driveMinecart(minecart, newDirection);
             }
         }
     }
 
-    private void driveMinecart(final Minecart minecart, final String newDriveDirection) {
+    private void execute(final Minecart minecart, final String action) {
 
         final Vector speed = new Vector();
         final double speedNumber = MinecartUtil.getSpeed(minecart);
         final Location newLocation = minecart.getLocation();
-        if (newDriveDirection.equalsIgnoreCase("r") || newDriveDirection.equalsIgnoreCase("l") || newDriveDirection.equalsIgnoreCase("m")) {
+        if (action.equalsIgnoreCase("r") || action.equalsIgnoreCase("l") || action.equalsIgnoreCase("m")) {
             if (minecart.getVelocity().getX() > 0.0D) {
-                if (newDriveDirection.equalsIgnoreCase("r")) {
+                if (action.equalsIgnoreCase("r")) {
                     speed.setZ(speedNumber);
                     newLocation.setZ(newLocation.getZ() + 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("l")) {
+                } else if (action.equalsIgnoreCase("l")) {
                     speed.setZ(-speedNumber);
                     newLocation.setZ(newLocation.getZ() - 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("m")) {
+                } else if (action.equalsIgnoreCase("m")) {
                     speed.setX(speedNumber);
                 }
             } else if (minecart.getVelocity().getX() < 0.0D) {
-                if (newDriveDirection.equalsIgnoreCase("r")) {
+                if (action.equalsIgnoreCase("r")) {
                     speed.setZ(-speedNumber);
                     newLocation.setZ(newLocation.getZ() - 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("l")) {
+                } else if (action.equalsIgnoreCase("l")) {
                     speed.setZ(speedNumber);
                     newLocation.setZ(newLocation.getZ() + 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("m")) {
+                } else if (action.equalsIgnoreCase("m")) {
                     speed.setX(-speedNumber);
                 }
             } else if (minecart.getVelocity().getZ() > 0.0D) {
-                if (newDriveDirection.equalsIgnoreCase("r")) {
+                if (action.equalsIgnoreCase("r")) {
                     speed.setX(-speedNumber);
                     newLocation.setX(newLocation.getX() - 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("l")) {
+                } else if (action.equalsIgnoreCase("l")) {
                     speed.setX(speedNumber);
                     newLocation.setX(newLocation.getX() + 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("m")) {
+                } else if (action.equalsIgnoreCase("m")) {
                     speed.setZ(speedNumber);
                 }
             } else if (minecart.getVelocity().getZ() < 0.0D) {
-                if (newDriveDirection.equalsIgnoreCase("r")) {
+                if (action.equalsIgnoreCase("r")) {
                     speed.setX(speedNumber);
                     newLocation.setX(newLocation.getX() + 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("l")) {
+                } else if (action.equalsIgnoreCase("l")) {
                     speed.setX(-speedNumber);
                     newLocation.setX(newLocation.getX() - 1.0D);
-                } else if (newDriveDirection.equalsIgnoreCase("m")) {
+                } else if (action.equalsIgnoreCase("m")) {
                     speed.setZ(-speedNumber);
                 }
             }
-        } else if (newDriveDirection.equalsIgnoreCase("n")) {
+        } else if (action.equalsIgnoreCase("n")) {
             speed.setZ(speedNumber);
             newLocation.setZ(newLocation.getZ() + 1.0D);
-        } else if (newDriveDirection.equalsIgnoreCase("e")) {
+        } else if (action.equalsIgnoreCase("e")) {
             speed.setX(-speedNumber);
             newLocation.setX(newLocation.getX() - 1.0D);
-        } else if (newDriveDirection.equalsIgnoreCase("s")) {
+        } else if (action.equalsIgnoreCase("s")) {
             speed.setZ(-speedNumber);
             newLocation.setZ(newLocation.getZ() - 1.0D);
-        } else if (newDriveDirection.equalsIgnoreCase("w")) {
+        } else if (action.equalsIgnoreCase("w")) {
             speed.setX(speedNumber);
             newLocation.setX(newLocation.getX() + 1.0D);
-        } else if (newDriveDirection.equalsIgnoreCase("d")) {
+        } else if (action.equalsIgnoreCase("d")) {
             minecart.remove();
-        } else if (newDriveDirection.equalsIgnoreCase("ej")) {
+        } else if (action.equalsIgnoreCase("ej")) {
             minecart.eject();
         }
 
