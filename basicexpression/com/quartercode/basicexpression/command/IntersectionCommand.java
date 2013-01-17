@@ -1,8 +1,10 @@
 
 package com.quartercode.basicexpression.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Monster;
@@ -13,6 +15,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import com.quartercode.basicexpression.BasicExpressionPlugin;
+import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
@@ -59,8 +63,11 @@ public class IntersectionCommand extends ExpressionCommand {
         }
     }
 
-    public IntersectionCommand() {
+    private final BasicExpressionPlugin plugin;
 
+    public IntersectionCommand(final BasicExpressionPlugin plugin) {
+
+        this.plugin = plugin;
     }
 
     @Override
@@ -154,7 +161,7 @@ public class IntersectionCommand extends ExpressionCommand {
 
     private void execute(final Minecart minecart, final String action) {
 
-        Direction from = Direction.getDirection(minecart);
+        final Direction from = Direction.getDirection(minecart);
 
         if (action.equalsIgnoreCase("r") || action.equalsIgnoreCase("right")) {
             doIntersection(minecart, from, from.getRight());
@@ -176,12 +183,25 @@ public class IntersectionCommand extends ExpressionCommand {
             minecart.remove();
         } else if (action.equalsIgnoreCase("ej") || action.equalsIgnoreCase("eject")) {
             minecart.eject();
+        } else if (action.toLowerCase().startsWith("c-") || action.toLowerCase().startsWith("cmd-") || action.toLowerCase().startsWith("command-")) {
+            final String command = action.replace("command-", "").replace("cmd-", "").replace("c-", "");
+            if (minecart.getPassenger() instanceof CommandSender) {
+                Bukkit.dispatchCommand((CommandSender) minecart.getPassenger(), command);
+            }
+        } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
+            final String command = action.replace("revo-", "").replace("control-", "").replace("script-", "").replace("expression-", "").replace("e-", "");
+            try {
+                plugin.getExpressionExecutor().execute(minecart, command);
+            }
+            catch (final Exception e) {
+                MinecartRevolution.handleSilenceThrowable(e);
+            }
         }
     }
 
-    private void doIntersection(Minecart minecart, final Direction from, final Direction to) {
+    private void doIntersection(final Minecart minecart, final Direction from, final Direction to) {
 
-        Block rail = minecart.getLocation().getBlock();
+        final Block rail = minecart.getLocation().getBlock();
         byte data = -1;
 
         if (from == Direction.NORTH && to == Direction.NORTH) {
@@ -227,9 +247,9 @@ public class IntersectionCommand extends ExpressionCommand {
         }
     }
 
-    private void reverse(Minecart minecart) {
+    private void reverse(final Minecart minecart) {
 
-        Vector vector = minecart.getVelocity();
+        final Vector vector = minecart.getVelocity();
         vector.setX(-vector.getX());
         vector.setZ(-vector.getZ());
 

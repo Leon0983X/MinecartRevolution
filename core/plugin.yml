@@ -327,10 +327,16 @@ permissions:
     children:
       minecartrevolution.control.sign.intersection.place: true
       minecartrevolution.control.sign.intersection.destroy: true
+      minecartrevolution.control.sign.intersection.command: true
+      minecartrevolution.control.sign.intersection.expression: true
   minecartrevolution.control.sign.intersection.place:
     description: Gives access to place the MinecartRevolution Intersection sign
   minecartrevolution.control.sign.intersection.destroy:
     description: Gives access to destroy the MinecartRevolution Intersection sign
+  minecartrevolution.control.sign.intersection.command:
+    description: Gives access to create Intersection command actions.
+  minecartrevolution.control.sign.intersection.expression:
+    description: Gives access to create Intersection expression actions.
 
 
   minecartrevolution.control.sign.jump.*:

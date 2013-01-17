@@ -3,7 +3,9 @@ package com.quartercode.basiccontrols.sign;
 
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.get.Lang;
+import com.quartercode.minecartrevolution.get.Perm;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
 
@@ -31,6 +33,27 @@ public class IntersectionSign extends ControlSign {
         if (!sign.getLine(3).isEmpty()) {
             executeExpression(minecart, "intersection " + sign.getLine(3));
         }
+    }
+
+    @Override
+    public boolean allowPlace(final Player player, String[] lines, final Sign sign) {
+
+        for (String line : lines) {
+            if (line.split(":").length == 2) {
+                final String action = line.split(":")[1];
+                if (action.toLowerCase().startsWith("c-") || action.toLowerCase().startsWith("cmd-") || action.toLowerCase().startsWith("command-")) {
+                    if (!Perm.has(player, "control.sign.intersection.command")) {
+                        return false;
+                    }
+                } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
+                    if (!Perm.has(player, "control.sign.intersection.expression")) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
 }

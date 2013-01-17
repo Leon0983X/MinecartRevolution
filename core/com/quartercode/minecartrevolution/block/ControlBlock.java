@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Player;
 import com.quartercode.minecartrevolution.util.Control;
 
 public abstract class ControlBlock extends Control {
@@ -49,5 +50,15 @@ public abstract class ControlBlock extends Control {
     protected abstract ControlBlockInfo createInfo();
 
     public abstract void execute(Minecart minecart, Block block);
+
+    public boolean allowPlace(final Player player, final Block block) {
+
+        return true;
+    }
+
+    public boolean allowDestroy(final Player player, final Block block) {
+
+        return true;
+    }
 
 }

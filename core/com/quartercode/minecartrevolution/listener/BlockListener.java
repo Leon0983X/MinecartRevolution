@@ -40,7 +40,7 @@ public class BlockListener implements Listener {
 
                     for (final ItemData itemData : info.getItemDatas()) {
                         if (itemData.equals(block)) {
-                            if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
+                            if (!Perm.has(event.getPlayer(), info.getPlacePermission()) || !controlBlock.allowPlace(event.getPlayer(), block)) {
 	event.setCancelled(true);
 	event.getPlayer().sendMessage(Lang.getValue("control.place.noPermission"));
                             } else {
@@ -63,7 +63,7 @@ public class BlockListener implements Listener {
 
                     for (final ItemData itemData : info.getItemDatas()) {
                         if (itemData.equals(block)) {
-                            if (!Perm.has(event.getPlayer(), info.getDestroyPermission())) {
+                            if (!Perm.has(event.getPlayer(), info.getDestroyPermission()) || !controlBlock.allowDestroy(event.getPlayer(), block)) {
 	event.setCancelled(true);
 	event.getPlayer().sendMessage(Lang.getValue("control.destroy.noPermission"));
                             } else {
@@ -87,7 +87,7 @@ public class BlockListener implements Listener {
 
             for (final String signLabel : info.getLabels()) {
                 if (signLabel.equalsIgnoreCase(label)) {
-                    if (!Perm.has(event.getPlayer(), info.getPlacePermission())) {
+                    if (!Perm.has(event.getPlayer(), info.getPlacePermission()) || !controlSign.allowPlace(event.getPlayer(), event.getLines(), (Sign) event.getBlock().getState())) {
                         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
                             event.getBlock().setTypeId(0);
                         } else {
@@ -116,7 +116,7 @@ public class BlockListener implements Listener {
 
                 for (final String signLabel : info.getLabels()) {
                     if (signLabel.equalsIgnoreCase(label)) {
-                        if (!Perm.has(event.getPlayer(), info.getDestroyPermission())) {
+                        if (!Perm.has(event.getPlayer(), info.getDestroyPermission()) || !controlSign.allowDestroy(event.getPlayer(), ((Sign) event.getBlock().getState()).getLines(), (Sign) event.getBlock().getState())) {
                             event.setCancelled(true);
                             event.getPlayer().sendMessage(Lang.getValue("control.destroy.noPermission"));
                         } else {
