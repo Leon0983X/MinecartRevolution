@@ -79,4 +79,14 @@ public class ItemData {
         return block.getType() == material && block.getData() == data;
     }
 
+    public boolean equals(Object object) {
+
+        if (object == null || ! (object instanceof ItemData)) {
+            return false;
+        } else {
+            ItemData itemData = (ItemData) object;
+            return itemData.getMaterial() == material && itemData.getData() == data;
+        }
+    }
+
 }

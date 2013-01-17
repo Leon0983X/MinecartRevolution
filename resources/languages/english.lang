@@ -95,6 +95,9 @@ basiccontrols.signs.expression.description=Controls the minecart with Expression
 basiccontrols.signs.file.name=File
 basiccontrols.signs.file.description=Executes a script file like the file-command
 
+basiccontrols.signs.furnace.name=Furnace
+basiccontrols.signs.furnace.description=Transfers items between furnaces and storage minecarts
+
 basiccontrols.signs.grab.name=Grab
 basiccontrols.signs.grab.description=Grabs the nearest player in the given radius
 

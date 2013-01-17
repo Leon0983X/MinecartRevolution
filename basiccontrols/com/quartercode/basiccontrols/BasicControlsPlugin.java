@@ -16,6 +16,7 @@ import com.quartercode.basiccontrols.sign.CommandSign;
 import com.quartercode.basiccontrols.sign.EffectSign;
 import com.quartercode.basiccontrols.sign.ExpressionSign;
 import com.quartercode.basiccontrols.sign.FileSign;
+import com.quartercode.basiccontrols.sign.FurnaceSign;
 import com.quartercode.basiccontrols.sign.GrabSign;
 import com.quartercode.basiccontrols.sign.HealthSign;
 import com.quartercode.basiccontrols.sign.HoldSign;
@@ -68,6 +69,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
         addControlSign(new EffectSign());
         addControlSign(new ExpressionSign());
         addControlSign(new FileSign());
+        addControlSign(new FurnaceSign());
         addControlSign(new GrabSign());
         addControlSign(new HealthSign());
         addControlSign(new HoldSign());

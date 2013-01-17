@@ -9,6 +9,7 @@ import com.quartercode.basicexpression.command.CommandCommand;
 import com.quartercode.basicexpression.command.EffectCommand;
 import com.quartercode.basicexpression.command.EjectCommand;
 import com.quartercode.basicexpression.command.FileCommand;
+import com.quartercode.basicexpression.command.FurnaceCommand;
 import com.quartercode.basicexpression.command.GrabCommand;
 import com.quartercode.basicexpression.command.HealthCommand;
 import com.quartercode.basicexpression.command.HoldCommand;
@@ -61,6 +62,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
         addExpressionCommand(new FileCommand(getExpressionExecutor()));
+        addExpressionCommand(new FurnaceCommand());
         addExpressionCommand(new GrabCommand(this));
         addExpressionCommand(new HealthCommand());
         addExpressionCommand(new HoldCommand(getMinecartRevolution()));

@@ -85,18 +85,18 @@ public class ChestCommand extends ExpressionCommand {
         if (String.valueOf(parameter).startsWith("+")) {
             if (items.size() > 0) {
                 for (final String item : items) {
-                    transfer(chest.getInventory(), inventoryMinecart.getInventory(), item);
-                }
-            } else {
-                transfer(chest.getInventory(), inventoryMinecart.getInventory(), null);
-            }
-        } else if (String.valueOf(parameter).startsWith("-")) {
-            if (items.size() > 0) {
-                for (final String item : items) {
                     transfer(inventoryMinecart.getInventory(), chest.getInventory(), item);
                 }
             } else {
                 transfer(inventoryMinecart.getInventory(), chest.getInventory(), null);
+            }
+        } else if (String.valueOf(parameter).startsWith("-")) {
+            if (items.size() > 0) {
+                for (final String item : items) {
+                    transfer(chest.getInventory(), inventoryMinecart.getInventory(), item);
+                }
+            } else {
+                transfer(chest.getInventory(), inventoryMinecart.getInventory(), null);
             }
         }
     }

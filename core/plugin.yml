@@ -278,6 +278,17 @@ permissions:
     description: Gives access to destroy the MinecartRevolution File sign
 
 
+  minecartrevolution.control.sign.furnace.*:
+    description: Gives access to use the MinecartRevolution Furnace sign
+    children:
+      minecartrevolution.control.sign.furnace.place: true
+      minecartrevolution.control.sign.furnace.destroy: true
+  minecartrevolution.control.sign.furnace.place:
+    description: Gives access to place the MinecartRevolution Furnace sign
+  minecartrevolution.control.sign.furnace.destroy:
+    description: Gives access to destroy the MinecartRevolution Furnace sign
+
+
   minecartrevolution.control.sign.grab.*:
     description: Gives access to use the MinecartRevolution Grab sign
     children:

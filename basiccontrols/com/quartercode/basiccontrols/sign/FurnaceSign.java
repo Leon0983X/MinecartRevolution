@@ -7,24 +7,24 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
 
-public class SensorSign extends ControlSign {
+public class FurnaceSign extends ControlSign {
 
-    public SensorSign() {
+    public FurnaceSign() {
 
     }
 
     @Override
     protected ControlSignInfo createInfo() {
 
-        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.sensor.name"), Lang.getValue("basiccontrols.signs.sensor.description"), "sensor.place", "sensor.destroy", "sensor");
+        return new ControlSignInfo(Lang.getValue("basiccontrols.signs.furnace.name"), Lang.getValue("basiccontrols.signs.furnace.description"), "furnace.place", "furnace.destroy", "furnace", "smelt");
     }
 
     @Override
     public void execute(final Minecart minecart, final String label, final Sign sign) {
 
-        executeExpression(minecart, "sensor " + sign.getLine(1));
-        executeExpression(minecart, "sensor " + sign.getLine(2));
-        executeExpression(minecart, "sensor " + sign.getLine(3));
+        executeExpression(minecart, "furnace " + sign.getLine(1));
+        executeExpression(minecart, "furnace " + sign.getLine(2));
+        executeExpression(minecart, "furnace " + sign.getLine(3));
     }
 
 }
