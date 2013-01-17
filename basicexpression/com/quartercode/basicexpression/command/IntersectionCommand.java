@@ -1,7 +1,8 @@
 
 package com.quartercode.basicexpression.command;
 
-import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Monster;
@@ -13,13 +14,50 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
-import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class IntersectionCommand extends ExpressionCommand {
+
+    public enum Direction {
+
+        NORTH, EAST, SOUTH, WEST;
+
+        public static Direction getDirection(final Minecart minecart) {
+
+            if (minecart.getVelocity().getX() > 0.0D) {
+                return WEST;
+            } else if (minecart.getVelocity().getX() < 0.0D) {
+                return EAST;
+            } else if (minecart.getVelocity().getZ() > 0.0D) {
+                return NORTH;
+            } else if (minecart.getVelocity().getZ() < 0.0D) {
+                return SOUTH;
+            } else {
+                return null;
+            }
+        }
+
+        public Direction getRight() {
+
+            if (ordinal() == values().length - 1) {
+                return values()[0];
+            } else {
+                return values()[ordinal() + 1];
+            }
+        }
+
+        public Direction getLeft() {
+
+            if (ordinal() == 0) {
+                return values()[values().length - 1];
+            } else {
+                return values()[ordinal() - 1];
+            }
+        }
+    }
 
     public IntersectionCommand() {
 
@@ -45,13 +83,13 @@ public class IntersectionCommand extends ExpressionCommand {
             final String action = String.valueOf(parameter).split(":")[1];
 
             if (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("e") || term.equalsIgnoreCase("s") || term.equalsIgnoreCase("w")) {
-                if (term.equalsIgnoreCase("n") && minecart.getVelocity().getZ() > 0.0D) {
+                if (term.equalsIgnoreCase("n") && Direction.getDirection(minecart) == Direction.NORTH) {
                     execute(minecart, action);
-                } else if (term.equalsIgnoreCase("e") && minecart.getVelocity().getX() < 0.0D) {
+                } else if (term.equalsIgnoreCase("e") && Direction.getDirection(minecart) == Direction.EAST) {
                     execute(minecart, action);
-                } else if (term.equalsIgnoreCase("s") && minecart.getVelocity().getZ() < 0.0D) {
+                } else if (term.equalsIgnoreCase("s") && Direction.getDirection(minecart) == Direction.SOUTH) {
                     execute(minecart, action);
-                } else if (term.equalsIgnoreCase("w") && minecart.getVelocity().getX() > 0.0D) {
+                } else if (term.equalsIgnoreCase("w") && Direction.getDirection(minecart) == Direction.WEST) {
                     execute(minecart, action);
                 }
             } else if (term.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
@@ -118,71 +156,86 @@ public class IntersectionCommand extends ExpressionCommand {
 
     private void execute(final Minecart minecart, final String action) {
 
-        final Vector speed = new Vector();
-        final double speedNumber = MinecartUtil.getSpeed(minecart);
-        final Location newLocation = minecart.getLocation();
-        if (action.equalsIgnoreCase("r") || action.equalsIgnoreCase("l") || action.equalsIgnoreCase("m")) {
-            if (minecart.getVelocity().getX() > 0.0D) {
-                if (action.equalsIgnoreCase("r")) {
-                    speed.setZ(speedNumber);
-                    newLocation.setZ(newLocation.getZ() + 1.0D);
-                } else if (action.equalsIgnoreCase("l")) {
-                    speed.setZ(-speedNumber);
-                    newLocation.setZ(newLocation.getZ() - 1.0D);
-                } else if (action.equalsIgnoreCase("m")) {
-                    speed.setX(speedNumber);
-                }
-            } else if (minecart.getVelocity().getX() < 0.0D) {
-                if (action.equalsIgnoreCase("r")) {
-                    speed.setZ(-speedNumber);
-                    newLocation.setZ(newLocation.getZ() - 1.0D);
-                } else if (action.equalsIgnoreCase("l")) {
-                    speed.setZ(speedNumber);
-                    newLocation.setZ(newLocation.getZ() + 1.0D);
-                } else if (action.equalsIgnoreCase("m")) {
-                    speed.setX(-speedNumber);
-                }
-            } else if (minecart.getVelocity().getZ() > 0.0D) {
-                if (action.equalsIgnoreCase("r")) {
-                    speed.setX(-speedNumber);
-                    newLocation.setX(newLocation.getX() - 1.0D);
-                } else if (action.equalsIgnoreCase("l")) {
-                    speed.setX(speedNumber);
-                    newLocation.setX(newLocation.getX() + 1.0D);
-                } else if (action.equalsIgnoreCase("m")) {
-                    speed.setZ(speedNumber);
-                }
-            } else if (minecart.getVelocity().getZ() < 0.0D) {
-                if (action.equalsIgnoreCase("r")) {
-                    speed.setX(speedNumber);
-                    newLocation.setX(newLocation.getX() + 1.0D);
-                } else if (action.equalsIgnoreCase("l")) {
-                    speed.setX(-speedNumber);
-                    newLocation.setX(newLocation.getX() - 1.0D);
-                } else if (action.equalsIgnoreCase("m")) {
-                    speed.setZ(-speedNumber);
-                }
-            }
-        } else if (action.equalsIgnoreCase("n")) {
-            speed.setZ(speedNumber);
-            newLocation.setZ(newLocation.getZ() + 1.0D);
-        } else if (action.equalsIgnoreCase("e")) {
-            speed.setX(-speedNumber);
-            newLocation.setX(newLocation.getX() - 1.0D);
-        } else if (action.equalsIgnoreCase("s")) {
-            speed.setZ(-speedNumber);
-            newLocation.setZ(newLocation.getZ() - 1.0D);
-        } else if (action.equalsIgnoreCase("w")) {
-            speed.setX(speedNumber);
-            newLocation.setX(newLocation.getX() + 1.0D);
-        } else if (action.equalsIgnoreCase("d")) {
+        Direction from = Direction.getDirection(minecart);
+
+        if (action.equalsIgnoreCase("r") || action.equalsIgnoreCase("right")) {
+            doIntersection(minecart, from, from.getRight());
+        } else if (action.equalsIgnoreCase("l") || action.equalsIgnoreCase("left")) {
+            doIntersection(minecart, from, from.getLeft());
+        } else if (action.equalsIgnoreCase("m") || action.equalsIgnoreCase("middle")) {
+            doIntersection(minecart, from, from);
+        } else if (action.equalsIgnoreCase("re") || action.equalsIgnoreCase("reverse")) {
+            doIntersection(minecart, from, from.getRight().getRight());
+        } else if (action.equalsIgnoreCase("n") || action.equalsIgnoreCase("north")) {
+            doIntersection(minecart, from, Direction.NORTH);
+        } else if (action.equalsIgnoreCase("e") || action.equalsIgnoreCase("east")) {
+            doIntersection(minecart, from, Direction.EAST);
+        } else if (action.equalsIgnoreCase("s") || action.equalsIgnoreCase("south")) {
+            doIntersection(minecart, from, Direction.SOUTH);
+        } else if (action.equalsIgnoreCase("w") || action.equalsIgnoreCase("west")) {
+            doIntersection(minecart, from, Direction.WEST);
+        } else if (action.equalsIgnoreCase("d") || action.equalsIgnoreCase("delete")) {
             minecart.remove();
-        } else if (action.equalsIgnoreCase("ej")) {
+        } else if (action.equalsIgnoreCase("ej") || action.equalsIgnoreCase("eject")) {
             minecart.eject();
         }
+    }
 
-        minecart.setVelocity(speed);
-        minecart.teleport(newLocation);
+    private void doIntersection(Minecart minecart, final Direction from, final Direction to) {
+
+        Block rail = minecart.getLocation().getBlock();
+        byte data = -1;
+
+        if (from == Direction.NORTH && to == Direction.NORTH) {
+            data = 0;
+        } else if (from == Direction.NORTH && to == Direction.EAST) {
+            data = 8;
+        } else if (from == Direction.NORTH && to == Direction.SOUTH) {
+            data = 0;
+            reverse(minecart);
+        } else if (from == Direction.NORTH && to == Direction.WEST) {
+            data = 9;
+        } else if (from == Direction.EAST && to == Direction.NORTH) {
+            data = 6;
+        } else if (from == Direction.EAST && to == Direction.EAST) {
+            data = 1;
+        } else if (from == Direction.EAST && to == Direction.SOUTH) {
+            data = 9;
+        } else if (from == Direction.EAST && to == Direction.WEST) {
+            data = 1;
+            reverse(minecart);
+        } else if (from == Direction.SOUTH && to == Direction.NORTH) {
+            data = 0;
+            reverse(minecart);
+        } else if (from == Direction.SOUTH && to == Direction.EAST) {
+            data = 7;
+        } else if (from == Direction.SOUTH && to == Direction.SOUTH) {
+            data = 0;
+        } else if (from == Direction.SOUTH && to == Direction.WEST) {
+            data = 6;
+        } else if (from == Direction.WEST && to == Direction.NORTH) {
+            data = 7;
+        } else if (from == Direction.WEST && to == Direction.EAST) {
+            data = 1;
+            reverse(minecart);
+        } else if (from == Direction.WEST && to == Direction.SOUTH) {
+            data = 8;
+        } else if (from == Direction.WEST && to == Direction.WEST) {
+            data = 1;
+        }
+
+        if (data >= 0 && rail.getType() == Material.RAILS) {
+            rail.setData(data);
+        }
+    }
+
+    private void reverse(Minecart minecart) {
+
+        Vector vector = minecart.getVelocity();
+        vector.setX(-vector.getX());
+        vector.setZ(-vector.getZ());
+
+        minecart.setVelocity(vector);
     }
 
     private boolean contains(final Inventory inventory, final String string) {
