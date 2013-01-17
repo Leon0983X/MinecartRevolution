@@ -82,16 +82,14 @@ public class IntersectionCommand extends ExpressionCommand {
             final String term = String.valueOf(parameter).split(":")[0];
             final String action = String.valueOf(parameter).split(":")[1];
 
-            if (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("e") || term.equalsIgnoreCase("s") || term.equalsIgnoreCase("w")) {
-                if (term.equalsIgnoreCase("n") && Direction.getDirection(minecart) == Direction.NORTH) {
-                    execute(minecart, action);
-                } else if (term.equalsIgnoreCase("e") && Direction.getDirection(minecart) == Direction.EAST) {
-                    execute(minecart, action);
-                } else if (term.equalsIgnoreCase("s") && Direction.getDirection(minecart) == Direction.SOUTH) {
-                    execute(minecart, action);
-                } else if (term.equalsIgnoreCase("w") && Direction.getDirection(minecart) == Direction.WEST) {
-                    execute(minecart, action);
-                }
+            if ( (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("north")) && Direction.getDirection(minecart) == Direction.NORTH) {
+                execute(minecart, action);
+            } else if ( (term.equalsIgnoreCase("e") || term.equalsIgnoreCase("east")) && Direction.getDirection(minecart) == Direction.EAST) {
+                execute(minecart, action);
+            } else if ( (term.equalsIgnoreCase("s") || term.equalsIgnoreCase("south")) && Direction.getDirection(minecart) == Direction.SOUTH) {
+                execute(minecart, action);
+            } else if ( (term.equalsIgnoreCase("w") || term.equalsIgnoreCase("west")) && Direction.getDirection(minecart) == Direction.WEST) {
+                execute(minecart, action);
             } else if (term.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
                 execute(minecart, action);
             } else if (term.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {

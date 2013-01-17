@@ -17,6 +17,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Lever;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
+import com.quartercode.basicexpression.command.IntersectionCommand.Direction;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
@@ -50,16 +51,14 @@ public class SensorCommand extends ExpressionCommand {
 
         final String term = String.valueOf(parameter);
 
-        if (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("e") || term.equalsIgnoreCase("s") || term.equalsIgnoreCase("w")) {
-            if (term.equalsIgnoreCase("n") && minecart.getVelocity().getZ() > 0.0D) {
-                power(minecart);
-            } else if (term.equalsIgnoreCase("e") && minecart.getVelocity().getX() < 0.0D) {
-                power(minecart);
-            } else if (term.equalsIgnoreCase("s") && minecart.getVelocity().getZ() < 0.0D) {
-                power(minecart);
-            } else if (term.equalsIgnoreCase("w") && minecart.getVelocity().getX() > 0.0D) {
-                power(minecart);
-            }
+        if ( (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("north")) && Direction.getDirection(minecart) == Direction.NORTH) {
+            power(minecart);
+        } else if ( (term.equalsIgnoreCase("e") || term.equalsIgnoreCase("east")) && Direction.getDirection(minecart) == Direction.EAST) {
+            power(minecart);
+        } else if ( (term.equalsIgnoreCase("s") || term.equalsIgnoreCase("south")) && Direction.getDirection(minecart) == Direction.SOUTH) {
+            power(minecart);
+        } else if ( (term.equalsIgnoreCase("w") || term.equalsIgnoreCase("west")) && Direction.getDirection(minecart) == Direction.WEST) {
+            power(minecart);
         } else if (term.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
             power(minecart);
         } else if (term.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {
