@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Minecart;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
@@ -84,46 +85,32 @@ public class ChestCommand extends ExpressionCommand {
         if (String.valueOf(parameter).startsWith("+")) {
             if (items.size() > 0) {
                 for (final String item : items) {
-                    toMinecart(chest, inventoryMinecart, item);
+                    transfer(chest.getInventory(), inventoryMinecart.getInventory(), item);
                 }
             } else {
-                toMinecart(chest, inventoryMinecart, null);
+                transfer(chest.getInventory(), inventoryMinecart.getInventory(), null);
             }
         } else if (String.valueOf(parameter).startsWith("-")) {
             if (items.size() > 0) {
                 for (final String item : items) {
-                    toChest(chest, inventoryMinecart, item);
+                    transfer(inventoryMinecart.getInventory(), chest.getInventory(), item);
                 }
             } else {
-                toChest(chest, inventoryMinecart, null);
+                transfer(inventoryMinecart.getInventory(), chest.getInventory(), null);
             }
         }
     }
 
-    private void toChest(final Chest chest, final InventoryHolder inventoryMinecart, final String string) {
+    private void transfer(final Inventory fromInventory, final Inventory toInventory, final String string) {
 
-        for (int counter = 0; counter < inventoryMinecart.getInventory().getSize(); counter++) {
-            if (chest.getInventory().firstEmpty() < 0) {
-                return;
-            }
+        for (int counter = 0; counter < fromInventory.getSize(); counter++) {
+            if (fromInventory.getItem(counter) != null && MaterialAliasConfig.equals(fromInventory.getItem(counter), string)) {
+                final List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getItem(counter) }).values());
+                fromInventory.setItem(counter, new ItemStack(Material.AIR));
 
-            if (inventoryMinecart.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(inventoryMinecart.getInventory().getItem(counter), string)) {
-                chest.getInventory().addItem(new ItemStack[] { inventoryMinecart.getInventory().getItem(counter) });
-                inventoryMinecart.getInventory().setItem(counter, new ItemStack(Material.AIR));
-            }
-        }
-    }
-
-    private void toMinecart(final Chest chest, final InventoryHolder inventoryMinecart, final String string) {
-
-        for (int counter = 0; counter < chest.getInventory().getSize(); counter++) {
-            if (inventoryMinecart.getInventory().firstEmpty() < 0) {
-                return;
-            }
-
-            if (chest.getInventory().getItem(counter) != null && MaterialAliasConfig.equals(chest.getInventory().getItem(counter), string)) {
-                inventoryMinecart.getInventory().addItem(new ItemStack[] { chest.getInventory().getItem(counter) });
-                chest.getInventory().setItem(counter, new ItemStack(Material.AIR));
+                for (final ItemStack itemStack : overplus) {
+                    fromInventory.addItem(itemStack);
+                }
             }
         }
     }
