@@ -5,6 +5,7 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.EffectUtil.DEffect;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
+import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
@@ -35,7 +36,7 @@ public class KillCommand extends ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         minecart.eject();
-        minecart.remove();
+        MinecartUtil.remove(minecart);
 
         if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
             DEffect.SMOKE.play(minecart);

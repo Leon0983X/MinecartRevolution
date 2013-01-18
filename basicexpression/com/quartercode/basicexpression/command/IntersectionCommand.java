@@ -15,8 +15,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import com.quartercode.basicexpression.BasicExpressionPlugin;
+import com.quartercode.basicexpression.util.Direction;
+import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
@@ -24,49 +28,11 @@ import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class IntersectionCommand extends ExpressionCommand {
 
-    public enum Direction {
+    private final BasicExpressionPlugin plugin;
 
-        NORTH, EAST, SOUTH, WEST;
+    public IntersectionCommand(final BasicExpressionPlugin plugin) {
 
-        public static Direction getDirection(final Minecart minecart) {
-
-            if (minecart.getVelocity().getX() > 0.0D) {
-                return WEST;
-            } else if (minecart.getVelocity().getX() < 0.0D) {
-                return EAST;
-            } else if (minecart.getVelocity().getZ() > 0.0D) {
-                return NORTH;
-            } else if (minecart.getVelocity().getZ() < 0.0D) {
-                return SOUTH;
-            } else {
-                return null;
-            }
-        }
-
-        public Direction getRight() {
-
-            if (ordinal() == values().length - 1) {
-                return values()[0];
-            } else {
-                return values()[ordinal() + 1];
-            }
-        }
-
-        public Direction getLeft() {
-
-            if (ordinal() == 0) {
-                return values()[values().length - 1];
-            } else {
-                return values()[ordinal() - 1];
-            }
-        }
-    }
-
-    private final MinecartRevolution minecartRevolution;
-
-    public IntersectionCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
+        this.plugin = plugin;
     }
 
     @Override
@@ -154,6 +120,19 @@ public class IntersectionCommand extends ExpressionCommand {
                 if (MaterialAliasConfig.equals(player.getItemInHand(), variables[1])) {
                     execute(minecart, action);
                 }
+            } else {
+                for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
+                    for (final String label : minecartTerm.getLabels()) {
+                        if (term.matches(label)) {
+                            if (minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+	execute(minecart, action);
+	return;
+                            }
+                        }
+                    }
+                }
+
+                doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
             }
         }
     }
@@ -179,7 +158,7 @@ public class IntersectionCommand extends ExpressionCommand {
         } else if (action.equalsIgnoreCase("w") || action.equalsIgnoreCase("west")) {
             doIntersection(minecart, from, Direction.WEST);
         } else if (action.equalsIgnoreCase("d") || action.equalsIgnoreCase("delete")) {
-            minecart.remove();
+            MinecartUtil.remove(minecart);
         } else if (action.equalsIgnoreCase("ej") || action.equalsIgnoreCase("eject")) {
             minecart.eject();
         } else if (action.toLowerCase().startsWith("c-") || action.toLowerCase().startsWith("cmd-") || action.toLowerCase().startsWith("command-")) {
@@ -190,7 +169,7 @@ public class IntersectionCommand extends ExpressionCommand {
         } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
             final String command = action.replace("revo-", "").replace("control-", "").replace("script-", "").replace("expression-", "").replace("e-", "");
             try {
-                minecartRevolution.getExpressionExecutor().execute(minecart, command);
+                plugin.getExpressionExecutor().execute(minecart, command);
             }
             catch (final Exception e) {
                 MinecartRevolution.handleSilenceThrowable(e);

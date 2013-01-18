@@ -17,8 +17,9 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Lever;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
-import com.quartercode.basicexpression.command.IntersectionCommand.Direction;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
+import com.quartercode.basicexpression.util.Direction;
+import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
@@ -116,6 +117,16 @@ public class SensorCommand extends ExpressionCommand {
             final String[] variables = term.split("-");
             if (MaterialAliasConfig.equals(player.getItemInHand(), variables[1])) {
                 power(minecart);
+            }
+        } else {
+            for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
+                for (final String label : minecartTerm.getLabels()) {
+                    if (term.matches(label)) {
+                        if (minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                            power(minecart);
+                        }
+                    }
+                }
             }
         }
     }

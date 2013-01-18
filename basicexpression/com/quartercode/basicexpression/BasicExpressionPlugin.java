@@ -1,6 +1,8 @@
 
 package com.quartercode.basicexpression;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.quartercode.basicexpression.command.AnnounceCommand;
 import com.quartercode.basicexpression.command.ChestCommand;
 import com.quartercode.basicexpression.command.ClearCommand;
@@ -30,11 +32,14 @@ import com.quartercode.basicexpression.constant.XConstant;
 import com.quartercode.basicexpression.constant.YConstant;
 import com.quartercode.basicexpression.constant.ZConstant;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
+import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
 
 public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
+
+    private final List<MinecartTerm> minecartTerms = new ArrayList<MinecartTerm>();
 
     public BasicExpressionPlugin() {
 
@@ -45,6 +50,11 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     public PluginInfo getInfo() {
 
         return new PluginInfo("BasicExpression", new Version("1.0"));
+    }
+
+    public List<MinecartTerm> getMinecartTerms() {
+
+        return minecartTerms;
     }
 
     @Override
@@ -66,7 +76,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new GrabCommand(this));
         addExpressionCommand(new HealthCommand());
         addExpressionCommand(new HoldCommand(getMinecartRevolution()));
-        addExpressionCommand(new IntersectionCommand(getMinecartRevolution()));
+        addExpressionCommand(new IntersectionCommand(this));
         addExpressionCommand(new KillCommand(getMinecartRevolution()));
         addExpressionCommand(new LockCommand(getMinecartRevolution()));
         addExpressionCommand(new ReverseCommand());

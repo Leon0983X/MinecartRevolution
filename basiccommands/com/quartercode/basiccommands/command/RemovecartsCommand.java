@@ -14,6 +14,7 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.command.Command;
 import com.quartercode.minecartrevolution.command.CommandInfo;
 import com.quartercode.minecartrevolution.get.Lang;
+import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.qcutil.args.Arguments;
 
 public class RemovecartsCommand extends Command {
@@ -77,11 +78,8 @@ public class RemovecartsCommand extends Command {
         int count = 0;
         for (final Entity entity : world.getEntities()) {
             if (entity instanceof Minecart) {
-                if (entity.getLocation().distance(location) <= radius) {
-                    entity.remove();
-                    count++;
-                } else if (radius < 0) {
-                    entity.remove();
+                if (entity.getLocation().distance(location) <= radius || radius < 0) {
+                    MinecartUtil.remove((Minecart) entity);
                     count++;
                 }
             }

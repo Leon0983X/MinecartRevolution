@@ -1,9 +1,11 @@
 
 package com.quartercode.minecartrevolution.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
+import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.util.Vector;
 
 public class MinecartUtil {
@@ -100,6 +102,17 @@ public class MinecartUtil {
         }
 
         minecart.setVelocity(velocity);
+    }
+
+    public static boolean remove(final Minecart minecart) {
+
+        final VehicleDestroyEvent event = new VehicleDestroyEvent(minecart, null);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            minecart.remove();
+        }
+
+        return event.isCancelled();
     }
 
     private MinecartUtil() {

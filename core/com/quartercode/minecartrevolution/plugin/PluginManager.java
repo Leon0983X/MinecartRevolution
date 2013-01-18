@@ -41,6 +41,28 @@ public class PluginManager {
         return plugins;
     }
 
+    public static MinecartRevolutionPlugin getPlugin(final String name) {
+
+        for (final MinecartRevolutionPlugin plugin : plugins) {
+            if (plugin.getInfo().getName().equals(name)) {
+                return plugin;
+            }
+        }
+
+        return null;
+    }
+
+    public static MinecartRevolutionPlugin getPlugin(final Class<? extends MinecartRevolutionPlugin> c) {
+
+        for (final MinecartRevolutionPlugin plugin : plugins) {
+            if (plugin.getClass().equals(c)) {
+                return plugin;
+            }
+        }
+
+        return null;
+    }
+
     private PluginManager() {
 
     }
