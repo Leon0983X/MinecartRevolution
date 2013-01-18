@@ -15,7 +15,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
@@ -63,11 +62,11 @@ public class IntersectionCommand extends ExpressionCommand {
         }
     }
 
-    private final BasicExpressionPlugin plugin;
+    private final MinecartRevolution minecartRevolution;
 
-    public IntersectionCommand(final BasicExpressionPlugin plugin) {
+    public IntersectionCommand(final MinecartRevolution minecartRevolution) {
 
-        this.plugin = plugin;
+        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -191,7 +190,7 @@ public class IntersectionCommand extends ExpressionCommand {
         } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
             final String command = action.replace("revo-", "").replace("control-", "").replace("script-", "").replace("expression-", "").replace("e-", "");
             try {
-                plugin.getExpressionExecutor().execute(minecart, command);
+                minecartRevolution.getExpressionExecutor().execute(minecart, command);
             }
             catch (final Exception e) {
                 MinecartRevolution.handleSilenceThrowable(e);

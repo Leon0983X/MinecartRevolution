@@ -23,12 +23,12 @@ public abstract class ControlSign extends Control {
 
     public abstract void execute(Minecart minecart, String label, Sign sign);
 
-    public boolean allowPlace(final Player player, String[] lines, final Sign sign) {
+    public boolean allowPlace(final Player player, final String[] lines, final Sign sign) {
 
         return true;
     }
 
-    public boolean allowDestroy(final Player player, String[] lines, final Sign sign) {
+    public boolean allowDestroy(final Player player, final String[] lines, final Sign sign) {
 
         return true;
     }

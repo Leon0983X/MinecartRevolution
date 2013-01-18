@@ -36,9 +36,9 @@ public class IntersectionSign extends ControlSign {
     }
 
     @Override
-    public boolean allowPlace(final Player player, String[] lines, final Sign sign) {
+    public boolean allowPlace(final Player player, final String[] lines, final Sign sign) {
 
-        for (String line : lines) {
+        for (final String line : lines) {
             if (line.split(":").length == 2) {
                 final String action = line.split(":")[1];
                 if (action.toLowerCase().startsWith("c-") || action.toLowerCase().startsWith("cmd-") || action.toLowerCase().startsWith("command-")) {

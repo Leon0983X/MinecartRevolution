@@ -55,7 +55,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
 
         addControlBlock(new BoosterBlock());
         addControlBlock(new BrakeBlock());
-        addControlBlock(new ControlSignBlock(this));
+        addControlBlock(new ControlSignBlock(getMinecartRevolution()));
         addControlBlock(new EjectBlock());
         addControlBlock(new ElevatorBlock());
         addControlBlock(new KillBlock());

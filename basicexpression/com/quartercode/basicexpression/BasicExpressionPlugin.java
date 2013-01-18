@@ -61,12 +61,12 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new CommandCommand());
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
-        addExpressionCommand(new FileCommand(getExpressionExecutor()));
+        addExpressionCommand(new FileCommand(getMinecartRevolution()));
         addExpressionCommand(new FurnaceCommand());
         addExpressionCommand(new GrabCommand(this));
         addExpressionCommand(new HealthCommand());
         addExpressionCommand(new HoldCommand(getMinecartRevolution()));
-        addExpressionCommand(new IntersectionCommand(this));
+        addExpressionCommand(new IntersectionCommand(getMinecartRevolution()));
         addExpressionCommand(new KillCommand(getMinecartRevolution()));
         addExpressionCommand(new LockCommand(getMinecartRevolution()));
         addExpressionCommand(new ReverseCommand());

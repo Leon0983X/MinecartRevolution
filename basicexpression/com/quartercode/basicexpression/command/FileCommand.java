@@ -17,11 +17,11 @@ import com.quartercode.qcutil.io.File;
 
 public class FileCommand extends ExpressionCommand {
 
-    private final MRExpressionExecutor expressionExecutor;
+    private final MinecartRevolution minecartRevolution;
 
-    public FileCommand(final MRExpressionExecutor expressionExecutor) {
+    public FileCommand(final MinecartRevolution minecartRevolution) {
 
-        this.expressionExecutor = expressionExecutor;
+        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FileCommand extends ExpressionCommand {
                 }
                 reader.close();
 
-                expressionExecutor.execute(minecart, MRExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
+                minecartRevolution.getExpressionExecutor().execute(minecart, MRExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
             }
         }
         catch (final Exception e) {
