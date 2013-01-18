@@ -9,10 +9,13 @@ import java.io.OutputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import com.quartercode.minecartrevolution.MinecartRevolution;
@@ -128,9 +131,39 @@ public class Lang {
         return resourceManager.getResource() != null;
     }
 
-    public static void extractCurrentLanguage() {
+    public static void extractDefaults() {
 
-        extractFromJAR(Lang.class.getResource("/languages/" + getLanguage() + ".lang"), new File(FileConf.LANGUAGES + java.io.File.separator + getLanguage() + ".lang"));
+        List<String> languageFiles = new ArrayList<String>();
+        final CodeSource src = MinecartRevolution.class.getProtectionDomain().getCodeSource();
+
+        if (src != null) {
+            try {
+                final URL jarUrl = src.getLocation();
+                final ZipInputStream zipInputStream = new ZipInputStream(jarUrl.openStream());
+
+                ZipEntry zipEntry = null;
+                while ( (zipEntry = zipInputStream.getNextEntry()) != null) {
+                    final String entryName = zipEntry.getName();
+                    if (entryName.matches("languages/.*\\.lang")) {
+                        languageFiles.add(entryName);
+                    }
+                }
+            }
+            catch (final IOException e) {
+                MinecartRevolution.handleThrowable(e);
+                return;
+            }
+        } else {
+            MinecartRevolution.handleThrowable(new RuntimeException("Failed to locate default language files"));
+            return;
+        }
+
+        for (String languageFile : languageFiles) {
+            File file = new File(FileConf.LANGUAGES + File.separator + languageFile.replace("languages/", ""));
+            if (!file.exists()) {
+                extractFromJAR(Lang.class.getResource("/" + languageFile), file);
+            }
+        }
     }
 
     private static void extractFromJAR(final URL url, final File destination) {
@@ -139,7 +172,6 @@ public class Lang {
         OutputStream outputStream = null;
 
         try {
-
             destination.getParentFile().mkdirs();
 
             outputStream = new FileOutputStream(destination);

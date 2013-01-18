@@ -111,11 +111,8 @@ public class MinecartRevolution {
         configuration.setDefaults();
         configuration.save();
 
+        Lang.extractDefaults();
         Lang.setLanguage(configuration.get(GlobalConfig.LANGUAGE));
-
-        if (!Lang.isCurrentLanguageAvaiable()) {
-            Lang.extractCurrentLanguage();
-        }
 
         enableListeners();
         enableExecutors();
