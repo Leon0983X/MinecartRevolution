@@ -22,7 +22,6 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
 
     protected JavaMinecartRevolutionPlugin() {
 
-        PluginManager.registerPlugin(this);
     }
 
     @Override
@@ -108,11 +107,5 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
 
         getExpressionExecutor().getExpressionConstants().add(expressionConstant);
     }
-
-    @Override
-    public abstract PluginInfo getInfo();
-
-    @Override
-    public abstract void onEnable();
 
 }

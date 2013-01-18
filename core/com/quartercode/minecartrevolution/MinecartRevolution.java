@@ -147,9 +147,9 @@ public class MinecartRevolution {
         controlsPlugin = new BasicControlsPlugin();
         expressionPlugin = new BasicExpressionPlugin();
 
-        PluginManager.enablePlugin(commandsPlugin);
-        PluginManager.enablePlugin(controlsPlugin);
-        PluginManager.enablePlugin(expressionPlugin);
+        PluginManager.registerPlugin(commandsPlugin);
+        PluginManager.registerPlugin(controlsPlugin);
+        PluginManager.registerPlugin(expressionPlugin);
     }
 
     private void enableMetrics() {

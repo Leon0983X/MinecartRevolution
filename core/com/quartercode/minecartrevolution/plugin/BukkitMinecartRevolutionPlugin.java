@@ -23,7 +23,6 @@ public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implemen
 
     protected BukkitMinecartRevolutionPlugin() {
 
-        PluginManager.registerPlugin(this);
     }
 
     @Override
@@ -111,9 +110,9 @@ public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implemen
     }
 
     @Override
-    public abstract PluginInfo getInfo();
+    public final void onEnable() {
 
-    @Override
-    public abstract void onEnable();
+        PluginManager.registerPlugin(this);
+    }
 
 }

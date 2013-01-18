@@ -47,7 +47,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
     }
 
     @Override
-    public void onEnable() {
+    public void enable() {
 
         config = new BasicControlsConfig(this);
         config.setDefaults();

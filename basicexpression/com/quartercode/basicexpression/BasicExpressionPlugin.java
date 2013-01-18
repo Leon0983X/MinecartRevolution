@@ -48,7 +48,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     }
 
     @Override
-    public void onEnable() {
+    public void enable() {
 
         config = new BasicExpressionConfig(this);
         config.setDefaults();

@@ -24,16 +24,15 @@ public class PluginManager {
 
         if (minecartRevolution == null) {
             throw new IllegalStateException("A plugin can only be registered after MinecartRevolution was loaded [" + minecartRevolutionPlugin.getInfo().getName() + "]");
-        } else {
-            minecartRevolutionPlugin.setMinecartRevolution(minecartRevolution);
-            plugins.add(minecartRevolutionPlugin);
         }
-    }
 
-    public static void enablePlugin(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
+        minecartRevolution.getLogger().info("Loading plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' ...");
+        minecartRevolutionPlugin.setMinecartRevolution(minecartRevolution);
+        plugins.add(minecartRevolutionPlugin);
 
         minecartRevolution.getLogger().info("Enabling plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' ...");
-        minecartRevolutionPlugin.onEnable();
+        minecartRevolutionPlugin.getPluginFolder().mkdirs();
+        minecartRevolutionPlugin.enable();
         minecartRevolution.getLogger().info("Plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' successfully enabled!");
     }
 

@@ -46,6 +46,6 @@ public interface MinecartRevolutionPlugin {
 
     public abstract PluginInfo getInfo();
 
-    public abstract void onEnable();
+    public abstract void enable();
 
 }

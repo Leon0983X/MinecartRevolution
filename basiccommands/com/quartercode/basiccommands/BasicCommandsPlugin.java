@@ -30,7 +30,7 @@ public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
     }
 
     @Override
-    public void onEnable() {
+    public void enable() {
 
         config = new BasicCommandsConfig(this);
         config.setDefaults();
