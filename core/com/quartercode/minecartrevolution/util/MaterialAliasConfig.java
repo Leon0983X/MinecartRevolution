@@ -7,8 +7,17 @@ import java.io.IOException;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public class MaterialAliasConfig {
+
+    private static MinecartRevolution minecartRevolution;
+
+    public static void setMinecartRevolution(final MinecartRevolution minecartRevolution) {
+
+        MaterialAliasConfig.minecartRevolution = minecartRevolution;
+    }
 
     public static int getId(final String string) {
 
@@ -50,25 +59,19 @@ public class MaterialAliasConfig {
 
         try {
             reader = new BufferedReader(new FileReader(FileConf.MATERIAL_ALIAS_CONF));
+            String line = null;
 
-            try {
-                String line = null;
-
-                while ( (line = reader.readLine()) != null) {
-                    final String[] parts = line.split(",");
-                    if (parts[0].equalsIgnoreCase(string)) {
-                        value = Integer.parseInt(parts[index]);
-                        break;
-                    }
+            while ( (line = reader.readLine()) != null) {
+                final String[] parts = line.split(",");
+                if (parts[0].equalsIgnoreCase(string)) {
+                    value = Integer.parseInt(parts[index]);
+                    break;
                 }
-                reader.close();
             }
-            catch (final Exception e) {
-                MinecartRevolution.handleSilenceThrowable(e);
-            }
+            reader.close();
         }
         catch (final IOException e) {
-            MinecartRevolution.handleSilenceThrowable(e);
+            QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse item string: " + string));
         }
 
         if (reader != null) {

@@ -1,5 +1,5 @@
 
-package com.quartercode.minecartrevolution.util.expression;
+package com.quartercode.minecartrevolution.expression;
 
 import java.util.Comparator;
 

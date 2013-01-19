@@ -2,22 +2,18 @@
 package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.EffectUtil.DEffect;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class KillCommand extends ExpressionCommand {
 
-    private final MinecartRevolution minecartRevolution;
+    public KillCommand() {
 
-    public KillCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override

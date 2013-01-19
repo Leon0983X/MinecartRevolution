@@ -3,8 +3,8 @@ package com.quartercode.basicexpression.constant;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
+import com.quartercode.minecartrevolution.expression.ExpressionConstant;
+import com.quartercode.minecartrevolution.expression.ExpressionConstantInfo;
 
 public class HealthConstant extends ExpressionConstant {
 

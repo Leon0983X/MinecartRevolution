@@ -6,22 +6,20 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
+import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public class FileCommand extends ExpressionCommand {
 
-    private final MinecartRevolution minecartRevolution;
+    public FileCommand() {
 
-    public FileCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -58,11 +56,11 @@ public class FileCommand extends ExpressionCommand {
                 }
                 reader.close();
 
-                minecartRevolution.getExpressionExecutor().execute(minecart, MRExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
+                minecartRevolution.getExpressionExecutor().execute(minecart, ExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
             }
         }
         catch (final Exception e) {
-            MinecartRevolution.handleSilenceThrowable(e);
+            QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load script file " + file.getPath()));
         }
     }
 

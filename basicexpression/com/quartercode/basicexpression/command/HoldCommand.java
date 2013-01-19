@@ -1,22 +1,18 @@
 
 package com.quartercode.basicexpression.command;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
+import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class HoldCommand extends ExpressionCommand {
 
-    private final MinecartRevolution minecartRevolution;
+    public HoldCommand() {
 
-    public HoldCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
@@ -43,14 +39,14 @@ public class HoldCommand extends ExpressionCommand {
             final Vector oldVelocity = minecart.getVelocity();
             minecart.setVelocity(new Vector(0, 0, 0));
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(minecartRevolution.getPlugin(), new Runnable() {
+            new ScheduleTask(minecartRevolution.getPlugin()) {
 
                 @Override
                 public void run() {
 
                     minecart.setVelocity(oldVelocity);
                 }
-            }, (long) (time * 1000D / 50D));
+            }.run((long) (time * 1000D));
         }
     }
 

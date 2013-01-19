@@ -31,6 +31,13 @@ import com.quartercode.basicexpression.constant.TimeConstant;
 import com.quartercode.basicexpression.constant.XConstant;
 import com.quartercode.basicexpression.constant.YConstant;
 import com.quartercode.basicexpression.constant.ZConstant;
+import com.quartercode.basicexpression.term.EastTerm;
+import com.quartercode.basicexpression.term.ItemTerm;
+import com.quartercode.basicexpression.term.NorthTerm;
+import com.quartercode.basicexpression.term.PassengerTerm;
+import com.quartercode.basicexpression.term.PlayerTerm;
+import com.quartercode.basicexpression.term.SouthTerm;
+import com.quartercode.basicexpression.term.WestTerm;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
@@ -71,14 +78,14 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new CommandCommand());
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
-        addExpressionCommand(new FileCommand(getMinecartRevolution()));
+        addExpressionCommand(new FileCommand());
         addExpressionCommand(new FurnaceCommand());
         addExpressionCommand(new GrabCommand(this));
         addExpressionCommand(new HealthCommand());
-        addExpressionCommand(new HoldCommand(getMinecartRevolution()));
+        addExpressionCommand(new HoldCommand());
         addExpressionCommand(new IntersectionCommand(this));
-        addExpressionCommand(new KillCommand(getMinecartRevolution()));
-        addExpressionCommand(new LockCommand(getMinecartRevolution()));
+        addExpressionCommand(new KillCommand());
+        addExpressionCommand(new LockCommand());
         addExpressionCommand(new ReverseCommand());
         addExpressionCommand(new SensorCommand(this));
         addExpressionCommand(new SpeedCommand(this));
@@ -93,6 +100,14 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionConstant(new XConstant());
         addExpressionConstant(new YConstant());
         addExpressionConstant(new ZConstant());
+
+        minecartTerms.add(new NorthTerm());
+        minecartTerms.add(new EastTerm());
+        minecartTerms.add(new SouthTerm());
+        minecartTerms.add(new WestTerm());
+        minecartTerms.add(new PassengerTerm());
+        minecartTerms.add(new PlayerTerm());
+        minecartTerms.add(new ItemTerm());
     }
 
 }

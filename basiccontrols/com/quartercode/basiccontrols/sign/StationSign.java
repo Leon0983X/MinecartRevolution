@@ -10,7 +10,6 @@ import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.util.Vector;
-import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
@@ -18,11 +17,13 @@ import com.quartercode.minecartrevolution.util.MinecartUtil;
 
 public class StationSign extends ControlSign implements Listener {
 
-    private final MinecartRevolution minecartRevolution;
+    public StationSign() {
 
-    public StationSign(final MinecartRevolution minecartRevolution) {
+    }
 
-        this.minecartRevolution = minecartRevolution;
+    @Override
+    public void enable() {
+
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 

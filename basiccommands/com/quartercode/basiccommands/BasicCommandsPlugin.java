@@ -39,14 +39,14 @@ public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
         new PlayerListener(getMinecartRevolution());
         new ServerListener(getMinecartRevolution());
 
-        addCommand(new HelpCommand(getMinecartRevolution()));
-        addCommand(new InfoCommand());
-        addCommand(new GetVersionCommand());
-        addCommand(new VersioncheckCommand());
-        addCommand(new UpdateCommand(getMinecartRevolution()));
-        addCommand(new RemovecartsCommand());
-        addCommand(new StopcartsCommand());
-        addCommand(new EjectCommand());
+        addCommandHandler(new EjectCommand());
+        addCommandHandler(new GetVersionCommand());
+        addCommandHandler(new HelpCommand());
+        addCommandHandler(new InfoCommand());
+        addCommandHandler(new RemovecartsCommand());
+        addCommandHandler(new StopcartsCommand());
+        addCommandHandler(new UpdateCommand());
+        addCommandHandler(new VersioncheckCommand());
     }
 
 }

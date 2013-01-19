@@ -2,10 +2,10 @@
 package com.quartercode.basicexpression.command;
 
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class WeatherCommand extends ExpressionCommand {
 

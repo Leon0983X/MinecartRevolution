@@ -2,9 +2,9 @@
 package com.quartercode.basicexpression.constant;
 
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.expression.ExpressionConstant;
+import com.quartercode.minecartrevolution.expression.ExpressionConstantInfo;
 import com.quartercode.minecartrevolution.util.MinecartUtil;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstantInfo;
 
 public class SpeedConstant extends ExpressionConstant {
 

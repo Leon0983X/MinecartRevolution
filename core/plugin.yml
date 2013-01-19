@@ -37,27 +37,16 @@ permissions:
       minecartrevolution.command.eject: true
 
 
+  minecartrevolution.command.eject:
+    description: Gives access to use the MinecartRevolution eject command
+
+
   minecartrevolution.command.help:
     description: Gives access to use the MinecartRevolution help
 
 
   minecartrevolution.command.info:
     description: Gives access to show the MinecartRevolution info
-
-
-  minecartrevolution.command.getversion:
-    description: Gives access to use the MinecartRevolution get version command
-
-
-  minecartrevolution.command.version.*:
-    description: Gives access to use all MinecartRevolution version functions
-    children:
-      minecartrevolution.command.version.versioncheck: true
-      minecartrevolution.command.version.update: true
-  minecartrevolution.command.version.versioncheck:
-    description: Gives access to checks the MinecartRevolution version
-  minecartrevolution.command.version.update:
-    description: Gives access to update MinecartRevolution
 
 
   minecartrevolution.command.removecarts:
@@ -68,8 +57,18 @@ permissions:
     description: Gives access to use the MinecartRevolution stop carts command
 
 
-  minecartrevolution.command.eject:
-    description: Gives access to use the MinecartRevolution eject command
+  minecartrevolution.command.version.*:
+    description: Gives access to use all MinecartRevolution version functions
+    children:
+      minecartrevolution.command.version.getversion: true
+      minecartrevolution.command.version.versioncheck: true
+      minecartrevolution.command.version.update: true
+  minecartrevolution.command.version.get:
+    description: Gives access to use the MinecartRevolution get version command
+  minecartrevolution.command.version.check:
+    description: Gives access to checks the MinecartRevolution version
+  minecartrevolution.command.version.update:
+    description: Gives access to update MinecartRevolution
 
 
 

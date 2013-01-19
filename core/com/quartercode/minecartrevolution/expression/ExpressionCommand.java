@@ -1,11 +1,18 @@
 
-package com.quartercode.minecartrevolution.util.expression;
+package com.quartercode.minecartrevolution.expression;
 
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.MinecartRevolution;
 
 public abstract class ExpressionCommand {
 
+    protected MinecartRevolution  minecartRevolution;
     private ExpressionCommandInfo info;
+
+    public void setMinecartRevolution(final MinecartRevolution minecartRevolution) {
+
+        this.minecartRevolution = minecartRevolution;
+    }
 
     public final ExpressionCommandInfo getInfo() {
 
@@ -14,6 +21,10 @@ public abstract class ExpressionCommand {
         }
 
         return info;
+    }
+
+    public void enable() {
+
     }
 
     protected abstract ExpressionCommandInfo createInfo();

@@ -3,17 +3,17 @@ package com.quartercode.minecartrevolution.plugin;
 
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.block.ControlBlock;
-import com.quartercode.minecartrevolution.block.MRControlBlockExecutor;
-import com.quartercode.minecartrevolution.command.Command;
+import com.quartercode.minecartrevolution.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.command.MRCommandExecutor;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionConstant;
+import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.sign.ControlSign;
-import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
+import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
-import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
 public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolutionPlugin {
 
@@ -43,19 +43,19 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
     }
 
     @Override
-    public MRControlBlockExecutor getControlBlockExecutor() {
+    public ControlBlockExecutor getControlBlockExecutor() {
 
         return minecartRevolution.getControlBlockExecutor();
     }
 
     @Override
-    public MRControlSignExecutor getControlSignExecutor() {
+    public ControlSignExecutor getControlSignExecutor() {
 
         return minecartRevolution.getControlSignExecutor();
     }
 
     @Override
-    public MRExpressionExecutor getExpressionExecutor() {
+    public ExpressionExecutor getExpressionExecutor() {
 
         return minecartRevolution.getExpressionExecutor();
     }
@@ -79,33 +79,33 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
     }
 
     @Override
-    public void addCommand(final Command command) {
+    public void addCommandHandler(final CommandHandler commandHandler) {
 
-        getCommandExecutor().getCommands().add(command);
+        getCommandExecutor().addCommandHandler(commandHandler);
     }
 
     @Override
     public void addControlBlock(final ControlBlock controlBlock) {
 
-        getControlBlockExecutor().getControlBlocks().add(controlBlock);
+        getControlBlockExecutor().addControlBlock(controlBlock);
     }
 
     @Override
     public void addControlSign(final ControlSign controlSign) {
 
-        getControlSignExecutor().getControlSigns().add(controlSign);
+        getControlSignExecutor().addControlSign(controlSign);
     }
 
     @Override
     public void addExpressionCommand(final ExpressionCommand expressionCommand) {
 
-        getExpressionExecutor().getExpressionCommands().add(expressionCommand);
+        getExpressionExecutor().addExpressionCommand(expressionCommand);
     }
 
     @Override
     public void addExpressionConstant(final ExpressionConstant expressionConstant) {
 
-        getExpressionExecutor().getExpressionConstants().add(expressionConstant);
+        getExpressionExecutor().addExpressionConstant(expressionConstant);
     }
 
 }

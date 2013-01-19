@@ -3,10 +3,10 @@ package com.quartercode.basiccontrols.sign;
 
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
-import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 
 public class ExpressionSign extends ControlSign {
 
@@ -24,7 +24,7 @@ public class ExpressionSign extends ControlSign {
     public void execute(final Minecart minecart, final String label, final Sign sign) {
 
         final String[] lines = { sign.getLine(1), sign.getLine(2), sign.getLine(3) };
-        final String expression = MRExpressionExecutor.getExpression(lines);
+        final String expression = ExpressionExecutor.getExpression(lines);
         if (expression == null || expression.isEmpty()) {
             return;
         }

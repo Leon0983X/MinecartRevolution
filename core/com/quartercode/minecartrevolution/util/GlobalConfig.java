@@ -1,6 +1,7 @@
 
 package com.quartercode.minecartrevolution.util;
 
+import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.get.Lang;
 
@@ -19,9 +20,9 @@ public class GlobalConfig extends Config {
     private static final String MINECART               = "minecart";
     public static final String  PLAY_EFFECTS           = MINECART + ".playEffects";
 
-    public GlobalConfig() {
+    public GlobalConfig(final MinecartRevolution minecartRevolution) {
 
-        super(FileConf.MAIN_CONF);
+        super(minecartRevolution, FileConf.MAIN_CONF);
     }
 
     @Override

@@ -2,29 +2,40 @@
 package com.quartercode.minecartrevolution.block;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.util.ItemData;
 
-public class MRControlBlockExecutor {
+public class ControlBlockExecutor {
 
-    private List<ControlBlock> controlBlocks;
+    private final MinecartRevolution minecartRevolution;
+    private List<ControlBlock>       controlBlocks;
 
-    public MRControlBlockExecutor() {
+    public ControlBlockExecutor(final MinecartRevolution minecartRevolution) {
 
+        this.minecartRevolution = minecartRevolution;
         controlBlocks = new ArrayList<ControlBlock>();
     }
 
     public List<ControlBlock> getControlBlocks() {
 
-        return controlBlocks;
+        return Collections.unmodifiableList(controlBlocks);
     }
 
     public void setControlBlocks(final List<ControlBlock> controlBlocks) {
 
         this.controlBlocks = controlBlocks;
+    }
+
+    public void addControlBlock(final ControlBlock controlBlock) {
+
+        controlBlock.setMinecartRevolution(minecartRevolution);
+        controlBlocks.add(controlBlock);
+        controlBlock.enable();
     }
 
     public List<Block> getBlocks(final Location railLocation) {

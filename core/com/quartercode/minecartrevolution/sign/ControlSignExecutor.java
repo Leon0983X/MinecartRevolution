@@ -2,31 +2,42 @@
 package com.quartercode.minecartrevolution.sign;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.MinecartRevolution;
 
-public class MRControlSignExecutor {
+public class ControlSignExecutor {
 
-    private static final int[][] controlSignOffsets = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 0, 1 }, { 0, 0, -1 }, { 0, -2, 0 }, { 0, 2, 0 }, { 0, 3, 0 } };
+    private static final int[][]     controlSignOffsets = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 0, 1 }, { 0, 0, -1 }, { 0, -2, 0 }, { 0, 2, 0 }, { 0, 3, 0 } };
 
-    private List<ControlSign>    controlSigns;
+    private final MinecartRevolution minecartRevolution;
+    private List<ControlSign>        controlSigns;
 
-    public MRControlSignExecutor() {
+    public ControlSignExecutor(final MinecartRevolution minecartRevolution) {
 
+        this.minecartRevolution = minecartRevolution;
         controlSigns = new ArrayList<ControlSign>();
     }
 
     public List<ControlSign> getControlSigns() {
 
-        return controlSigns;
+        return Collections.unmodifiableList(controlSigns);
     }
 
     public void setControlSigns(final List<ControlSign> controlSigns) {
 
         this.controlSigns = controlSigns;
+    }
+
+    public void addControlSign(final ControlSign controlSign) {
+
+        controlSign.setMinecartRevolution(minecartRevolution);
+        controlSigns.add(controlSign);
+        controlSign.enable();
     }
 
     public List<Sign> getSigns(final Minecart minecart) {

@@ -3,68 +3,59 @@ package com.quartercode.basiccommands.command;
 
 import java.util.List;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.command.Command;
-import com.quartercode.minecartrevolution.command.CommandInfo;
+import com.quartercode.minecartrevolution.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.get.Lang;
-import com.quartercode.qcutil.args.Arguments;
+import com.quartercode.quarterbukkit.api.command.Command;
+import com.quartercode.quarterbukkit.api.command.CommandHandler;
+import com.quartercode.quarterbukkit.api.command.CommandInfo;
 
-public class HelpCommand extends Command {
+public class HelpCommand extends MRCommandHandler {
 
-    private final MinecartRevolution minecartRevolution;
+    public HelpCommand() {
 
-    public HelpCommand(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override
-    protected CommandInfo createInfo() {
+    public CommandInfo createInfo() {
 
-        return new CommandInfo(true, null, Lang.getValue("basiccommands.help.description"), "help", "<empty>", "help");
+        return new CommandInfo(true, null, Lang.getValue("basiccommands.help.description"), "minecartrevolution.command.help", "<empty>", "help");
     }
 
     @Override
-    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
+    public void execute(final Command command) {
 
-        showHelp(commandSender, usedMrCommand);
-    }
-
-    private void showHelp(final CommandSender commandSender, final String usedMrCommand) {
-
-        commandSender.sendMessage(ChatColor.GREEN + "==========[ " + Lang.getValue("basiccommands.help.start") + " ]==========");
+        command.getSender().sendMessage(ChatColor.GREEN + "==========[ " + Lang.getValue("basiccommands.help.start") + " ]==========");
 
         String aliases = ChatColor.DARK_GREEN + "/minecartrevolution" + ChatColor.AQUA + ", ";
         for (final String alias : minecartRevolution.getPlugin().getCommand("minecartrevolution").getAliases()) {
             aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
-        commandSender.sendMessage("Aliases: " + aliases);
+        command.getSender().sendMessage("Aliases: " + aliases);
 
-        final List<Command> commands = minecartRevolution.getCommandExecutor().getCommands();
+        final List<CommandHandler> commandHandlers = minecartRevolution.getCommandExecutor().getCommandHandlers();
 
-        for (final Command command : commands) {
-            final CommandInfo commandInfo = command.getInfo();
+        for (final CommandHandler commandHandler : commandHandlers) {
+            final CommandInfo info = commandHandler.getInfo();
 
-            if (! (commandSender instanceof Player) || commandInfo.getPermission() == null || ((Player) commandSender).hasPermission(commandInfo.getPermission())) {
-                for (final String label : commandInfo.getLabels()) {
+            if (! (command.getSender() instanceof Player) || info.getPermission() == null || ((Player) command.getSender()).hasPermission(info.getPermission())) {
+                for (final String label : info.getLabels()) {
                     String printLabel = "";
                     if (!label.equalsIgnoreCase("<empty>")) {
                         printLabel = " " + label;
                     }
 
                     String parameterUsage = "";
-                    if (commandInfo.getParameterUsage() != null && !commandInfo.getParameterUsage().isEmpty()) {
-                        parameterUsage = " " + commandInfo.getParameterUsage();
+                    if (info.getParameterUsage() != null && !info.getParameterUsage().isEmpty()) {
+                        parameterUsage = " " + info.getParameterUsage();
                     }
 
-                    commandSender.sendMessage(ChatColor.GOLD + "/" + usedMrCommand + printLabel + parameterUsage);
+                    command.getSender().sendMessage(ChatColor.GOLD + "/" + command.getGlobalLabel() + printLabel + parameterUsage);
                 }
             }
 
-            commandSender.sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + commandInfo.getDescription());
+            command.getSender().sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + info.getDescription());
         }
     }
 

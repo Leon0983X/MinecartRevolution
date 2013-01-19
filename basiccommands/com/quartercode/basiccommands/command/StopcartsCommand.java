@@ -11,29 +11,33 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.command.Command;
-import com.quartercode.minecartrevolution.command.CommandInfo;
+import com.quartercode.minecartrevolution.command.MRCommandHandler;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.qcutil.args.Arguments;
+import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.command.Command;
+import com.quartercode.quarterbukkit.api.command.CommandInfo;
 
-public class StopcartsCommand extends Command {
+public class StopcartsCommand extends MRCommandHandler {
 
     public StopcartsCommand() {
 
     }
 
     @Override
-    protected CommandInfo createInfo() {
+    public CommandInfo createInfo() {
 
-        return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.stopcarts.description"), "stopcarts", "stopcarts");
+        return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.stopcarts.description"), "minecartrevolution.command.stopcarts", "stopcarts");
     }
 
     @Override
-    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
+    public void execute(final Command command) {
 
         final List<World> worlds = new ArrayList<World>();
         int radius = -1;
+
+        final Arguments arguments = new Arguments(command.getArguments());
 
         if (arguments.isParameterSet("w", true)) {
             if (arguments.getParameter("w", true).equalsIgnoreCase("all")) {
@@ -46,8 +50,8 @@ public class StopcartsCommand extends Command {
                 }
             }
         } else {
-            if (commandSender instanceof Player) {
-                worlds.add( ((Entity) commandSender).getWorld());
+            if (command.getSender() instanceof Player) {
+                worlds.add( ((Entity) command.getSender()).getWorld());
             } else {
                 worlds.addAll(Bukkit.getWorlds());
             }
@@ -58,17 +62,17 @@ public class StopcartsCommand extends Command {
                 radius = Integer.parseInt(arguments.getParameter("r", true));
             }
             catch (final NumberFormatException e) {
-                MinecartRevolution.handleSilenceThrowable(e);
+                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse stopcarts radius: " + radius));
             }
         }
 
-        if (commandSender instanceof Player) {
+        if (command.getSender() instanceof Player) {
             for (final World world : worlds) {
-                stop(world, radius, ((Player) commandSender).getLocation(), commandSender, commandSender.getName());
+                stop(world, radius, ((Player) command.getSender()).getLocation(), command.getSender(), command.getSender().getName());
             }
         } else {
             for (final World world : worlds) {
-                stop(world, radius, new Location(world, 0, 0, 0), commandSender, "Console");
+                stop(world, radius, new Location(world, 0, 0, 0), command.getSender(), "Console");
             }
         }
     }

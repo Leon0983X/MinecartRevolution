@@ -4,40 +4,35 @@ package com.quartercode.basiccommands.command;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.command.Command;
-import com.quartercode.minecartrevolution.command.CommandInfo;
+import com.quartercode.minecartrevolution.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.conf.Conf;
 import com.quartercode.minecartrevolution.conf.URLConf;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.get.Lang;
-import com.quartercode.qcutil.args.Arguments;
+import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.command.Command;
+import com.quartercode.quarterbukkit.api.command.CommandInfo;
 
-public class InfoCommand extends Command {
+public class InfoCommand extends MRCommandHandler {
 
     public InfoCommand() {
 
     }
 
     @Override
-    protected CommandInfo createInfo() {
+    public CommandInfo createInfo() {
 
-        return new CommandInfo(true, null, Lang.getValue("basiccommands.info.description"), "info", "info");
+        return new CommandInfo(true, null, Lang.getValue("basiccommands.info.description"), "minecartrevolution.command.info", "info");
     }
 
     @Override
-    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
-
-        sendInfo(commandSender);
-    }
-
-    private void sendInfo(final CommandSender sender) {
+    public void execute(final Command command) {
 
         final InfoThread thread = new InfoThread();
-        thread.sender = sender;
+        thread.sender = command.getSender();
         thread.start();
     }
 
@@ -57,7 +52,7 @@ public class InfoCommand extends Command {
                 sender.sendMessage("");
             }
 
-            sender.sendMessage("This plugin was born at a Tuesday, on");
+            sender.sendMessage("This plugin was born at a Tuesday, on the");
             sender.sendMessage(ChatColor.DARK_PURPLE + "21th February 2012" + ChatColor.RESET + ", and filled with creativity.");
             sender.sendMessage("The first run was with only a few lines of code, and that");
             sender.sendMessage("was the beginning of a big thing which's called");
@@ -86,11 +81,8 @@ public class InfoCommand extends Command {
                 }
                 reader.close();
             }
-            catch (final MalformedURLException e) {
-                MinecartRevolution.handleSilenceThrowable(e);
-            }
             catch (final IOException e) {
-                MinecartRevolution.handleSilenceThrowable(e);
+                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load download count"));
             }
 
             return -1;

@@ -7,7 +7,7 @@ public abstract class PluginConfig extends Config {
 
     public PluginConfig(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
-        super(minecartRevolutionPlugin.getConfigFile());
+        super(minecartRevolutionPlugin.getMinecartRevolution(), minecartRevolutionPlugin.getConfigFile());
     }
 
 }

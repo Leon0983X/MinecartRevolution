@@ -15,11 +15,6 @@ public class PluginManager {
         PluginManager.minecartRevolution = minecartRevolution;
     }
 
-    public static MinecartRevolution getMinecartRevolution() {
-
-        return minecartRevolution;
-    }
-
     public static void registerPlugin(final MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         if (minecartRevolution == null) {

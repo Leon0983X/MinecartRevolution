@@ -10,30 +10,33 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
-import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.command.Command;
-import com.quartercode.minecartrevolution.command.CommandInfo;
+import com.quartercode.minecartrevolution.command.MRCommandHandler;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.qcutil.args.Arguments;
+import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.command.Command;
+import com.quartercode.quarterbukkit.api.command.CommandInfo;
 
-public class RemovecartsCommand extends Command {
+public class RemovecartsCommand extends MRCommandHandler {
 
     public RemovecartsCommand() {
 
     }
 
     @Override
-    protected CommandInfo createInfo() {
+    public CommandInfo createInfo() {
 
-        return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.removecarts.description"), "removecarts", "removecarts", "delcarts");
+        return new CommandInfo(true, "[-w World1,World2...] [-r Radius]", Lang.getValue("basiccommands.removecarts.description"), "minecartrevolution.command.removecarts", "removecarts", "delcarts");
     }
 
     @Override
-    public void execute(final CommandSender commandSender, final String usedMrCommand, final String label, final Arguments arguments) {
+    public void execute(final Command command) {
 
         final List<World> worlds = new ArrayList<World>();
         int radius = -1;
+        final Arguments arguments = new Arguments(command.getArguments());
 
         if (arguments.isParameterSet("w", true)) {
             if (arguments.getParameter("w", true).equalsIgnoreCase("all")) {
@@ -46,8 +49,8 @@ public class RemovecartsCommand extends Command {
                 }
             }
         } else {
-            if (commandSender instanceof Player) {
-                worlds.add( ((Entity) commandSender).getWorld());
+            if (command.getSender() instanceof Player) {
+                worlds.add( ((Entity) command.getSender()).getWorld());
             } else {
                 worlds.addAll(Bukkit.getWorlds());
             }
@@ -58,17 +61,17 @@ public class RemovecartsCommand extends Command {
                 radius = Integer.parseInt(arguments.getParameter("r", true));
             }
             catch (final NumberFormatException e) {
-                MinecartRevolution.handleSilenceThrowable(e);
+                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse removecarts radius: " + radius));
             }
         }
 
-        if (commandSender instanceof Player) {
+        if (command.getSender() instanceof Player) {
             for (final World world : worlds) {
-                clear(world, radius, ((Player) commandSender).getLocation(), commandSender, commandSender.getName());
+                clear(world, radius, ((Player) command.getSender()).getLocation(), command.getSender(), command.getSender().getName());
             }
         } else {
             for (final World world : worlds) {
-                clear(world, radius, new Location(world, 0, 0, 0), commandSender, "Console");
+                clear(world, radius, new Location(world, 0, 0, 0), command.getSender(), "Console");
             }
         }
     }

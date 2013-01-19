@@ -1,5 +1,5 @@
 
-package com.quartercode.minecartrevolution.util.expression;
+package com.quartercode.minecartrevolution.expression;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 import javax.script.ScriptException;
 import org.bukkit.entity.Minecart;
+import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.qcutil.script.ScriptExecutor;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
-public class MRExpressionExecutor {
+public class ExpressionExecutor {
 
     private static final String COMMAND_END_MARKER = ";";
     private static final char[] OPERATORS          = { '+', '-', '*', '/' };
@@ -33,11 +36,15 @@ public class MRExpressionExecutor {
         return expression;
     }
 
+    private final MinecartRevolution          minecartRevolution;
+
     private List<ExpressionCommand>           expressionCommands;
     private List<ExpressionConstant>          expressionConstants;
     private final Map<Minecart, List<String>> minecartExpressions;
 
-    public MRExpressionExecutor() {
+    public ExpressionExecutor(final MinecartRevolution minecartRevolution) {
+
+        this.minecartRevolution = minecartRevolution;
 
         setExpressionCommands(new ArrayList<ExpressionCommand>());
         setExpressionConstants(new ArrayList<ExpressionConstant>());
@@ -46,7 +53,7 @@ public class MRExpressionExecutor {
 
     public List<ExpressionCommand> getExpressionCommands() {
 
-        return expressionCommands;
+        return Collections.unmodifiableList(expressionCommands);
     }
 
     public void setExpressionCommands(final List<ExpressionCommand> expressionCommands) {
@@ -54,9 +61,16 @@ public class MRExpressionExecutor {
         this.expressionCommands = expressionCommands;
     }
 
+    public void addExpressionCommand(final ExpressionCommand expressionCommand) {
+
+        expressionCommand.setMinecartRevolution(minecartRevolution);
+        expressionCommands.add(expressionCommand);
+        expressionCommand.enable();
+    }
+
     public List<ExpressionConstant> getExpressionConstants() {
 
-        return expressionConstants;
+        return Collections.unmodifiableList(expressionConstants);
     }
 
     public void setExpressionConstants(final List<ExpressionConstant> expressionConstants) {
@@ -64,12 +78,19 @@ public class MRExpressionExecutor {
         this.expressionConstants = expressionConstants;
     }
 
+    public void addExpressionConstant(final ExpressionConstant expressionConstant) {
+
+        expressionConstant.setMinecartRevolution(minecartRevolution);
+        expressionConstants.add(expressionConstant);
+        expressionConstant.enable();
+    }
+
     public Map<Minecart, List<String>> getMinecartExpressions() {
 
         return minecartExpressions;
     }
 
-    public void execute(final Minecart minecart, String expression) throws ScriptException {
+    public void execute(final Minecart minecart, String expression) {
 
         expression = expression.trim();
         final String[] expressionParts = expression.split(COMMAND_END_MARKER);
@@ -125,14 +146,15 @@ public class MRExpressionExecutor {
 
 	        if (info.getTypeArray().isOneNumber()) {
 	            parameterString = generateJavaScript(parameterString);
-	            final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
 	            try {
+	                final ScriptExecutor scriptExecutor = new ScriptExecutor("JavaScript");
 	                scriptExecutor.execute("var result = " + String.valueOf(parameterString) + ";");
+	                parameterString = String.valueOf(scriptExecutor.get("result"));
 	            }
 	            catch (final ScriptException e) {
+	                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Expression script error for: " + expressionPart));
 	                return;
 	            }
-	            parameterString = String.valueOf(scriptExecutor.get("result"));
 	        }
 
 	        Object parameter = parameterString;

@@ -10,20 +10,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
+import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class LockCommand extends ExpressionCommand implements Listener {
 
-    private final MinecartRevolution minecartRevolution;
-    private final List<Minecart>     lockedMinecarts = new ArrayList<Minecart>();
+    private final List<Minecart> lockedMinecarts = new ArrayList<Minecart>();
 
-    public LockCommand(final MinecartRevolution minecartRevolution) {
+    public LockCommand() {
 
-        this.minecartRevolution = minecartRevolution;
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
@@ -64,14 +62,14 @@ public class LockCommand extends ExpressionCommand implements Listener {
     public void onVehicleExit(final VehicleExitEvent event) {
 
         if (event.getVehicle() instanceof Minecart && isLocked((Minecart) event.getVehicle())) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(minecartRevolution.getPlugin(), new Runnable() {
+            new ScheduleTask(minecartRevolution.getPlugin()) {
 
                 @Override
                 public void run() {
 
                     event.getVehicle().setPassenger(event.getExited());
                 }
-            }, 0);
+            }.run(0);
         }
     }
 

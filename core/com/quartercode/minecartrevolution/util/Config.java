@@ -9,15 +9,19 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public abstract class Config {
 
-    protected FileConfiguration configuration;
-    protected File              file;
+    protected MinecartRevolution minecartRevolution;
+    protected FileConfiguration  configuration;
+    protected File               file;
 
-    protected Config(final File file) {
+    protected Config(final MinecartRevolution minecartRevolution, final File file) {
 
+        this.minecartRevolution = minecartRevolution;
         this.file = file;
         configuration = YamlConfiguration.loadConfiguration(file);
     }
@@ -111,7 +115,7 @@ public abstract class Config {
             configuration.save(file);
         }
         catch (final IOException e) {
-            MinecartRevolution.handleThrowable(e);
+            QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
         }
     }
 

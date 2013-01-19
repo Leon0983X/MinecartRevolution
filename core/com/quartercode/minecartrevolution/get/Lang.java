@@ -1,7 +1,6 @@
 
 package com.quartercode.minecartrevolution.get;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,20 +20,28 @@ import org.bukkit.ChatColor;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.Conf;
 import com.quartercode.minecartrevolution.conf.FileConf;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.qcutil.io.File;
 import com.quartercode.qcutil.res.PropertyResourceHandler;
 import com.quartercode.qcutil.res.ResourceManager;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public class Lang {
 
-    public static final String               STANDARD_LANGUAGE = "english";
+    public static final String             STANDARD_LANGUAGE = "english";
 
-    protected static ResourceManager         resourceManager   = new ResourceManager(FileConf.LANGUAGES);
-    protected static PropertyResourceHandler resourceHandler   = new PropertyResourceHandler(resourceManager);
+    private static MinecartRevolution      minecartRevolution;
+    private static ResourceManager         resourceManager   = new ResourceManager(FileConf.LANGUAGES);
+    private static PropertyResourceHandler resourceHandler   = new PropertyResourceHandler(resourceManager);
 
     static {
 
         resourceManager.getFilePatterns().add("english.lang");
+    }
+
+    public static void setMinecartRevolution(final MinecartRevolution minecartRevolution) {
+
+        Lang.minecartRevolution = minecartRevolution;
     }
 
     public static ResourceManager getResourceManager() {
@@ -133,7 +140,7 @@ public class Lang {
 
     public static void extractDefaults() {
 
-        List<String> languageFiles = new ArrayList<String>();
+        final List<String> languageFiles = new ArrayList<String>();
         final CodeSource src = MinecartRevolution.class.getProtectionDomain().getCodeSource();
 
         if (src != null) {
@@ -150,16 +157,16 @@ public class Lang {
                 }
             }
             catch (final IOException e) {
-                MinecartRevolution.handleThrowable(e);
+                QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to locate default language files"));
                 return;
             }
         } else {
-            MinecartRevolution.handleThrowable(new RuntimeException("Failed to locate default language files"));
+            QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, "Failed to locate default language files"));
             return;
         }
 
-        for (String languageFile : languageFiles) {
-            File file = new File(FileConf.LANGUAGES + File.separator + languageFile.replace("languages/", ""));
+        for (final String languageFile : languageFiles) {
+            final File file = new File(FileConf.LANGUAGES + java.io.File.separator + languageFile.replace("languages/", ""));
             if (!file.exists()) {
                 extractFromJAR(Lang.class.getResource("/" + languageFile), file);
             }
@@ -193,11 +200,8 @@ public class Lang {
                 }
             }
         }
-        catch (final FileNotFoundException e) {
-            MinecartRevolution.handleThrowable(e);
-        }
         catch (final IOException e) {
-            MinecartRevolution.handleThrowable(e);
+            QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to extract language from jar"));
         }
         finally {
             if (inputStream != null) {
@@ -205,7 +209,7 @@ public class Lang {
                     inputStream.close();
                 }
                 catch (final IOException e) {
-                    MinecartRevolution.handleThrowable(e);
+                    QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close input stream"));
                 }
             }
 
@@ -214,7 +218,7 @@ public class Lang {
                     outputStream.close();
                 }
                 catch (final IOException e) {
-                    MinecartRevolution.handleThrowable(e);
+                    QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close output stream"));
                 }
             }
         }

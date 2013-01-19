@@ -10,12 +10,13 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
+import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public class CollectCommand extends ExpressionCommand {
 
@@ -56,7 +57,7 @@ public class CollectCommand extends ExpressionCommand {
                     }
                 }
                 catch (final NumberFormatException e) {
-                    MinecartRevolution.handleSilenceThrowable(e);
+                    QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse collect radius"));
                 }
             }
         }

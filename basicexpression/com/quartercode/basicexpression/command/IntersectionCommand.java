@@ -18,13 +18,12 @@ import org.bukkit.util.Vector;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.basicexpression.util.MinecartTerm;
-import com.quartercode.minecartrevolution.MinecartRevolution;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
 
 public class IntersectionCommand extends ExpressionCommand {
 
@@ -51,7 +50,7 @@ public class IntersectionCommand extends ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         if (String.valueOf(parameter).split(":").length == 2) {
-            final String term = String.valueOf(parameter).split(":")[0];
+            String term = String.valueOf(parameter).split(":")[0];
             final String action = String.valueOf(parameter).split(":")[1];
 
             if ( (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("north")) && Direction.getDirection(minecart) == Direction.NORTH) {
@@ -121,18 +120,29 @@ public class IntersectionCommand extends ExpressionCommand {
                     execute(minecart, action);
                 }
             } else {
+                final boolean negate = term.startsWith("!");
+                if (negate) {
+                    term = term.replace("!", "");
+                }
+
                 for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
                     for (final String label : minecartTerm.getLabels()) {
-                        if (term.matches(label)) {
-                            if (minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                        if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                            if (!negate) {
 	execute(minecart, action);
-	return;
+                            } else {
+	doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
                             }
+                            return;
                         }
                     }
                 }
 
-                doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
+                if (negate) {
+                    execute(minecart, action);
+                } else {
+                    doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
+                }
             }
         }
     }
@@ -168,12 +178,7 @@ public class IntersectionCommand extends ExpressionCommand {
             }
         } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
             final String command = action.replace("revo-", "").replace("control-", "").replace("script-", "").replace("expression-", "").replace("e-", "");
-            try {
-                plugin.getExpressionExecutor().execute(minecart, command);
-            }
-            catch (final Exception e) {
-                MinecartRevolution.handleSilenceThrowable(e);
-            }
+            plugin.getExpressionExecutor().execute(minecart, command);
         }
     }
 

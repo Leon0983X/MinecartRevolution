@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.block.ControlBlockInfo;
 import com.quartercode.minecartrevolution.get.Lang;
@@ -13,11 +12,8 @@ import com.quartercode.minecartrevolution.util.ItemData;
 
 public class ControlSignBlock extends ControlBlock {
 
-    private final MinecartRevolution minecartRevolution;
+    public ControlSignBlock() {
 
-    public ControlSignBlock(final MinecartRevolution minecartRevolution) {
-
-        this.minecartRevolution = minecartRevolution;
     }
 
     @Override

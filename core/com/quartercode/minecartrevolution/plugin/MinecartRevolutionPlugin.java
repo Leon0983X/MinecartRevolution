@@ -3,16 +3,16 @@ package com.quartercode.minecartrevolution.plugin;
 
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.block.ControlBlock;
-import com.quartercode.minecartrevolution.block.MRControlBlockExecutor;
-import com.quartercode.minecartrevolution.command.Command;
+import com.quartercode.minecartrevolution.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.command.MRCommandExecutor;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionConstant;
+import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.sign.ControlSign;
-import com.quartercode.minecartrevolution.sign.MRControlSignExecutor;
+import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionConstant;
-import com.quartercode.minecartrevolution.util.expression.MRExpressionExecutor;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
 public interface MinecartRevolutionPlugin {
 
@@ -22,11 +22,11 @@ public interface MinecartRevolutionPlugin {
 
     public MRCommandExecutor getCommandExecutor();
 
-    public MRControlBlockExecutor getControlBlockExecutor();
+    public ControlBlockExecutor getControlBlockExecutor();
 
-    public MRControlSignExecutor getControlSignExecutor();
+    public ControlSignExecutor getControlSignExecutor();
 
-    public MRExpressionExecutor getExpressionExecutor();
+    public ExpressionExecutor getExpressionExecutor();
 
     public File getPluginFolder();
 
@@ -34,7 +34,7 @@ public interface MinecartRevolutionPlugin {
 
     public Config getConfiguration();
 
-    public void addCommand(final Command command);
+    public void addCommandHandler(final CommandHandler command);
 
     public void addControlBlock(final ControlBlock controlBlock);
 

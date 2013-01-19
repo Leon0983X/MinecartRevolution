@@ -30,12 +30,7 @@ public class MinecartListener implements Listener {
             final Minecart minecart = (Minecart) event.getVehicle();
             if (minecartRevolution.getExpressionExecutor().getMinecartExpressions().containsKey(minecart)) {
                 for (final String expression : minecartRevolution.getExpressionExecutor().getMinecartExpressions().get(minecart)) {
-                    try {
-                        minecartRevolution.getExpressionExecutor().execute(minecart, expression);
-                    }
-                    catch (final Exception e) {
-                        MinecartRevolution.handleSilenceThrowable(e);
-                    }
+                    minecartRevolution.getExpressionExecutor().execute(minecart, expression);
                 }
             }
         }

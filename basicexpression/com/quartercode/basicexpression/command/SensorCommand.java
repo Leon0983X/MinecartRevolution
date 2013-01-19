@@ -1,7 +1,6 @@
 
 package com.quartercode.basicexpression.command;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -20,11 +19,12 @@ import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.basicexpression.util.MinecartTerm;
+import com.quartercode.minecartrevolution.expression.ExpressionCommand;
+import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.util.expression.ExpressionCommandInfo;
+import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class SensorCommand extends ExpressionCommand {
 
@@ -50,7 +50,7 @@ public class SensorCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        final String term = String.valueOf(parameter);
+        String term = String.valueOf(parameter);
 
         if ( (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("north")) && Direction.getDirection(minecart) == Direction.NORTH) {
             power(minecart);
@@ -119,14 +119,24 @@ public class SensorCommand extends ExpressionCommand {
                 power(minecart);
             }
         } else {
+            final boolean negate = term.startsWith("!");
+            if (negate) {
+                term = term.replace("!", "");
+            }
+
             for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
                 for (final String label : minecartTerm.getLabels()) {
-                    if (term.matches(label)) {
-                        if (minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                    if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                        if (!negate) {
                             power(minecart);
                         }
+                        return;
                     }
                 }
+            }
+
+            if (negate) {
+                power(minecart);
             }
         }
     }
@@ -153,14 +163,15 @@ public class SensorCommand extends ExpressionCommand {
             if (plugin.getConfiguration().getDouble(BasicExpressionConfig.SENSOR_POWER_TIME) > 0) {
                 time = plugin.getConfiguration().getDouble(BasicExpressionConfig.SENSOR_POWER_TIME);
             }
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin.getMinecartRevolution().getPlugin(), new Runnable() {
+
+            new ScheduleTask(minecartRevolution.getPlugin()) {
 
                 @Override
                 public void run() {
 
                     setPowered(minecartLocation, false);
                 }
-            }, (long) (time * 1000D / 50D));
+            }.run((long) (time * 1000D));
         }
     }
 
