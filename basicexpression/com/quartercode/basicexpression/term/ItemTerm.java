@@ -18,7 +18,7 @@ public class ItemTerm implements MinecartTerm {
     @Override
     public String[] getLabels() {
 
-        return new String[] { "i.*", "item.*", "items.*" };
+        return new String[] { "i", "item", "items", "i-.*", "item-.*", "items-.*" };
     }
 
     @Override

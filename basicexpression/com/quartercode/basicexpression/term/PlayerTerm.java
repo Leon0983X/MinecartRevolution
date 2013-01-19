@@ -15,7 +15,7 @@ public class PlayerTerm implements MinecartTerm {
     @Override
     public String[] getLabels() {
 
-        return new String[] { "pl.*", "player.*" };
+        return new String[] { "pl", "player", "pl-.*", "player-.*" };
     }
 
     @Override

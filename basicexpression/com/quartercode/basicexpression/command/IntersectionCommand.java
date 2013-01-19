@@ -5,23 +5,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Animals;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.PoweredMinecart;
-import org.bukkit.entity.StorageMinecart;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
-import com.quartercode.minecartrevolution.util.MinecartUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 
@@ -53,96 +43,28 @@ public class IntersectionCommand extends ExpressionCommand {
             String term = String.valueOf(parameter).split(":")[0];
             final String action = String.valueOf(parameter).split(":")[1];
 
-            if ( (term.equalsIgnoreCase("n") || term.equalsIgnoreCase("north")) && Direction.getDirection(minecart) == Direction.NORTH) {
-                execute(minecart, action);
-            } else if ( (term.equalsIgnoreCase("e") || term.equalsIgnoreCase("east")) && Direction.getDirection(minecart) == Direction.EAST) {
-                execute(minecart, action);
-            } else if ( (term.equalsIgnoreCase("s") || term.equalsIgnoreCase("south")) && Direction.getDirection(minecart) == Direction.SOUTH) {
-                execute(minecart, action);
-            } else if ( (term.equalsIgnoreCase("w") || term.equalsIgnoreCase("west")) && Direction.getDirection(minecart) == Direction.WEST) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("storage") && minecart instanceof StorageMinecart) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("powered") && minecart instanceof PoweredMinecart) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("standard") && ! (minecart instanceof StorageMinecart) && ! (minecart instanceof PoweredMinecart)) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("invcart") && minecart instanceof InventoryHolder) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("player") && minecart.getPassenger() instanceof Player) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("mob") && (minecart.getPassenger() instanceof Monster || minecart.getPassenger() instanceof Animals)) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("empty") && minecart.isEmpty()) {
-                execute(minecart, action);
-            } else if (term.equalsIgnoreCase("nocargo")) {
-                if (minecart.getPassenger() instanceof Player) {
-                    final Player player = (Player) minecart.getPassenger();
-                    for (int counter = 0; counter < player.getInventory().getSize(); counter++) {
-                        if (player.getInventory().getItem(counter) != null) {
-                            return;
+            final boolean negate = term.startsWith("!");
+            if (negate) {
+                term = term.replace("!", "");
+            }
+
+            for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
+                for (final String label : minecartTerm.getLabels()) {
+                    if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                        if (!negate) {
+                            execute(minecart, action);
+                        } else {
+                            doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
                         }
-                    }
-                    execute(minecart, action);
-                } else if (minecart instanceof StorageMinecart) {
-                    final StorageMinecart storageMinecart = (StorageMinecart) minecart;
-                    for (int counter = 0; counter < storageMinecart.getInventory().getSize(); counter++) {
-                        if (storageMinecart.getInventory().getItem(counter) != null) {
-                            return;
-                        }
-                    }
-                    execute(minecart, action);
-                } else {
-                    execute(minecart, action);
-                }
-            } else if (term.contains("p-") && minecart.getPassenger() instanceof Player) {
-                final Player player = (Player) minecart.getPassenger();
-                final String[] variables = term.split("-");
-                if (player.getName().equalsIgnoreCase(variables[1])) {
-                    execute(minecart, action);
-                }
-            } else if (term.contains("invc-")) {
-                if (minecart.getPassenger() instanceof InventoryHolder) {
-                    final String[] variables = term.split("-");
-                    if (contains( ((InventoryHolder) minecart.getPassenger()).getInventory(), variables[1])) {
-                        execute(minecart, action);
-                    }
-                } else if (minecart instanceof InventoryHolder) {
-                    final String[] variables = term.split("-");
-                    if (contains( ((InventoryHolder) minecart).getInventory(), variables[1])) {
-                        execute(minecart, action);
+                        return;
                     }
                 }
-            } else if (term.contains("ihold-") && minecart.getPassenger() instanceof Player) {
-                final Player player = (Player) minecart.getPassenger();
-                final String[] variables = term.split("-");
-                if (MaterialAliasConfig.equals(player.getItemInHand(), variables[1])) {
-                    execute(minecart, action);
-                }
+            }
+
+            if (negate) {
+                execute(minecart, action);
             } else {
-                final boolean negate = term.startsWith("!");
-                if (negate) {
-                    term = term.replace("!", "");
-                }
-
-                for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
-                    for (final String label : minecartTerm.getLabels()) {
-                        if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
-                            if (!negate) {
-	execute(minecart, action);
-                            } else {
-	doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
-                            }
-                            return;
-                        }
-                    }
-                }
-
-                if (negate) {
-                    execute(minecart, action);
-                } else {
-                    doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
-                }
+                doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
             }
         }
     }
@@ -167,18 +89,13 @@ public class IntersectionCommand extends ExpressionCommand {
             doIntersection(minecart, from, Direction.SOUTH);
         } else if (action.equalsIgnoreCase("w") || action.equalsIgnoreCase("west")) {
             doIntersection(minecart, from, Direction.WEST);
-        } else if (action.equalsIgnoreCase("d") || action.equalsIgnoreCase("delete")) {
-            MinecartUtil.remove(minecart);
-        } else if (action.equalsIgnoreCase("ej") || action.equalsIgnoreCase("eject")) {
-            minecart.eject();
         } else if (action.toLowerCase().startsWith("c-") || action.toLowerCase().startsWith("cmd-") || action.toLowerCase().startsWith("command-")) {
             final String command = action.replace("command-", "").replace("cmd-", "").replace("c-", "");
             if (minecart.getPassenger() instanceof CommandSender) {
                 Bukkit.dispatchCommand((CommandSender) minecart.getPassenger(), command);
             }
-        } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
-            final String command = action.replace("revo-", "").replace("control-", "").replace("script-", "").replace("expression-", "").replace("e-", "");
-            plugin.getExpressionExecutor().execute(minecart, command);
+        } else {
+            plugin.getExpressionExecutor().execute(minecart, action);
         }
     }
 
@@ -237,17 +154,6 @@ public class IntersectionCommand extends ExpressionCommand {
         vector.setZ(-vector.getZ());
 
         minecart.setVelocity(vector);
-    }
-
-    private boolean contains(final Inventory inventory, final String string) {
-
-        for (final ItemStack itemStack : inventory.getContents()) {
-            if (MaterialAliasConfig.equals(itemStack, string)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
 }

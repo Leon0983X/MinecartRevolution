@@ -22,6 +22,11 @@ public class LockCommand extends ExpressionCommand implements Listener {
 
     public LockCommand() {
 
+    }
+
+    @Override
+    public void enable() {
+
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 

@@ -31,12 +31,21 @@ import com.quartercode.basicexpression.constant.TimeConstant;
 import com.quartercode.basicexpression.constant.XConstant;
 import com.quartercode.basicexpression.constant.YConstant;
 import com.quartercode.basicexpression.constant.ZConstant;
+import com.quartercode.basicexpression.term.AnimalTerm;
 import com.quartercode.basicexpression.term.EastTerm;
+import com.quartercode.basicexpression.term.InventoryTerm;
+import com.quartercode.basicexpression.term.ItemHoldTerm;
 import com.quartercode.basicexpression.term.ItemTerm;
+import com.quartercode.basicexpression.term.MonsterTerm;
+import com.quartercode.basicexpression.term.NPCTerm;
 import com.quartercode.basicexpression.term.NorthTerm;
 import com.quartercode.basicexpression.term.PassengerTerm;
 import com.quartercode.basicexpression.term.PlayerTerm;
+import com.quartercode.basicexpression.term.PoweredMinecartTerm;
+import com.quartercode.basicexpression.term.RandomTerm;
 import com.quartercode.basicexpression.term.SouthTerm;
+import com.quartercode.basicexpression.term.StandardMinecartTerm;
+import com.quartercode.basicexpression.term.StorageMinecartTerm;
 import com.quartercode.basicexpression.term.WestTerm;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.basicexpression.util.MinecartTerm;
@@ -105,9 +114,22 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         minecartTerms.add(new EastTerm());
         minecartTerms.add(new SouthTerm());
         minecartTerms.add(new WestTerm());
+
+        minecartTerms.add(new StandardMinecartTerm());
+        minecartTerms.add(new StorageMinecartTerm());
+        minecartTerms.add(new PoweredMinecartTerm());
+        minecartTerms.add(new InventoryTerm());
+
         minecartTerms.add(new PassengerTerm());
         minecartTerms.add(new PlayerTerm());
+        minecartTerms.add(new MonsterTerm());
+        minecartTerms.add(new AnimalTerm());
+        minecartTerms.add(new NPCTerm());
+
         minecartTerms.add(new ItemTerm());
+        minecartTerms.add(new ItemHoldTerm());
+
+        minecartTerms.add(new RandomTerm());
     }
 
 }
