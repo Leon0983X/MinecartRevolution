@@ -4,6 +4,7 @@ package com.quartercode.minecartrevolution;
 import java.io.IOException;
 import java.util.logging.Logger;
 import org.bukkit.plugin.PluginDescriptionFile;
+import com.quartercode.basicactions.BasicActionsPlugin;
 import com.quartercode.basiccommands.BasicCommandsPlugin;
 import com.quartercode.basiccontrols.BasicControlsPlugin;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
@@ -63,6 +64,7 @@ public class MinecartRevolution {
     private Config                         configuration;
     private Metrics                        metrics;
 
+    private BasicActionsPlugin             actionsPlugin;
     private BasicCommandsPlugin            commandsPlugin;
     private BasicControlsPlugin            controlsPlugin;
     private BasicExpressionPlugin          expressionPlugin;
@@ -154,10 +156,12 @@ public class MinecartRevolution {
 
     private void enablePlugins() {
 
+        actionsPlugin = new BasicActionsPlugin();
         commandsPlugin = new BasicCommandsPlugin();
         controlsPlugin = new BasicControlsPlugin();
         expressionPlugin = new BasicExpressionPlugin();
 
+        PluginManager.registerPlugin(actionsPlugin);
         PluginManager.registerPlugin(commandsPlugin);
         PluginManager.registerPlugin(controlsPlugin);
         PluginManager.registerPlugin(expressionPlugin);

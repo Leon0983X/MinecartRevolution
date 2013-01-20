@@ -13,6 +13,9 @@ control.place.noPermission=$red$You don't have the permission to place this cont
 control.destroy.noPermission=$red$You don't have the permission to destroy this control!
 
 
+basicactions.punch=Punch the minecart in the direction you wanna drive!
+
+
 basiccommands.help.description=Shows a help page
 basiccommands.help.start=$name$ Help
 basiccommands.help.aliases=Aliases: $darkGreen$$aliases$

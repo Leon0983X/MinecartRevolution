@@ -52,7 +52,12 @@ public class LockCommand extends ExpressionCommand implements Listener {
         }
     }
 
-    private boolean isLocked(final Minecart minecart) {
+    public List<Minecart> getLockedMinecarts() {
+
+        return lockedMinecarts;
+    }
+
+    public boolean isLocked(final Minecart minecart) {
 
         for (final Minecart testMinecart : lockedMinecarts) {
             if (minecart.getEntityId() == testMinecart.getEntityId()) {

@@ -20,8 +20,20 @@ permissions:
     description: Gives access to use all MinecartRevolution functions
     default: op
     children:
+      minecartrevolution.punch.*: true
       minecartrevolution.command.*: true
       minecartrevolution.control.*: true
+
+
+
+  minecartrevolution.action.*:
+    description: Gives access to use all MinecartRevolution basic actions
+    children:
+      minecartrevolution.action.punch: true
+
+
+  minecartrevolution.action.punch:
+    description: Gives access to punch minecarts and drive in this direction
 
 
 

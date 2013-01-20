@@ -11,7 +11,6 @@ import com.quartercode.basiccommands.command.UpdateCommand;
 import com.quartercode.basiccommands.command.VersioncheckCommand;
 import com.quartercode.basiccommands.listener.PlayerListener;
 import com.quartercode.basiccommands.listener.ServerListener;
-import com.quartercode.basiccommands.util.BasicCommandsConfig;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
@@ -31,10 +30,6 @@ public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
 
     @Override
     public void enable() {
-
-        config = new BasicCommandsConfig(this);
-        config.setDefaults();
-        config.save();
 
         new PlayerListener(getMinecartRevolution());
         new ServerListener(getMinecartRevolution());
