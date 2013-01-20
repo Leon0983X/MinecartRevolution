@@ -29,6 +29,7 @@ import com.quartercode.quarterbukkit.QuarterBukkit;
 public class Lang {
 
     public static final String             STANDARD_LANGUAGE = "english";
+    public static final ChatColor          DEFAULT           = ChatColor.GOLD;
 
     private static MinecartRevolution      minecartRevolution;
     private static ResourceManager         resourceManager   = new ResourceManager(FileConf.LANGUAGES);
@@ -109,6 +110,8 @@ public class Lang {
         addVariable(variableList, "strikethrough", ChatColor.STRIKETHROUGH);
         addVariable(variableList, "under", ChatColor.UNDERLINE);
         addVariable(variableList, "underline", ChatColor.UNDERLINE);
+
+        addVariable(variableList, "d", DEFAULT);
 
         return resourceHandler.getProperty(key, variableList.toArray(new String[variableList.size()]));
     }

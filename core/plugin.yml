@@ -42,7 +42,6 @@ permissions:
     children:
       minecartrevolution.command.help: true
       minecartrevolution.command.info: true
-      minecartrevolution.command.getversion: true
       minecartrevolution.command.version.*: true
       minecartrevolution.command.removecarts: true
       minecartrevolution.command.stopcarts: true

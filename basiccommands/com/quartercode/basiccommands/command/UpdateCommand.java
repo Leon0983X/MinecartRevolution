@@ -1,7 +1,6 @@
 
 package com.quartercode.basiccommands.command;
 
-import org.bukkit.ChatColor;
 import com.quartercode.basiccommands.util.MinecartRevolutionUpdater;
 import com.quartercode.minecartrevolution.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.get.Lang;
@@ -23,9 +22,9 @@ public class UpdateCommand extends MRCommandHandler {
     @Override
     public void execute(final Command command) {
 
-        command.getSender().sendMessage(ChatColor.GOLD + "Updating MinecartRevolution ...");
-        new MinecartRevolutionUpdater(minecartRevolution).tryInstall();
-        command.getSender().sendMessage(ChatColor.GOLD + "Successfully updated MinecartRevolution!");
+        command.getSender().sendMessage(Lang.getValue("basiccommands.update.update"));
+        command.getSender().sendMessage(Lang.getValue("basiccommands.update.download"));
+        new MinecartRevolutionUpdater(minecartRevolution).tryInstall(command.getSender());
     }
 
 }

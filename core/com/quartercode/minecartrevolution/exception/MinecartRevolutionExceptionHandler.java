@@ -2,7 +2,6 @@
 package com.quartercode.minecartrevolution.exception;
 
 import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.conf.Conf;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.qcutil.QcUtil;
@@ -31,7 +30,7 @@ public class MinecartRevolutionExceptionHandler extends ExceptionHandler {
                 QcUtil.handleThrowable(exception);
             }
         } else if (exception instanceof InstallException) {
-            plugin.getLogger().warning("Can't update " + Conf.NAME + ": " + exception.getLocalizedMessage());
+            plugin.getLogger().severe(Lang.getValue("basiccommands.update.error", "error", exception.getLocalizedMessage()));
         } else if (exception instanceof NoPermissionException) {
             ((NoPermissionException) exception).getCauser().sendMessage(Lang.getValue("command.noPermission"));
         } else if (exception instanceof NoCommandFoundException) {

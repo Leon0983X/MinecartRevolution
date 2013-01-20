@@ -32,7 +32,7 @@ public class HelpCommand extends MRCommandHandler {
             aliases += ChatColor.DARK_GREEN + "/" + alias + ChatColor.AQUA + ", ";
         }
         aliases = aliases.substring(0, aliases.length() - 2);
-        command.getSender().sendMessage("Aliases: " + aliases);
+        command.getSender().sendMessage(Lang.getValue("basiccommands.help.aliases", "aliases", aliases));
 
         final List<CommandHandler> commandHandlers = minecartRevolution.getCommandExecutor().getCommandHandlers();
 
