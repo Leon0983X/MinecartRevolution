@@ -34,7 +34,7 @@ public class MinecartRevolutionUpdater extends Updater {
     }
 
     @Override
-    protected void doInstall(final File downloadedFile, CommandSender causer) throws IOException {
+    protected void doInstall(final File downloadedFile, final CommandSender causer) throws IOException {
 
         if (causer != null) {
             causer.sendMessage(Lang.getValue("basiccommands.update.downloaded", "file", downloadedFile.getName()));

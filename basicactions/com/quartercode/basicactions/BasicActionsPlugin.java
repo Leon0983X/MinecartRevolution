@@ -1,6 +1,7 @@
 
 package com.quartercode.basicactions;
 
+import com.quartercode.basicactions.listener.BlockListener;
 import com.quartercode.basicactions.listener.MinecartListener;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
@@ -22,6 +23,7 @@ public class BasicActionsPlugin extends JavaMinecartRevolutionPlugin {
     public void enable() {
 
         new MinecartListener(getMinecartRevolution());
+        new BlockListener(getMinecartRevolution());
     }
 
 }

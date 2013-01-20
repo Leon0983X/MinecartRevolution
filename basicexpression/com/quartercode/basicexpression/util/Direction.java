@@ -1,6 +1,7 @@
 
 package com.quartercode.basicexpression.util;
 
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 
 public enum Direction {
@@ -17,6 +18,21 @@ public enum Direction {
             return NORTH;
         } else if (minecart.getVelocity().getZ() < 0.0D) {
             return SOUTH;
+        } else {
+            return null;
+        }
+    }
+
+    public static Direction getDirection(final Sign sign) {
+
+        if (sign.getRawData() == 0) {
+            return SOUTH;
+        } else if (sign.getRawData() == 4) {
+            return WEST;
+        } else if (sign.getRawData() == 8) {
+            return NORTH;
+        } else if (sign.getRawData() == 12) {
+            return EAST;
         } else {
             return null;
         }

@@ -7,7 +7,7 @@ import org.bukkit.entity.StorageMinecart;
 
 public enum MinecartType {
 
-    MINECART, STORAGE, POWERED;
+    MINECART (Minecart.class), STORAGE (StorageMinecart.class), POWERED (PoweredMinecart.class);
 
     public static MinecartType getType(final Minecart minecart) {
 
@@ -18,6 +18,18 @@ public enum MinecartType {
         } else {
             return MINECART;
         }
+    }
+
+    private Class<? extends Minecart> c;
+
+    private MinecartType(final Class<? extends Minecart> c) {
+
+        this.c = c;
+    }
+
+    public Class<? extends Minecart> getCartClass() {
+
+        return c;
     }
 
 }

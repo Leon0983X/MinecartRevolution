@@ -3,19 +3,24 @@ package com.quartercode.basicactions.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Chest;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import com.quartercode.basicexpression.command.LockCommand;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.get.Perm;
+import com.quartercode.minecartrevolution.util.MinecartType;
+import com.quartercode.minecartrevolution.util.MinecartUtil;
 
 public class MinecartListener implements Listener {
 
@@ -55,6 +60,32 @@ public class MinecartListener implements Listener {
                 minecart.setVelocity(velocity);
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler
+    public void VehicleBlockCollisionEvent(final VehicleBlockCollisionEvent event) {
+
+        if (event.getVehicle() instanceof Minecart && event.getBlock().getType() == Material.CHEST) {
+            final Minecart minecart = (Minecart) event.getVehicle();
+            final MinecartType type = MinecartType.getType(minecart);
+            final Chest chest = (Chest) event.getBlock().getState();
+
+            if (chest.getInventory().firstEmpty() < 0) {
+                return;
+            }
+
+            if (type == MinecartType.MINECART) {
+                chest.getInventory().addItem(new ItemStack(Material.MINECART));
+            } else if (type == MinecartType.STORAGE) {
+                chest.getInventory().addItem(new ItemStack(Material.STORAGE_MINECART));
+            } else if (type == MinecartType.POWERED) {
+                chest.getInventory().addItem(new ItemStack(Material.POWERED_MINECART));
+            } else {
+                return;
+            }
+
+            MinecartUtil.remove(minecart);
         }
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.util.Vector;
+import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
@@ -51,7 +52,7 @@ public class StationSign extends ControlSign implements Listener {
                         for (final Minecart minecart : event.getBlock().getWorld().getEntitiesByClass(Minecart.class)) {
                             for (final Sign sign2 : minecartRevolution.getControlSignExecutor().getSigns(minecart)) {
 	if (sign.equals(sign2)) {
-	    MinecartUtil.driveInSignDirection(minecart, sign);
+	    MinecartUtil.driveInDirection(minecart, Direction.getDirection(sign));
 	}
                             }
                         }
@@ -68,7 +69,8 @@ public class StationSign extends ControlSign implements Listener {
             for (final Sign sign : minecartRevolution.getControlSignExecutor().getSigns((Minecart) event.getVehicle())) {
                 for (final String label : getInfo().getLabels()) {
                     if (sign.getLine(0).equalsIgnoreCase("[" + label + "]") && (sign.getLine(1).equalsIgnoreCase("enter") || sign.getLine(2).equalsIgnoreCase("enter"))) {
-                        MinecartUtil.driveInSignDirection((Minecart) event.getVehicle(), sign);
+                        MinecartUtil.driveInDirection((Minecart) event.getVehicle(), Direction.getDirection(sign));
+                        return;
                     }
                 }
             }
@@ -82,7 +84,8 @@ public class StationSign extends ControlSign implements Listener {
             for (final Sign sign : minecartRevolution.getControlSignExecutor().getSigns((Minecart) event.getVehicle())) {
                 for (final String label : getInfo().getLabels()) {
                     if (sign.getLine(0).equalsIgnoreCase("[" + label + "]") && (sign.getLine(1).equalsIgnoreCase("exit") || sign.getLine(2).equalsIgnoreCase("exit"))) {
-                        MinecartUtil.driveInSignDirection((Minecart) event.getVehicle(), sign);
+                        MinecartUtil.driveInDirection((Minecart) event.getVehicle(), Direction.getDirection(sign));
+                        return;
                     }
                 }
             }

@@ -3,10 +3,10 @@ package com.quartercode.minecartrevolution.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.util.Vector;
+import com.quartercode.basicexpression.util.Direction;
 
 public class MinecartUtil {
 
@@ -74,27 +74,27 @@ public class MinecartUtil {
         minecart.setVelocity(velocity);
     }
 
-    public static void driveInSignDirection(final Minecart minecart, final Sign sign) {
+    public static void driveInDirection(final Minecart minecart, final Direction direction) {
 
         final Vector velocity = minecart.getVelocity();
         final double speed = 0.3913788423600029;
 
-        if (sign.getRawData() == 0) {
+        if (direction == Direction.SOUTH) {
             final Location newLocation = minecart.getLocation();
             newLocation.setZ(minecart.getLocation().getZ() - 1.0D);
             minecart.teleport(newLocation);
             velocity.setZ(-speed);
-        } else if (sign.getRawData() == 4) {
+        } else if (direction == Direction.WEST) {
             final Location newLocation = minecart.getLocation();
             newLocation.setX(minecart.getLocation().getX() + 1.0D);
             minecart.teleport(newLocation);
             velocity.setX(speed);
-        } else if (sign.getRawData() == 8) {
+        } else if (direction == Direction.NORTH) {
             final Location newLocation = minecart.getLocation();
             newLocation.setZ(minecart.getLocation().getZ() + 1.0D);
             minecart.teleport(newLocation);
             velocity.setZ(speed);
-        } else if (sign.getRawData() == 12) {
+        } else if (direction == Direction.EAST) {
             final Location newLocation = minecart.getLocation();
             newLocation.setX(minecart.getLocation().getX() - 1.0D);
             minecart.teleport(newLocation);
@@ -103,6 +103,36 @@ public class MinecartUtil {
 
         minecart.setVelocity(velocity);
     }
+
+    // public static void driveInDirection(final Minecart minecart, Direction direction) {
+    //
+    // final Vector velocity = minecart.getVelocity();
+    // final double speed = 0.3913788423600029;
+    //
+    // if (sign.getRawData() == 0) {
+    // final Location newLocation = minecart.getLocation();
+    // newLocation.setZ(minecart.getLocation().getZ() - 1.0D);
+    // minecart.teleport(newLocation);
+    // velocity.setZ(-speed);
+    // } else if (sign.getRawData() == 4) {
+    // final Location newLocation = minecart.getLocation();
+    // newLocation.setX(minecart.getLocation().getX() + 1.0D);
+    // minecart.teleport(newLocation);
+    // velocity.setX(speed);
+    // } else if (sign.getRawData() == 8) {
+    // final Location newLocation = minecart.getLocation();
+    // newLocation.setZ(minecart.getLocation().getZ() + 1.0D);
+    // minecart.teleport(newLocation);
+    // velocity.setZ(speed);
+    // } else if (sign.getRawData() == 12) {
+    // final Location newLocation = minecart.getLocation();
+    // newLocation.setX(minecart.getLocation().getX() - 1.0D);
+    // minecart.teleport(newLocation);
+    // velocity.setX(-speed);
+    // }
+    //
+    // minecart.setVelocity(velocity);
+    // }
 
     public static boolean remove(final Minecart minecart) {
 
