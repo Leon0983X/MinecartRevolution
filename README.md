@@ -23,3 +23,11 @@ The sourcecode is splitted in seperated folders:
 * /basiccommands contains a MinecartRevolution-Plugin for the main Chat-Commands, like /help.
 * /basiccontrols contains a MinecartRevolution-Plugin for the main Controls, like Boosters, Brakes and even the Expression-Sign.
 * /basicexpression contains a MinecartRevolution-Plugin for the main Expression-Commands and Expression-Constants, like "announce" or "speed".
+
+Libraries
+---------
+
+You need the following libraries to compile MinecartRevolution yourself:
+
+* bukkit.jar (http://dl.bukkit.org/downloads/bukkit/) or craftbukkit.jar (http://dl.bukkit.org/downloads/craftbukkit/)
+* QuarterBukkit.jar (http://dev.bukkit.org/server-mods/quarterbukkit/)
