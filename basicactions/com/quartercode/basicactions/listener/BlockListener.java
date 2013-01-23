@@ -4,7 +4,9 @@ package com.quartercode.basicactions.listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,42 +25,28 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onRedstoneBlockChange(final BlockRedstoneEvent event) {
+    public void onRedstoneBlockChangeOnChest(final BlockRedstoneEvent event) {
 
         if (event.getBlock().getData() >= 9) {
             return;
         }
 
         Chest chest;
-        Location location = event.getBlock().getLocation();
-        if (location.add(1, 0, 0).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) location.getBlock().getState();
-        } else if (location.add(-1, 0, 0).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) location.getBlock().getState();
-        } else if (location.add(0, 0, 1).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) location.getBlock().getState();
-        } else if (location.add(0, 0, -1).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) location.getBlock().getState();
+        if (event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.CHEST) {
+            chest = (Chest) event.getBlock().getLocation().add(1, 0, 0).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.CHEST) {
+            chest = (Chest) event.getBlock().getLocation().add(-1, 0, 0).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.CHEST) {
+            chest = (Chest) event.getBlock().getLocation().add(0, 0, 1).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.CHEST) {
+            chest = (Chest) event.getBlock().getLocation().add(0, 0, -1).getBlock().getState();
         } else {
             return;
         }
 
-        Location rails;
-        Direction direction;
-        location = chest.getLocation();
-        if (location.add(1, 0, 0).getBlock().getType() == Material.RAILS || location.add(1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || location.add(1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
-            rails = location;
-            direction = Direction.WEST;
-        } else if (location.add(-1, 0, 0).getBlock().getType() == Material.RAILS || location.add(-1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || location.add(-1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
-            rails = location;
-            direction = Direction.EAST;
-        } else if (location.add(0, 0, 1).getBlock().getType() == Material.RAILS || location.add(0, 0, 1).getBlock().getType() == Material.POWERED_RAIL || location.add(0, 0, 1).getBlock().getType() == Material.DETECTOR_RAIL) {
-            rails = location;
-            direction = Direction.NORTH;
-        } else if (location.add(0, 0, -1).getBlock().getType() == Material.RAILS || location.add(0, 0, -1).getBlock().getType() == Material.POWERED_RAIL || location.add(0, 0, -1).getBlock().getType() == Material.DETECTOR_RAIL) {
-            rails = location;
-            direction = Direction.SOUTH;
-        } else {
+        Location rail = getRail(chest.getBlock());
+        Direction direction = getDirection(chest.getBlock());
+        if (rail == null || direction == null) {
             return;
         }
 
@@ -84,9 +72,86 @@ public class BlockListener implements Listener {
         }
 
         if (minecartType != null) {
-            final Minecart minecart = location.getWorld().spawn(rails, minecartType.getCartClass());
-            MinecartUtil.driveInDirection(minecart, direction);
+            dispense(minecartType, rail, direction);
         }
+    }
+
+    @EventHandler
+    public void onRedstoneBlockChangeOnSign(final BlockRedstoneEvent event) {
+
+        if (event.getBlock().getData() >= 9) {
+            return;
+        }
+
+        Sign sign;
+        if (event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.WALL_SIGN) {
+            sign = (Sign) event.getBlock().getLocation().add(1, 0, 0).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.WALL_SIGN) {
+            sign = (Sign) event.getBlock().getLocation().add(-1, 0, 0).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.WALL_SIGN) {
+            sign = (Sign) event.getBlock().getLocation().add(0, 0, 1).getBlock().getState();
+        } else if (event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.WALL_SIGN) {
+            sign = (Sign) event.getBlock().getLocation().add(0, 0, -1).getBlock().getState();
+        } else {
+            return;
+        }
+
+        if (sign.getLine(0).equalsIgnoreCase("[spawn]")) {
+            Location rail = getRail(sign.getBlock());
+            Direction direction = getDirection(sign.getBlock());
+            if (rail == null || direction == null) {
+                return;
+            }
+
+            MinecartType minecartType;
+            if (sign.getLine(1).equalsIgnoreCase("minecart")) {
+                minecartType = MinecartType.MINECART;
+            } else if (sign.getLine(1).equalsIgnoreCase("storage")) {
+                minecartType = MinecartType.STORAGE;
+            } else if (sign.getLine(1).equalsIgnoreCase("powered")) {
+                minecartType = MinecartType.POWERED;
+            } else {
+                return;
+            }
+
+            dispense(minecartType, rail, direction);
+        }
+    }
+
+    private Location getRail(Block block) {
+
+        if (block.getLocation().add(1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return block.getLocation().add(1, 0, 0);
+        } else if (block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return block.getLocation().add(-1, 0, 0);
+        } else if (block.getLocation().add(0, 0, 1).getBlock().getType() == Material.RAILS || block.getLocation().add(0, 0, 1).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(0, 0, 1).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return block.getLocation().add(0, 0, 1);
+        } else if (block.getLocation().add(0, 0, -1).getBlock().getType() == Material.RAILS || block.getLocation().add(0, 0, -1).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(0, 0, -1).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return block.getLocation().add(0, 0, -1);
+        }
+
+        return null;
+    }
+
+    private Direction getDirection(Block block) {
+
+        if (block.getLocation().add(1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return Direction.WEST;
+        } else if (block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(-1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return Direction.EAST;
+        } else if (block.getLocation().add(0, 0, 1).getBlock().getType() == Material.RAILS || block.getLocation().add(0, 0, 1).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(0, 0, 1).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return Direction.NORTH;
+        } else if (block.getLocation().add(0, 0, -1).getBlock().getType() == Material.RAILS || block.getLocation().add(0, 0, -1).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(0, 0, -1).getBlock().getType() == Material.DETECTOR_RAIL) {
+            return Direction.SOUTH;
+        }
+
+        return null;
+    }
+
+    private void dispense(MinecartType minecartType, Location rail, Direction direction) {
+
+        final Minecart minecart = rail.getWorld().spawn(rail, minecartType.getCartClass());
+        MinecartUtil.driveInDirection(minecart, direction);
     }
 
 }

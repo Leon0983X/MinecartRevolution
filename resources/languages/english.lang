@@ -15,6 +15,9 @@ control.destroy.noPermission=$red$You don't have the permission to destroy this 
 
 basicactions.punch=$d$Punch the minecart in the direction you wanna drive!
 
+basicactions.spawn.name=Spawn
+basicactions.spawn.description=Spawns a specified minecart when powered (infinitly)
+
 
 basiccommands.help.description=Shows a help page
 basiccommands.help.start=$name$ Help
