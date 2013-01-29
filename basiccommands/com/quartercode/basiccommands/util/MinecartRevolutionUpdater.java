@@ -5,23 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.quarterbukkit.QuarterBukkit;
 import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.exception.InstallException;
 
-/**
- * This class is for checking the QuarterBukkit-version and updating the plugin.
- */
 public class MinecartRevolutionUpdater extends Updater {
 
-    /**
-     * Creates a new QuarterBukkit updater.
-     * 
-     * @param plugin The {@link QuarterBukkit}-{@link Plugin}.
-     */
     public MinecartRevolutionUpdater(final MinecartRevolution minecartRevolution) {
 
         super(minecartRevolution.getPlugin(), minecartRevolution.getPlugin(), "minecartrevolution");
@@ -45,7 +36,7 @@ public class MinecartRevolutionUpdater extends Updater {
         }
 
         try {
-            Bukkit.getPluginManager().disablePlugin(plugin);
+            Bukkit.getPluginManager().disablePlugin(updatePlugin);
             Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().loadPlugin(new File("plugins", "MinecartRevolution.jar")));
         }
         catch (final Exception e) {

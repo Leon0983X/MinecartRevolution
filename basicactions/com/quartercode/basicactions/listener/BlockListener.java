@@ -44,8 +44,8 @@ public class BlockListener implements Listener {
             return;
         }
 
-        Location rail = getRail(chest.getBlock());
-        Direction direction = getDirection(chest.getBlock());
+        final Location rail = getRail(chest.getBlock());
+        final Direction direction = getDirection(chest.getBlock());
         if (rail == null || direction == null) {
             return;
         }
@@ -97,8 +97,8 @@ public class BlockListener implements Listener {
         }
 
         if (sign.getLine(0).equalsIgnoreCase("[spawn]")) {
-            Location rail = getRail(sign.getBlock());
-            Direction direction = getDirection(sign.getBlock());
+            final Location rail = getRail(sign.getBlock());
+            final Direction direction = getDirection(sign.getBlock());
             if (rail == null || direction == null) {
                 return;
             }
@@ -118,7 +118,7 @@ public class BlockListener implements Listener {
         }
     }
 
-    private Location getRail(Block block) {
+    private Location getRail(final Block block) {
 
         if (block.getLocation().add(1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
             return block.getLocation().add(1, 0, 0);
@@ -133,7 +133,7 @@ public class BlockListener implements Listener {
         return null;
     }
 
-    private Direction getDirection(Block block) {
+    private Direction getDirection(final Block block) {
 
         if (block.getLocation().add(1, 0, 0).getBlock().getType() == Material.RAILS || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.POWERED_RAIL || block.getLocation().add(1, 0, 0).getBlock().getType() == Material.DETECTOR_RAIL) {
             return Direction.WEST;
@@ -148,7 +148,7 @@ public class BlockListener implements Listener {
         return null;
     }
 
-    private void dispense(MinecartType minecartType, Location rail, Direction direction) {
+    private void dispense(final MinecartType minecartType, final Location rail, final Direction direction) {
 
         final Minecart minecart = rail.getWorld().spawn(rail, minecartType.getCartClass());
         MinecartUtil.driveInDirection(minecart, direction);
