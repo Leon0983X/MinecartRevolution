@@ -45,7 +45,7 @@ public class IntersectionSign extends ControlSign {
                     if (!Perm.has(player, "control.sign.intersection.command")) {
                         return false;
                     }
-                } else if (action.toLowerCase().startsWith("e-") || action.toLowerCase().startsWith("revo-") || action.toLowerCase().startsWith("control-") || action.toLowerCase().startsWith("script-") || action.toLowerCase().startsWith("expression-")) {
+                } else if (!action.equalsIgnoreCase("r") && !action.equalsIgnoreCase("l") && !action.equalsIgnoreCase("m") && !action.equalsIgnoreCase("re") && !action.equalsIgnoreCase("n") && !action.equalsIgnoreCase("e") && !action.equalsIgnoreCase("s") && !action.equalsIgnoreCase("w")) {
                     if (!Perm.has(player, "control.sign.intersection.expression")) {
                         return false;
                     }

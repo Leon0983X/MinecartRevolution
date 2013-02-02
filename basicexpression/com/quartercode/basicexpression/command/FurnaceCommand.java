@@ -13,8 +13,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
+import com.quartercode.minecartrevolution.util.AliasUtil;
 import com.quartercode.minecartrevolution.util.ItemData;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 
@@ -50,6 +50,11 @@ public class FurnaceCommand extends ExpressionCommand {
         FUELS.add(new ItemData(Material.HUGE_MUSHROOM_2));
         FUELS.add(new ItemData(Material.BLAZE_ROD));
         FUELS.add(new ItemData(Material.LAVA_BUCKET));
+    }
+
+    public static boolean isFuel(final ItemData itemData) {
+
+        return FUELS.contains(itemData);
     }
 
     public FurnaceCommand() {
@@ -140,9 +145,9 @@ public class FurnaceCommand extends ExpressionCommand {
         for (int counter = 0; counter < fromInventory.getSize(); counter++) {
             if (fromInventory.getItem(counter) != null) {
                 int slot;
-                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string.equalsIgnoreCase("fuel") || MaterialAliasConfig.equals(fromInventory.getItem(counter), string))) {
+                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string.equalsIgnoreCase("fuel") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string))) {
                     slot = 1;
-                } else if (string.equalsIgnoreCase("item") || MaterialAliasConfig.equals(fromInventory.getItem(counter), string)) {
+                } else if (string.equalsIgnoreCase("item") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string)) {
                     slot = 0;
                 } else {
                     continue;
@@ -167,7 +172,7 @@ public class FurnaceCommand extends ExpressionCommand {
 
     private void transferToInventory(final FurnaceInventory fromInventory, final Inventory toInventory, final String string) {
 
-        if (fromInventory.getResult() != null && MaterialAliasConfig.equals(fromInventory.getResult(), string)) {
+        if (fromInventory.getResult() != null && AliasUtil.equals(new ItemData(fromInventory.getResult()), string)) {
             final List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getResult() }).values());
             fromInventory.setResult(new ItemStack(Material.AIR));
 

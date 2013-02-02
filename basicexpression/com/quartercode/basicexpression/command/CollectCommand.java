@@ -13,7 +13,8 @@ import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.AliasUtil;
+import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.quarterbukkit.QuarterBukkit;
@@ -82,7 +83,7 @@ public class CollectCommand extends ExpressionCommand {
                 final Item item = (Item) entity;
                 if (item.isDead()) {
                     continue;
-                } else if (string != null && !MaterialAliasConfig.equals(item.getItemStack(), string)) {
+                } else if (string != null && !AliasUtil.equals(new ItemData(item.getItemStack()), string)) {
                     continue;
                 }
 

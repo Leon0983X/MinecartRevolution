@@ -4,22 +4,27 @@ package com.quartercode.minecartrevolution.util;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.Material;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.quarterbukkit.QuarterBukkit;
 
-public class MaterialAliasConfig {
+public class AliasUtil {
 
     private static MinecartRevolution minecartRevolution;
 
     public static void setMinecartRevolution(final MinecartRevolution minecartRevolution) {
 
-        MaterialAliasConfig.minecartRevolution = minecartRevolution;
+        AliasUtil.minecartRevolution = minecartRevolution;
     }
 
-    public static int getId(final String string) {
+    public static ItemData getItemData(final String string) {
+
+        return new ItemData(Material.getMaterial(getId(string)), getData(string));
+    }
+
+    private static int getId(final String string) {
 
         try {
             if (string.contains(":")) {
@@ -33,7 +38,7 @@ public class MaterialAliasConfig {
         }
     }
 
-    public static byte getData(final String string) {
+    private static byte getData(final String string) {
 
         if (string.contains(":")) {
             return ((Double) Double.parseDouble(string.split(":")[1])).byteValue();
@@ -86,14 +91,14 @@ public class MaterialAliasConfig {
         return value;
     }
 
-    public static boolean equals(final ItemStack itemStack, final String string) {
+    public static boolean equals(final ItemData itemData, final String string) {
 
-        if (itemStack == null) {
+        if (itemData == null) {
             return false;
         } else if (string == null) {
             return true;
         } else {
-            return itemStack.getTypeId() == getId(string) && itemStack.getData().getData() == getData(string);
+            return itemData.equals(getItemData(string));
         }
     }
 

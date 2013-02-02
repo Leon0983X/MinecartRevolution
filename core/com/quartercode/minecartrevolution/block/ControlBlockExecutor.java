@@ -26,6 +26,17 @@ public class ControlBlockExecutor {
         return Collections.unmodifiableList(controlBlocks);
     }
 
+    public ControlBlock getControlBlock(final Class<? extends ControlBlock> c) {
+
+        for (final ControlBlock controlBlock : controlBlocks) {
+            if (controlBlock.getClass().equals(c)) {
+                return controlBlock;
+            }
+        }
+
+        return null;
+    }
+
     public void setControlBlocks(final List<ControlBlock> controlBlocks) {
 
         this.controlBlocks = controlBlocks;

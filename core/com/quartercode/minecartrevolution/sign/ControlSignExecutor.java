@@ -28,6 +28,17 @@ public class ControlSignExecutor {
         return Collections.unmodifiableList(controlSigns);
     }
 
+    public ControlSign getControlBlock(final Class<? extends ControlSign> c) {
+
+        for (final ControlSign controlSign : controlSigns) {
+            if (controlSign.getClass().equals(c)) {
+                return controlSign;
+            }
+        }
+
+        return null;
+    }
+
     public void setControlSigns(final List<ControlSign> controlSigns) {
 
         this.controlSigns = controlSigns;

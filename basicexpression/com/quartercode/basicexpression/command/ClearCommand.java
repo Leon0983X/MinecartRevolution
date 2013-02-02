@@ -8,7 +8,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.AliasUtil;
+import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 
@@ -48,7 +49,7 @@ public class ClearCommand extends ExpressionCommand {
         } else {
             for (final String item : String.valueOf(parameter).split(",")) {
                 for (int slot = 0; slot < inventory.getSize(); slot++) {
-                    if (MaterialAliasConfig.equals(inventory.getItem(slot), item)) {
+                    if (AliasUtil.equals(new ItemData(inventory.getItem(slot)), item)) {
                         inventory.setItem(slot, new ItemStack(Material.AIR));
                     }
                 }

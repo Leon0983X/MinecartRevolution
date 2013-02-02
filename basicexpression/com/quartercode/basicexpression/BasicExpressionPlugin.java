@@ -36,6 +36,7 @@ import com.quartercode.basicexpression.term.EastTerm;
 import com.quartercode.basicexpression.term.InventoryTerm;
 import com.quartercode.basicexpression.term.ItemHoldTerm;
 import com.quartercode.basicexpression.term.ItemTerm;
+import com.quartercode.basicexpression.term.MobTerm;
 import com.quartercode.basicexpression.term.MonsterTerm;
 import com.quartercode.basicexpression.term.NPCTerm;
 import com.quartercode.basicexpression.term.NorthTerm;
@@ -122,9 +123,10 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
 
         minecartTerms.add(new PassengerTerm());
         minecartTerms.add(new PlayerTerm());
-        minecartTerms.add(new MonsterTerm());
         minecartTerms.add(new AnimalTerm());
         minecartTerms.add(new NPCTerm());
+        minecartTerms.add(new MonsterTerm());
+        minecartTerms.add(new MobTerm());
 
         minecartTerms.add(new ItemTerm());
         minecartTerms.add(new ItemHoldTerm());

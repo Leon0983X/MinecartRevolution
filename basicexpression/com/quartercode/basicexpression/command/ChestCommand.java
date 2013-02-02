@@ -12,7 +12,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.AliasUtil;
+import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 
@@ -104,7 +105,7 @@ public class ChestCommand extends ExpressionCommand {
     private void transfer(final Inventory fromInventory, final Inventory toInventory, final String string) {
 
         for (int counter = 0; counter < fromInventory.getSize(); counter++) {
-            if (fromInventory.getItem(counter) != null && MaterialAliasConfig.equals(fromInventory.getItem(counter), string)) {
+            if (fromInventory.getItem(counter) != null && AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string)) {
                 final List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getItem(counter) }).values());
                 fromInventory.setItem(counter, new ItemStack(Material.AIR));
 

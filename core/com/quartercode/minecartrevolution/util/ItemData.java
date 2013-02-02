@@ -4,6 +4,7 @@ package com.quartercode.minecartrevolution.util;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 public class ItemData {
 
@@ -77,6 +78,20 @@ public class ItemData {
     public boolean equals(final Block block) {
 
         return block.getType() == material && block.getData() == data;
+    }
+
+    public void apply(final ItemStack itemStack) {
+
+        itemStack.setType(material);
+        final MaterialData itemData = itemStack.getData();
+        itemData.setData(data);
+        itemStack.setData(itemData);
+    }
+
+    public void apply(final Block block) {
+
+        block.setType(material);
+        block.setData(data);
     }
 
     @Override

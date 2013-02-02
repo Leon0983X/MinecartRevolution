@@ -45,14 +45,21 @@ basiccommands.update.reloaded=$d$Successfully reloaded $name$!
 basiccommands.update.error=$red$An error ocurred while updating: $error$
 
 basiccommands.removecarts.description=Removes all minecarts in one or more worlds
-basiccommands.removecarts.cleared=$green$Successfully removed $count$ minecarts in world "$world$" within radius $radius$!
-basiccommands.removecarts.broadcast=$d$$sender$ removed $count$ minecarts in world "$world$" within radius $radius$!
+basiccommands.removecarts.cleared=$green$Successfully removed $count$ minecarts in "$world$" within radius $radius$!
+basiccommands.removecarts.broadcast=$d$$sender$ removed $count$ minecarts in "$world$" within radius $radius$!
 
 basiccommands.stopcarts.description=Stops all minecarts in one or more worlds
-basiccommands.stopcarts.stopped=$green$Successfully stopped $count$ minecarts in world "$world$" within radius $radius$!
-basiccommands.stopcarts.broadcast=$d$$sender$ stopped $count$ minecarts in world "$world$" within radius $radius$!
+basiccommands.stopcarts.stopped=$green$Successfully stopped $count$ minecarts in "$world$" within radius $radius$!
+basiccommands.stopcarts.broadcast=$d$$sender$ stopped $count$ minecarts in "$world$" within radius $radius$!
 
 basiccommands.eject.description=Ejects you from a minecart
+
+basiccommands.patch.description=Replaces all your old controls with new ones
+basiccommands.patch.patchers=$d$Avaiable patchers: $patchers$
+basiccommands.patch.noPatchers=$red$There are no patchers avaiable :(
+basiccommands.patch.noPatcher=$red$There is no patcher called $patcher$ avaiable :(
+basiccommands.patch.start=$d$Patching "$world$" with patcher "$patcher$" ...
+basiccommands.patch.finish=$green$Successfully patched $count$ controls in "$world$" with patcher "$patcher$"!
 
 
 basiccontrols.blocks.booster.name=Booster
@@ -63,9 +70,6 @@ basiccontrols.blocks.brake.description=Slows the minecart
 
 basiccontrols.blocks.controlsign.name=Control Sign Block
 basiccontrols.blocks.controlsign.description=Executes a Control Sign put on the block
-
-basiccontrols.blocks.eject.name=Eject
-basiccontrols.blocks.eject.description=Ejects the passenger from a minecart
 
 basiccontrols.blocks.elevator.name=Elevator
 basiccontrols.blocks.elevator.description=Elevates the minecart to the next elevator block above
@@ -94,6 +98,9 @@ basiccontrols.signs.command.description=Executes a command as the riding player
 
 basiccontrols.signs.effect.name=Effect
 basiccontrols.signs.effect.description=Executes a given effect
+
+basiccontrols.signs.eject.name=Eject
+basiccontrols.signs.eject.description=Ejects the player with at an optional location or on the track
 
 basiccontrols.signs.expression.name=Expression
 basiccontrols.signs.expression.description=Controls the minecart with Expressions

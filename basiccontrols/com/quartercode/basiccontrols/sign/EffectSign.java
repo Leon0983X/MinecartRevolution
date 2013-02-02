@@ -26,7 +26,7 @@ public class EffectSign extends ControlSign {
             if (line.startsWith("+")) {
                 executeExpression(minecart, "+ effect " + line.replaceAll("\\+", "").trim());
             } else if (line.startsWith("-")) {
-                executeExpression(minecart, "- effect " + line.replaceAll("\\-", "").trim());
+                executeExpression(minecart, "- effect " + line.replaceAll("-", "").trim());
             } else {
                 executeExpression(minecart, "effect " + line);
             }

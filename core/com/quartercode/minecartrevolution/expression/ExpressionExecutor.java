@@ -87,7 +87,7 @@ public class ExpressionExecutor {
 
     public Map<Minecart, List<String>> getMinecartExpressions() {
 
-        return minecartExpressions;
+        return Collections.unmodifiableMap(minecartExpressions);
     }
 
     public void execute(final Minecart minecart, String expression) {
@@ -104,21 +104,22 @@ public class ExpressionExecutor {
                 if (!minecartExpressions.containsKey(minecart)) {
                     minecartExpressions.put(minecart, new ArrayList<String>());
                 }
-
                 minecartExpressions.get(minecart).add(expressionPart.replaceAll("\\+ ", "").replaceAll("add ", ""));
             } else if (expressionPart.startsWith("- ") || expressionPart.startsWith("remove ")) {
                 if (minecartExpressions.containsKey(minecart)) {
-                    final String command = expressionPart.replaceAll("\\- ", "").replaceAll("remove ", "").split(" ")[0];
-
-                    final List<String> removalExpressions = new ArrayList<String>();
-                    for (final String minecartExpression : minecartExpressions.get(minecart)) {
-                        if (minecartExpression.startsWith(command)) {
-                            removalExpressions.add(minecartExpression);
+                    final String removalExpressionPart = expressionPart.replaceAll("\\- ", "").replaceAll("remove ", "");
+                    if (removalExpressionPart.split(" ").length == 1) {
+                        for (final String minecartExpression : new ArrayList<String>(minecartExpressions.get(minecart))) {
+                            if (minecartExpression.startsWith(removalExpressionPart)) {
+	minecartExpressions.get(minecart).remove(minecartExpression);
+                            }
                         }
-                    }
-
-                    for (final String removalExpression : removalExpressions) {
-                        minecartExpressions.get(minecart).remove(removalExpression);
+                    } else {
+                        for (final String minecartExpression : new ArrayList<String>(minecartExpressions.get(minecart))) {
+                            if (minecartExpression.equalsIgnoreCase(removalExpressionPart)) {
+	minecartExpressions.get(minecart).remove(minecartExpression);
+                            }
+                        }
                     }
 
                     if (minecartExpressions.get(minecart).isEmpty()) {

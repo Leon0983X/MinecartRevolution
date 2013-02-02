@@ -58,10 +58,7 @@ permissions:
       minecartrevolution.command.removecarts: true
       minecartrevolution.command.stopcarts: true
       minecartrevolution.command.eject: true
-
-
-  minecartrevolution.command.eject:
-    description: Gives access to use the MinecartRevolution eject command
+      minecartrevolution.command.patch: true
 
 
   minecartrevolution.command.help:
@@ -70,14 +67,6 @@ permissions:
 
   minecartrevolution.command.info:
     description: Gives access to show the MinecartRevolution info
-
-
-  minecartrevolution.command.removecarts:
-    description: Gives access to use the MinecartRevolution remove carts command
-
-
-  minecartrevolution.command.stopcarts:
-    description: Gives access to use the MinecartRevolution stop carts command
 
 
   minecartrevolution.command.version.*:
@@ -92,6 +81,22 @@ permissions:
     description: Gives access to checks the MinecartRevolution version
   minecartrevolution.command.version.update:
     description: Gives access to update MinecartRevolution
+
+
+  minecartrevolution.command.removecarts:
+    description: Gives access to use the MinecartRevolution remove carts command
+
+
+  minecartrevolution.command.stopcarts:
+    description: Gives access to use the MinecartRevolution stop carts command
+
+
+  minecartrevolution.command.eject:
+    description: Gives access to use the MinecartRevolution eject command
+
+
+  minecartrevolution.command.patch:
+    description: Gives access to use the MinecartRevolution patch command
 
 
 
@@ -148,17 +153,6 @@ permissions:
     description: Gives access to destroy the MinecartRevolution Control Sign block
 
 
-  minecartrevolution.control.block.eject.*:
-    description: Gives access to use the MinecartRevolution Eject block
-    children:
-      minecartrevolution.control.block.eject.place: true
-      minecartrevolution.control.block.eject.destroy: true
-  minecartrevolution.control.block.eject.place:
-    description: Gives access to place the MinecartRevolution Eject block
-  minecartrevolution.control.block.eject.destroy:
-    description: Gives access to destroy the MinecartRevolution Eject block
-
-
   minecartrevolution.control.block.elevator.*:
     description: Gives access to use the MinecartRevolution Elevator block
     children:
@@ -202,6 +196,7 @@ permissions:
       minecartrevolution.control.sign.collect.*: true
       minecartrevolution.control.sign.command.*: true
       minecartrevolution.control.sign.effect.*: true
+      minecartrevolution.control.sign.eject.*: true
       minecartrevolution.control.sign.expression.*: true
       minecartrevolution.control.sign.file.*: true
       minecartrevolution.control.sign.furnace.*: true
@@ -282,6 +277,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Effect sign
   minecartrevolution.control.sign.effect.destroy:
     description: Gives access to destroy the MinecartRevolution Effect sign
+
+
+  minecartrevolution.control.sign.eject.*:
+    description: Gives access to use the MinecartRevolution Eject sign
+    children:
+      minecartrevolution.control.sign.eject.place: true
+      minecartrevolution.control.sign.eject.destroy: true
+  minecartrevolution.control.sign.eject.place:
+    description: Gives access to place the MinecartRevolution Eject sign
+  minecartrevolution.control.sign.eject.destroy:
+    description: Gives access to destroy the MinecartRevolution Eject sign
 
 
   minecartrevolution.control.sign.expression.*:

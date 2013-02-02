@@ -12,6 +12,8 @@ import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
+import com.quartercode.minecartrevolution.util.EffectUtil.DEffect;
+import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
@@ -49,6 +51,10 @@ public class LockCommand extends ExpressionCommand implements Listener {
             lockedMinecarts.add(minecart);
         } else if (String.valueOf(parameter).equals("-") && lockedMinecarts.contains(minecart)) {
             lockedMinecarts.remove(minecart);
+        }
+
+        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
+            DEffect.DOOR.play(minecart);
         }
     }
 

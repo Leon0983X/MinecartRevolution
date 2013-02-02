@@ -8,7 +8,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
 import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.basicexpression.util.MinecartTerm;
-import com.quartercode.minecartrevolution.util.MaterialAliasConfig;
+import com.quartercode.minecartrevolution.util.AliasUtil;
+import com.quartercode.minecartrevolution.util.ItemData;
 
 public class ItemHoldTerm implements MinecartTerm {
 
@@ -30,7 +31,7 @@ public class ItemHoldTerm implements MinecartTerm {
 
             if (term.split("-").length == 2) {
                 for (final String item : term.split("-")[1].split(",")) {
-                    if (MaterialAliasConfig.equals(inventory.getItemInHand(), item)) {
+                    if (AliasUtil.equals(new ItemData(inventory.getItemInHand()), item)) {
                         return true;
                     }
                 }
