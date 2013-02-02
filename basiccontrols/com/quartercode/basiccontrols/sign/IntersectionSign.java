@@ -24,15 +24,25 @@ public class IntersectionSign extends ControlSign {
     @Override
     public void execute(final Minecart minecart, final String label, final Sign sign) {
 
+        String expression = "intersection ";
+
         if (!sign.getLine(1).isEmpty()) {
-            executeExpression(minecart, "intersection " + sign.getLine(1));
+            expression += sign.getLine(1);
         }
         if (!sign.getLine(2).isEmpty()) {
-            executeExpression(minecart, "intersection " + sign.getLine(2));
+            if (!sign.getLine(1).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(2);
         }
         if (!sign.getLine(3).isEmpty()) {
-            executeExpression(minecart, "intersection " + sign.getLine(3));
+            if (!sign.getLine(1).isEmpty() || !sign.getLine(2).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(3);
         }
+
+        executeExpression(minecart, expression);
     }
 
     @Override

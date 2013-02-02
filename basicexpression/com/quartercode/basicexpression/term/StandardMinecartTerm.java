@@ -3,7 +3,7 @@ package com.quartercode.basicexpression.term;
 
 import org.bukkit.entity.Minecart;
 import com.quartercode.basicexpression.util.Direction;
-import com.quartercode.basicexpression.util.MinecartTerm;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.minecartrevolution.util.MinecartType;
 
 public class StandardMinecartTerm implements MinecartTerm {

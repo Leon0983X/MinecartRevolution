@@ -1,8 +1,6 @@
 
 package com.quartercode.basicexpression;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.quartercode.basicexpression.command.AnnounceCommand;
 import com.quartercode.basicexpression.command.ChestCommand;
 import com.quartercode.basicexpression.command.ClearCommand;
@@ -49,14 +47,11 @@ import com.quartercode.basicexpression.term.StandardMinecartTerm;
 import com.quartercode.basicexpression.term.StorageMinecartTerm;
 import com.quartercode.basicexpression.term.WestTerm;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
-import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginInfo;
 import com.quartercode.qcutil.version.Version;
 
 public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
-
-    private final List<MinecartTerm> minecartTerms = new ArrayList<MinecartTerm>();
 
     public BasicExpressionPlugin() {
 
@@ -67,11 +62,6 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     public PluginInfo getInfo() {
 
         return new PluginInfo("BasicExpression", new Version("1.0"));
-    }
-
-    public List<MinecartTerm> getMinecartTerms() {
-
-        return minecartTerms;
     }
 
     @Override
@@ -111,27 +101,27 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionConstant(new YConstant());
         addExpressionConstant(new ZConstant());
 
-        minecartTerms.add(new NorthTerm());
-        minecartTerms.add(new EastTerm());
-        minecartTerms.add(new SouthTerm());
-        minecartTerms.add(new WestTerm());
+        addMinecartTerm(new NorthTerm());
+        addMinecartTerm(new EastTerm());
+        addMinecartTerm(new SouthTerm());
+        addMinecartTerm(new WestTerm());
 
-        minecartTerms.add(new StandardMinecartTerm());
-        minecartTerms.add(new StorageMinecartTerm());
-        minecartTerms.add(new PoweredMinecartTerm());
-        minecartTerms.add(new InventoryTerm());
+        addMinecartTerm(new StandardMinecartTerm());
+        addMinecartTerm(new StorageMinecartTerm());
+        addMinecartTerm(new PoweredMinecartTerm());
+        addMinecartTerm(new InventoryTerm());
 
-        minecartTerms.add(new PassengerTerm());
-        minecartTerms.add(new PlayerTerm());
-        minecartTerms.add(new AnimalTerm());
-        minecartTerms.add(new NPCTerm());
-        minecartTerms.add(new MonsterTerm());
-        minecartTerms.add(new MobTerm());
+        addMinecartTerm(new PassengerTerm());
+        addMinecartTerm(new PlayerTerm());
+        addMinecartTerm(new AnimalTerm());
+        addMinecartTerm(new NPCTerm());
+        addMinecartTerm(new MonsterTerm());
+        addMinecartTerm(new MobTerm());
 
-        minecartTerms.add(new ItemTerm());
-        minecartTerms.add(new ItemHoldTerm());
+        addMinecartTerm(new ItemTerm());
+        addMinecartTerm(new ItemHoldTerm());
 
-        minecartTerms.add(new RandomTerm());
+        addMinecartTerm(new RandomTerm());
     }
 
 }

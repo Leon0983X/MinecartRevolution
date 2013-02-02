@@ -1,7 +1,8 @@
 
-package com.quartercode.basicexpression.util;
+package com.quartercode.minecartrevolution.util;
 
 import org.bukkit.entity.Minecart;
+import com.quartercode.basicexpression.util.Direction;
 
 public interface MinecartTerm {
 

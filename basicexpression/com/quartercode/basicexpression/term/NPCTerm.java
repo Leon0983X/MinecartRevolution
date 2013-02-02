@@ -4,7 +4,7 @@ package com.quartercode.basicexpression.term;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.NPC;
 import com.quartercode.basicexpression.util.Direction;
-import com.quartercode.basicexpression.util.MinecartTerm;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 
 public class NPCTerm implements MinecartTerm {
 

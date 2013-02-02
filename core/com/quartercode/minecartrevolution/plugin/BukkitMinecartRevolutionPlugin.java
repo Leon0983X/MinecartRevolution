@@ -1,6 +1,7 @@
 
 package com.quartercode.minecartrevolution.plugin;
 
+import java.util.List;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.block.ControlBlock;
@@ -13,6 +14,7 @@ import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.qcutil.io.File;
 import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
@@ -62,6 +64,12 @@ public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implemen
     }
 
     @Override
+    public List<MinecartTerm> getMinecartTerms() {
+
+        return minecartRevolution.getMinecartTerms();
+    }
+
+    @Override
     public File getPluginFolder() {
 
         return new File(FileConf.PLUGINS, getInfo().getName());
@@ -107,6 +115,12 @@ public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implemen
     public void addExpressionConstant(final ExpressionConstant expressionConstant) {
 
         getExpressionExecutor().addExpressionConstant(expressionConstant);
+    }
+
+    @Override
+    public void addMinecartTerm(final MinecartTerm minecartTerm) {
+
+        minecartRevolution.addMinecartTerm(minecartTerm);
     }
 
     @Override

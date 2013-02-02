@@ -9,9 +9,9 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.Direction;
-import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 
@@ -39,34 +39,49 @@ public class IntersectionCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        if (String.valueOf(parameter).split(":").length == 2) {
-            String term = String.valueOf(parameter).split(":")[0];
-            final String action = String.valueOf(parameter).split(":")[1];
-
-            final boolean negate = term.startsWith("!");
-            if (negate) {
-                term = term.replace("!", "");
+        for (final String intersection : String.valueOf(parameter).split(",")) {
+            if (tryIntersection(minecart, intersection)) {
+                execute(minecart, intersection.split(":")[1]);
+                return;
             }
+        }
 
-            for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
-                for (final String label : minecartTerm.getLabels()) {
-                    if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
-                        if (!negate) {
-                            execute(minecart, action);
-                        } else {
-                            doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
-                        }
-                        return;
-                    }
+        doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
+    }
+
+    private boolean tryIntersection(final Minecart minecart, final String intersection) {
+
+        if (intersection.split(":").length == 2) {
+            final String terms = intersection.split(":")[0];
+
+            for (final String term : terms.split("&")) {
+                if (!tryTerm(minecart, term)) {
+                    return false;
                 }
             }
 
-            if (negate) {
-                execute(minecart, action);
-            } else {
-                doIntersection(minecart, Direction.getDirection(minecart), Direction.getDirection(minecart));
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean tryTerm(final Minecart minecart, String term) {
+
+        final boolean negate = term.startsWith("!");
+        if (negate) {
+            term = term.replace("!", "");
+        }
+
+        for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
+            for (final String label : minecartTerm.getLabels()) {
+                if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                    return !negate;
+                }
             }
         }
+
+        return negate;
     }
 
     private void execute(final Minecart minecart, final String action) {

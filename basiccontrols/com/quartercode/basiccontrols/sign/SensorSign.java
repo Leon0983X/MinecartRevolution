@@ -22,9 +22,25 @@ public class SensorSign extends ControlSign {
     @Override
     public void execute(final Minecart minecart, final String label, final Sign sign) {
 
-        executeExpression(minecart, "sensor " + sign.getLine(1));
-        executeExpression(minecart, "sensor " + sign.getLine(2));
-        executeExpression(minecart, "sensor " + sign.getLine(3));
+        String expression = "sensor ";
+
+        if (!sign.getLine(1).isEmpty()) {
+            expression += sign.getLine(1);
+        }
+        if (!sign.getLine(2).isEmpty()) {
+            if (!sign.getLine(1).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(2);
+        }
+        if (!sign.getLine(3).isEmpty()) {
+            if (!sign.getLine(1).isEmpty() || !sign.getLine(2).isEmpty()) {
+                expression += ",";
+            }
+            expression += sign.getLine(3);
+        }
+
+        executeExpression(minecart, expression);
     }
 
 }

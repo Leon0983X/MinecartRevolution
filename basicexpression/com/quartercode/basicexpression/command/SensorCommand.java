@@ -10,9 +10,9 @@ import org.bukkit.material.Lever;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.basicexpression.util.Direction;
-import com.quartercode.basicexpression.util.MinecartTerm;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
@@ -38,8 +38,7 @@ public class SensorCommand extends ExpressionCommand {
         return true;
     }
 
-    @Override
-    public void execute(final Minecart minecart, final Object parameter) {
+    public void execute2(final Minecart minecart, final Object parameter) {
 
         String term = String.valueOf(parameter);
 
@@ -62,6 +61,46 @@ public class SensorCommand extends ExpressionCommand {
         if (negate) {
             power(minecart);
         }
+    }
+
+    @Override
+    public void execute(final Minecart minecart, final Object parameter) {
+
+        for (final String sensor : String.valueOf(parameter).split(",")) {
+            if (trySensor(minecart, sensor)) {
+                power(minecart);
+                return;
+            }
+        }
+    }
+
+    private boolean trySensor(final Minecart minecart, final String sensor) {
+
+        for (final String term : sensor.split("&")) {
+            if (!tryTerm(minecart, term)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean tryTerm(final Minecart minecart, String term) {
+
+        final boolean negate = term.startsWith("!");
+        if (negate) {
+            term = term.replace("!", "");
+        }
+
+        for (final MinecartTerm minecartTerm : plugin.getMinecartTerms()) {
+            for (final String label : minecartTerm.getLabels()) {
+                if (term.matches(label) && minecartTerm.getResult(minecart, Direction.getDirection(minecart), term)) {
+                    return !negate;
+                }
+            }
+        }
+
+        return negate;
     }
 
     private void power(final Minecart minecart) {

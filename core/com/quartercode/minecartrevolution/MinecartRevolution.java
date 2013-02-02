@@ -2,6 +2,9 @@
 package com.quartercode.minecartrevolution;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Logger;
 import org.bukkit.plugin.PluginDescriptionFile;
 import com.quartercode.basicactions.BasicActionsPlugin;
@@ -22,6 +25,7 @@ import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
+import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.quarterbukkit.QuarterBukkit;
 
 public class MinecartRevolution {
@@ -61,6 +65,8 @@ public class MinecartRevolution {
     private ControlBlockExecutor           controlBlockExecutor;
     private ControlSignExecutor            controlSignExecutor;
     private ExpressionExecutor             expressionExecutor;
+    private List<MinecartTerm>             minecartTerms;
+
     private Config                         configuration;
     private Metrics                        metrics;
 
@@ -98,6 +104,16 @@ public class MinecartRevolution {
     public ExpressionExecutor getExpressionExecutor() {
 
         return expressionExecutor;
+    }
+
+    public List<MinecartTerm> getMinecartTerms() {
+
+        return Collections.unmodifiableList(minecartTerms);
+    }
+
+    public void addMinecartTerm(final MinecartTerm minecartTerm) {
+
+        minecartTerms.add(minecartTerm);
     }
 
     public Config getConfiguration() {
@@ -152,6 +168,8 @@ public class MinecartRevolution {
         controlBlockExecutor = new ControlBlockExecutor(this);
         controlSignExecutor = new ControlSignExecutor(this);
         expressionExecutor = new ExpressionExecutor(this);
+
+        minecartTerms = new ArrayList<MinecartTerm>();
     }
 
     private void enablePlugins() {
