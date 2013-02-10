@@ -27,7 +27,7 @@ public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicCommands", new Version("Alpha 1.0"));
+        return new PluginInfo("BasicCommands", new Version("Alpha 1.0.1"));
     }
 
     @Override

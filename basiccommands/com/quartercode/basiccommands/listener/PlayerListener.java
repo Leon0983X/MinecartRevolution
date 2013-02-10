@@ -34,17 +34,17 @@ public class PlayerListener implements Listener {
             }.start();
         }
 
-        new Thread() {
+        final Player player = event.getPlayer();
+        if (Perm.has(player, "command.versions.check") && minecartRevolution.getConfiguration().getBool(GlobalConfig.CHECK_VERSION_ON_JOIN) && !minecartRevolution.getConfiguration().getBool(GlobalConfig.AUTO_UPDATE)) {
+            new Thread() {
 
-            @Override
-            public void run() {
+                @Override
+                public void run() {
 
-                final Player player = event.getPlayer();
-                if (Perm.has(player, "update.update") && minecartRevolution.getConfiguration().getBool(GlobalConfig.CHECK_VERSION_ON_JOIN) && !minecartRevolution.getConfiguration().getBool(GlobalConfig.AUTO_UPDATE)) {
                     Bukkit.dispatchCommand(player, "minecartrevolution checkversions");
                 }
-            }
-        }.start();
+            }.start();
+        }
     }
 
 }
