@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.PluginDescriptionFile;
 import com.quartercode.basicactions.BasicActionsPlugin;
 import com.quartercode.basiccommands.BasicCommandsPlugin;
+import com.quartercode.basiccommands.util.MinecartRevolutionUpdater;
 import com.quartercode.basiccontrols.BasicControlsPlugin;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.minecartrevolution.block.ControlBlockExecutor;
@@ -27,6 +28,7 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.Updater;
 
 public class MinecartRevolution {
 
@@ -66,6 +68,7 @@ public class MinecartRevolution {
     private ControlSignExecutor            controlSignExecutor;
     private ExpressionExecutor             expressionExecutor;
     private List<MinecartTerm>             minecartTerms;
+    private List<Updater>                  updaters;
 
     private Config                         configuration;
     private Metrics                        metrics;
@@ -116,6 +119,16 @@ public class MinecartRevolution {
         minecartTerms.add(minecartTerm);
     }
 
+    public List<Updater> getUpdaters() {
+
+        return Collections.unmodifiableList(updaters);
+    }
+
+    public void addUpdater(final Updater updater) {
+
+        updaters.add(updater);
+    }
+
     public Config getConfiguration() {
 
         return configuration;
@@ -153,6 +166,8 @@ public class MinecartRevolution {
         enableExecutors();
         enablePlugins();
         enableMetrics();
+
+        addUpdater(new MinecartRevolutionUpdater(this));
     }
 
     private void enableListeners() {
@@ -170,6 +185,7 @@ public class MinecartRevolution {
         expressionExecutor = new ExpressionExecutor(this);
 
         minecartTerms = new ArrayList<MinecartTerm>();
+        updaters = new ArrayList<Updater>();
     }
 
     private void enablePlugins() {

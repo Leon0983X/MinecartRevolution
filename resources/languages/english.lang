@@ -26,23 +26,18 @@ basiccommands.help.aliases=Aliases: $darkGreen$$aliases$
 basiccommands.info.description=Shows a info page
 basiccommands.info.start=$name$ Info
 
-basiccommands.version.latest=$green$You have already the latest version of $name$!
+basiccommands.getversions.description=Returns your plugin versions
+basiccommands.getversions.return=$d$Your $darkGreen$$plugin$$d$ version: $darkGreen$$pluginVersion$
 
-basiccommands.getversion.description=Returns your plugin version
-basiccommands.getversion.return=$d$Your $name$ version: $darkGreen$$version$
+basiccommands.versioncheck.description=Checks if new versions of the installed plugins are avaiable
+basiccommands.versioncheck.check=$d$Checking $darkGreen$$plugin$$d$ version ...
+basiccommands.versioncheck.newVersion=$d$There's a new version of $darkGreen$$plugin$$d$ ($darkGreen$$newVersion$$d$) avaiable! Update with '$darkGreen$$updateCommand$$d$'!
+basiccommands.versioncheck.latestVersion=$green$You have already the latest version of $darkGreen$$plugin$$d$!
 
-basiccommands.versioncheck.description=Checks if a new version of $name$ is avaiable
-basiccommands.versioncheck.check=$d$Checking $name$ version ...
-basiccommands.versioncheck.newVersion=$d$There's a new version of $name$ ($newVersion$) avaiable! Update with '$updateCommand$'!
-
-basiccommands.update.description=Updates your $name$ to the latest version
-basiccommands.update.update=$d$Updating $name$ ...
-basiccommands.update.updated=$d$Successfully updated $name$!
-basiccommands.update.download=$d$Downloading ...
-basiccommands.update.downloaded=$d$Successfully downloaded $file$!
-basiccommands.update.reload=$d$Reloading $name$ ...
-basiccommands.update.reloaded=$d$Successfully reloaded $name$!
-basiccommands.update.error=$red$An error ocurred while updating: $error$
+basiccommands.update.description=Updates your plugins to the latest versions
+basiccommands.update.update=$d$Updating $darkGreen$$plugin$$d$ ...
+basiccommands.update.updated=$d$Successfully updated $darkGreen$$plugin$$d$!
+basiccommands.update.error=$red$An error ocurred while updating $darkGreen$$plugin$$d$: $darkRed$$error$
 
 basiccommands.removecarts.description=Removes all minecarts in one or more worlds
 basiccommands.removecarts.cleared=$green$Successfully removed $count$ minecarts in "$world$" within radius $radius$!

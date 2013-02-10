@@ -17,7 +17,7 @@ public class BasicActionsPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicActions", new Version("1.0"));
+        return new PluginInfo("BasicActions", new Version("Alpha 1.0"));
     }
 
     @Override

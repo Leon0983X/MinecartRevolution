@@ -2,7 +2,7 @@
 package com.quartercode.basiccommands;
 
 import com.quartercode.basiccommands.command.EjectCommand;
-import com.quartercode.basiccommands.command.GetVersionCommand;
+import com.quartercode.basiccommands.command.GetVersionsCommand;
 import com.quartercode.basiccommands.command.HelpCommand;
 import com.quartercode.basiccommands.command.InfoCommand;
 import com.quartercode.basiccommands.command.PatchCommand;
@@ -11,7 +11,6 @@ import com.quartercode.basiccommands.command.StopcartsCommand;
 import com.quartercode.basiccommands.command.UpdateCommand;
 import com.quartercode.basiccommands.command.VersioncheckCommand;
 import com.quartercode.basiccommands.listener.PlayerListener;
-import com.quartercode.basiccommands.listener.ServerListener;
 import com.quartercode.basiccommands.util.MinecartRevolutionRecodePatcher;
 import com.quartercode.basiccommands.util.Patcher;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
@@ -28,18 +27,17 @@ public class BasicCommandsPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicCommands", new Version("1.0"));
+        return new PluginInfo("BasicCommands", new Version("Alpha 1.0"));
     }
 
     @Override
     public void enable() {
 
         new PlayerListener(getMinecartRevolution());
-        new ServerListener(getMinecartRevolution());
 
         addCommandHandler(new HelpCommand());
         addCommandHandler(new InfoCommand());
-        addCommandHandler(new GetVersionCommand());
+        addCommandHandler(new GetVersionsCommand());
         addCommandHandler(new VersioncheckCommand());
         addCommandHandler(new UpdateCommand());
         addCommandHandler(new RemovecartsCommand());

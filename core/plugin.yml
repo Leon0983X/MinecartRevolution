@@ -1,9 +1,10 @@
 name: MinecartRevolution
-version: 1.0
+version: Alpha 1.0
 description: MinecartRevolution is a modern Minecart-Plugin which features simple functions for beginners and professional ones.
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
 website: http://dev.bukkit.org/server-mods/MinecartRevolution
 main: com.quartercode.minecartrevolution.MinecartRevolutionPlugin
+load: STARTUP
 
 
 
@@ -20,7 +21,7 @@ permissions:
     description: Gives access to use all MinecartRevolution functions
     default: op
     children:
-      minecartrevolution.punch.*: true
+      minecartrevolution.action.*: true
       minecartrevolution.command.*: true
       minecartrevolution.control.*: true
 
@@ -69,18 +70,18 @@ permissions:
     description: Gives access to show the MinecartRevolution info
 
 
-  minecartrevolution.command.version.*:
+  minecartrevolution.command.versions.*:
     description: Gives access to use all MinecartRevolution version functions
     children:
-      minecartrevolution.command.version.getversion: true
-      minecartrevolution.command.version.versioncheck: true
-      minecartrevolution.command.version.update: true
-  minecartrevolution.command.version.get:
-    description: Gives access to use the MinecartRevolution get version command
-  minecartrevolution.command.version.check:
-    description: Gives access to checks the MinecartRevolution version
-  minecartrevolution.command.version.update:
-    description: Gives access to update MinecartRevolution
+      minecartrevolution.command.versions.get: true
+      minecartrevolution.command.versions.check: true
+      minecartrevolution.command.versions.update: true
+  minecartrevolution.command.versions.get:
+    description: Gives access to use the MinecartRevolution get versions command
+  minecartrevolution.command.versions.check:
+    description: Gives access to checks the plugin versions
+  minecartrevolution.command.versions.update:
+    description: Gives access to update the plugins
 
 
   minecartrevolution.command.removecarts:

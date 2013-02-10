@@ -1,6 +1,7 @@
 
 package com.quartercode.minecartrevolution.exception;
 
+import org.bukkit.Bukkit;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
@@ -30,13 +31,13 @@ public class MinecartRevolutionExceptionHandler extends ExceptionHandler {
                 QcUtil.handleThrowable(exception);
             }
         } else if (exception instanceof InstallException) {
-            plugin.getLogger().severe(Lang.getValue("basiccommands.update.error", "error", exception.getLocalizedMessage()));
+            Bukkit.getConsoleSender().sendMessage(exception.getLocalizedMessage());
         } else if (exception instanceof NoPermissionException) {
             ((NoPermissionException) exception).getCauser().sendMessage(Lang.getValue("command.noPermission"));
         } else if (exception instanceof NoCommandFoundException) {
             ((NoCommandFoundException) exception).getCommand().getSender().sendMessage(Lang.getValue("command.noCommand", "label", ((NoCommandFoundException) exception).getCommand().getLabel()));
         } else {
-            plugin.getLogger().warning(exception.toString());
+            Bukkit.getConsoleSender().sendMessage(exception.toString());
         }
     }
 

@@ -81,7 +81,6 @@ public class Lang {
 
         addVariable(variableList, "name", Conf.NAME);
         addVariable(variableList, "nameLc", Conf.NAME_LC);
-        addVariable(variableList, "version", Conf.VERSION.getVersionString());
         addVariable(variableList, "devBuild", Conf.DEV_BUILD);
 
         addVariable(variableList, "aqua", ChatColor.AQUA);

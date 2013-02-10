@@ -14,6 +14,7 @@ import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
 public interface MinecartRevolutionPlugin {
@@ -32,7 +33,7 @@ public interface MinecartRevolutionPlugin {
 
     public List<MinecartTerm> getMinecartTerms();
 
-    public void addMinecartTerm(MinecartTerm minecartTerm);
+    public List<Updater> getUpdaters();
 
     public File getPluginFolder();
 
@@ -49,6 +50,10 @@ public interface MinecartRevolutionPlugin {
     public void addExpressionCommand(final ExpressionCommand expressionCommand);
 
     public void addExpressionConstant(final ExpressionConstant expressionConstant);
+
+    public void addMinecartTerm(MinecartTerm minecartTerm);
+
+    public void addUpdater(Updater updater);
 
     public abstract PluginInfo getInfo();
 

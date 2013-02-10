@@ -7,11 +7,10 @@ import com.quartercode.quarterbukkit.QuarterBukkitIntegration;
 
 public class MinecartRevolutionPlugin extends JavaPlugin {
 
-    private final MinecartRevolution minecartRevolution;
+    private MinecartRevolution minecartRevolution;
 
     public MinecartRevolutionPlugin() {
 
-        minecartRevolution = new MinecartRevolution(this);
     }
 
     public MinecartRevolution getMinecartRevolution() {
@@ -33,6 +32,8 @@ public class MinecartRevolutionPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        minecartRevolution = new MinecartRevolution(this);
 
         minecartRevolution.enable();
     }

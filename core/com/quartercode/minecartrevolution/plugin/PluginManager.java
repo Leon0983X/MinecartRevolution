@@ -21,11 +21,11 @@ public class PluginManager {
             throw new IllegalStateException("A plugin can only be registered after MinecartRevolution was loaded [" + minecartRevolutionPlugin.getInfo().getName() + "]");
         }
 
-        minecartRevolution.getLogger().info("Loading plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' ...");
+        minecartRevolution.getLogger().info("Loading plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' v" + minecartRevolutionPlugin.getInfo().getVersion().getVersionString() + " ...");
         minecartRevolutionPlugin.setMinecartRevolution(minecartRevolution);
         plugins.add(minecartRevolutionPlugin);
 
-        minecartRevolution.getLogger().info("Enabling plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' ...");
+        minecartRevolution.getLogger().info("Enabling plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' v" + minecartRevolutionPlugin.getInfo().getVersion().getVersionString() + " ...");
         minecartRevolutionPlugin.getPluginFolder().mkdirs();
         minecartRevolutionPlugin.enable();
         minecartRevolution.getLogger().info("Plugin '" + minecartRevolutionPlugin.getInfo().getName() + "' successfully enabled!");

@@ -15,6 +15,7 @@ import com.quartercode.minecartrevolution.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.qcutil.io.File;
+import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
 public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolutionPlugin {
@@ -69,6 +70,12 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
     }
 
     @Override
+    public List<Updater> getUpdaters() {
+
+        return minecartRevolution.getUpdaters();
+    }
+
+    @Override
     public File getPluginFolder() {
 
         return new File(FileConf.PLUGINS, getInfo().getName());
@@ -120,6 +127,12 @@ public abstract class JavaMinecartRevolutionPlugin implements MinecartRevolution
     public void addMinecartTerm(final MinecartTerm minecartTerm) {
 
         minecartRevolution.addMinecartTerm(minecartTerm);
+    }
+
+    @Override
+    public void addUpdater(final Updater updater) {
+
+        minecartRevolution.addUpdater(updater);
     }
 
 }

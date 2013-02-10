@@ -61,7 +61,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicExpression", new Version("1.0"));
+        return new PluginInfo("BasicExpression", new Version("Alpha 1.0"));
     }
 
     @Override

@@ -25,32 +25,18 @@ public class MinecartRevolutionUpdater extends Updater {
     }
 
     @Override
-    protected void doInstall(final File downloadedFile, final CommandSender causer) throws IOException {
-
-        if (causer != null) {
-            causer.sendMessage(Lang.getValue("basiccommands.update.downloaded", "file", downloadedFile.getName()));
-            causer.sendMessage(Lang.getValue("basiccommands.update.reload"));
-        } else {
-            plugin.getLogger().info(Lang.getValue("basiccommands.update.downloaded", "file", downloadedFile.getName()));
-            plugin.getLogger().info(Lang.getValue("basiccommands.update.reload"));
-        }
+    protected boolean doInstall(final File downloadedFile, final CommandSender causer) throws IOException {
 
         try {
             Bukkit.getPluginManager().disablePlugin(updatePlugin);
             Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().loadPlugin(new File("plugins", "MinecartRevolution.jar")));
+            return true;
         }
         catch (final Exception e) {
-            QuarterBukkit.exception(new InstallException(plugin, e, Lang.getValue("basiccommands.update.error", "error", "Error while reloading: " + e.getLocalizedMessage())));
-            return;
+            QuarterBukkit.exception(new InstallException(plugin, this, e, Lang.getValue("basiccommands.update.error", "plugin", updatePlugin.getName(), "error", "Error while reloading: " + e.getLocalizedMessage())));
         }
 
-        if (causer != null) {
-            causer.sendMessage(Lang.getValue("basiccommands.update.reloaded"));
-            causer.sendMessage(Lang.getValue("basiccommands.update.updated"));
-        } else {
-            plugin.getLogger().info(Lang.getValue("basiccommands.update.reloaded"));
-            plugin.getLogger().info(Lang.getValue("basiccommands.update.updated"));
-        }
+        return false;
     }
 
 }

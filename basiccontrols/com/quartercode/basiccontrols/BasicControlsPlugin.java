@@ -43,7 +43,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicControls", new Version("1.0"));
+        return new PluginInfo("BasicControls", new Version("Alpha 1.0"));
     }
 
     @Override
