@@ -77,7 +77,8 @@ public class QuarterBukkitIntegration {
     }
 
     /**
-     * Call this method in onEnable() for integrating QuarterBukkit into your plugin. It creates a config where the user has to turn a value to "Yes" and notfies him on console and via "Join-Event".
+     * Call this method in onEnable() for integrating QuarterBukkit into your plugin.
+     * It creates a config where the user has to turn a value to "Yes" and notfies him on console and via "Join-Event".
      * 
      * @param plugin The plugin which tries to integrate QuarterBukkit.
      */
@@ -86,7 +87,7 @@ public class QuarterBukkitIntegration {
         final File installConfigFile = new File("plugins/QuarterBukkit", "install.yml");
 
         try {
-            if (!installConfigFile.exists()) {
+            if (!installConfigFile.exists() && !Bukkit.getPluginManager().isPluginEnabled("QuarterBukkit")) {
                 final YamlConfiguration installConfig = new YamlConfiguration();
                 installConfig.set("install-QuarterBukkit", false);
                 installConfig.save(installConfigFile);
@@ -97,6 +98,8 @@ public class QuarterBukkitIntegration {
                     installConfigFile.delete();
                     return true;
                 }
+            } else {
+                return true;
             }
 
             new Timer().schedule(new TimerTask() {

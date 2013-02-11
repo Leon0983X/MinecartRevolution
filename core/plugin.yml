@@ -4,6 +4,7 @@ description: MinecartRevolution is a modern Minecart-Plugin which features simpl
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
 website: http://dev.bukkit.org/server-mods/MinecartRevolution
 main: com.quartercode.minecartrevolution.MinecartRevolutionPlugin
+softdepend: [QuarterBukkit]
 load: STARTUP
 
 

@@ -58,7 +58,7 @@ public class InfoCommand extends MRCommandHandler {
             sender.sendMessage("was the beginning of a big thing which's called");
             sender.sendMessage(ChatColor.GOLD + Conf.NAME + ChatColor.RESET + ". Today it's one of the largest & most");
             sender.sendMessage("versatile Minecart plugins ever made.");
-            sender.sendMessage(ChatColor.AQUA + "There's no limit with " + ChatColor.GOLD + Conf.NAME + ChatColor.RESET + "!");
+            sender.sendMessage(ChatColor.AQUA + "There is no limit with " + ChatColor.GOLD + Conf.NAME + ChatColor.RESET + "!");
         }
 
         private int getDownloadCount() {
