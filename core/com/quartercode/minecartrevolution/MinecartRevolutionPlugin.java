@@ -27,14 +27,13 @@ public class MinecartRevolutionPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        if (!QuarterBukkitIntegration.integrate()) {
+        if (!QuarterBukkitIntegration.integrate(this)) {
             getLogger().severe("Can't enable plugin " + getName() + "! For more information, see above.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
         minecartRevolution = new MinecartRevolution(this);
-
         minecartRevolution.enable();
     }
 
