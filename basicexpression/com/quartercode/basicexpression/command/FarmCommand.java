@@ -42,14 +42,14 @@ public class FarmCommand extends ExpressionCommand {
     public void execute(final Minecart minecart, final Object parameter) {
 
         final String[] parameters = String.valueOf(parameter).split(" ");
-        int radius = 5;
+        int radius = (int) plugin.getConfiguration().getLong(BasicExpressionConfig.FARM_DEFAULT_RADIUS);
 
         try {
             if (parameters.length >= 2 && (plugin.getConfiguration().getLong(BasicExpressionConfig.FARM_MAX_RADIUS) < 0 || Integer.parseInt(parameters[1]) <= plugin.getConfiguration().getLong(BasicExpressionConfig.FARM_MAX_RADIUS))) {
                 radius = Integer.parseInt(parameters[1]);
             }
         }
-        catch (NumberFormatException e) {
+        catch (final NumberFormatException e) {
             radius = 5;
         }
 

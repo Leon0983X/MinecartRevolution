@@ -43,7 +43,7 @@ public class CollectCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        int radius = 5;
+        int radius = (int) plugin.getConfiguration().getLong(BasicExpressionConfig.COLLECT_DEFAULT_RADIUS);
         final List<String> items = new ArrayList<String>();
 
         if (parameter != null) {

@@ -35,11 +35,11 @@ public class GrabCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        double radius = 5;
+        int radius = (int) plugin.getConfiguration().getLong(BasicExpressionConfig.COLLECT_DEFAULT_RADIUS);
 
         if (parameter != null) {
             if (plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS) < 0 || (Double) parameter <= plugin.getConfiguration().getLong(BasicExpressionConfig.GRAB_MAX_RADIUS)) {
-                radius = (Double) parameter;
+                radius = Integer.parseInt(String.valueOf(parameter));
             }
         }
 
