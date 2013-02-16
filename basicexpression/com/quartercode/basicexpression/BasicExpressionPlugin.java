@@ -8,6 +8,7 @@ import com.quartercode.basicexpression.command.CollectCommand;
 import com.quartercode.basicexpression.command.CommandCommand;
 import com.quartercode.basicexpression.command.EffectCommand;
 import com.quartercode.basicexpression.command.EjectCommand;
+import com.quartercode.basicexpression.command.FarmCommand;
 import com.quartercode.basicexpression.command.FileCommand;
 import com.quartercode.basicexpression.command.FurnaceCommand;
 import com.quartercode.basicexpression.command.GrabCommand;
@@ -61,7 +62,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicExpression", new Version("Alpha 1.0"));
+        return new PluginInfo("BasicExpression", new Version("Alpha 1.0.1"));
     }
 
     @Override
@@ -78,6 +79,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new CommandCommand());
         addExpressionCommand(new EffectCommand());
         addExpressionCommand(new EjectCommand());
+        addExpressionCommand(new FarmCommand(this));
         addExpressionCommand(new FileCommand());
         addExpressionCommand(new FurnaceCommand());
         addExpressionCommand(new GrabCommand(this));

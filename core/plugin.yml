@@ -1,5 +1,5 @@
 name: MinecartRevolution
-version: Alpha 1.0.1
+version: Alpha 1.0.2
 description: MinecartRevolution is a modern Minecart-Plugin which features simple functions for beginners and professional ones.
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
 website: http://dev.bukkit.org/server-mods/MinecartRevolution
@@ -301,6 +301,17 @@ permissions:
     description: Gives access to place the MinecartRevolution Expression sign
   minecartrevolution.control.sign.expression.destroy:
     description: Gives access to destroy the MinecartRevolution Expression sign
+
+
+  minecartrevolution.control.sign.farm.*:
+    description: Gives access to use the MinecartRevolution Farm sign
+    children:
+      minecartrevolution.control.sign.farm.place: true
+      minecartrevolution.control.sign.farm.destroy: true
+  minecartrevolution.control.sign.farm.place:
+    description: Gives access to place the MinecartRevolution Farm sign
+  minecartrevolution.control.sign.farm.destroy:
+    description: Gives access to destroy the MinecartRevolution Farm sign
 
 
   minecartrevolution.control.sign.file.*:

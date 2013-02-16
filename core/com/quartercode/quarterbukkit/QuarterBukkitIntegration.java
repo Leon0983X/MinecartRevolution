@@ -77,8 +77,7 @@ public class QuarterBukkitIntegration {
     }
 
     /**
-     * Call this method in onEnable() for integrating QuarterBukkit into your plugin.
-     * It creates a config where the user has to turn a value to "Yes" and notfies him on console and via "Join-Event".
+     * Call this method in onEnable() for integrating QuarterBukkit into your plugin. It creates a config where the user has to turn a value to "Yes" and notfies him on console and via "Join-Event".
      * 
      * @param plugin The plugin which tries to integrate QuarterBukkit.
      */

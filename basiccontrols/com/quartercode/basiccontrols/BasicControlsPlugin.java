@@ -15,6 +15,7 @@ import com.quartercode.basiccontrols.sign.CommandSign;
 import com.quartercode.basiccontrols.sign.EffectSign;
 import com.quartercode.basiccontrols.sign.EjectSign;
 import com.quartercode.basiccontrols.sign.ExpressionSign;
+import com.quartercode.basiccontrols.sign.FarmSign;
 import com.quartercode.basiccontrols.sign.FileSign;
 import com.quartercode.basiccontrols.sign.FurnaceSign;
 import com.quartercode.basiccontrols.sign.GrabSign;
@@ -43,7 +44,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicControls", new Version("Alpha 1.0"));
+        return new PluginInfo("BasicControls", new Version("Alpha 1.0.1"));
     }
 
     @Override
@@ -68,6 +69,7 @@ public class BasicControlsPlugin extends JavaMinecartRevolutionPlugin {
         addControlSign(new EffectSign());
         addControlSign(new EjectSign());
         addControlSign(new ExpressionSign());
+        addControlSign(new FarmSign());
         addControlSign(new FileSign());
         addControlSign(new FurnaceSign());
         addControlSign(new GrabSign());

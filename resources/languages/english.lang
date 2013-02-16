@@ -100,6 +100,9 @@ basiccontrols.signs.eject.description=Ejects the player with at an optional loca
 basiccontrols.signs.expression.name=Expression
 basiccontrols.signs.expression.description=Controls the minecart with Expressions
 
+basiccontrols.signs.farm.name=Farm
+basiccontrols.signs.farm.description=Allows to farm with minecarts
+
 basiccontrols.signs.file.name=File
 basiccontrols.signs.file.description=Executes a script file like the file-command
 
