@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;
-import com.quartercode.minecartrevolution.util.ItemData;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ControlBlockExecutor {
 

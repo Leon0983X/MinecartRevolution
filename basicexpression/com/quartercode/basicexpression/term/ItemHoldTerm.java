@@ -8,8 +8,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
 import com.quartercode.basicexpression.util.Direction;
 import com.quartercode.minecartrevolution.util.AliasUtil;
-import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ItemHoldTerm implements MinecartTerm {
 

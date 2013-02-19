@@ -18,7 +18,7 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.minecartrevolution.get.Perm;
 import com.quartercode.minecartrevolution.sign.ControlSign;
 import com.quartercode.minecartrevolution.sign.ControlSignInfo;
-import com.quartercode.minecartrevolution.util.ItemData;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class BlockListener implements Listener {
 

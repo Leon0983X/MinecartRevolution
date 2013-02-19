@@ -1,7 +1,7 @@
 
 package com.quartercode.minecartrevolution.block;
 
-import com.quartercode.minecartrevolution.util.ItemData;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ControlBlockInfo {
 

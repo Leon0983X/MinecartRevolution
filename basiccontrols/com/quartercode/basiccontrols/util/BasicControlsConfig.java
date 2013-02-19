@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.plugin.MinecartRevolutionPlugin;
 import com.quartercode.minecartrevolution.plugin.PluginConfig;
-import com.quartercode.minecartrevolution.util.ItemData;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class BasicControlsConfig extends PluginConfig {
 

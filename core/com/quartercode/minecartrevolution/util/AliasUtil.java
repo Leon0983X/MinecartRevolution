@@ -9,6 +9,7 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class AliasUtil {
 

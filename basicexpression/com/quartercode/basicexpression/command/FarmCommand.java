@@ -13,9 +13,9 @@ import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
-import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class FarmCommand extends ExpressionCommand {
 

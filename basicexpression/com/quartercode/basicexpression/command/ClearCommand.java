@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.util.AliasUtil;
-import com.quartercode.minecartrevolution.util.ItemData;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ClearCommand extends ExpressionCommand {
 

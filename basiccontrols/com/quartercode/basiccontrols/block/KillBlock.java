@@ -7,7 +7,7 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.block.ControlBlock;
 import com.quartercode.minecartrevolution.block.ControlBlockInfo;
 import com.quartercode.minecartrevolution.get.Lang;
-import com.quartercode.minecartrevolution.util.ItemData;
+import com.quartercode.quarterbukkit.api.ItemData;
 
 public class KillBlock extends ControlBlock {
 
