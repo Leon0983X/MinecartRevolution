@@ -5,8 +5,6 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 
 public class MinecartRevolutionSilenceException extends MinecartRevolutionException {
 
-    private static final long serialVersionUID = -1325581518215061260L;
-
     public MinecartRevolutionSilenceException(final MinecartRevolution minecartRevolution) {
 
         super(minecartRevolution);

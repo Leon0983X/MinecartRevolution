@@ -6,8 +6,6 @@ import com.quartercode.quarterbukkit.api.exception.GameException;
 
 public class MinecartRevolutionException extends GameException {
 
-    private static final long        serialVersionUID = 2948675748160003549L;
-
     private final MinecartRevolution minecartRevolution;
     private Throwable                cause;
 
@@ -42,7 +40,6 @@ public class MinecartRevolutionException extends GameException {
         return minecartRevolution;
     }
 
-    @Override
     public Throwable getCause() {
 
         return cause;

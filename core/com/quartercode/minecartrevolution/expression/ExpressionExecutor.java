@@ -12,7 +12,7 @@ import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.qcutil.script.ScriptExecutor;
-import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class ExpressionExecutor {
 
@@ -153,7 +153,7 @@ public class ExpressionExecutor {
 	                parameterString = String.valueOf(scriptExecutor.get("result"));
 	            }
 	            catch (final ScriptException e) {
-	                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Expression script error for: " + expressionPart));
+	                ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Expression script error for: " + expressionPart));
 	                return;
 	            }
 	        }

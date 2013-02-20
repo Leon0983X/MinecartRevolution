@@ -14,9 +14,9 @@ import com.quartercode.minecartrevolution.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.qcutil.args.Arguments;
-import com.quartercode.quarterbukkit.QuarterBukkit;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class PatchCommand extends MRCommandHandler {
 
@@ -75,7 +75,7 @@ public class PatchCommand extends MRCommandHandler {
                 radius = Integer.parseInt(arguments.getParameter("r", true));
             }
             catch (final NumberFormatException e) {
-                QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse patch radius: " + radius));
+                ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse patch radius: " + radius));
             }
         }
 

@@ -6,10 +6,10 @@ import javax.xml.stream.XMLStreamException;
 import com.quartercode.minecartrevolution.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.minecartrevolution.get.Lang;
-import com.quartercode.quarterbukkit.QuarterBukkit;
 import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class VersioncheckCommand extends MRCommandHandler {
 
@@ -35,10 +35,10 @@ public class VersioncheckCommand extends MRCommandHandler {
                 }
             }
             catch (final IOException e) {
-                QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the file system"));
+                ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the file system"));
             }
             catch (final XMLStreamException e) {
-                QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the version XML-feed"));
+                ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the version XML-feed"));
             }
         }
     }

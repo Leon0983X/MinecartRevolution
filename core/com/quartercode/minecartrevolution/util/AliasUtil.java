@@ -8,8 +8,8 @@ import org.bukkit.Material;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
-import com.quartercode.quarterbukkit.QuarterBukkit;
 import com.quartercode.quarterbukkit.api.ItemData;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class AliasUtil {
 
@@ -77,7 +77,7 @@ public class AliasUtil {
             reader.close();
         }
         catch (final IOException e) {
-            QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse item string: " + string));
+            ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse item string: " + string));
         }
 
         if (reader != null) {

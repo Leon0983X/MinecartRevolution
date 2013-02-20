@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.qcutil.io.File;
-import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public abstract class Config {
 
@@ -115,7 +115,7 @@ public abstract class Config {
             configuration.save(file);
         }
         catch (final IOException e) {
-            QuarterBukkit.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
+            ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
         }
     }
 

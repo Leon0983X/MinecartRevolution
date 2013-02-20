@@ -27,8 +27,8 @@ import com.quartercode.minecartrevolution.util.Config;
 import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
-import com.quartercode.quarterbukkit.QuarterBukkit;
 import com.quartercode.quarterbukkit.api.Updater;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class MinecartRevolution {
 
@@ -151,7 +151,7 @@ public class MinecartRevolution {
 
     public void enable() {
 
-        QuarterBukkit.setExceptionHandler(new MinecartRevolutionExceptionHandler(this));
+        ExceptionManager.setExceptionHandler(new MinecartRevolutionExceptionHandler(this));
         PluginManager.registerMinecartRevolution(this);
 
         configuration = new GlobalConfig(this);
@@ -208,7 +208,7 @@ public class MinecartRevolution {
             metrics.start();
         }
         catch (final IOException e) {
-            QuarterBukkit.exception(createException(true, e, "Error while initalizing Metrics"));
+            ExceptionManager.exception(createException(true, e, "Error while initalizing Metrics"));
         }
     }
 

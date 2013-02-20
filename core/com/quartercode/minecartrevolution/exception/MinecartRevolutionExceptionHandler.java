@@ -25,19 +25,19 @@ public class MinecartRevolutionExceptionHandler extends ExceptionHandler {
         if (exception instanceof MinecartRevolutionException) {
             if (exception instanceof MinecartRevolutionSilenceException) {
                 if ( ((MinecartRevolutionException) exception).getMinecartRevolution().getConfiguration().getBool(GlobalConfig.PRINT_SILENCE_ERRORS)) {
-                    QcUtil.handleThrowable(exception);
+                    QcUtil.handleThrowable( ((MinecartRevolutionException) exception).getCause());
                 }
             } else {
-                QcUtil.handleThrowable(exception);
+                QcUtil.handleThrowable( ((MinecartRevolutionException) exception).getCause());
             }
         } else if (exception instanceof InstallException) {
-            Bukkit.getConsoleSender().sendMessage(exception.getLocalizedMessage());
+            Bukkit.getConsoleSender().sendMessage(exception.getMessage());
         } else if (exception instanceof NoPermissionException) {
             ((NoPermissionException) exception).getCauser().sendMessage(Lang.getValue("command.noPermission"));
         } else if (exception instanceof NoCommandFoundException) {
             ((NoCommandFoundException) exception).getCommand().getSender().sendMessage(Lang.getValue("command.noCommand", "label", ((NoCommandFoundException) exception).getCommand().getLabel()));
         } else {
-            Bukkit.getConsoleSender().sendMessage(exception.toString());
+            Bukkit.getConsoleSender().sendMessage("Can't handle exception: " + exception.getClass().getName());
         }
     }
 

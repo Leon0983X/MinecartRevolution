@@ -14,7 +14,7 @@ import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.qcutil.io.File;
-import com.quartercode.quarterbukkit.QuarterBukkit;
+import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
 
 public class FileCommand extends ExpressionCommand {
 
@@ -60,7 +60,7 @@ public class FileCommand extends ExpressionCommand {
             }
         }
         catch (final Exception e) {
-            QuarterBukkit.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load script file " + file.getPath()));
+            ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load script file " + file.getPath()));
         }
     }
 
