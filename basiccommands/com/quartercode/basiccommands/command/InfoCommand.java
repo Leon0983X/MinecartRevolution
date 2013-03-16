@@ -14,7 +14,7 @@ import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceExc
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class InfoCommand extends MRCommandHandler {
 
@@ -82,7 +82,7 @@ public class InfoCommand extends MRCommandHandler {
                 reader.close();
             }
             catch (final IOException e) {
-                ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load download count"));
+                ExceptionHandler.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to load download count"));
             }
 
             return -1;

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.quarterbukkit.api.Updater;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 import com.quartercode.quarterbukkit.api.exception.InstallException;
 
 public class MinecartRevolutionUpdater extends Updater {
@@ -33,7 +33,7 @@ public class MinecartRevolutionUpdater extends Updater {
             return true;
         }
         catch (final Exception e) {
-            ExceptionManager.exception(new InstallException(plugin, this, e, Lang.getValue("basiccommands.update.error", "plugin", updatePlugin.getName(), "error", "Error while reloading: " + e.getLocalizedMessage())));
+            ExceptionHandler.exception(new InstallException(plugin, this, e, Lang.getValue("basiccommands.update.error", "plugin", updatePlugin.getName(), "error", "Error while reloading: " + e.getLocalizedMessage())));
         }
 
         return false;

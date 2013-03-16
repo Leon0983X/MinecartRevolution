@@ -9,7 +9,7 @@ import com.quartercode.minecartrevolution.get.Lang;
 import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class VersioncheckCommand extends MRCommandHandler {
 
@@ -35,10 +35,10 @@ public class VersioncheckCommand extends MRCommandHandler {
                 }
             }
             catch (final IOException e) {
-                ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the file system"));
+                ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the file system"));
             }
             catch (final XMLStreamException e) {
-                ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the version XML-feed"));
+                ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the version XML-feed"));
             }
         }
     }

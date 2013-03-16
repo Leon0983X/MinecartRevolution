@@ -122,7 +122,7 @@ public class SensorCommand extends ExpressionCommand {
 
                     setPowered(minecartLocation, false);
                 }
-            }.run((long) (time * 1000D));
+            }.run(true, (long) (time * 1000D));
         }
     }
 

@@ -17,7 +17,7 @@ import com.quartercode.minecartrevolution.util.AliasUtil;
 import com.quartercode.minecartrevolution.util.TypeArray;
 import com.quartercode.minecartrevolution.util.TypeArray.Type;
 import com.quartercode.quarterbukkit.api.ItemData;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class CollectCommand extends ExpressionCommand {
 
@@ -58,7 +58,7 @@ public class CollectCommand extends ExpressionCommand {
                     }
                 }
                 catch (final NumberFormatException e) {
-                    ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse collect radius"));
+                    ExceptionHandler.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse collect radius"));
                 }
             }
         }

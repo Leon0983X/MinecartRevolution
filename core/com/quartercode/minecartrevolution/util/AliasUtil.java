@@ -9,7 +9,7 @@ import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.conf.FileConf;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.quarterbukkit.api.ItemData;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class AliasUtil {
 
@@ -77,7 +77,7 @@ public class AliasUtil {
             reader.close();
         }
         catch (final IOException e) {
-            ExceptionManager.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse item string: " + string));
+            ExceptionHandler.exception(new MinecartRevolutionSilenceException(minecartRevolution, e, "Failed to parse item string: " + string));
         }
 
         if (reader != null) {

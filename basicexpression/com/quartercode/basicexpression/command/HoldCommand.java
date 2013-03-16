@@ -46,7 +46,7 @@ public class HoldCommand extends ExpressionCommand {
 
                     minecart.setVelocity(oldVelocity);
                 }
-            }.run((long) (time * 1000D));
+            }.run(true, (long) (time * 1000D));
         }
     }
 

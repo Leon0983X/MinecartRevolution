@@ -24,7 +24,7 @@ import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.qcutil.io.File;
 import com.quartercode.qcutil.res.PropertyResourceHandler;
 import com.quartercode.qcutil.res.ResourceManager;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class Lang {
 
@@ -159,11 +159,11 @@ public class Lang {
                 }
             }
             catch (final IOException e) {
-                ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to locate default language files"));
+                ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to locate default language files"));
                 return;
             }
         } else {
-            ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, "Failed to locate default language files"));
+            ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, "Failed to locate default language files"));
             return;
         }
 
@@ -203,7 +203,7 @@ public class Lang {
             }
         }
         catch (final IOException e) {
-            ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to extract language from jar"));
+            ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to extract language from jar"));
         }
         finally {
             if (inputStream != null) {
@@ -211,7 +211,7 @@ public class Lang {
                     inputStream.close();
                 }
                 catch (final IOException e) {
-                    ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close input stream"));
+                    ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close input stream"));
                 }
             }
 
@@ -220,7 +220,7 @@ public class Lang {
                     outputStream.close();
                 }
                 catch (final IOException e) {
-                    ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close output stream"));
+                    ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close output stream"));
                 }
             }
         }

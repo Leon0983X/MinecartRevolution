@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 import com.quartercode.minecartrevolution.MinecartRevolution;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
 import com.quartercode.qcutil.io.File;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public abstract class Config {
 
@@ -30,31 +30,6 @@ public abstract class Config {
 
         return configuration;
     }
-
-    // public Object get(final String path) {
-    //
-    // if (configuration.isBoolean(path)) {
-    // return configuration.getBoolean(path);
-    // } else if (configuration.isDouble(path)) {
-    // return configuration.getDouble(path);
-    // } else if (configuration.isInt(path)) {
-    // return configuration.getInt(path);
-    // } else if (configuration.isItemStack(path)) {
-    // return configuration.getItemStack(path);
-    // } else if (configuration.isList(path)) {
-    // return configuration.getList(path);
-    // } else if (configuration.isLong(path)) {
-    // return configuration.getLong(path);
-    // } else if (configuration.isOfflinePlayer(path)) {
-    // return configuration.getOfflinePlayer(path);
-    // } else if (configuration.isString(path)) {
-    // return configuration.getString(path);
-    // } else if (configuration.isVector(path)) {
-    // return configuration.getVector(path);
-    // } else {
-    // return configuration.get(path);
-    // }
-    // }
 
     public String get(final String path) {
 
@@ -115,7 +90,7 @@ public abstract class Config {
             configuration.save(file);
         }
         catch (final IOException e) {
-            ExceptionManager.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
+            ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
         }
     }
 

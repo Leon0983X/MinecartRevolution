@@ -14,8 +14,8 @@ import com.quartercode.basiccontrols.BasicControlsPlugin;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
 import com.quartercode.minecartrevolution.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.command.MRCommandExecutor;
+import com.quartercode.minecartrevolution.exception.ExceptionListener;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionException;
-import com.quartercode.minecartrevolution.exception.MinecartRevolutionExceptionHandler;
 import com.quartercode.minecartrevolution.exception.MinecartRevolutionSilenceException;
 import com.quartercode.minecartrevolution.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.get.Lang;
@@ -28,7 +28,7 @@ import com.quartercode.minecartrevolution.util.GlobalConfig;
 import com.quartercode.minecartrevolution.util.Metrics;
 import com.quartercode.minecartrevolution.util.MinecartTerm;
 import com.quartercode.quarterbukkit.api.Updater;
-import com.quartercode.quarterbukkit.api.exception.ExceptionManager;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class MinecartRevolution {
 
@@ -151,7 +151,7 @@ public class MinecartRevolution {
 
     public void enable() {
 
-        ExceptionManager.setExceptionHandler(new MinecartRevolutionExceptionHandler(this));
+        new ExceptionListener(this);
         PluginManager.registerMinecartRevolution(this);
 
         configuration = new GlobalConfig(this);
@@ -208,7 +208,7 @@ public class MinecartRevolution {
             metrics.start();
         }
         catch (final IOException e) {
-            ExceptionManager.exception(createException(true, e, "Error while initalizing Metrics"));
+            ExceptionHandler.exception(createException(true, e, "Error while initalizing Metrics"));
         }
     }
 

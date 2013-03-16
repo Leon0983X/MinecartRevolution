@@ -85,7 +85,7 @@ public class LockCommand extends ExpressionCommand implements Listener {
 
                     event.getVehicle().setPassenger(event.getExited());
                 }
-            }.run(0);
+            }.run(true, 0);
         }
     }
 
