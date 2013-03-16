@@ -145,19 +145,19 @@ public class FurnaceCommand extends ExpressionCommand {
         for (int counter = 0; counter < fromInventory.getSize(); counter++) {
             if (fromInventory.getItem(counter) != null) {
                 int slot;
-                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string.equalsIgnoreCase("fuel") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string))) {
+                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string == null || string.equalsIgnoreCase("fuel") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string))) {
                     slot = 1;
-                } else if (string.equalsIgnoreCase("item") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string)) {
+                } else if (string == null || string.equalsIgnoreCase("item") || AliasUtil.equals(new ItemData(fromInventory.getItem(counter)), string)) {
                     slot = 0;
                 } else {
                     continue;
                 }
 
                 if (toInventory.getItem(slot) == null || ItemData.equals(fromInventory.getItem(counter), toInventory.getItem(slot))) {
-                    final int overplus = fromInventory.getItem(counter).getAmount() + (toInventory.getItem(slot) == null ? 0 : toInventory.getItem(slot).getAmount()) - 64;
+                    final int overplus = fromInventory.getItem(counter).getAmount() + (toInventory.getItem(slot) == null ? 0 : toInventory.getItem(slot).getAmount()) - fromInventory.getItem(counter).getMaxStackSize();
                     final ItemStack fuelItemStack = new ItemStack(fromInventory.getItem(counter));
                     if (overplus > 0) {
-                        fuelItemStack.setAmount(64);
+                        fuelItemStack.setAmount(fuelItemStack.getMaxStackSize());
                         final ItemStack itemStack = new ItemStack(fromInventory.getItem(counter));
                         itemStack.setAmount(overplus);
                         fromInventory.setItem(counter, itemStack);
@@ -171,6 +171,15 @@ public class FurnaceCommand extends ExpressionCommand {
     }
 
     private void transferToInventory(final FurnaceInventory fromInventory, final Inventory toInventory, final String string) {
+
+        if (fromInventory.getFuel() != null && fromInventory.getFuel().getType() == Material.BUCKET) {
+            final List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getFuel() }).values());
+            fromInventory.setFuel(new ItemStack(Material.AIR));
+
+            for (final ItemStack itemStack : overplus) {
+                fromInventory.setFuel(itemStack);
+            }
+        }
 
         if (fromInventory.getResult() != null && AliasUtil.equals(new ItemData(fromInventory.getResult()), string)) {
             final List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getResult() }).values());
