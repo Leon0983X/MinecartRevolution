@@ -38,31 +38,27 @@ public class ChestCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        Chest chest = null;
+        final List<Chest> chests = new ArrayList<Chest>();
 
         Location minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() + 1.0D);
         if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chest = (Chest) minecartLocation.getBlock().getState();
+            chests.add((Chest) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() - 1.0D);
         if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chest = (Chest) minecartLocation.getBlock().getState();
+            chests.add((Chest) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() + 1.0D);
         if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chest = (Chest) minecartLocation.getBlock().getState();
+            chests.add((Chest) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() - 1.0D);
         if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chest = (Chest) minecartLocation.getBlock().getState();
-        }
-
-        if (chest == null) {
-            return;
+            chests.add((Chest) minecartLocation.getBlock().getState());
         }
 
         final InventoryHolder inventoryMinecart = (InventoryHolder) minecart;
@@ -83,21 +79,23 @@ public class ChestCommand extends ExpressionCommand {
             }
         }
 
-        if (String.valueOf(parameter).startsWith("+")) {
-            if (items.size() > 0) {
-                for (final String item : items) {
-                    transfer(inventoryMinecart.getInventory(), chest.getInventory(), item);
+        for (final Chest chest : chests) {
+            if (String.valueOf(parameter).startsWith("+")) {
+                if (items.size() > 0) {
+                    for (final String item : items) {
+                        transfer(inventoryMinecart.getInventory(), chest.getInventory(), item);
+                    }
+                } else {
+                    transfer(inventoryMinecart.getInventory(), chest.getInventory(), null);
                 }
-            } else {
-                transfer(inventoryMinecart.getInventory(), chest.getInventory(), null);
-            }
-        } else if (String.valueOf(parameter).startsWith("-")) {
-            if (items.size() > 0) {
-                for (final String item : items) {
-                    transfer(chest.getInventory(), inventoryMinecart.getInventory(), item);
+            } else if (String.valueOf(parameter).startsWith("-")) {
+                if (items.size() > 0) {
+                    for (final String item : items) {
+                        transfer(chest.getInventory(), inventoryMinecart.getInventory(), item);
+                    }
+                } else {
+                    transfer(chest.getInventory(), inventoryMinecart.getInventory(), null);
                 }
-            } else {
-                transfer(chest.getInventory(), inventoryMinecart.getInventory(), null);
             }
         }
     }

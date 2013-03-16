@@ -76,31 +76,27 @@ public class FurnaceCommand extends ExpressionCommand {
     @Override
     public void execute(final Minecart minecart, final Object parameter) {
 
-        Furnace furnace = null;
+        final List<Furnace> furnaces = new ArrayList<Furnace>();
 
         Location minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() + 1.0D);
         if (minecartLocation.getBlock().getType() == Material.FURNACE || minecartLocation.getBlock().getType() == Material.BURNING_FURNACE) {
-            furnace = (Furnace) minecartLocation.getBlock().getState();
+            furnaces.add((Furnace) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() - 1.0D);
         if (minecartLocation.getBlock().getType() == Material.FURNACE || minecartLocation.getBlock().getType() == Material.BURNING_FURNACE) {
-            furnace = (Furnace) minecartLocation.getBlock().getState();
+            furnaces.add((Furnace) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() + 1.0D);
         if (minecartLocation.getBlock().getType() == Material.FURNACE || minecartLocation.getBlock().getType() == Material.BURNING_FURNACE) {
-            furnace = (Furnace) minecartLocation.getBlock().getState();
+            furnaces.add((Furnace) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() - 1.0D);
         if (minecartLocation.getBlock().getType() == Material.FURNACE || minecartLocation.getBlock().getType() == Material.BURNING_FURNACE) {
-            furnace = (Furnace) minecartLocation.getBlock().getState();
-        }
-
-        if (furnace == null) {
-            return;
+            furnaces.add((Furnace) minecartLocation.getBlock().getState());
         }
 
         final InventoryHolder inventoryMinecart = (InventoryHolder) minecart;
@@ -121,21 +117,23 @@ public class FurnaceCommand extends ExpressionCommand {
             }
         }
 
-        if (String.valueOf(parameter).startsWith("+")) {
-            if (items.size() > 0) {
-                for (final String item : items) {
-                    transferToFurnace(inventoryMinecart.getInventory(), furnace.getInventory(), item);
+        for (final Furnace furnace : furnaces) {
+            if (String.valueOf(parameter).startsWith("+")) {
+                if (items.size() > 0) {
+                    for (final String item : items) {
+                        transferToFurnace(inventoryMinecart.getInventory(), furnace.getInventory(), item);
+                    }
+                } else {
+                    transferToFurnace(inventoryMinecart.getInventory(), furnace.getInventory(), null);
                 }
-            } else {
-                transferToFurnace(inventoryMinecart.getInventory(), furnace.getInventory(), null);
-            }
-        } else if (String.valueOf(parameter).startsWith("-")) {
-            if (items.size() > 0) {
-                for (final String item : items) {
-                    transferToInventory(furnace.getInventory(), inventoryMinecart.getInventory(), item);
+            } else if (String.valueOf(parameter).startsWith("-")) {
+                if (items.size() > 0) {
+                    for (final String item : items) {
+                        transferToInventory(furnace.getInventory(), inventoryMinecart.getInventory(), item);
+                    }
+                } else {
+                    transferToInventory(furnace.getInventory(), inventoryMinecart.getInventory(), null);
                 }
-            } else {
-                transferToInventory(furnace.getInventory(), inventoryMinecart.getInventory(), null);
             }
         }
     }
