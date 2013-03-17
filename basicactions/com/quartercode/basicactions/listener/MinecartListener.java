@@ -75,7 +75,7 @@ public class MinecartListener implements Listener {
                 return;
             }
 
-            if (type == MinecartType.MINECART) {
+            if (type == MinecartType.RIDEABLE) {
                 chest.getInventory().addItem(new ItemStack(Material.MINECART));
             } else if (type == MinecartType.STORAGE) {
                 chest.getInventory().addItem(new ItemStack(Material.STORAGE_MINECART));

@@ -56,7 +56,7 @@ public class BlockListener implements Listener {
                 final Material type = chest.getInventory().getItem(slot).getType();
 
                 if (type == Material.MINECART) {
-                    minecartType = MinecartType.MINECART;
+                    minecartType = MinecartType.RIDEABLE;
                     chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
                     break;
                 } else if (type == Material.STORAGE_MINECART) {
@@ -105,7 +105,7 @@ public class BlockListener implements Listener {
 
             MinecartType minecartType;
             if (sign.getLine(1).equalsIgnoreCase("minecart")) {
-                minecartType = MinecartType.MINECART;
+                minecartType = MinecartType.RIDEABLE;
             } else if (sign.getLine(1).equalsIgnoreCase("storage")) {
                 minecartType = MinecartType.STORAGE;
             } else if (sign.getLine(1).equalsIgnoreCase("powered")) {

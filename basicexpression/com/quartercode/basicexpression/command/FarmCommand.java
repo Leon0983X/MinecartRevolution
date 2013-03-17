@@ -6,7 +6,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.basicexpression.BasicExpressionPlugin;
@@ -35,7 +34,7 @@ public class FarmCommand extends ExpressionCommand {
     @Override
     public boolean canExecute(final Minecart minecart) {
 
-        return minecart instanceof StorageMinecart;
+        return minecart instanceof InventoryHolder;
     }
 
     @Override
@@ -53,10 +52,7 @@ public class FarmCommand extends ExpressionCommand {
             radius = 5;
         }
 
-        farm((StorageMinecart) minecart, parameters[0], radius);
-    }
-
-    public void farm(final StorageMinecart minecart, final String type, final int radius) {
+        final String type = parameters[0];
 
         if (type.equalsIgnoreCase("wood")) {
             final int[] destroyIds = { 18, 17 };
@@ -73,17 +69,17 @@ public class FarmCommand extends ExpressionCommand {
                             if (world.getBlockTypeIdAt(x, y, z) == destroyId) {
 	world.getBlockAt(x, y, z).breakNaturally();
 	for (final int collectId : collectIds) {
-	    collectItems(minecart, minecart, radius, collectId);
+	    collectItems((InventoryHolder) minecart, minecart, radius, collectId);
 	}
 
 	if (world.getBlockTypeIdAt(x, y - 1, z) != 0) {
-	    for (int storageCounter = 0; storageCounter < minecart.getInventory().getSize(); storageCounter++) {
-	        if (minecart.getInventory().getItem(storageCounter) != null && minecart.getInventory().getItem(storageCounter).getTypeId() == plantId) {
-	            final ItemStack newItemStack = new ItemStack(minecart.getInventory().getItem(storageCounter));
-	            newItemStack.setAmount(minecart.getInventory().getItem(storageCounter).getAmount() - 1);
-	            minecart.getInventory().setItem(storageCounter, newItemStack);
-	            if (minecart.getInventory().getItem(storageCounter).getAmount() <= 0) {
-	                minecart.getInventory().setItem(storageCounter, null);
+	    for (int storageCounter = 0; storageCounter < ((InventoryHolder) minecart).getInventory().getSize(); storageCounter++) {
+	        if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter) != null && ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getTypeId() == plantId) {
+	            final ItemStack newItemStack = new ItemStack( ((InventoryHolder) minecart).getInventory().getItem(storageCounter));
+	            newItemStack.setAmount( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() - 1);
+	            ((InventoryHolder) minecart).getInventory().setItem(storageCounter, newItemStack);
+	            if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() <= 0) {
+	                ((InventoryHolder) minecart).getInventory().setItem(storageCounter, null);
 	            }
 	            world.getBlockAt(x, y, z).setTypeId(plantId);
 	        }
@@ -109,16 +105,16 @@ public class FarmCommand extends ExpressionCommand {
                             if (world.getBlockTypeIdAt(x, y, z) == destroyId && world.getBlockAt(x, y, z).getData() == 7) {
 	world.getBlockAt(x, y, z).breakNaturally();
 	for (final int collectId : collectIds) {
-	    collectItems(minecart, minecart, radius, collectId);
+	    collectItems((InventoryHolder) minecart, minecart, radius, collectId);
 	}
 
-	for (int storageCounter = 0; storageCounter < minecart.getInventory().getSize(); storageCounter++) {
-	    if (minecart.getInventory().getItem(storageCounter) != null && minecart.getInventory().getItem(storageCounter).getTypeId() == plantItemId) {
-	        final ItemStack newItemStack = new ItemStack(minecart.getInventory().getItem(storageCounter));
-	        newItemStack.setAmount(minecart.getInventory().getItem(storageCounter).getAmount() - 1);
-	        minecart.getInventory().setItem(storageCounter, newItemStack);
-	        if (minecart.getInventory().getItem(storageCounter).getAmount() <= 0) {
-	            minecart.getInventory().setItem(storageCounter, null);
+	for (int storageCounter = 0; storageCounter < ((InventoryHolder) minecart).getInventory().getSize(); storageCounter++) {
+	    if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter) != null && ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getTypeId() == plantItemId) {
+	        final ItemStack newItemStack = new ItemStack( ((InventoryHolder) minecart).getInventory().getItem(storageCounter));
+	        newItemStack.setAmount( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() - 1);
+	        ((InventoryHolder) minecart).getInventory().setItem(storageCounter, newItemStack);
+	        if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() <= 0) {
+	            ((InventoryHolder) minecart).getInventory().setItem(storageCounter, null);
 	        }
 	        world.getBlockAt(x, y, z).setTypeId(plantBlockId);
 	    }
@@ -144,7 +140,7 @@ public class FarmCommand extends ExpressionCommand {
                 }
             }
 
-            collectItems(minecart, minecart, radius, collectId);
+            collectItems((InventoryHolder) minecart, minecart, radius, collectId);
         } else if (type.equalsIgnoreCase("melon")) {
             final int destroyId = 103;
             final int collectId = 103;
@@ -161,7 +157,7 @@ public class FarmCommand extends ExpressionCommand {
                 }
             }
 
-            collectItems(minecart, minecart, radius, collectId);
+            collectItems((InventoryHolder) minecart, minecart, radius, collectId);
         } else if (type.equalsIgnoreCase("sugar") || type.equalsIgnoreCase("sugarcane")) {
             final int[] destroyIds = { 83 };
             final int[] collectIds = { 338 };
@@ -181,7 +177,7 @@ public class FarmCommand extends ExpressionCommand {
             }
 
             for (final int collectId : collectIds) {
-                collectItems(minecart, minecart, radius, collectId);
+                collectItems((InventoryHolder) minecart, minecart, radius, collectId);
             }
         }
     }

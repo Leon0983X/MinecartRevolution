@@ -32,6 +32,7 @@ import com.quartercode.basicexpression.constant.YConstant;
 import com.quartercode.basicexpression.constant.ZConstant;
 import com.quartercode.basicexpression.term.AnimalTerm;
 import com.quartercode.basicexpression.term.EastTerm;
+import com.quartercode.basicexpression.term.HopperMinecartTerm;
 import com.quartercode.basicexpression.term.InventoryTerm;
 import com.quartercode.basicexpression.term.ItemHoldTerm;
 import com.quartercode.basicexpression.term.ItemTerm;
@@ -44,8 +45,10 @@ import com.quartercode.basicexpression.term.PlayerTerm;
 import com.quartercode.basicexpression.term.PoweredMinecartTerm;
 import com.quartercode.basicexpression.term.RandomTerm;
 import com.quartercode.basicexpression.term.SouthTerm;
+import com.quartercode.basicexpression.term.SpawnerMinecartTerm;
 import com.quartercode.basicexpression.term.StandardMinecartTerm;
 import com.quartercode.basicexpression.term.StorageMinecartTerm;
+import com.quartercode.basicexpression.term.TNTMinecartTerm;
 import com.quartercode.basicexpression.term.WestTerm;
 import com.quartercode.basicexpression.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.plugin.JavaMinecartRevolutionPlugin;
@@ -62,7 +65,7 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
     @Override
     public PluginInfo getInfo() {
 
-        return new PluginInfo("BasicExpression", new Version("Alpha 1.0.3"));
+        return new PluginInfo("BasicExpression", new Version("Alpha 1.0.4"));
     }
 
     @Override
@@ -111,6 +114,9 @@ public class BasicExpressionPlugin extends JavaMinecartRevolutionPlugin {
         addMinecartTerm(new StandardMinecartTerm());
         addMinecartTerm(new StorageMinecartTerm());
         addMinecartTerm(new PoweredMinecartTerm());
+        addMinecartTerm(new HopperMinecartTerm());
+        addMinecartTerm(new TNTMinecartTerm());
+        addMinecartTerm(new SpawnerMinecartTerm());
         addMinecartTerm(new InventoryTerm());
 
         addMinecartTerm(new PassengerTerm());
