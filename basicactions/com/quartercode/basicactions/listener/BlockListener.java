@@ -57,14 +57,17 @@ public class BlockListener implements Listener {
 
                 if (type == Material.MINECART) {
                     minecartType = MinecartType.RIDEABLE;
-                    chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
-                    break;
                 } else if (type == Material.STORAGE_MINECART) {
                     minecartType = MinecartType.STORAGE;
-                    chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
-                    break;
                 } else if (type == Material.POWERED_MINECART) {
                     minecartType = MinecartType.POWERED;
+                } else if (type == Material.HOPPER_MINECART) {
+                    minecartType = MinecartType.HOPPER;
+                } else if (type == Material.EXPLOSIVE_MINECART) {
+                    minecartType = MinecartType.TNT;
+                }
+
+                if (minecartType != null) {
                     chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
                     break;
                 }
@@ -103,18 +106,18 @@ public class BlockListener implements Listener {
                 return;
             }
 
-            MinecartType minecartType;
-            if (sign.getLine(1).equalsIgnoreCase("minecart")) {
-                minecartType = MinecartType.RIDEABLE;
-            } else if (sign.getLine(1).equalsIgnoreCase("storage")) {
-                minecartType = MinecartType.STORAGE;
-            } else if (sign.getLine(1).equalsIgnoreCase("powered")) {
-                minecartType = MinecartType.POWERED;
-            } else {
-                return;
+            MinecartType minecartType = null;
+            for (final MinecartType testMinecartType : MinecartType.values()) {
+                for (final String name : testMinecartType.getNames()) {
+                    if (name.equalsIgnoreCase(sign.getLine(1))) {
+                        minecartType = testMinecartType;
+                    }
+                }
             }
 
-            dispense(minecartType, rail, direction);
+            if (minecartType != null) {
+                dispense(minecartType, rail, direction);
+            }
         }
     }
 

@@ -10,7 +10,7 @@ import org.bukkit.entity.minecart.StorageMinecart;
 
 public enum MinecartType {
 
-    RIDEABLE (Minecart.class), STORAGE (StorageMinecart.class), POWERED (PoweredMinecart.class), HOPPER (HopperMinecart.class), TNT (ExplosiveMinecart.class), SPAWNER (SpawnerMinecart.class);
+    RIDEABLE (Minecart.class, "rideable", "minecart", "standard", "default"), STORAGE (StorageMinecart.class, "storage", "chest"), POWERED (PoweredMinecart.class, "powered", "fuel", "furnace"), HOPPER (HopperMinecart.class, "hopper"), TNT (ExplosiveMinecart.class, "tnt", "explosive"), SPAWNER (SpawnerMinecart.class, "spawner");
 
     public static MinecartType getType(final Minecart minecart) {
 
@@ -23,16 +23,23 @@ public enum MinecartType {
         return null;
     }
 
-    private Class<? extends Minecart> c;
+    private final Class<? extends Minecart> c;
+    private final String[]                  names;
 
-    private MinecartType(final Class<? extends Minecart> c) {
+    private MinecartType(final Class<? extends Minecart> c, final String... names) {
 
         this.c = c;
+        this.names = names;
     }
 
     public Class<? extends Minecart> getCartClass() {
 
         return c;
+    }
+
+    public String[] getNames() {
+
+        return names;
     }
 
 }
