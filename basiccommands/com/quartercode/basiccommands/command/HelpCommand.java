@@ -53,9 +53,9 @@ public class HelpCommand extends MRCommandHandler {
 
                     command.getSender().sendMessage(ChatColor.GOLD + "/" + command.getGlobalLabel() + printLabel + parameterUsage);
                 }
-            }
 
-            command.getSender().sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + info.getDescription());
+                command.getSender().sendMessage(ChatColor.DARK_RED + "  > " + ChatColor.GRAY + info.getDescription());
+            }
         }
     }
 
