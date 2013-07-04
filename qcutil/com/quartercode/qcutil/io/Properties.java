@@ -226,12 +226,16 @@ public class Properties extends java.util.Properties {
 
     public void load(final File file) throws FileNotFoundException, IOException {
 
-        load(new FileReader(file));
+        final FileReader reader = new FileReader(file);
+        load(reader);
+        reader.close();
     }
 
     public void load(final String string) throws IOException {
 
-        load(new StringReader(string));
+        final StringReader reader = new StringReader(string);
+        load(reader);
+        reader.close();
     }
 
     protected String getComments(final String... defaultComments) {
@@ -275,13 +279,16 @@ public class Properties extends java.util.Properties {
 
     public void store(final File file, final String... comments) throws FileNotFoundException, IOException {
 
-        store(new FileWriter(file), getComments(comments));
+        final FileWriter writer = new FileWriter(file);
+        store(writer, getComments(comments));
+        writer.close();
     }
 
     public String storeToString(final String... comments) throws IOException {
 
         final StringWriter writer = new StringWriter();
         store(writer, comments);
+        writer.close();
         return writer.getBuffer().toString();
     }
 

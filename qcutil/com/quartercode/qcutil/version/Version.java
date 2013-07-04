@@ -56,6 +56,17 @@ public class Version implements Serializable, Comparable<Version> {
         }
     }
 
+    public boolean isSupported() {
+
+        try {
+            splitVersionNumbers(getVersionNumbers());
+            return true;
+        }
+        catch (final NumberFormatException e) {
+            return false;
+        }
+    }
+
     protected int[] splitVersionNumbers(final String versionNumbers) throws NumberFormatException {
 
         final ArrayList<Integer> versionNumbersList = new ArrayList<Integer>();
@@ -108,21 +119,26 @@ public class Version implements Serializable, Comparable<Version> {
             } else if (thisVersionPrefix < otherVersionPrefix) {
                 return false;
             } else {
-                final int[] thisVersionParts = splitVersionNumbers(getVersionNumbers());
-                final int[] otherVersionParts = splitVersionNumbers(otherVersion.getVersionNumbers());
+                try {
+                    final int[] thisVersionParts = splitVersionNumbers(getVersionNumbers());
+                    final int[] otherVersionParts = splitVersionNumbers(otherVersion.getVersionNumbers());
 
-                for (int counter = 0; counter < thisVersionParts.length; counter++) {
-                    if (thisVersionParts.length > counter && otherVersionParts.length > counter) {
-                        if (thisVersionParts[counter] > otherVersionParts[counter]) {
-                            return true;
-                        } else if (thisVersionParts[counter] < otherVersionParts[counter]) {
+                    for (int counter = 0; counter < thisVersionParts.length; counter++) {
+                        if (thisVersionParts.length > counter && otherVersionParts.length > counter) {
+                            if (thisVersionParts[counter] > otherVersionParts[counter]) {
+	return true;
+                            } else if (thisVersionParts[counter] < otherVersionParts[counter]) {
+	return false;
+                            }
+                        } else if (thisVersionParts.length <= counter && ! (otherVersionParts.length <= counter)) {
                             return false;
+                        } else if (! (thisVersionParts.length <= counter) && otherVersionParts.length <= counter) {
+                            return true;
                         }
-                    } else if (thisVersionParts.length <= counter && ! (otherVersionParts.length <= counter)) {
-                        return false;
-                    } else if (! (thisVersionParts.length <= counter) && otherVersionParts.length <= counter) {
-                        return true;
                     }
+                }
+                catch (final NumberFormatException e) {
+                    return false;
                 }
             }
 

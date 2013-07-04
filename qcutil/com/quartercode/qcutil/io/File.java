@@ -173,6 +173,8 @@ public class File extends java.io.File {
         for (final ZipEntry zipEntry : Collections.list(zipFile.entries())) {
             extractZipEntry(zipFile, zipEntry, destination, progress);
         }
+
+        zipFile.close();
     }
 
     protected void extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry, final File destination, final Progressable progress) throws IOException {
@@ -242,18 +244,6 @@ public class File extends java.io.File {
         } else {
             write(string);
         }
-    }
-
-    @Override
-    public String getParent() {
-
-        return getAbsoluteFile().getParent();
-    }
-
-    @Override
-    public File getParentFile() {
-
-        return new File(getAbsoluteFile().getParentFile().getAbsolutePath());
     }
 
 }

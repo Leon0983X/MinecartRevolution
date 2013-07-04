@@ -89,9 +89,7 @@ public class NetConnection implements Serializable, Comparable<NetConnection> {
 
         String fileContent = "";
         final InputStream inputStream = url.openStream();
-        final Scanner scanner = new Scanner(inputStream);
-        fileContent = scanner.useDelimiter("\\Z").next();
-        scanner.close();
+        fileContent = new Scanner(inputStream).useDelimiter("\\Z").next();
         inputStream.close();
 
         return fileContent;
