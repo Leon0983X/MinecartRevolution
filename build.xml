@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MinecartRevolution Plugin" default="jar" basedir=".">
+	<target name="jar">
+		<jar destfile="../Server/plugins/MinecartRevolution.jar">
+			<fileset dir="bin" />
+			<fileset dir="resources">
+				<exclude name="**/*.bat"/>
+			</fileset>
+		</jar>
+	</target>
+</project>
