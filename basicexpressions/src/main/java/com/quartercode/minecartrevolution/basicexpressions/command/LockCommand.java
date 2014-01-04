@@ -18,8 +18,6 @@
 
 package com.quartercode.minecartrevolution.basicexpressions.command;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
@@ -27,6 +25,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import com.quartercode.minecartrevolution.basicexpressions.util.EffectUtil.ExtendedEffect;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
@@ -36,8 +35,6 @@ import com.quartercode.minecartrevolution.core.util.config.GlobalConfig;
 import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class LockCommand extends ExpressionCommand implements Listener {
-
-    private final List<Minecart> lockedMinecarts = new ArrayList<Minecart>();
 
     public LockCommand() {
 
@@ -64,10 +61,10 @@ public class LockCommand extends ExpressionCommand implements Listener {
     @Override
     public void execute(Minecart minecart, Object parameter) {
 
-        if (String.valueOf(parameter).equals("+") && !lockedMinecarts.contains(minecart)) {
-            lockedMinecarts.add(minecart);
-        } else if (String.valueOf(parameter).equals("-") && lockedMinecarts.contains(minecart)) {
-            lockedMinecarts.remove(minecart);
+        if (String.valueOf(parameter).equals("+") && !isLocked(minecart)) {
+            setLocked(minecart, true);
+        } else if (String.valueOf(parameter).equals("-") && isLocked(minecart)) {
+            setLocked(minecart, false);
         }
 
         if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
@@ -75,20 +72,18 @@ public class LockCommand extends ExpressionCommand implements Listener {
         }
     }
 
-    public List<Minecart> getLockedMinecarts() {
-
-        return lockedMinecarts;
-    }
-
     public boolean isLocked(Minecart minecart) {
 
-        for (Minecart testMinecart : lockedMinecarts) {
-            if (minecart.getEntityId() == testMinecart.getEntityId()) {
-                return true;
-            }
+        if (minecart.getMetadata("locked").size() == 1) {
+            return minecart.getMetadata("locked").get(0).asBoolean();
+        } else {
+            return false;
         }
+    }
 
-        return false;
+    public void setLocked(Minecart minecart, boolean locked) {
+
+        minecart.setMetadata("locked", new FixedMetadataValue(minecartRevolution.getPlugin(), locked));
     }
 
     @EventHandler
