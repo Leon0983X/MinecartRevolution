@@ -8,26 +8,22 @@ There is no limit with MinecartRevolution.
 
 For more information on the usage, check out our current homepage on http://dev.bukkit.org/server-mods/MinecartRevolution.
 
-License (Creative Commons Attribution 3.0 Unported)
----------------------------------------------------
+License
+-------
 
-This work, is licensed under the Creative Commons Attribution 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+Copyright (c) 2013 QuarterCode <http://www.quartercode.com/>
 
-The Code
---------
+MinecartRevolution may be used under the terms of either the GNU General Public License (GPL). See the LICENSE.md file for details.
 
-The sourcecode is splitted in seperated folders:
+Compilation
+-----------
 
-* /core contains the main code of MinecartRevolution, like listeners and executors.
-* /qcutil contains a Bukkit-Version of the Java-Libraray QcUtil.
-* /basiccommands contains a MinecartRevolution-Plugin for the main Chat-Commands, like /help.
-* /basiccontrols contains a MinecartRevolution-Plugin for the main Controls, like Boosters, Brakes and even the Expression-Sign.
-* /basicexpression contains a MinecartRevolution-Plugin for the main Expression-Commands and Expression-Constants, like "announce" or "speed".
+We use maven to handle our dependencies and build, so you need the Java JDK and Maven for compiling the sourcecode.
 
-Libraries
----------
+* Download & install [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+* Download & install [Maven 3](http://maven.apache.org/download.cgi).
+* Check out this repository (clone or download).
+* Navigate to the project folder of this repository which contains a `pom.xml` and run:
 
-You need the following libraries to compile MinecartRevolution yourself:
+        mvn clean install
 
-* bukkit.jar (http://dl.bukkit.org/downloads/bukkit/) or craftbukkit.jar (http://dl.bukkit.org/downloads/craftbukkit/)
-* QuarterBukkit.jar (http://dev.bukkit.org/server-mods/quarterbukkit/)

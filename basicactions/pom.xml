@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.quartercode</groupId>
+        <artifactId>minecartrevolution</artifactId>
+        <version>1.1.0-ALPHA</version>
+    </parent>
+
+    <artifactId>minecartrevolution-basicactions</artifactId>
+
+    <name>MinecartRevolution-Basicactions</name>
+    <url>http://dev.bukkit.org/bukkit-plugins/MinecartRevolution</url>
+    <description>A plugin containing mixed features which don't belong to any other module.</description>
+
+    <dependencies>
+        <!-- Core -->
+        <dependency>
+            <groupId>com.quartercode</groupId>
+            <artifactId>minecartrevolution-core</artifactId>
+            <version>1.1.0-ALPHA</version>
+        </dependency>
+
+        <!-- Basic Expressions -->
+        <dependency>
+            <groupId>com.quartercode</groupId>
+            <artifactId>minecartrevolution-basicexpressions</artifactId>
+            <version>1.1.0-ALPHA</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Build JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
