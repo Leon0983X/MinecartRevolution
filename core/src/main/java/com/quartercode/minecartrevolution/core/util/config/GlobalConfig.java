@@ -19,7 +19,7 @@
 package com.quartercode.minecartrevolution.core.util.config;
 
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
-import com.quartercode.minecartrevolution.core.conf.FileConf;
+import com.quartercode.minecartrevolution.core.get.FileConf;
 
 public class GlobalConfig extends Config {
 

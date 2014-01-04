@@ -24,13 +24,13 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.core.conf.FileConf;
 import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
 import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
+import com.quartercode.minecartrevolution.core.get.FileConf;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class FileCommand extends ExpressionCommand {
