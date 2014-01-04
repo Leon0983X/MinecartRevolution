@@ -67,7 +67,7 @@ public class LockCommand extends ExpressionCommand implements Listener {
             setLocked(minecart, false);
         }
 
-        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
+        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_DEFAULT_EFFECTS)) {
             ExtendedEffect.DOOR.play(minecart);
         }
     }

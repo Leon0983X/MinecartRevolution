@@ -23,20 +23,28 @@ import com.quartercode.minecartrevolution.core.get.FileConf;
 
 public class GlobalConfig extends Config {
 
-    public static final String  LANGUAGE                        = "language";
+    // ---------- Plugin ----------
 
-    private static final String UPDATE                          = "update";
+    private static final String PLUGIN                          = "plugin";
+
+    public static final String  LANGUAGE                        = PLUGIN + ".language";
+
+    private static final String UPDATE                          = PLUGIN + ".update";
     public static final String  AUTO_UPDATE                     = UPDATE + ".autoUpdate";
     public static final String  CHECK_VERSION_ON_JOIN           = UPDATE + ".checkVersionOnJoin";
 
-    private static final String ERRORS                          = "errors";
+    private static final String ERRORS                          = PLUGIN + ".errors";
     public static final String  PRINT_ERROR_MESSAGES            = ERRORS + ".printMessages";
     public static final String  PRINT_ERROR_STACK_TRACES        = ERRORS + ".printStackTraces";
     public static final String  PRINT_SILENT_ERROR_MESSAGES     = ERRORS + ".printSilentMessages";
     public static final String  PRINT_SILENT_ERROR_STACK_TRACES = ERRORS + ".printSilentStackTraces";
 
-    private static final String MINECART                        = "minecart";
-    public static final String  PLAY_EFFECTS                    = MINECART + ".playEffects";
+    // ---------- Functionality ----------
+
+    private static final String FUNCTIONALITY                   = "functionality";
+
+    private static final String ENTITY                          = FUNCTIONALITY + ".entity";
+    public static final String  PLAY_DEFAULT_EFFECTS            = ENTITY + ".playDefaultEffects";
 
     public GlobalConfig(MinecartRevolution minecartRevolution) {
 
@@ -56,7 +64,7 @@ public class GlobalConfig extends Config {
         addDefault(PRINT_SILENT_ERROR_MESSAGES, false);
         addDefault(PRINT_SILENT_ERROR_STACK_TRACES, false);
 
-        addDefault(PLAY_EFFECTS, true);
+        addDefault(PLAY_DEFAULT_EFFECTS, true);
     }
 
 }
