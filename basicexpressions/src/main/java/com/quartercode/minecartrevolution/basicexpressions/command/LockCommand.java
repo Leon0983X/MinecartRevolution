@@ -25,7 +25,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import com.quartercode.minecartrevolution.basicexpressions.util.EffectUtil.ExtendedEffect;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
@@ -74,16 +73,12 @@ public class LockCommand extends ExpressionCommand implements Listener {
 
     public boolean isLocked(Minecart minecart) {
 
-        if (minecart.getMetadata("locked").size() == 1) {
-            return minecart.getMetadata("locked").get(0).asBoolean();
-        } else {
-            return false;
-        }
+        return minecartRevolution.getMetadataStorage().getBoolen(minecart, "locked");
     }
 
     public void setLocked(Minecart minecart, boolean locked) {
 
-        minecart.setMetadata("locked", new FixedMetadataValue(minecartRevolution.getPlugin(), locked));
+        minecartRevolution.getMetadataStorage().setBoolean(minecart, "locked", locked);
     }
 
     @EventHandler

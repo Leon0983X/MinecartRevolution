@@ -19,12 +19,15 @@
 package com.quartercode.minecartrevolution.core;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.logging.Logger;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +35,7 @@ import com.quartercode.minecartrevolution.core.command.MRCommandExecutor;
 import com.quartercode.minecartrevolution.core.control.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.core.exception.ExceptionListener;
+import com.quartercode.minecartrevolution.core.exception.MinecartRevolutionException;
 import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
 import com.quartercode.minecartrevolution.core.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.core.get.FileConf;
@@ -44,11 +48,13 @@ import com.quartercode.minecartrevolution.core.util.ExtractionUtil;
 import com.quartercode.minecartrevolution.core.util.Metrics;
 import com.quartercode.minecartrevolution.core.util.MinecartRevolutionUpdater;
 import com.quartercode.minecartrevolution.core.util.ResourceLister;
+import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.minecartrevolution.core.util.config.Config;
 import com.quartercode.minecartrevolution.core.util.config.GlobalConfig;
 import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
+import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class MinecartRevolution {
 
@@ -76,6 +82,7 @@ public class MinecartRevolution {
     private List<Updater>             updaters;
 
     private Config                    configuration;
+    private VehicleMetdataStorage     metadataStorage;
     private Metrics                   metrics;
 
     public MinecartRevolution(JavaPlugin plugin) {
@@ -132,6 +139,11 @@ public class MinecartRevolution {
     public Config getConfiguration() {
 
         return configuration;
+    }
+
+    public VehicleMetdataStorage getMetadataStorage() {
+
+        return metadataStorage;
     }
 
     public String getName() {
@@ -193,6 +205,7 @@ public class MinecartRevolution {
 
         AliasUtil.setMinecartRevolution(this);
 
+        loadMetadataStorage();
         enableListeners();
         enableExecutors();
 
@@ -206,6 +219,69 @@ public class MinecartRevolution {
         }
 
         addUpdater(new MinecartRevolutionUpdater(this));
+    }
+
+    private void loadMetadataStorage() {
+
+        metadataStorage = new VehicleMetdataStorage();
+
+        File metadataFile = new File(FileConf.DATA, "metadata.properties");
+        if (metadataFile.exists()) {
+            FileReader reader = null;
+            try {
+                reader = new FileReader(metadataFile);
+                Properties metadataProperties = new Properties();
+                metadataProperties.load(reader);
+                metadataStorage.deserialize(metadataProperties);
+            }
+            catch (IOException e) {
+                ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Error while loading stored metadata"));
+            }
+            finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    }
+                    catch (IOException e) {
+                        ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while closing metadata loading stream"));
+                    }
+                }
+            }
+        } else {
+            metadataFile.getParentFile().mkdirs();
+        }
+
+        new ScheduleTask(plugin) {
+
+            @Override
+            public void run() {
+
+                serializeMetadataStorage();
+            }
+        }.run(true, 0, configuration.getLong(GlobalConfig.SAVE_TIME_INTERVAL) * 1000);
+    }
+
+    private void serializeMetadataStorage() {
+
+        File metadataFile = new File(FileConf.DATA, "metadata.properties");
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(metadataFile);
+            metadataStorage.serialize().store(writer, "Entity metadata storage; Do not edit!");
+        }
+        catch (IOException e) {
+            ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Error while loading saving metadata"));
+        }
+        finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                }
+                catch (IOException e) {
+                    ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while closing metadata saving stream"));
+                }
+            }
+        }
     }
 
     private void enableListeners() {
@@ -228,6 +304,7 @@ public class MinecartRevolution {
 
     public void disable() {
 
+        serializeMetadataStorage();
     }
 
 }

@@ -25,6 +25,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.event.vehicle.VehicleUpdateEvent;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
@@ -38,6 +39,12 @@ public class MinecartListener implements Listener {
 
         this.minecartRevolution = minecartRevolution;
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
+    }
+
+    @EventHandler
+    public void onVehicleDestroy(VehicleDestroyEvent event) {
+
+        minecartRevolution.getMetadataStorage().clear(event.getVehicle());
     }
 
     @EventHandler

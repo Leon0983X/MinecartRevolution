@@ -46,6 +46,9 @@ public class GlobalConfig extends Config {
     private static final String ENTITY                          = FUNCTIONALITY + ".entity";
     public static final String  PLAY_DEFAULT_EFFECTS            = ENTITY + ".playDefaultEffects";
 
+    private static final String ENTITY_METADATA                 = ENTITY + ".metadata";
+    public static final String  SAVE_TIME_INTERVAL              = ENTITY_METADATA + ".saveTimeInterval";
+
     public GlobalConfig(MinecartRevolution minecartRevolution) {
 
         super(minecartRevolution, FileConf.MAIN_CONF);
@@ -65,6 +68,8 @@ public class GlobalConfig extends Config {
         addDefault(PRINT_SILENT_ERROR_STACK_TRACES, false);
 
         addDefault(PLAY_DEFAULT_EFFECTS, true);
+
+        addDefault(SAVE_TIME_INTERVAL, 600);
     }
 
 }
