@@ -226,4 +226,8 @@ public class MinecartRevolution {
         updaters = new ArrayList<Updater>();
     }
 
+    public void disable() {
+
+    }
+
 }

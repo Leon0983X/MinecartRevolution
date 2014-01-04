@@ -60,4 +60,12 @@ public class MinecartRevolutionPlugin extends JavaPlugin {
         PluginManager.registerPlugin(new BasicActionsPlugin());
     }
 
+    @Override
+    public void onDisable() {
+
+        if (minecartRevolution != null) {
+            minecartRevolution.disable();
+        }
+    }
+
 }
