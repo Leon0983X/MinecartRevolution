@@ -21,62 +21,20 @@ package com.quartercode.minecartrevolution.basicactions.listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Minecart;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
-import org.bukkit.event.vehicle.VehicleDamageEvent;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
-import com.quartercode.minecartrevolution.basicexpressions.command.LockCommand;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
-import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
-import com.quartercode.minecartrevolution.core.get.Perm;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartType;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartUtil;
 
 public class MinecartListener implements Listener {
 
-    private final MinecartRevolution minecartRevolution;
-
     public MinecartListener(MinecartRevolution minecartRevolution) {
 
-        this.minecartRevolution = minecartRevolution;
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
-    }
-
-    @EventHandler
-    public void onVehicleEnter(VehicleEnterEvent event) {
-
-        if (event.getEntered() instanceof CommandSender) {
-            ((CommandSender) event.getEntered()).sendMessage(MinecartRevolution.getLang().get("basicactions.punch"));
-        }
-    }
-
-    @EventHandler
-    public void onVehicleDamage(VehicleDamageEvent event) {
-
-        if (event.getVehicle() instanceof Minecart && event.getAttacker() instanceof Player) {
-            Minecart minecart = (Minecart) event.getVehicle();
-            Player player = (Player) event.getAttacker();
-            if (Perm.has(player, "action.punch") && player.isInsideVehicle() && minecart.getLocation().getBlock().getType() == Material.RAILS) {
-                for (ExpressionCommand expressionCommand : minecartRevolution.getExpressionExecutor().getExpressionCommands()) {
-                    if (expressionCommand instanceof LockCommand) {
-                        if ( ((LockCommand) expressionCommand).isLocked(minecart)) {
-                            event.setCancelled(true);
-                            return;
-                        }
-                    }
-                }
-
-                Vector velocity = player.getLocation().getDirection();
-                minecart.setVelocity(velocity);
-                event.setCancelled(true);
-            }
-        }
     }
 
     @EventHandler

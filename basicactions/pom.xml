@@ -21,13 +21,6 @@
             <artifactId>minecartrevolution-core</artifactId>
             <version>1.1.0-ALPHA</version>
         </dependency>
-
-        <!-- Basic Expressions -->
-        <dependency>
-            <groupId>com.quartercode</groupId>
-            <artifactId>minecartrevolution-basicexpressions</artifactId>
-            <version>1.1.0-ALPHA</version>
-        </dependency>
     </dependencies>
 
     <build>
