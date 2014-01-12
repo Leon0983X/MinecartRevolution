@@ -11,26 +11,5 @@
     <artifactId>minecartrevolution-core</artifactId>
 
     <name>MinecartRevolution-Core</name>
-    <url>http://dev.bukkit.org/bukkit-plugins/MinecartRevolution</url>
     <description>The core API of MinecartRevolution. Other plugins can register their stuff (things like blocks, signs or expressions) here.</description>
-
-    <build>
-        <plugins>
-            <!-- Build JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${project.version}</Implementation-Version>
-                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

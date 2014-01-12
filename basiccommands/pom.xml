@@ -11,7 +11,6 @@
     <artifactId>minecartrevolution-basiccommands</artifactId>
 
     <name>MinecartRevolution-Basiccommands</name>
-    <url>http://dev.bukkit.org/bukkit-plugins/MinecartRevolution</url>
     <description>A plugin containing the default bukkit comamnds MinecartRevolution provides (/mr ...).</description>
 
     <dependencies>
@@ -22,24 +21,4 @@
             <version>1.1.0-ALPHA</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Build JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${project.version}</Implementation-Version>
-                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
