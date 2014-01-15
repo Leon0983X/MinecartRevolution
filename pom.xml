@@ -77,7 +77,7 @@
 
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
+            <id>bukkit-repository</id>
             <name>Bukkit Repository</name>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
