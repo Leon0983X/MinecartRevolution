@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.quartercode</groupId>
             <artifactId>quarterbukkit-integration</artifactId>
-            <version>1.5-BETA</version>
+            <version>1.5.1-BETA</version>
         </dependency>
 
         <!-- Modules -->
