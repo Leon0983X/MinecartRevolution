@@ -29,6 +29,7 @@ import com.quartercode.minecartrevolution.core.control.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.core.expression.ExpressionExecutor;
+import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.minecartrevolution.core.util.config.Config;
 import com.quartercode.quarterbukkit.api.Updater;
@@ -57,6 +58,8 @@ public interface MinecartRevolutionPlugin {
     public File getConfigFile();
 
     public Config getConfiguration();
+
+    public VehicleMetdataStorage getMetdataStorage();
 
     public void addCommandHandler(CommandHandler command);
 

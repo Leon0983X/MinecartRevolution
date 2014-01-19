@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
@@ -75,7 +74,7 @@ public class ControlSignExecutor {
             Location signLocation = location.clone();
             signLocation.add(offsets[0], offsets[1], offsets[2]);
 
-            if (signLocation.getBlock().getType() == Material.SIGN || signLocation.getBlock().getType() == Material.SIGN_POST) {
+            if (signLocation.getBlock().getState() instanceof Sign) {
                 signs.add((Sign) signLocation.getBlock().getState());
             }
         }

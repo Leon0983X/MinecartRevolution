@@ -24,6 +24,7 @@ import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSign;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSignInfo;
 
+// This class is only used for adding the "placed" and "destroyed" messages!
 public class SpawnSign extends ControlSign {
 
     public SpawnSign() {

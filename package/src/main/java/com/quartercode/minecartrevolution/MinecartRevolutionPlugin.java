@@ -18,6 +18,7 @@
 
 package com.quartercode.minecartrevolution;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.quartercode.minecartrevolution.basicactions.BasicActionsPlugin;
 import com.quartercode.minecartrevolution.basiccommands.BasicCommandsPlugin;
@@ -45,7 +46,7 @@ public class MinecartRevolutionPlugin extends JavaPlugin {
 
         // QuarterBukkit
         if (!QuarterBukkitIntegration.integrate(this)) {
-            getLogger().severe("Can't enable plugin " + getName() + "! For more information, see above.");
+            Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
@@ -58,6 +59,14 @@ public class MinecartRevolutionPlugin extends JavaPlugin {
         PluginManager.registerPlugin(new BasicControlsPlugin());
         PluginManager.registerPlugin(new BasicExpressionsPlugin());
         PluginManager.registerPlugin(new BasicActionsPlugin());
+    }
+
+    @Override
+    public void onDisable() {
+
+        if (minecartRevolution != null) {
+            minecartRevolution.disable();
+        }
     }
 
 }

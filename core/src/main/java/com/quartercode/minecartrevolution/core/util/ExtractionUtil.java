@@ -27,6 +27,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.exception.MinecartRevolutionException;
+import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class ExtractionUtil {
@@ -70,7 +71,7 @@ public class ExtractionUtil {
                     inputStream.close();
                 }
                 catch (IOException e) {
-                    ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close input stream after attempting to extract files from jar"));
+                    ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to close input stream after attempting to extract files from jar"));
                 }
             }
 
@@ -79,7 +80,7 @@ public class ExtractionUtil {
                     outputStream.close();
                 }
                 catch (IOException e) {
-                    ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to close otuput stream after attempting to extract files from jar"));
+                    ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to close otuput stream after attempting to extract files from jar"));
                 }
             }
         }

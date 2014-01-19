@@ -5,13 +5,12 @@
     <parent>
         <groupId>com.quartercode</groupId>
         <artifactId>minecartrevolution</artifactId>
-        <version>1.1.0-ALPHA</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>minecartrevolution-basiccontrols</artifactId>
 
     <name>MinecartRevolution-Basiccontrols</name>
-    <url>http://dev.bukkit.org/bukkit-plugins/MinecartRevolution</url>
     <description>A plugin containing the default control blocks and signs.</description>
 
     <dependencies>
@@ -19,27 +18,7 @@
         <dependency>
             <groupId>com.quartercode</groupId>
             <artifactId>minecartrevolution-core</artifactId>
-            <version>1.1.0-ALPHA</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Build JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${project.version}</Implementation-Version>
-                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

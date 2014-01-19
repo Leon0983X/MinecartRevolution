@@ -122,7 +122,7 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onSignBreak(BlockBreakEvent event) {
 
-        if (event.getBlock().getType() == Material.SIGN || event.getBlock().getType() == Material.SIGN_POST || event.getBlock().getType() == Material.WALL_SIGN) {
+        if (event.getBlock().getState() instanceof Sign) {
             Sign sign = (Sign) event.getBlock().getState();
             String label = sign.getLine(0);
             label = ControlSignInfo.getUnformattedLabel(label);

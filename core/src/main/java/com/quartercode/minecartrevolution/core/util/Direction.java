@@ -18,12 +18,54 @@
 
 package com.quartercode.minecartrevolution.core.util;
 
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 
 public enum Direction {
 
-    NORTH, EAST, SOUTH, WEST;
+    NORTH (BlockFace.NORTH), EAST (BlockFace.EAST), SOUTH (BlockFace.SOUTH), WEST (BlockFace.WEST);
+
+    private BlockFace face;
+
+    private Direction(BlockFace face) {
+
+        this.face = face;
+    }
+
+    public BlockFace getFace() {
+
+        return face;
+    }
+
+    public Direction nextRight() {
+
+        if (ordinal() == values().length - 1) {
+            return values()[0];
+        } else {
+            return values()[ordinal() + 1];
+        }
+    }
+
+    public Direction nextLeft() {
+
+        if (ordinal() == 0) {
+            return values()[values().length - 1];
+        } else {
+            return values()[ordinal() - 1];
+        }
+    }
+
+    public static Direction valueOf(BlockFace face) {
+
+        for (Direction direction : values()) {
+            if (direction.getFace() == face) {
+                return direction;
+            }
+        }
+
+        return null;
+    }
 
     public static Direction valueOf(Minecart minecart) {
 
@@ -54,24 +96,6 @@ public enum Direction {
             return EAST;
         } else {
             return null;
-        }
-    }
-
-    public Direction nextRight() {
-
-        if (ordinal() == values().length - 1) {
-            return values()[0];
-        } else {
-            return values()[ordinal() + 1];
-        }
-    }
-
-    public Direction nextLeft() {
-
-        if (ordinal() == 0) {
-            return values()[values().length - 1];
-        } else {
-            return values()[ordinal() - 1];
         }
     }
 

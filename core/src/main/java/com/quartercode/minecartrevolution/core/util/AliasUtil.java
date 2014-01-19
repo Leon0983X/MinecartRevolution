@@ -26,8 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.Material;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
-import com.quartercode.minecartrevolution.core.conf.FileConf;
 import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
+import com.quartercode.minecartrevolution.core.get.FileConf;
 import com.quartercode.quarterbukkit.api.ItemData;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 

@@ -121,36 +121,6 @@ public class MinecartUtil {
         minecart.setVelocity(velocity);
     }
 
-    // public static void driveInDirection( Minecart minecart, Direction direction) {
-    //
-    // Vector velocity = minecart.getVelocity();
-    // double speed = 0.3913788423600029;
-    //
-    // if (sign.getRawData() == 0) {
-    // Location newLocation = minecart.getLocation();
-    // newLocation.setZ(minecart.getLocation().getZ() - 1.0D);
-    // minecart.teleport(newLocation);
-    // velocity.setZ(-speed);
-    // } else if (sign.getRawData() == 4) {
-    // Location newLocation = minecart.getLocation();
-    // newLocation.setX(minecart.getLocation().getX() + 1.0D);
-    // minecart.teleport(newLocation);
-    // velocity.setX(speed);
-    // } else if (sign.getRawData() == 8) {
-    // Location newLocation = minecart.getLocation();
-    // newLocation.setZ(minecart.getLocation().getZ() + 1.0D);
-    // minecart.teleport(newLocation);
-    // velocity.setZ(speed);
-    // } else if (sign.getRawData() == 12) {
-    // Location newLocation = minecart.getLocation();
-    // newLocation.setX(minecart.getLocation().getX() - 1.0D);
-    // minecart.teleport(newLocation);
-    // velocity.setX(-speed);
-    // }
-    //
-    // minecart.setVelocity(velocity);
-    // }
-
     public static boolean remove(Minecart minecart) {
 
         VehicleDestroyEvent event = new VehicleDestroyEvent(minecart, null);

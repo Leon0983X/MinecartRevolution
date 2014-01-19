@@ -18,8 +18,6 @@
 
 package com.quartercode.minecartrevolution.basicexpressions.command;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
@@ -36,8 +34,6 @@ import com.quartercode.minecartrevolution.core.util.config.GlobalConfig;
 import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class LockCommand extends ExpressionCommand implements Listener {
-
-    private final List<Minecart> lockedMinecarts = new ArrayList<Minecart>();
 
     public LockCommand() {
 
@@ -64,31 +60,25 @@ public class LockCommand extends ExpressionCommand implements Listener {
     @Override
     public void execute(Minecart minecart, Object parameter) {
 
-        if (String.valueOf(parameter).equals("+") && !lockedMinecarts.contains(minecart)) {
-            lockedMinecarts.add(minecart);
-        } else if (String.valueOf(parameter).equals("-") && lockedMinecarts.contains(minecart)) {
-            lockedMinecarts.remove(minecart);
+        if (String.valueOf(parameter).equals("+") && !isLocked(minecart)) {
+            setLocked(minecart, true);
+        } else if (String.valueOf(parameter).equals("-") && isLocked(minecart)) {
+            setLocked(minecart, false);
         }
 
-        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_EFFECTS)) {
+        if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PLAY_DEFAULT_EFFECTS)) {
             ExtendedEffect.DOOR.play(minecart);
         }
     }
 
-    public List<Minecart> getLockedMinecarts() {
-
-        return lockedMinecarts;
-    }
-
     public boolean isLocked(Minecart minecart) {
 
-        for (Minecart testMinecart : lockedMinecarts) {
-            if (minecart.getEntityId() == testMinecart.getEntityId()) {
-                return true;
-            }
-        }
+        return minecartRevolution.getMetadataStorage().getBoolen(minecart, "locked");
+    }
 
-        return false;
+    public void setLocked(Minecart minecart, boolean locked) {
+
+        minecartRevolution.getMetadataStorage().setBoolean(minecart, "locked", locked);
     }
 
     @EventHandler

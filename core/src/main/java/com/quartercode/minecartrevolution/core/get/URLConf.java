@@ -16,31 +16,15 @@
  * along with MinecartRevolution-Core. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.quartercode.minecartrevolution.core.conf;
+package com.quartercode.minecartrevolution.core.get;
 
-import java.io.File;
+public class URLConf {
 
-public class FileConf {
+    // BukkitDev
+    public static final String BUKKIT_DEV_URL      = "http://dev.bukkit.org/bukkit-plugins/minecartrevolution";
+    public static final String BUKKIT_DEV_FILEFEED = BUKKIT_DEV_URL + "/files.rss";
 
-    // Global
-    public static final String MAIN_CONF_NAME = "config.yml";
-
-    // Plugin folder
-    public static final File   PLUGIN_FOLDER  = new File("plugins", "MinecartRevolution");
-
-    // First level
-    public static final File   SCRIPTS        = new File(PLUGIN_FOLDER, "scripts");
-    public static final File   DATA           = new File(PLUGIN_FOLDER, "data");
-    public static final File   PLUGINS        = new File(PLUGIN_FOLDER, "plugins");
-    public static final File   MAIN_CONF      = new File(PLUGIN_FOLDER, MAIN_CONF_NAME);
-
-    static {
-
-        PLUGIN_FOLDER.mkdirs();
-        SCRIPTS.mkdirs();
-    }
-
-    private FileConf() {
+    private URLConf() {
 
     }
 

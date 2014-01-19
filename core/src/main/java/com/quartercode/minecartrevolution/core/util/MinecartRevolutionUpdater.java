@@ -41,18 +41,15 @@ public class MinecartRevolutionUpdater extends Updater {
     }
 
     @Override
-    protected boolean doInstall(File downloadedFile, CommandSender causer) throws IOException {
+    protected void doInstall(File downloadedFile, CommandSender causer) throws IOException {
 
         try {
-            Bukkit.getPluginManager().disablePlugin(updatePlugin);
+            Bukkit.getPluginManager().disablePlugin(getUpdatePlugin());
             Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().loadPlugin(new File("plugins", "MinecartRevolution.jar")));
-            return true;
         }
         catch (Exception e) {
-            ExceptionHandler.exception(new InstallException(plugin, this, e, MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", updatePlugin.getName(), "error", "Error while reloading: " + e.getLocalizedMessage())));
+            ExceptionHandler.exception(new InstallException(getPlugin(), this, e, MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", getUpdatePlugin().getName(), "error", "Error while reloading: " + e.getLocalizedMessage())));
         }
-
-        return false;
     }
 
 }

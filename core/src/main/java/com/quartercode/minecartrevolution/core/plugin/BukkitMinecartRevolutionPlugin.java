@@ -23,7 +23,6 @@ import java.util.List;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.command.MRCommandExecutor;
-import com.quartercode.minecartrevolution.core.conf.FileConf;
 import com.quartercode.minecartrevolution.core.control.block.ControlBlock;
 import com.quartercode.minecartrevolution.core.control.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSign;
@@ -31,6 +30,8 @@ import com.quartercode.minecartrevolution.core.control.sign.ControlSignExecutor;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.core.expression.ExpressionExecutor;
+import com.quartercode.minecartrevolution.core.get.FileConf;
+import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.minecartrevolution.core.util.config.Config;
 import com.quartercode.quarterbukkit.api.Updater;
@@ -109,6 +110,12 @@ public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implemen
     public Config getConfiguration() {
 
         return config;
+    }
+
+    @Override
+    public VehicleMetdataStorage getMetdataStorage() {
+
+        return minecartRevolution.getMetadataStorage();
     }
 
     @Override

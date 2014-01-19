@@ -22,32 +22,9 @@ permissions:
     description: Gives access to use all MinecartRevolution functions
     default: op
     children:
-      minecartrevolution.action.*: true
       minecartrevolution.command.*: true
       minecartrevolution.control.*: true
-
-
-
-  minecartrevolution.action.*:
-    description: Gives access to use all MinecartRevolution basic actions
-    children:
-      minecartrevolution.action.punch: true
-      minecartrevolution.action.spawn: true
-
-
-  minecartrevolution.action.punch:
-    description: Gives access to punch minecarts and drive in this direction
-
-
-  minecartrevolution.action.sign.spawn.*:
-    description: Gives access to use the MinecartRevolution Spawn sign
-    children:
-      minecartrevolution.action.sign.spawn.place: true
-      minecartrevolution.action.sign.spawn.destroy: true
-  minecartrevolution.action.sign.spawn.place:
-    description: Gives access to place the MinecartRevolution Spawn sign
-  minecartrevolution.action.sign.spawn.destroy:
-    description: Gives access to destroy the MinecartRevolution Spawn sign
+      minecartrevolution.action.*: true
 
 
 
@@ -461,3 +438,21 @@ permissions:
     description: Gives access to place the MinecartRevolution Weather sign
   minecartrevolution.control.sign.weather.destroy:
     description: Gives access to destroy the MinecartRevolution Weather sign
+
+
+
+  minecartrevolution.action.*:
+    description: Gives access to use all MinecartRevolution basic actions
+    children:
+      minecartrevolution.action.sign.spawn: true
+
+
+  minecartrevolution.action.sign.spawn.*:
+    description: Gives access to use the MinecartRevolution Spawn sign
+    children:
+      minecartrevolution.action.sign.spawn.place: true
+      minecartrevolution.action.sign.spawn.destroy: true
+  minecartrevolution.action.sign.spawn.place:
+    description: Gives access to place the MinecartRevolution Spawn sign
+  minecartrevolution.action.sign.spawn.destroy:
+    description: Gives access to destroy the MinecartRevolution Spawn sign

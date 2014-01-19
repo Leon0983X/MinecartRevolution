@@ -27,12 +27,12 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.util.Direction;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartType;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartUtil;
+import com.quartercode.quarterbukkit.api.event.RedstoneToggleEvent;
 
 public class BlockListener implements Listener {
 
@@ -41,103 +41,72 @@ public class BlockListener implements Listener {
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
 
-    @SuppressWarnings ("deprecation")
     @EventHandler
-    public void onRedstoneBlockChangeOnChest(BlockRedstoneEvent event) {
+    public void onRedstoneToggleOnChest(RedstoneToggleEvent event) {
 
-        // TODO: Replace with better solution
-        if (event.getBlock().getData() >= 9) {
-            return;
-        }
-
-        Chest chest;
-        if (event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) event.getBlock().getLocation().add(1, 0, 0).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) event.getBlock().getLocation().add(-1, 0, 0).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) event.getBlock().getLocation().add(0, 0, 1).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.CHEST) {
-            chest = (Chest) event.getBlock().getLocation().add(0, 0, -1).getBlock().getState();
-        } else {
-            return;
-        }
-
-        Location rail = getRail(chest.getBlock());
-        Direction direction = getDirection(chest.getBlock());
-        if (rail == null || direction == null) {
-            return;
-        }
-
-        MinecartType minecartType = null;
-        for (int slot = 0; slot < chest.getInventory().getSize(); slot++) {
-            if (chest.getInventory().getItem(slot) != null && chest.getInventory().getItem(slot).getType() != Material.AIR) {
-                Material type = chest.getInventory().getItem(slot).getType();
-
-                if (type == Material.MINECART) {
-                    minecartType = MinecartType.RIDEABLE;
-                } else if (type == Material.STORAGE_MINECART) {
-                    minecartType = MinecartType.STORAGE;
-                } else if (type == Material.POWERED_MINECART) {
-                    minecartType = MinecartType.POWERED;
-                } else if (type == Material.HOPPER_MINECART) {
-                    minecartType = MinecartType.HOPPER;
-                } else if (type == Material.EXPLOSIVE_MINECART) {
-                    minecartType = MinecartType.TNT;
-                }
-
-                if (minecartType != null) {
-                    chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
-                    break;
-                }
-            }
-        }
-
-        if (minecartType != null) {
-            dispense(minecartType, rail, direction);
-        }
-    }
-
-    @SuppressWarnings ("deprecation")
-    @EventHandler
-    public void onRedstoneBlockChangeOnSign(BlockRedstoneEvent event) {
-
-        // TODO: Replace with better solution
-        if (event.getBlock().getData() >= 9) {
-            return;
-        }
-
-        Sign sign;
-        if (event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(1, 0, 0).getBlock().getType() == Material.WALL_SIGN) {
-            sign = (Sign) event.getBlock().getLocation().add(1, 0, 0).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(-1, 0, 0).getBlock().getType() == Material.WALL_SIGN) {
-            sign = (Sign) event.getBlock().getLocation().add(-1, 0, 0).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(0, 0, 1).getBlock().getType() == Material.WALL_SIGN) {
-            sign = (Sign) event.getBlock().getLocation().add(0, 0, 1).getBlock().getState();
-        } else if (event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.SIGN || event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.SIGN_POST || event.getBlock().getLocation().add(0, 0, -1).getBlock().getType() == Material.WALL_SIGN) {
-            sign = (Sign) event.getBlock().getLocation().add(0, 0, -1).getBlock().getState();
-        } else {
-            return;
-        }
-
-        if (sign.getLine(0).equalsIgnoreCase("[spawn]")) {
-            Location rail = getRail(sign.getBlock());
-            Direction direction = getDirection(sign.getBlock());
+        if (event.getBlock().getState() instanceof Chest && event.isPowered()) {
+            Chest chest = (Chest) event.getBlock().getState();
+            Location rail = getRail(chest.getBlock());
+            Direction direction = getDirection(chest.getBlock());
             if (rail == null || direction == null) {
                 return;
             }
 
             MinecartType minecartType = null;
-            for (MinecartType testMinecartType : MinecartType.values()) {
-                for (String name : testMinecartType.getNames()) {
-                    if (name.equalsIgnoreCase(sign.getLine(1))) {
-                        minecartType = testMinecartType;
+            for (int slot = 0; slot < chest.getInventory().getSize(); slot++) {
+                if (chest.getInventory().getItem(slot) != null && chest.getInventory().getItem(slot).getType() != Material.AIR) {
+                    Material type = chest.getInventory().getItem(slot).getType();
+
+                    if (type == Material.MINECART) {
+                        minecartType = MinecartType.RIDEABLE;
+                    } else if (type == Material.STORAGE_MINECART) {
+                        minecartType = MinecartType.STORAGE;
+                    } else if (type == Material.POWERED_MINECART) {
+                        minecartType = MinecartType.POWERED;
+                    } else if (type == Material.HOPPER_MINECART) {
+                        minecartType = MinecartType.HOPPER;
+                    } else if (type == Material.EXPLOSIVE_MINECART) {
+                        minecartType = MinecartType.TNT;
+                    }
+
+                    if (minecartType != null) {
+                        chest.getInventory().setItem(slot, new ItemStack(Material.AIR));
+                        break;
                     }
                 }
             }
 
             if (minecartType != null) {
                 dispense(minecartType, rail, direction);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onRedstoneToggleOnSign(RedstoneToggleEvent event) {
+
+        if (event.getBlock().getState() instanceof Sign && event.isPowered()) {
+            Sign sign = (Sign) event.getBlock().getState();
+
+            if (sign.getLine(0).equalsIgnoreCase("[spawn]")) {
+                Location rail = getRail(sign.getBlock());
+                Direction direction = getDirection(sign.getBlock());
+                if (rail == null || direction == null) {
+                    return;
+                }
+
+                MinecartType minecartType = null;
+                for (MinecartType testMinecartType : MinecartType.values()) {
+                    for (String name : testMinecartType.getNames()) {
+                        if (name.equalsIgnoreCase(sign.getLine(1))) {
+                            minecartType = testMinecartType;
+                        }
+                    }
+                }
+
+                if (minecartType != null) {
+                    dispense(minecartType, rail, direction);
+                }
             }
         }
     }
