@@ -98,7 +98,7 @@
         <dependency>
             <groupId>com.quartercode</groupId>
             <artifactId>quarterbukkit-plugin</artifactId>
-            <version>1.5.1-BETA</version>
+            <version>0.1.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
