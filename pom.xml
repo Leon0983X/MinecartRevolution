@@ -29,6 +29,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <quarterbukkit.version>0.1.3</quarterbukkit.version>
     </properties>
 
     <organization>
@@ -98,7 +99,7 @@
         <dependency>
             <groupId>com.quartercode</groupId>
             <artifactId>quarterbukkit-plugin</artifactId>
-            <version>0.1.2</version>
+            <version>${quarterbukkit.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
