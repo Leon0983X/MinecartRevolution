@@ -9,7 +9,7 @@
 
     <name>MinecartRevolution</name>
     <url>http://dev.bukkit.org/bukkit-plugins/MinecartRevolution</url>
-    <description>MinecartRevolution is a modern Minecart-Plugin for Bukkit which features a fast and simple entry simple entry and can be customized deeply using expressions.</description>
+    <description>MinecartRevolution is a modern Minecart-Plugin for Bukkit which features a fast and simple entry and can be deeply customized using expressions.</description>
     <inceptionYear>2012</inceptionYear>
 
     <modules>
