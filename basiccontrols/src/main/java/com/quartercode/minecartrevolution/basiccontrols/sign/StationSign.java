@@ -23,7 +23,6 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.util.Vector;
@@ -32,6 +31,7 @@ import com.quartercode.minecartrevolution.core.control.sign.ControlSign;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSignInfo;
 import com.quartercode.minecartrevolution.core.util.Direction;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartUtil;
+import com.quartercode.quarterbukkit.api.event.RedstoneToggleEvent;
 
 public class StationSign extends ControlSign implements Listener {
 
@@ -58,19 +58,17 @@ public class StationSign extends ControlSign implements Listener {
     }
 
     @EventHandler
-    public void onBlockRedstoneUpdate(BlockRedstoneEvent event) {
+    public void onRedstoneToggle(RedstoneToggleEvent event) {
 
-        if (event.getBlock().getState() instanceof Sign) {
-            if (event.getBlock().isBlockPowered()) {
-                Sign sign = (Sign) event.getBlock().getState();
+        if (event.getBlock().getState() instanceof Sign && event.isPowered()) {
+            Sign sign = (Sign) event.getBlock().getState();
 
-                for (String label : getInfo().getLabels()) {
-                    if (sign.getLine(0).equalsIgnoreCase("[" + label + "]")) {
-                        for (Minecart minecart : event.getBlock().getWorld().getEntitiesByClass(Minecart.class)) {
-                            for (Sign sign2 : minecartRevolution.getControlSignExecutor().getSigns(minecart)) {
-                                if (sign.equals(sign2)) {
-                                    MinecartUtil.driveInDirection(minecart, Direction.valueOf(sign));
-                                }
+            for (String label : getInfo().getLabels()) {
+                if (sign.getLine(0).equalsIgnoreCase("[" + label + "]")) {
+                    for (Minecart minecart : event.getBlock().getWorld().getEntitiesByClass(Minecart.class)) {
+                        for (Sign sign2 : minecartRevolution.getControlSignExecutor().getSigns(minecart)) {
+                            if (sign.equals(sign2)) {
+                                MinecartUtil.driveInDirection(minecart, Direction.valueOf(sign));
                             }
                         }
                     }
