@@ -20,11 +20,11 @@ package com.quartercode.minecartrevolution.basicactions.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartType;
@@ -43,22 +43,22 @@ public class MinecartListener implements Listener {
         if (event.getVehicle() instanceof Minecart && event.getBlock().getType() == Material.CHEST) {
             Minecart minecart = (Minecart) event.getVehicle();
             MinecartType type = MinecartType.valueOf(minecart);
-            Chest chest = (Chest) event.getBlock().getState();
+            InventoryHolder block = (InventoryHolder) event.getBlock().getState();
 
-            if (chest.getInventory().firstEmpty() < 0) {
+            if (block.getInventory().firstEmpty() < 0) {
                 return;
             }
 
             if (type == MinecartType.RIDEABLE) {
-                chest.getInventory().addItem(new ItemStack(Material.MINECART));
+                block.getInventory().addItem(new ItemStack(Material.MINECART));
             } else if (type == MinecartType.STORAGE) {
-                chest.getInventory().addItem(new ItemStack(Material.STORAGE_MINECART));
+                block.getInventory().addItem(new ItemStack(Material.STORAGE_MINECART));
             } else if (type == MinecartType.POWERED) {
-                chest.getInventory().addItem(new ItemStack(Material.POWERED_MINECART));
+                block.getInventory().addItem(new ItemStack(Material.POWERED_MINECART));
             } else if (type == MinecartType.HOPPER) {
-                chest.getInventory().addItem(new ItemStack(Material.HOPPER_MINECART));
+                block.getInventory().addItem(new ItemStack(Material.HOPPER_MINECART));
             } else if (type == MinecartType.TNT) {
-                chest.getInventory().addItem(new ItemStack(Material.EXPLOSIVE_MINECART));
+                block.getInventory().addItem(new ItemStack(Material.EXPLOSIVE_MINECART));
             } else {
                 return;
             }
