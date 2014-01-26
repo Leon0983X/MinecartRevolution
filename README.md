@@ -13,7 +13,7 @@ License
 
 Copyright (c) 2013 QuarterCode <http://www.quartercode.com/>
 
-MinecartRevolution may be used under the terms of either the GNU General Public License (GPL). See the LICENSE.md file for details.
+MinecartRevolution may be used under the terms of the GNU General Public License (GPL) v3.0. See the LICENSE.md file or https://www.gnu.org/licenses/gpl-3.0.txt for details.
 
 Compilation
 -----------
