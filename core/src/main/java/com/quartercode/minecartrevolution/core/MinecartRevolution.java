@@ -45,15 +45,17 @@ import com.quartercode.minecartrevolution.core.listener.MinecartListener;
 import com.quartercode.minecartrevolution.core.plugin.PluginManager;
 import com.quartercode.minecartrevolution.core.util.AliasUtil;
 import com.quartercode.minecartrevolution.core.util.ExtractionUtil;
+import com.quartercode.minecartrevolution.core.util.JarUpdater;
 import com.quartercode.minecartrevolution.core.util.Metrics;
-import com.quartercode.minecartrevolution.core.util.MinecartRevolutionUpdater;
 import com.quartercode.minecartrevolution.core.util.ResourceLister;
+import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.minecartrevolution.core.util.config.Config;
 import com.quartercode.minecartrevolution.core.util.config.GlobalConfig;
-import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
+import com.quartercode.quarterbukkit.api.query.FilesQuery.ProjectFile;
+import com.quartercode.quarterbukkit.api.query.FilesQuery.VersionParser;
 import com.quartercode.quarterbukkit.api.scheduler.ScheduleTask;
 
 public class MinecartRevolution {
@@ -218,7 +220,15 @@ public class MinecartRevolution {
             ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while initalizing Metrics"));
         }
 
-        addUpdater(new MinecartRevolutionUpdater(this));
+        // Updater
+        addUpdater(new JarUpdater(plugin, 36965, new VersionParser() {
+
+            @Override
+            public String parseVersion(ProjectFile file) {
+
+                return file.getName().replace("MinecartRevolution ", "");
+            }
+        }));
     }
 
     private void loadMetadataStorage() {

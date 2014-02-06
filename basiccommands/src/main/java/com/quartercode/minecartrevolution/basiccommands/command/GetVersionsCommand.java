@@ -20,7 +20,7 @@ package com.quartercode.minecartrevolution.basiccommands.command;
 
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.command.MRCommandHandler;
-import com.quartercode.quarterbukkit.api.Updater;
+import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
 
@@ -40,7 +40,7 @@ public class GetVersionsCommand extends MRCommandHandler {
     public void execute(Command command) {
 
         for (Updater updater : minecartRevolution.getUpdaters()) {
-            command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.getversions.return", "plugin", updater.getUpdatePlugin().getName(), "pluginVersion", updater.getUpdatePlugin().getDescription().getVersion()));
+            command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.getversions.return", "plugin", updater.getPlugin().getName(), "pluginVersion", updater.getPlugin().getDescription().getVersion()));
         }
     }
 

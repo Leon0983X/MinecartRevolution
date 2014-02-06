@@ -31,10 +31,10 @@ import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionConstant;
 import com.quartercode.minecartrevolution.core.expression.ExpressionExecutor;
 import com.quartercode.minecartrevolution.core.get.FileConf;
+import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.minecartrevolution.core.util.config.Config;
-import com.quartercode.quarterbukkit.api.Updater;
 import com.quartercode.quarterbukkit.api.command.CommandHandler;
 
 public abstract class BukkitMinecartRevolutionPlugin extends JavaPlugin implements MinecartRevolutionPlugin {
