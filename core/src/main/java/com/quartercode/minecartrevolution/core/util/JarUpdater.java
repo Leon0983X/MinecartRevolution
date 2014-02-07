@@ -33,8 +33,8 @@ import com.quartercode.quarterbukkit.api.query.QueryException;
 
 public class JarUpdater implements Updater {
 
-    private final int           projectId;
     private final Plugin        plugin;
+    private final int           projectId;
     private final VersionParser versionParser;
 
     public JarUpdater(Plugin plugin, int projectId, VersionParser versionParser) {
