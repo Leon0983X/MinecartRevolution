@@ -47,8 +47,7 @@ public class RandomTerm implements MinecartTerm {
         if (term.split("-").length == 2) {
             try {
                 percent = Double.parseDouble(term.split("-")[1]);
-            }
-            catch (NumberFormatException e1) {
+            } catch (NumberFormatException e1) {
             }
         }
 

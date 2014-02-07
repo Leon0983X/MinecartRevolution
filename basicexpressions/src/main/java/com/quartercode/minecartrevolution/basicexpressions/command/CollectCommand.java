@@ -73,8 +73,7 @@ public class CollectCommand extends ExpressionCommand {
                     } else {
                         items.add(part);
                     }
-                }
-                catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to parse collect radius"));
                 }
             }

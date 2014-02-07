@@ -50,8 +50,7 @@ public class AliasUtil {
             } else {
                 return new ItemData(Material.getMaterial(Integer.parseInt(string)));
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return resolveAlias(string);
         }
     }
@@ -78,16 +77,13 @@ public class AliasUtil {
                     }
                 }
                 reader.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while reading items.csv file for retrieving aliases"));
-            }
-            finally {
+            } finally {
                 if (reader != null) {
                     try {
                         reader.close();
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

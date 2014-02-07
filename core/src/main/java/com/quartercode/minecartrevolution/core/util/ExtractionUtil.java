@@ -61,16 +61,13 @@ public class ExtractionUtil {
                 outputStream.write(tempBuffer, 0, counter);
                 outputStream.flush();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to extract files from jar"));
-        }
-        finally {
+        } finally {
             if (inputStream != null) {
                 try {
                     inputStream.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to close input stream after attempting to extract files from jar"));
                 }
             }
@@ -78,8 +75,7 @@ public class ExtractionUtil {
             if (outputStream != null) {
                 try {
                     outputStream.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to close otuput stream after attempting to extract files from jar"));
                 }
             }

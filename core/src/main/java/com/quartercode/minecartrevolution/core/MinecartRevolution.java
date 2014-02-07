@@ -183,8 +183,7 @@ public class MinecartRevolution {
                 extractionPath = extractionPath.substring(extractionPath.indexOf("extract")).replace("extract/", "");
                 ExtractionUtil.extractFromJAR(resource, new File(FileConf.DATA + File.separator + extractionPath));
             }
-        }
-        catch (IOException e1) {
+        } catch (IOException e1) {
             // TODO: Remove extract
             e1.printStackTrace();
         }
@@ -215,8 +214,7 @@ public class MinecartRevolution {
         try {
             metrics = new Metrics(plugin);
             metrics.start();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while initalizing Metrics"));
         }
 
@@ -243,16 +241,13 @@ public class MinecartRevolution {
                 Properties metadataProperties = new Properties();
                 metadataProperties.load(reader);
                 metadataStorage.deserialize(metadataProperties);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Error while loading stored metadata"));
-            }
-            finally {
+            } finally {
                 if (reader != null) {
                     try {
                         reader.close();
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while closing metadata loading stream"));
                     }
                 }
@@ -278,16 +273,13 @@ public class MinecartRevolution {
         try {
             writer = new FileWriter(metadataFile);
             metadataStorage.serialize().store(writer, "Entity metadata storage; Do not edit!");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Error while loading saving metadata"));
-        }
-        finally {
+        } finally {
             if (writer != null) {
                 try {
                     writer.close();
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while closing metadata saving stream"));
                 }
             }

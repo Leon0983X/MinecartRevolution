@@ -51,12 +51,10 @@ public class VersioncheckCommand extends MRCommandHandler {
                 } else {
                     command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.latestVersion", "plugin", updater.getPlugin().getName(), "currentVersion", updater.getPlugin().getDescription().getVersion()));
                 }
-            }
-            catch (QueryException e) {
+            } catch (QueryException e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong while querying the server mods api"));
                 command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: An unknown error occurred"));
                 command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
             }

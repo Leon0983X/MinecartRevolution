@@ -75,8 +75,7 @@ public class FileCommand extends ExpressionCommand {
 
                 minecartRevolution.getExpressionExecutor().execute(minecart, ExpressionExecutor.getExpression(lines.toArray(new String[lines.size()])));
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to load script file " + file.getPath()));
         }
     }

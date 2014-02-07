@@ -51,12 +51,10 @@ public class UpdateCommand extends MRCommandHandler {
                     updater.changeVersion(latestVersion);
                     command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.updated", "plugin", updater.getPlugin().getName(), "newVersion", latestVersion.getVersion()));
                 }
-            }
-            catch (QueryException e) {
+            } catch (QueryException e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Update: Something went wrong while querying the server mods api"));
                 command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Update: An unknown error occurred"));
                 command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
             }
