@@ -29,7 +29,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarterbukkit.version>0.2.0-SNAPSHOT</quarterbukkit.version>
+        <quarterbukkit.version>0.2.0</quarterbukkit.version>
     </properties>
 
     <organization>
