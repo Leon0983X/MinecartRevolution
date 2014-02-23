@@ -56,10 +56,10 @@ public class JarUpdater implements Updater {
         plugin.getLogger().info("Querying server mods api ...");
 
         // Get latest version
-        List<ProjectFile> avaiableFiles = new ArrayList<ProjectFile>();
-        avaiableFiles = new FilesQuery(projectId, versionParser).execute();
+        List<ProjectFile> availableFiles = new ArrayList<ProjectFile>();
+        availableFiles = new FilesQuery(projectId, versionParser).execute();
 
-        return avaiableFiles.size() == 0 ? null : avaiableFiles.get(avaiableFiles.size() - 1);
+        return availableFiles.size() == 0 ? null : availableFiles.get(availableFiles.size() - 1);
     }
 
     @Override
