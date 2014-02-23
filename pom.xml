@@ -4,7 +4,7 @@
 
     <groupId>com.quartercode</groupId>
     <artifactId>minecartrevolution</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <name>MinecartRevolution</name>
@@ -29,7 +29,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarterbukkit.version>0.1.3</quarterbukkit.version>
+        <quarterbukkit.version>0.2.0</quarterbukkit.version>
     </properties>
 
     <organization>
@@ -53,16 +53,14 @@
     <licenses>
         <license>
             <name>GNU General Public License Version 3</name>
-            <url>http://opensource.org/licenses/GPL-3.0</url>
-            <distribution>repo</distribution>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
         </license>
     </licenses>
 
     <scm>
-        <url>https://github.com/QuarterCode/MinecartRevolution/tree/master/</url>
+        <url>https://github.com/QuarterCode/MinecartRevolution</url>
         <connection>scm:git:git://github.com/QuarterCode/MinecartRevolution.git</connection>
         <developerConnection>scm:git:git@github.com:QuarterCode/MinecartRevolution.git</developerConnection>
-        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
@@ -119,6 +117,16 @@
 
     <build>
         <plugins>
+            <!-- Gitflow -->
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jgitflow-plugin</artifactId>
+                <version>1.0-alpha27</version>
+                <configuration>
+                    <noDeploy>true</noDeploy>
+                </configuration>
+            </plugin>
+
             <!-- License header -->
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>

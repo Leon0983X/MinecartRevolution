@@ -105,8 +105,7 @@ public abstract class Config {
 
         try {
             configuration.save(file);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ExceptionHandler.exception(new MinecartRevolutionException(minecartRevolution, e, "Failed to save configuration to: " + file.getPath()));
         }
     }

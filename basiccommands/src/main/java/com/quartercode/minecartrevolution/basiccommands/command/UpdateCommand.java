@@ -20,9 +20,13 @@ package com.quartercode.minecartrevolution.basiccommands.command;
 
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.command.MRCommandHandler;
-import com.quartercode.quarterbukkit.api.Updater;
+import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
+import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
+import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
+import com.quartercode.quarterbukkit.api.query.FilesQuery.ProjectFile;
+import com.quartercode.quarterbukkit.api.query.QueryException;
 
 public class UpdateCommand extends MRCommandHandler {
 
@@ -40,9 +44,19 @@ public class UpdateCommand extends MRCommandHandler {
     public void execute(Command command) {
 
         for (Updater updater : minecartRevolution.getUpdaters()) {
-            command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.update", "plugin", updater.getUpdatePlugin().getName()));
-            if (updater.tryInstall(command.getSender())) {
-                command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.updated", "plugin", updater.getUpdatePlugin().getName()));
+            try {
+                ProjectFile latestVersion = updater.getLatestVersion();
+                if (!latestVersion.equals(minecartRevolution.getDescription().getVersion())) {
+                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.update", "plugin", updater.getPlugin().getName(), "newVersion", latestVersion.getVersion()));
+                    updater.changeVersion(latestVersion);
+                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.updated", "plugin", updater.getPlugin().getName(), "newVersion", latestVersion.getVersion()));
+                }
+            } catch (QueryException e) {
+                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Update: Something went wrong while querying the server mods api"));
+                command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
+            } catch (Exception e) {
+                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Update: An unknown error occurred"));
+                command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.update.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
             }
         }
     }

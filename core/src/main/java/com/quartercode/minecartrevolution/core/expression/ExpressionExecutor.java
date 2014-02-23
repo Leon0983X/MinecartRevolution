@@ -171,8 +171,7 @@ public class ExpressionExecutor {
                                                 ScriptEngine scriptEngine = SCRIPT_ENGINE_MANAGER.getEngineByName("JavaScript");
                                                 scriptEngine.eval("var result = " + String.valueOf(parameterString) + ";");
                                                 parameterString = String.valueOf(scriptEngine.get("result"));
-                                            }
-                                            catch (ScriptException e) {
+                                            } catch (ScriptException e) {
                                                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Expression script error for: " + expressionPart));
                                                 return;
                                             }
@@ -280,8 +279,7 @@ public class ExpressionExecutor {
         try {
             Double.parseDouble(string);
             return true;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }

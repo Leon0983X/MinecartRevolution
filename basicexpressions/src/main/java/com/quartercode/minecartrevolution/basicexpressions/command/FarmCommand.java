@@ -67,8 +67,7 @@ public class FarmCommand extends ExpressionCommand {
             if (parameters.length >= 2 && (plugin.getConfiguration().getLong(BasicExpressionConfig.FARM_MAX_RADIUS) < 0 || Integer.parseInt(parameters[1]) <= plugin.getConfiguration().getLong(BasicExpressionConfig.FARM_MAX_RADIUS))) {
                 radius = Integer.parseInt(parameters[1]);
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             radius = 5;
         }
 

@@ -89,15 +89,13 @@ public class InfoCommand extends MRCommandHandler {
                         try {
                             line = reader.readLine();
                             return Integer.parseInt(line.split("\"")[1].trim());
-                        }
-                        catch (NumberFormatException e) {
+                        } catch (NumberFormatException e) {
                             return -1;
                         }
                     }
                 }
                 reader.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to load download count"));
             }
 

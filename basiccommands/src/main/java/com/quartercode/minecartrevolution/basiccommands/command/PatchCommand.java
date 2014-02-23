@@ -91,8 +91,7 @@ public class PatchCommand extends MRCommandHandler {
         if (arguments.isParameterSet("r", true)) {
             try {
                 radius = Integer.parseInt(arguments.getParameter("r", true));
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Failed to parse patch radius: " + radius));
             }
         }

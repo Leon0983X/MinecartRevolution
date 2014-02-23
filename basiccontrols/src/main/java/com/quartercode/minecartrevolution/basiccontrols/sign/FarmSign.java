@@ -51,8 +51,7 @@ public class FarmSign extends ControlSign {
 
             try {
                 radius = Integer.parseInt(line);
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 types.add(line);
             }
         }

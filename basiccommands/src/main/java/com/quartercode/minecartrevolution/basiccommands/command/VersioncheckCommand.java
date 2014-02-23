@@ -18,15 +18,15 @@
 
 package com.quartercode.minecartrevolution.basiccommands.command;
 
-import java.io.IOException;
-import javax.xml.stream.XMLStreamException;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.command.MRCommandHandler;
 import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
-import com.quartercode.quarterbukkit.api.Updater;
+import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.quarterbukkit.api.command.Command;
 import com.quartercode.quarterbukkit.api.command.CommandInfo;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
+import com.quartercode.quarterbukkit.api.query.FilesQuery.ProjectFile;
+import com.quartercode.quarterbukkit.api.query.QueryException;
 
 public class VersioncheckCommand extends MRCommandHandler {
 
@@ -45,17 +45,18 @@ public class VersioncheckCommand extends MRCommandHandler {
 
         for (Updater updater : minecartRevolution.getUpdaters()) {
             try {
-                if (updater.isNewVersionAvaiable()) {
-                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.newVersion", "plugin", updater.getUpdatePlugin().getName(), "newVersion", updater.getLatestVersion(), "updateCommand", "/mr update"));
+                ProjectFile latestVersion = updater.getLatestVersion();
+                if (!latestVersion.getVersion().equals(minecartRevolution.getDescription().getVersion())) {
+                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.newVersion", "plugin", updater.getPlugin().getName(), "newVersion", latestVersion.getVersion(), "updateCommand", "/mr update"));
                 } else {
-                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.latestVersion", "plugin", updater.getUpdatePlugin().getName()));
+                    command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.latestVersion", "plugin", updater.getPlugin().getName(), "currentVersion", updater.getPlugin().getDescription().getVersion()));
                 }
-            }
-            catch (IOException e) {
-                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the file system"));
-            }
-            catch (XMLStreamException e) {
-                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong with the version XML-feed"));
+            } catch (QueryException e) {
+                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: Something went wrong while querying the server mods api"));
+                command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
+            } catch (Exception e) {
+                ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Versioncheck: An unknown error occurred"));
+                command.getSender().sendMessage(MinecartRevolution.getLang().get("basiccommands.versioncheck.error", "plugin", updater.getPlugin().getName(), "error", e.toString()));
             }
         }
     }
