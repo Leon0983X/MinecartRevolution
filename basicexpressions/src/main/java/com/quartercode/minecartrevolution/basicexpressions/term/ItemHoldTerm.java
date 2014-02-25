@@ -23,8 +23,8 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.PlayerInventory;
-import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.minecartrevolution.core.util.Direction;
+import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.minecartrevolution.core.util.cart.MinecartTerm;
 import com.quartercode.quarterbukkit.api.ItemData;
 
@@ -48,7 +48,8 @@ public class ItemHoldTerm implements MinecartTerm {
 
             if (term.split("-").length == 2) {
                 for (String item : term.split("-")[1].split(",")) {
-                    if (new ItemData(inventory.getItemInHand()).equals(ItemDataResolver.resolve(item))) {
+                    ItemData itemData = ItemDataResolver.resolve(item);
+                    if (itemData != null && new ItemData(inventory.getItemInHand()).equals(itemData)) {
                         return true;
                     }
                 }

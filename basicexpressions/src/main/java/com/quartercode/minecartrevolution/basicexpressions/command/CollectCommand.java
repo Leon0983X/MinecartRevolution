@@ -94,12 +94,13 @@ public class CollectCommand extends ExpressionCommand {
             return;
         }
 
+        ItemData itemData = ItemDataResolver.resolve(string);
         for (Entity entity : minecart.getNearbyEntities(radius, radius, radius)) {
             if (entity instanceof Item) {
                 Item item = (Item) entity;
                 if (item.isDead()) {
                     continue;
-                } else if (string != null && !new ItemData(item.getItemStack()).equals(ItemDataResolver.resolve(string))) {
+                } else if (itemData != null && !new ItemData(item.getItemStack()).equals(itemData)) {
                     continue;
                 }
 

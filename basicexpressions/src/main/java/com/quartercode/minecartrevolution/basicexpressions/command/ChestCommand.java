@@ -119,10 +119,12 @@ public class ChestCommand extends ExpressionCommand {
 
     private void transfer(Inventory fromInventory, Inventory toInventory, String string) {
 
-        for (int counter = 0; counter < fromInventory.getSize(); counter++) {
-            if (fromInventory.getItem(counter) != null && new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string))) {
-                List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getItem(counter) }).values());
-                fromInventory.setItem(counter, new ItemStack(Material.AIR));
+        ItemData itemData = ItemDataResolver.resolve(string);
+        for (int slot = 0; slot < fromInventory.getSize(); slot++) {
+            ItemStack slotItem = fromInventory.getItem(slot);
+            if (slotItem != null && (itemData == null || new ItemData(slotItem).equals(itemData))) {
+                List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { slotItem }).values());
+                fromInventory.setItem(slot, new ItemStack(Material.AIR));
 
                 for (ItemStack itemStack : overplus) {
                     fromInventory.addItem(itemStack);

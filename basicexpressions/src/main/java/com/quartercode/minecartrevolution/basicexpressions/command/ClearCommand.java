@@ -65,8 +65,10 @@ public class ClearCommand extends ExpressionCommand {
             inventory.clear();
         } else {
             for (String item : String.valueOf(parameter).split(",")) {
+                ItemData itemData = ItemDataResolver.resolve(item);
+
                 for (int slot = 0; slot < inventory.getSize(); slot++) {
-                    if (new ItemData(inventory.getItem(slot)).equals(ItemDataResolver.resolve(item))) {
+                    if (itemData == null || new ItemData(inventory.getItem(slot)).equals(itemData)) {
                         inventory.setItem(slot, new ItemStack(Material.AIR));
                     }
                 }

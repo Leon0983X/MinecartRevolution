@@ -74,7 +74,13 @@ public class FurnaceCommand extends ExpressionCommand {
 
     public static boolean isFuel(ItemData itemData) {
 
-        return FUELS.contains(itemData);
+        for (ItemData fuel : FUELS) {
+            if (fuel.equals(itemData)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public FurnaceCommand() {
@@ -160,35 +166,42 @@ public class FurnaceCommand extends ExpressionCommand {
 
     private void transferToFurnace(Inventory fromInventory, FurnaceInventory toInventory, String string) {
 
-        for (int counter = 0; counter < fromInventory.getSize(); counter++) {
-            if (fromInventory.getItem(counter) != null) {
-                int slot;
-                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string == null || string.equalsIgnoreCase("fuel") || new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string)))) {
-                    slot = 1;
-                } else if (string == null || string.equalsIgnoreCase("item") || new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string))) {
-                    slot = 0;
+        ItemData itemData = null;
+        if (!string.equalsIgnoreCase("fuel") && !string.equalsIgnoreCase("item")) {
+            itemData = ItemDataResolver.resolve(string);
+        }
+
+        for (int inventorySlot = 0; inventorySlot < fromInventory.getSize(); inventorySlot++) {
+            if (fromInventory.getItem(inventorySlot) != null) {
+                int furnaceSlot;
+                if (isFuel(new ItemData(fromInventory.getItem(inventorySlot))) && (itemData == null || string.equalsIgnoreCase("fuel") || new ItemData(fromInventory.getItem(inventorySlot)).equals(itemData))) {
+                    furnaceSlot = 1;
+                } else if (itemData == null || string.equalsIgnoreCase("item") || new ItemData(fromInventory.getItem(inventorySlot)).equals(itemData)) {
+                    furnaceSlot = 0;
                 } else {
                     continue;
                 }
 
-                if (toInventory.getItem(slot) == null || ItemData.equals(fromInventory.getItem(counter), toInventory.getItem(slot))) {
-                    int overplus = fromInventory.getItem(counter).getAmount() + (toInventory.getItem(slot) == null ? 0 : toInventory.getItem(slot).getAmount()) - fromInventory.getItem(counter).getMaxStackSize();
-                    ItemStack fuelItemStack = new ItemStack(fromInventory.getItem(counter));
+                if (toInventory.getItem(furnaceSlot) == null || ItemData.equals(fromInventory.getItem(inventorySlot), toInventory.getItem(furnaceSlot))) {
+                    int overplus = fromInventory.getItem(inventorySlot).getAmount() + (toInventory.getItem(furnaceSlot) == null ? 0 : toInventory.getItem(furnaceSlot).getAmount()) - fromInventory.getItem(inventorySlot).getMaxStackSize();
+                    ItemStack fuelItemStack = new ItemStack(fromInventory.getItem(inventorySlot));
                     if (overplus > 0) {
                         fuelItemStack.setAmount(fuelItemStack.getMaxStackSize());
-                        ItemStack itemStack = new ItemStack(fromInventory.getItem(counter));
+                        ItemStack itemStack = new ItemStack(fromInventory.getItem(inventorySlot));
                         itemStack.setAmount(overplus);
-                        fromInventory.setItem(counter, itemStack);
+                        fromInventory.setItem(inventorySlot, itemStack);
                     } else {
-                        fromInventory.setItem(counter, new ItemStack(Material.AIR));
+                        fromInventory.setItem(inventorySlot, new ItemStack(Material.AIR));
                     }
-                    toInventory.setItem(slot, fuelItemStack);
+                    toInventory.setItem(furnaceSlot, fuelItemStack);
                 }
             }
         }
     }
 
     private void transferToInventory(FurnaceInventory fromInventory, Inventory toInventory, String string) {
+
+        ItemData itemData = ItemDataResolver.resolve(string);
 
         if (fromInventory.getFuel() != null && fromInventory.getFuel().getType() == Material.BUCKET) {
             List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getFuel() }).values());
@@ -199,7 +212,7 @@ public class FurnaceCommand extends ExpressionCommand {
             }
         }
 
-        if (fromInventory.getResult() != null && new ItemData(fromInventory.getResult()).equals(ItemDataResolver.resolve(string))) {
+        if (fromInventory.getResult() != null && (itemData == null || new ItemData(fromInventory.getResult()).equals(itemData))) {
             List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getResult() }).values());
             fromInventory.setResult(new ItemStack(Material.AIR));
 
