@@ -32,7 +32,7 @@ import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
 import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
-import com.quartercode.minecartrevolution.core.util.AliasUtil;
+import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.quarterbukkit.api.ItemData;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
@@ -99,7 +99,7 @@ public class CollectCommand extends ExpressionCommand {
                 Item item = (Item) entity;
                 if (item.isDead()) {
                     continue;
-                } else if (string != null && !new ItemData(item.getItemStack()).equals(AliasUtil.getItemData(string))) {
+                } else if (string != null && !new ItemData(item.getItemStack()).equals(ItemDataResolver.resolve(string))) {
                     continue;
                 }
 

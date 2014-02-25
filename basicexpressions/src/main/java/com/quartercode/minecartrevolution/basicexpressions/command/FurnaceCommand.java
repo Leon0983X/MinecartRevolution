@@ -34,7 +34,7 @@ import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
 import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
-import com.quartercode.minecartrevolution.core.util.AliasUtil;
+import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.quarterbukkit.api.ItemData;
 
 public class FurnaceCommand extends ExpressionCommand {
@@ -163,9 +163,9 @@ public class FurnaceCommand extends ExpressionCommand {
         for (int counter = 0; counter < fromInventory.getSize(); counter++) {
             if (fromInventory.getItem(counter) != null) {
                 int slot;
-                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string == null || string.equalsIgnoreCase("fuel") || new ItemData(fromInventory.getItem(counter)).equals(AliasUtil.getItemData(string)))) {
+                if (FUELS.contains(new ItemData(fromInventory.getItem(counter))) && (string == null || string.equalsIgnoreCase("fuel") || new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string)))) {
                     slot = 1;
-                } else if (string == null || string.equalsIgnoreCase("item") || new ItemData(fromInventory.getItem(counter)).equals(AliasUtil.getItemData(string))) {
+                } else if (string == null || string.equalsIgnoreCase("item") || new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string))) {
                     slot = 0;
                 } else {
                     continue;
@@ -199,7 +199,7 @@ public class FurnaceCommand extends ExpressionCommand {
             }
         }
 
-        if (fromInventory.getResult() != null && new ItemData(fromInventory.getResult()).equals(AliasUtil.getItemData(string))) {
+        if (fromInventory.getResult() != null && new ItemData(fromInventory.getResult()).equals(ItemDataResolver.resolve(string))) {
             List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getResult() }).values());
             fromInventory.setResult(new ItemStack(Material.AIR));
 

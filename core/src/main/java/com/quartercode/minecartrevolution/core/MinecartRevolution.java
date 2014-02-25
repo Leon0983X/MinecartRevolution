@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.quartercode.minecartrevolution.core.command.MRCommandExecutor;
@@ -43,7 +44,6 @@ import com.quartercode.minecartrevolution.core.get.LanguageBundle;
 import com.quartercode.minecartrevolution.core.listener.BlockListener;
 import com.quartercode.minecartrevolution.core.listener.MinecartListener;
 import com.quartercode.minecartrevolution.core.plugin.PluginManager;
-import com.quartercode.minecartrevolution.core.util.AliasUtil;
 import com.quartercode.minecartrevolution.core.util.ExtractionUtil;
 import com.quartercode.minecartrevolution.core.util.JarUpdater;
 import com.quartercode.minecartrevolution.core.util.Metrics;
@@ -91,6 +91,11 @@ public class MinecartRevolution {
 
         this.plugin = plugin;
         minecartRevolution = this;
+
+        // Check for the optional OddItem dependency
+        if (!Bukkit.getPluginManager().isPluginEnabled("OddItem")) {
+            getLogger().warning("In order to enable item aliases, you need to install OddItem: http://dev.bukkit.org/bukkit-plugins/odditem/");
+        }
     }
 
     public JavaPlugin getPlugin() {
@@ -203,8 +208,6 @@ public class MinecartRevolution {
             variant = localeParts[2];
         }
         locale = new Locale(language, country, variant);
-
-        AliasUtil.setMinecartRevolution(this);
 
         loadMetadataStorage();
         enableListeners();

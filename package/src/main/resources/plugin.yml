@@ -5,7 +5,7 @@ prefix: ${project.parent.name}
 authors: [QuarterCode, LoadingByte, TutorialMakerHD]
 website: ${project.parent.url}
 main: ${main.class}
-softdepend: [QuarterBukkit]
+softdepend: [QuarterBukkit, OddItem]
 
 
 

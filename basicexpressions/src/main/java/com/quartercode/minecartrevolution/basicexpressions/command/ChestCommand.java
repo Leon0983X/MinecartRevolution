@@ -31,7 +31,7 @@ import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
 import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
-import com.quartercode.minecartrevolution.core.util.AliasUtil;
+import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ChestCommand extends ExpressionCommand {
@@ -120,7 +120,7 @@ public class ChestCommand extends ExpressionCommand {
     private void transfer(Inventory fromInventory, Inventory toInventory, String string) {
 
         for (int counter = 0; counter < fromInventory.getSize(); counter++) {
-            if (fromInventory.getItem(counter) != null && new ItemData(fromInventory.getItem(counter)).equals(AliasUtil.getItemData(string))) {
+            if (fromInventory.getItem(counter) != null && new ItemData(fromInventory.getItem(counter)).equals(ItemDataResolver.resolve(string))) {
                 List<ItemStack> overplus = new ArrayList<ItemStack>(toInventory.addItem(new ItemStack[] { fromInventory.getItem(counter) }).values());
                 fromInventory.setItem(counter, new ItemStack(Material.AIR));
 
