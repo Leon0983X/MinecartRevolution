@@ -22,6 +22,8 @@ import org.bukkit.CropState;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Minecart;
@@ -73,6 +75,9 @@ public class FarmCommand extends ExpressionCommand {
 
         String type = parameters[0];
 
+        World world = minecart.getWorld();
+        Location location = minecart.getLocation().getBlock().getLocation();
+
         if (type.equalsIgnoreCase("wood") || type.equalsIgnoreCase("wheat")) {
             Material[] destroyTypes = null;
             Material[] collectTypes = null;
@@ -91,28 +96,41 @@ public class FarmCommand extends ExpressionCommand {
             }
 
             for (Material destroyType : destroyTypes) {
-                World world = minecart.getWorld();
-                Location location = minecart.getLocation().getBlock().getLocation();
-
                 for (int y = (int) (location.getY() - radius); y <= radius * 2 + location.getY(); y++) {
                     for (int x = (int) (location.getX() - radius); x <= radius * 2 + location.getX(); x++) {
                         for (int z = (int) (location.getZ() - radius); z <= radius * 2 + location.getZ(); z++) {
-                            if (world.getBlockAt(x, y, z) != null && world.getBlockAt(x, y, z).getType() == destroyType && (destroyType != Material.CROPS || ((Crops) world.getBlockAt(x, y, z).getState()).getState() == CropState.RIPE)) {
-                                world.getBlockAt(x, y, z).breakNaturally();
+                            Block block = world.getBlockAt(x, y, z);
+                            if (block != null && block.getType() == destroyType) {
+                                // Check for crop growth
+                                if (block.getType() == Material.CROPS && ((Crops) block.getState().getData()).getState() != CropState.RIPE) {
+                                    continue;
+                                }
+
+                                block.breakNaturally();
                                 for (Material collectType : collectTypes) {
                                     collectItems((InventoryHolder) minecart, minecart, radius, collectType);
                                 }
 
-                                if (world.getBlockAt(x, y - 1, z) != null && world.getBlockAt(x, y - 1, z).getType() != Material.AIR) {
-                                    for (int storageCounter = 0; storageCounter < ((InventoryHolder) minecart).getInventory().getSize(); storageCounter++) {
-                                        if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter) != null && ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getType() == plantItemType) {
-                                            ItemStack newItemStack = new ItemStack( ((InventoryHolder) minecart).getInventory().getItem(storageCounter));
-                                            newItemStack.setAmount( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() - 1);
-                                            ((InventoryHolder) minecart).getInventory().setItem(storageCounter, newItemStack);
-                                            if ( ((InventoryHolder) minecart).getInventory().getItem(storageCounter).getAmount() <= 0) {
-                                                ((InventoryHolder) minecart).getInventory().setItem(storageCounter, null);
+                                Block blockBelow = world.getBlockAt(x, y - 1, z);
+                                if (blockBelow != null && blockBelow.getType() != Material.AIR) {
+                                    for (int storageSlot = 0; storageSlot < ((InventoryHolder) minecart).getInventory().getSize(); storageSlot++) {
+                                        if ( ((InventoryHolder) minecart).getInventory().getItem(storageSlot) != null && ((InventoryHolder) minecart).getInventory().getItem(storageSlot).getType() == plantItemType) {
+                                            ItemStack newItemStack = new ItemStack( ((InventoryHolder) minecart).getInventory().getItem(storageSlot));
+                                            newItemStack.setAmount( ((InventoryHolder) minecart).getInventory().getItem(storageSlot).getAmount() - 1);
+                                            ((InventoryHolder) minecart).getInventory().setItem(storageSlot, newItemStack);
+                                            if ( ((InventoryHolder) minecart).getInventory().getItem(storageSlot).getAmount() <= 0) {
+                                                ((InventoryHolder) minecart).getInventory().setItem(storageSlot, null);
                                             }
-                                            world.getBlockAt(x, y, z).setType(plantBlockType);
+
+                                            block.setType(plantBlockType);
+                                            // Reset crop growth
+                                            if (block.getType() == Material.CROPS) {
+                                                BlockState blockState = block.getState();
+                                                Crops crops = (Crops) blockState.getData();
+                                                crops.setState(CropState.SEEDED);
+                                                blockState.setData(crops);
+                                                blockState.update();
+                                            }
                                         }
                                     }
                                 }
@@ -122,39 +140,39 @@ public class FarmCommand extends ExpressionCommand {
                 }
             }
         } else if (type.equalsIgnoreCase("pumpkin") || type.equalsIgnoreCase("melon")) {
-            Material blockType = null;
+            Material destroyType = null;
+            Material collectType = null;
             if (type.equalsIgnoreCase("pumpkin")) {
-                blockType = Material.PUMPKIN;
+                destroyType = Material.PUMPKIN;
+                collectType = Material.PUMPKIN;
             } else if (type.equalsIgnoreCase("melon")) {
-                blockType = Material.MELON_BLOCK;
+                destroyType = Material.MELON_BLOCK;
+                collectType = Material.MELON;
             }
-
-            World world = minecart.getWorld();
-            Location location = minecart.getLocation().getBlock().getLocation();
 
             for (int y = (int) (location.getY() - radius); y <= radius * 2 + location.getY(); y++) {
                 for (int x = (int) (location.getX() - radius); x <= radius * 2 + location.getX(); x++) {
                     for (int z = (int) (location.getZ() - radius); z <= radius * 2 + location.getZ(); z++) {
-                        if (world.getBlockAt(x, y, z) != null && world.getBlockAt(x, y, z).getType() == blockType) {
-                            world.getBlockAt(x, y, z).breakNaturally();
+                        Block block = world.getBlockAt(x, y, z);
+                        if (block != null && block.getType() == destroyType) {
+                            block.breakNaturally();
                         }
                     }
                 }
             }
 
-            collectItems((InventoryHolder) minecart, minecart, radius, blockType);
+            collectItems((InventoryHolder) minecart, minecart, radius, collectType);
         } else if (type.equalsIgnoreCase("sugar") || type.equalsIgnoreCase("sugarcane")) {
             Material destroyType = Material.SUGAR_CANE_BLOCK;
             Material collectType = Material.SUGAR_CANE;
 
-            World world = minecart.getWorld();
-            Location location = minecart.getLocation().getBlock().getLocation();
-
             for (int y = (int) (location.getY() - radius); y <= radius * 2 + location.getY(); y++) {
                 for (int x = (int) (location.getX() - radius); x <= radius * 2 + location.getX(); x++) {
                     for (int z = (int) (location.getZ() - radius); z <= radius * 2 + location.getZ(); z++) {
-                        if (world.getBlockAt(x, y, z) != null && world.getBlockAt(x, y, z).getType() == destroyType && world.getBlockAt(x, y - 1, z) != null && world.getBlockAt(x, y - 1, z).getType() == destroyType) {
-                            world.getBlockAt(x, y, z).breakNaturally();
+                        Block block = world.getBlockAt(x, y, z);
+                        Block blockBelow = world.getBlockAt(x, y - 1, z);
+                        if (block != null && block.getType() == destroyType && blockBelow != null && blockBelow.getType() == destroyType) {
+                            block.breakNaturally();
                         }
                     }
                 }
