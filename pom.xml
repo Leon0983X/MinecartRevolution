@@ -28,7 +28,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarterbukkit.version>0.2.0</quarterbukkit.version>
+        <quarterbukkit.version>0.2.1</quarterbukkit.version>
     </properties>
 
     <organization>
@@ -102,11 +102,14 @@
     </dependencies>
 
     <repositories>
+        <!-- Bukkit -->
         <repository>
             <id>bukkit-repository</id>
             <name>Bukkit Repository</name>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
+
+        <!-- QuarterCode -->
         <repository>
             <id>quartercode-repository</id>
             <name>QuarterCode Repository</name>

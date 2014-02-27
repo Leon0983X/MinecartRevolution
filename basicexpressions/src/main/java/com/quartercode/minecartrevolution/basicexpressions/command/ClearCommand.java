@@ -27,7 +27,7 @@ import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
 import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
-import com.quartercode.minecartrevolution.core.util.AliasUtil;
+import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ClearCommand extends ExpressionCommand {
@@ -65,8 +65,10 @@ public class ClearCommand extends ExpressionCommand {
             inventory.clear();
         } else {
             for (String item : String.valueOf(parameter).split(",")) {
+                ItemData itemData = ItemDataResolver.resolve(item);
+
                 for (int slot = 0; slot < inventory.getSize(); slot++) {
-                    if (new ItemData(inventory.getItem(slot)).equals(AliasUtil.getItemData(item))) {
+                    if (itemData == null || new ItemData(inventory.getItem(slot)).equals(itemData)) {
                         inventory.setItem(slot, new ItemStack(Material.AIR));
                     }
                 }

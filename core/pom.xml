@@ -11,4 +11,30 @@
 
     <name>MinecartRevolution-Core</name>
     <description>The core API of MinecartRevolution. Other plugins can register their stuff (things like blocks, signs or expressions) here.</description>
+
+    <dependencies>
+        <!-- Item Aliases -->
+        <dependency>
+            <groupId>info.somethingodd</groupId>
+            <artifactId>odditem</artifactId>
+            <version>0.9.5</version>
+        </dependency>
+
+        <!-- MCStats -->
+        <dependency>
+            <groupId>org.mcstats.bukkit</groupId>
+            <artifactId>metrics-lite</artifactId>
+            <version>R7</version>
+        </dependency>
+    </dependencies>
+
+
+    <repositories>
+        <!-- MCStats -->
+        <repository>
+            <id>mcstats-repository</id>
+            <name>MCStats Repository</name>
+            <url>http://repo.mcstats.org/content/groups/public/</url>
+        </repository>
+    </repositories>
 </project>
