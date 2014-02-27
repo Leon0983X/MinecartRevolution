@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.quartercode</groupId>
         <artifactId>minecartrevolution</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>1.1.1</version>
     </parent>
 
     <artifactId>minecartrevolution-basiccommands</artifactId>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.quartercode</groupId>
             <artifactId>minecartrevolution-core</artifactId>
-            <version>1.1.1-SNAPSHOT</version>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 </project>
