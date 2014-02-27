@@ -31,9 +31,11 @@ import com.quartercode.quarterbukkit.api.exception.NoCommandPermissionException;
 
 public class ExceptionListener implements Listener {
 
-    private MinecartRevolution minecartRevolution;
+    private final MinecartRevolution minecartRevolution;
 
     public ExceptionListener(MinecartRevolution minecartRevolution) {
+
+        this.minecartRevolution = minecartRevolution;
 
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
     }
@@ -42,16 +44,16 @@ public class ExceptionListener implements Listener {
     public void minecartRevolutionException(MinecartRevolutionException exception) {
 
         if (exception instanceof SilentMinecartRevolutionException) {
-            if (exception.getMinecartRevolution().getConfiguration().getBool(GlobalConfig.PRINT_SILENT_ERROR_MESSAGES)) {
-                if (exception.getMinecartRevolution().getConfiguration().getBool(GlobalConfig.PRINT_SILENT_ERROR_STACK_TRACES) && exception.getCause() != null) {
+            if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PRINT_SILENT_ERROR_MESSAGES)) {
+                if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PRINT_SILENT_ERROR_STACK_TRACES) && exception.getCause() != null) {
                     minecartRevolution.getLogger().log(Level.SEVERE, exception.getMessage(), exception.getCause());
                 } else {
                     minecartRevolution.getLogger().severe(exception.getMessage());
                 }
             }
         } else {
-            if (exception.getMinecartRevolution().getConfiguration().getBool(GlobalConfig.PRINT_ERROR_MESSAGES)) {
-                if (exception.getMinecartRevolution().getConfiguration().getBool(GlobalConfig.PRINT_ERROR_STACK_TRACES) && exception.getCause() != null) {
+            if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PRINT_ERROR_MESSAGES)) {
+                if (minecartRevolution.getConfiguration().getBool(GlobalConfig.PRINT_ERROR_STACK_TRACES) && exception.getCause() != null) {
                     minecartRevolution.getLogger().log(Level.SEVERE, exception.getMessage(), exception.getCause());
                 } else {
                     minecartRevolution.getLogger().severe(exception.getMessage());

@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.quartercode</groupId>
     <artifactId>minecartrevolution</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>pom</packaging>
 
     <name>MinecartRevolution</name>
@@ -29,7 +28,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarterbukkit.version>0.2.0</quarterbukkit.version>
+        <quarterbukkit.version>0.2.1</quarterbukkit.version>
     </properties>
 
     <organization>
@@ -103,11 +102,14 @@
     </dependencies>
 
     <repositories>
+        <!-- Bukkit -->
         <repository>
             <id>bukkit-repository</id>
             <name>Bukkit Repository</name>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
+
+        <!-- QuarterCode -->
         <repository>
             <id>quartercode-repository</id>
             <name>QuarterCode Repository</name>
