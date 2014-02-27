@@ -20,5 +20,22 @@
             <artifactId>odditem</artifactId>
             <version>0.9.5</version>
         </dependency>
+
+        <!-- MCStats -->
+        <dependency>
+            <groupId>org.mcstats.bukkit</groupId>
+            <artifactId>metrics-lite</artifactId>
+            <version>R7</version>
+        </dependency>
     </dependencies>
+
+
+    <repositories>
+        <!-- MCStats -->
+        <repository>
+            <id>mcstats-repository</id>
+            <name>MCStats Repository</name>
+            <url>http://repo.mcstats.org/content/groups/public/</url>
+        </repository>
+    </repositories>
 </project>

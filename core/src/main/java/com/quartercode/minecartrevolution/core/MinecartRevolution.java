@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 import com.quartercode.minecartrevolution.core.command.MRCommandExecutor;
 import com.quartercode.minecartrevolution.core.control.block.ControlBlockExecutor;
 import com.quartercode.minecartrevolution.core.control.sign.ControlSignExecutor;
@@ -46,7 +47,6 @@ import com.quartercode.minecartrevolution.core.listener.MinecartListener;
 import com.quartercode.minecartrevolution.core.plugin.PluginManager;
 import com.quartercode.minecartrevolution.core.util.ExtractionUtil;
 import com.quartercode.minecartrevolution.core.util.JarUpdater;
-import com.quartercode.minecartrevolution.core.util.Metrics;
 import com.quartercode.minecartrevolution.core.util.ResourceLister;
 import com.quartercode.minecartrevolution.core.util.Updater;
 import com.quartercode.minecartrevolution.core.util.VehicleMetdataStorage;
@@ -85,7 +85,6 @@ public class MinecartRevolution {
 
     private Config                    configuration;
     private VehicleMetdataStorage     metadataStorage;
-    private Metrics                   metrics;
 
     public MinecartRevolution(JavaPlugin plugin) {
 
@@ -215,7 +214,7 @@ public class MinecartRevolution {
 
         // Enable metrics
         try {
-            metrics = new Metrics(plugin);
+            MetricsLite metrics = new MetricsLite(plugin);
             metrics.start();
         } catch (IOException e) {
             ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Error while initalizing Metrics"));
