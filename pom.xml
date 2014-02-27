@@ -103,11 +103,14 @@
     </dependencies>
 
     <repositories>
+        <!-- Bukkit -->
         <repository>
             <id>bukkit-repository</id>
             <name>Bukkit Repository</name>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
+
+        <!-- QuarterCode -->
         <repository>
             <id>quartercode-repository</id>
             <name>QuarterCode Repository</name>
