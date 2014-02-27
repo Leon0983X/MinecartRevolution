@@ -1,3 +1,13 @@
+1.1.1
+-----
+
+### Additions
+* Now using OddItem item aliases.
+
+### Fixes
+* Correct handling of invalid item aliases.
+* Fixed chest, furnace and farm signs. 
+
 1.1.0
 -----
 
