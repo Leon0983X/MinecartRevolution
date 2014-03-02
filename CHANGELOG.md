@@ -1,3 +1,12 @@
+0.2.0
+-----
+
+### Fixes
+* The created plugin jar no longer contains unnecessary third party libraries.
+
+### Notes
+* Maven will publish the sources and JavaDocs from this version onwards.
+
 1.1.1
 -----
 
