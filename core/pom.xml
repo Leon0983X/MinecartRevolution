@@ -27,7 +27,6 @@
             <groupId>org.mcstats.bukkit</groupId>
             <artifactId>metrics-lite</artifactId>
             <version>R7</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
