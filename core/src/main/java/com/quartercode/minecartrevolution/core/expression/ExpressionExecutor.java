@@ -166,14 +166,13 @@ public class ExpressionExecutor {
                                         parameterString = replaceConstants(parameterString, minecart);
 
                                         if (info.getTypeArray().hasNumberType()) {
-                                            parameterString = generateJavaScript(parameterString);
+                                            String script = generateJavaScript(parameterString);
                                             try {
                                                 ScriptEngine scriptEngine = SCRIPT_ENGINE_MANAGER.getEngineByName("JavaScript");
-                                                scriptEngine.eval("var result = " + String.valueOf(parameterString) + ";");
+                                                scriptEngine.eval("var result = " + String.valueOf(script) + ";");
                                                 parameterString = String.valueOf(scriptEngine.get("result"));
                                             } catch (ScriptException e) {
                                                 ExceptionHandler.exception(new SilentMinecartRevolutionException(minecartRevolution, e, "Expression script error for: " + expressionPart));
-                                                return;
                                             }
                                         }
 
