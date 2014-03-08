@@ -177,6 +177,7 @@ permissions:
       minecartrevolution.control.sign.effect.*: true
       minecartrevolution.control.sign.eject.*: true
       minecartrevolution.control.sign.expression.*: true
+      minecartrevolution.control.sign.farm.*: true
       minecartrevolution.control.sign.file.*: true
       minecartrevolution.control.sign.furnace.*: true
       minecartrevolution.control.sign.grab.*: true
