@@ -1,8 +1,12 @@
 0.2.0
 -----
 
+### Additions
+* Control signs can be attached to the side of the block the minecart rail is placed on.
+
 ### Fixes
 * The created plugin jar no longer contains unnecessary third party libraries.
+* Errors that occur during the execution of a java script line for parsing expression parameters are ignored.
 
 ### Notes
 * Maven will publish the sources and JavaDocs from this version onwards.
