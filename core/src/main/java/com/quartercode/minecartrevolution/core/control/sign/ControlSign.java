@@ -25,7 +25,13 @@ import com.quartercode.minecartrevolution.core.control.Control;
 
 public abstract class ControlSign extends Control {
 
-    public static final int[][] CONTROL_SIGN_OFFSETS = { { 1, 0, 0 }, { -1, 0, 0 }, { 0, 0, 1 }, { 0, 0, -1 }, { 0, -2, 0 }, { 0, 2, 0 }, { 0, 3, 0 } };
+    public static final int[][] CONTROL_SIGN_OFFSETS = {
+                                                     // Next to the rail
+                                                     { 1, 0, 0 }, { -1, 0, 0 }, { 0, 0, 1 }, { 0, 0, -1 },
+                                                     // Attached to the block the rail is placed on
+                                                     { 1, -1, 0 }, { -1, -1, 0 }, { 0, -1, 1 }, { 0, -1, -1 },
+                                                     // Above or below the rail
+                                                     { 0, -2, 0 }, { 0, 2, 0 }, { 0, 3, 0 } };
 
     private ControlSignInfo     info;
 
