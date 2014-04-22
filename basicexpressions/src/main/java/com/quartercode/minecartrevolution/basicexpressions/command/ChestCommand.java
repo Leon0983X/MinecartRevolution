@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.block.Dispenser;
+import org.bukkit.block.Dropper;
+import org.bukkit.block.Hopper;
 import org.bukkit.entity.Minecart;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -35,6 +39,8 @@ import com.quartercode.minecartrevolution.core.util.ItemDataResolver;
 import com.quartercode.quarterbukkit.api.ItemData;
 
 public class ChestCommand extends ExpressionCommand {
+
+    private static final Class<?>[] VALID_BLOCK_STATES = { Chest.class, Dispenser.class, Dropper.class, Hopper.class };
 
     public ChestCommand() {
 
@@ -55,27 +61,27 @@ public class ChestCommand extends ExpressionCommand {
     @Override
     public void execute(Minecart minecart, Object parameter) {
 
-        List<Chest> chests = new ArrayList<Chest>();
+        List<InventoryHolder> containers = new ArrayList<InventoryHolder>();
 
         Location minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() + 1.0D);
-        if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chests.add((Chest) minecartLocation.getBlock().getState());
+        if (isValidContainer(minecartLocation.getBlock().getState())) {
+            containers.add((InventoryHolder) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setX(minecart.getLocation().getX() - 1.0D);
-        if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chests.add((Chest) minecartLocation.getBlock().getState());
+        if (isValidContainer(minecartLocation.getBlock().getState())) {
+            containers.add((InventoryHolder) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() + 1.0D);
-        if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chests.add((Chest) minecartLocation.getBlock().getState());
+        if (isValidContainer(minecartLocation.getBlock().getState())) {
+            containers.add((InventoryHolder) minecartLocation.getBlock().getState());
         }
         minecartLocation = minecart.getLocation();
         minecartLocation.setZ(minecart.getLocation().getZ() - 1.0D);
-        if (minecartLocation.getBlock().getType() == Material.CHEST) {
-            chests.add((Chest) minecartLocation.getBlock().getState());
+        if (isValidContainer(minecartLocation.getBlock().getState())) {
+            containers.add((InventoryHolder) minecartLocation.getBlock().getState());
         }
 
         InventoryHolder inventoryMinecart = (InventoryHolder) minecart;
@@ -96,7 +102,7 @@ public class ChestCommand extends ExpressionCommand {
             }
         }
 
-        for (Chest chest : chests) {
+        for (InventoryHolder chest : containers) {
             if (String.valueOf(parameter).startsWith("+")) {
                 if (items.size() > 0) {
                     for (String item : items) {
@@ -115,6 +121,17 @@ public class ChestCommand extends ExpressionCommand {
                 }
             }
         }
+    }
+
+    private boolean isValidContainer(BlockState state) {
+
+        for (Class<?> validState : VALID_BLOCK_STATES) {
+            if (validState.isAssignableFrom(state.getClass())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void transfer(Inventory fromInventory, Inventory toInventory, String string) {
