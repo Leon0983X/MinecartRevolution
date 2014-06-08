@@ -25,10 +25,12 @@ import org.bukkit.Location;
 import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleCreateEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.event.vehicle.VehicleUpdateEvent;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
+import com.quartercode.minecartrevolution.core.util.config.GlobalConfig;
 
 public class MinecartListener implements Listener {
 
@@ -39,6 +41,17 @@ public class MinecartListener implements Listener {
 
         this.minecartRevolution = minecartRevolution;
         Bukkit.getPluginManager().registerEvents(this, minecartRevolution.getPlugin());
+    }
+
+    @EventHandler
+    public void onVehicleCreate(VehicleCreateEvent event) {
+
+        double maxSpeed = minecartRevolution.getConfiguration().getDouble(GlobalConfig.MAX_SPEED);
+
+        if (maxSpeed > 0 && event.getVehicle() instanceof Minecart) {
+            Minecart minecart = (Minecart) event.getVehicle();
+            minecart.setMaxSpeed(maxSpeed);
+        }
     }
 
     @EventHandler

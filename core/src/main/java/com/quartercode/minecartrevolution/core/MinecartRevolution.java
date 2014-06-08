@@ -30,6 +30,9 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Minecart;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
@@ -211,6 +214,7 @@ public class MinecartRevolution {
         loadMetadataStorage();
         enableListeners();
         enableExecutors();
+        executeStartupActions();
 
         // Enable metrics
         try {
@@ -304,6 +308,19 @@ public class MinecartRevolution {
 
         minecartTerms = new ArrayList<MinecartTerm>();
         updaters = new ArrayList<Updater>();
+    }
+
+    private void executeStartupActions() {
+
+        double maxSpeed = minecartRevolution.getConfiguration().getDouble(GlobalConfig.MAX_SPEED);
+
+        for (World world : Bukkit.getWorlds()) {
+            for (Entity entity : world.getEntities()) {
+                if (entity instanceof Minecart) {
+                    ((Minecart) entity).setMaxSpeed(maxSpeed);
+                }
+            }
+        }
     }
 
     public void disable() {

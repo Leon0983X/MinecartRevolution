@@ -44,6 +44,7 @@ public class GlobalConfig extends Config {
     private static final String FUNCTIONALITY                   = "functionality";
 
     private static final String ENTITY                          = FUNCTIONALITY + ".entity";
+    public static final String  MAX_SPEED                       = ENTITY + ".maxSpeed";
     public static final String  PLAY_DEFAULT_EFFECTS            = ENTITY + ".playDefaultEffects";
 
     private static final String ENTITY_METADATA                 = ENTITY + ".metadata";
@@ -67,6 +68,7 @@ public class GlobalConfig extends Config {
         addDefault(PRINT_SILENT_ERROR_MESSAGES, false);
         addDefault(PRINT_SILENT_ERROR_STACK_TRACES, false);
 
+        addDefault(MAX_SPEED, 0.4);
         addDefault(PLAY_DEFAULT_EFFECTS, true);
 
         addDefault(SAVE_TIME_INTERVAL, 600);
