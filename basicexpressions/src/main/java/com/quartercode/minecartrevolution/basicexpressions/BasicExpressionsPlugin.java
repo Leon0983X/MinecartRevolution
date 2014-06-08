@@ -110,7 +110,7 @@ public class BasicExpressionsPlugin extends JavaMinecartRevolutionPlugin {
         addExpressionCommand(new LockCommand());
         addExpressionCommand(new ReverseCommand());
         addExpressionCommand(new SensorCommand(this));
-        addExpressionCommand(new SpeedCommand(this));
+        addExpressionCommand(new SpeedCommand());
         addExpressionCommand(new TimeCommand());
         addExpressionCommand(new VerticalCommand());
         addExpressionCommand(new WeatherCommand());

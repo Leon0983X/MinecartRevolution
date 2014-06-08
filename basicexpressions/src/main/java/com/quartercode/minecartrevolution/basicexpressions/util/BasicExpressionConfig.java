@@ -41,9 +41,6 @@ public class BasicExpressionConfig extends PluginConfig {
     private static final String SENSOR                     = "sensor";
     public static final String  SENSOR_POWER_TIME          = SENSOR + ".powerTime";
 
-    private static final String SPEED                      = "speed";
-    public static final String  SPEED_MAX_SPEED            = SPEED + ".maxSpeed";
-
     public BasicExpressionConfig(MinecartRevolutionPlugin minecartRevolutionPlugin) {
 
         super(minecartRevolutionPlugin);
@@ -64,8 +61,6 @@ public class BasicExpressionConfig extends PluginConfig {
         addDefault(GRAB_MAX_RADIUS, 20);
 
         addDefault(SENSOR_POWER_TIME, 1);
-
-        addDefault(SPEED_MAX_SPEED, 100);
     }
 
 }

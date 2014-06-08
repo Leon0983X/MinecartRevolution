@@ -19,8 +19,6 @@
 package com.quartercode.minecartrevolution.basicexpressions.command;
 
 import org.bukkit.entity.Minecart;
-import com.quartercode.minecartrevolution.basicexpressions.BasicExpressionsPlugin;
-import com.quartercode.minecartrevolution.basicexpressions.util.BasicExpressionConfig;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommand;
 import com.quartercode.minecartrevolution.core.expression.ExpressionCommandInfo;
 import com.quartercode.minecartrevolution.core.expression.TypeArray;
@@ -29,11 +27,8 @@ import com.quartercode.minecartrevolution.core.util.cart.MinecartUtil;
 
 public class SpeedCommand extends ExpressionCommand {
 
-    private final BasicExpressionsPlugin plugin;
+    public SpeedCommand() {
 
-    public SpeedCommand(BasicExpressionsPlugin plugin) {
-
-        this.plugin = plugin;
     }
 
     @Override
@@ -51,13 +46,7 @@ public class SpeedCommand extends ExpressionCommand {
     @Override
     public void execute(Minecart minecart, Object parameter) {
 
-        if (plugin.getConfiguration().getDouble(BasicExpressionConfig.SPEED_MAX_SPEED) < 0) {
-            MinecartUtil.setSpeed(minecart, (Double) parameter);
-        } else if ((Double) parameter <= plugin.getConfiguration().getDouble(BasicExpressionConfig.SPEED_MAX_SPEED)) {
-            MinecartUtil.setSpeed(minecart, (Double) parameter);
-        } else {
-            MinecartUtil.setSpeed(minecart, plugin.getConfiguration().getDouble(BasicExpressionConfig.SPEED_MAX_SPEED));
-        }
+        MinecartUtil.setSpeed(minecart, (Double) parameter);
     }
 
 }
