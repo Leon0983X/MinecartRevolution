@@ -3,6 +3,10 @@
 
 ### Additions
 * Control signs can be attached to the side of the block the minecart rail is placed on.
+* The global maxSpeed configuration setting for adjusting the maximal speed of all minecarts.
+
+### Removals
+* The maxSpeed configuration setting for the speed expression command.
 
 ### Fixes
 * The created plugin jar no longer contains unnecessary third party libraries.
