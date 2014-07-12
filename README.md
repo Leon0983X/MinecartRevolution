@@ -6,7 +6,7 @@ You can use it simple with Control-Signs and -Blocks and define the expression s
 
 There is no limit with MinecartRevolution.
 
-For more information on the usage, check out our current homepage on http://dev.bukkit.org/server-mods/MinecartRevolution.
+For more information on the usage, check out the [wiki page](http://quartercode.com/wiki/index.php?title=MinecartRevolution) and the [BukkitDev page](http://dev.bukkit.org/server-mods/MinecartRevolution/).
 
 License
 -------
@@ -27,3 +27,31 @@ We use maven to handle our dependencies and build, so you need the Java JDK and 
 
         mvn clean install
 
+Builds
+------
+
+* MinecartRevolution is built by a [Jenkins job](http://ci.quartercode.com/job/MinecartRevolution/) on the QuarterCode Jenkins instance.
+* Finished builds can be downloaded from the [BukkitDev page](http://dev.bukkit.org/server-mods/MinecartRevolution/) and the [QuarterCode DL website](http://quartercode.com/dl/projects/details?projectId=MinecartRevolution).
+* Builds are also available on the [QuarterCode maven repository](http://repo.quartercode.com).
+  In order to reference MinecartRevolution in another maven project, the following lines must be added to the project's pom:
+
+        <repositories>
+            ...
+            <repository>
+                <id>quartercode-repository</id>
+                <url>http://repo.quartercode.com/content/groups/public/</url>
+            </repository>
+            ...
+        </repositories>
+
+        ...
+
+        <dependencies>
+            ...
+            <dependency>
+                <groupId>com.quartercode</groupId>
+                <artifactId>minecartrevolution-package</artifactId>
+                <version>...</version>
+            </dependency>
+            ...
+        </dependencies>
