@@ -38,7 +38,7 @@ public class SpeedConstant extends ExpressionConstant {
     @Override
     public Object getValue(Minecart minecart) {
 
-        return MinecartUtil.getSpeed(minecart);
+        return Math.round(MinecartUtil.getSpeed(minecart) * 100) / 100D;
     }
 
 }

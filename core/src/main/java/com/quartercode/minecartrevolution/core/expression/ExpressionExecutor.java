@@ -30,6 +30,7 @@ import javax.script.ScriptException;
 import org.bukkit.entity.Minecart;
 import com.quartercode.minecartrevolution.core.MinecartRevolution;
 import com.quartercode.minecartrevolution.core.exception.SilentMinecartRevolutionException;
+import com.quartercode.minecartrevolution.core.expression.TypeArray.Type;
 import com.quartercode.quarterbukkit.api.exception.ExceptionHandler;
 
 public class ExpressionExecutor {
@@ -215,8 +216,19 @@ public class ExpressionExecutor {
             Collections.reverse(temp);
             constantLabels = temp.toArray(new String[constantLabels.length]);
 
+            Object constantValue = expressionConstant.getValue(minecart);
+
+            // Convert the value into an int if there are no decimal places
+            // That removes the unnecessary .0 at the end
+            if (Type.DOUBLE.isInstance(constantValue)) {
+                double value = (Double) constantValue;
+                if (value == Math.floor(value) && !Double.isInfinite(value)) {
+                    constantValue = Math.floor(value);
+                }
+            }
+
             for (String constantLabel : constantLabels) {
-                parameter = String.valueOf(parameter).replaceAll("\\$" + constantLabel, String.valueOf(expressionConstant.getValue(minecart)));
+                parameter = String.valueOf(parameter).replaceAll("\\$" + constantLabel, String.valueOf(constantValue));
             }
         }
 

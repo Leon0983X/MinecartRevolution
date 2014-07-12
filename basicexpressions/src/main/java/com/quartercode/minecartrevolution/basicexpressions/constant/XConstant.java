@@ -37,7 +37,7 @@ public class XConstant extends ExpressionConstant {
     @Override
     public Object getValue(Minecart minecart) {
 
-        return minecart.getLocation().getX();
+        return Math.round(minecart.getLocation().getX() * 10) / 10D;
     }
 
 }

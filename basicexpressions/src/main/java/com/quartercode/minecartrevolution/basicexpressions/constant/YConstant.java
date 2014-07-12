@@ -37,7 +37,7 @@ public class YConstant extends ExpressionConstant {
     @Override
     public Object getValue(Minecart minecart) {
 
-        return minecart.getLocation().getZ();
+        return Math.round(minecart.getLocation().getY() * 10) / 10D;
     }
 
 }
