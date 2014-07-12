@@ -52,7 +52,7 @@ public class AnnounceCommand extends ExpressionCommand {
     public void execute(Minecart minecart, Object parameter) {
 
         if (plugin.getConfiguration().getBool(BasicExpressionConfig.ANNOUNCE_ALLOW_COLOR_CODES)) {
-            ((CommandSender) minecart.getPassenger()).sendMessage(String.valueOf(parameter).replaceAll("&", "�"));
+            ((CommandSender) minecart.getPassenger()).sendMessage(String.valueOf(parameter).replaceAll("&", "\u00A7"));
         } else {
             ((CommandSender) minecart.getPassenger()).sendMessage(String.valueOf(parameter));
         }

@@ -207,9 +207,9 @@ public class ExpressionExecutor {
     private String replaceConstants(String parameter, Minecart minecart) {
 
         for (ExpressionConstant expressionConstant : expressionConstants) {
-            ExpressionConstantInfo info2 = expressionConstant.getInfo();
+            ExpressionConstantInfo info = expressionConstant.getInfo();
 
-            String[] constantLabels = info2.getConstantLabels();
+            String[] constantLabels = info.getConstantLabels();
             Arrays.sort(constantLabels, new StringLengthComperator());
             List<String> temp = Arrays.asList(constantLabels);
             Collections.reverse(temp);
