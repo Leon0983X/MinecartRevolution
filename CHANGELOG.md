@@ -11,6 +11,10 @@
 ### Fixes
 * The created plugin jar no longer contains unnecessary third party libraries.
 * Errors that occur during the execution of a java script line for parsing expression parameters are ignored.
+* The y constant actually returns the y coordinate instead of the z one.
+* Double expression constants are rounded to a sensible decimal place.
+* Double expression constant values which do not have decimal places no longer show a decimal point.
+* Expression constants have the same name as equivalent commands (e.g. "sp").
 
 ### Notes
 * Maven will publish the sources and JavaDocs from this version onwards.
