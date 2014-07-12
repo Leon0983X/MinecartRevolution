@@ -32,7 +32,7 @@ public class HealthConstant extends ExpressionConstant {
     @Override
     protected ExpressionConstantInfo createInfo() {
 
-        return new ExpressionConstantInfo("h", "health");
+        return new ExpressionConstantInfo("he", "health");
     }
 
     @Override

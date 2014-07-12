@@ -32,7 +32,7 @@ public class PlayerConstant extends ExpressionConstant {
     @Override
     protected ExpressionConstantInfo createInfo() {
 
-        return new ExpressionConstantInfo("p", "player");
+        return new ExpressionConstantInfo("pl", "player");
     }
 
     @Override

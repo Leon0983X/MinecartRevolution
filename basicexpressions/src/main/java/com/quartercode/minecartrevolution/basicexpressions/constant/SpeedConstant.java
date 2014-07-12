@@ -32,7 +32,7 @@ public class SpeedConstant extends ExpressionConstant {
     @Override
     protected ExpressionConstantInfo createInfo() {
 
-        return new ExpressionConstantInfo("s", "speed");
+        return new ExpressionConstantInfo("sp", "speed");
     }
 
     @Override
